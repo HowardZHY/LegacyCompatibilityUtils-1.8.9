@@ -1,0 +1,3 @@
+CL: net/minecraft/client/renderer/entity/RenderLivingBase net/minecraft/client/renderer/entity/RendererLivingEntity
+CL: net/minecraft/world/GameType net/minecraft/world/WorldSettings$GameType
+MD: net/minecraft/client/multiplayer/PlayerControllerMP/func_178889_l ()Lnet/minecraft/world/GameType; net/minecraft/client/multiplayer/PlayerControllerMP/func_178889_l ()Lnet/minecraft/world/WorldSettings$GameType;
