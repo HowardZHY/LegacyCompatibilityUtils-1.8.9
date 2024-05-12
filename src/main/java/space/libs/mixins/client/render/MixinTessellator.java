@@ -14,7 +14,7 @@ import java.lang.reflect.Constructor;
 
 @SuppressWarnings("unused")
 @Mixin(Tessellator.class)
-public class MixinTessellator {
+public abstract class MixinTessellator {
 
     @Shadow
     private WorldRenderer worldRenderer;
@@ -23,7 +23,7 @@ public class MixinTessellator {
     private WorldVertexBufferUploader vboUploader;
 
     @Shadow
-    public void draw() {}
+    public abstract void draw();
 
     @Inject(method = "<init>", at = @At("RETURN"))
     public void init(int bufferSize, CallbackInfo ci) {

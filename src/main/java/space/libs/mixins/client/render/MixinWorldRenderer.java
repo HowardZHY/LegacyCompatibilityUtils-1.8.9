@@ -30,6 +30,7 @@ public abstract class MixinWorldRenderer {
     @Shadow
     private boolean isDrawing;
 
+    /** 1.8 needsUpdate */
     @Shadow
     private boolean noColor;
 
@@ -139,6 +140,9 @@ public abstract class MixinWorldRenderer {
     public void func_178961_b(int red, int green, int blue, int alpha) {
         this.LegacyPOSITIONCOLORI = true;
         this.ColorR = red; this.ColorG = green; this.ColorB = blue; this.ColorA = alpha;
+        if (this.LegacyPOSITION) {
+            return;
+        }
         VertexFormat format = new VertexFormat(POSITION_COLOR);
         this.vertexFormat = format;
         this.vertexFormatElement = format.getElement(this.vertexFormatIndex);
@@ -232,13 +236,13 @@ public abstract class MixinWorldRenderer {
     public WorldRenderer.State func_178971_a(float p_178971_1_, float p_178971_2_, float p_178971_3_) {
         int[] i = new int[this.field_179008_i];
         PriorityQueue queue = new PriorityQueue(
-                this.field_179008_i,
-                new QuadComparator(
-                        this.rawFloatBuffer,
-                        (float) ((double) p_178971_1_ + this.xOffset),
-                        (float) ((double) p_178971_2_ + this.yOffset),
-                        (float) ((double) p_178971_3_ + this.zOffset),
-                        this.vertexFormat.getNextOffset() / 4)
+            this.field_179008_i,
+            new QuadComparator(
+                this.rawFloatBuffer,
+                (float) ((double) p_178971_1_ + this.xOffset),
+                (float) ((double) p_178971_2_ + this.yOffset),
+                (float) ((double) p_178971_3_ + this.zOffset),
+                this.vertexFormat.getNextOffset() / 4)
         );
         int nextOffset = this.vertexFormat.getNextOffset();
         int quadStep = this.vertexFormat.getNextOffset() / 4 * 4;
