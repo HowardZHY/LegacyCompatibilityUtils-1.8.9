@@ -17,10 +17,10 @@ public class CompatLib {
 
     public static final String MODID = "compatlib";
 
-    public Logger logger = FMLLog.getLogger();
+    public static Logger LOGGER = FMLLog.getLogger();
 
     public CompatLib() {
-        logger.info("[CompatLib] Loading...");
+        LOGGER.info("[CompatLib] Loading...");
     }
 
     public String getMCVersion() {
