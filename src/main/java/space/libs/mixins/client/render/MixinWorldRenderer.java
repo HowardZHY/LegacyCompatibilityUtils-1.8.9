@@ -77,10 +77,9 @@ public abstract class MixinWorldRenderer {
 
     @Shadow public abstract WorldRenderer.State getVertexState();
 
-    @Shadow protected abstract int getBufferSize();
+    @Shadow public abstract int getBufferSize();
 
-    @Shadow
-    private void growBuffer(int p_181670_1_) {}
+    @Shadow public abstract void growBuffer(int p_181670_1_);
 
     @Shadow public abstract void reset();
 
