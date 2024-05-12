@@ -68,7 +68,7 @@ public abstract class MixinVertexBuffer {
 
     /** nextVertexFormatIndex */
     public void func_181667_k() {
-        //renderer.nextVertexFormatIndex();
+        renderer.nextVertexFormatIndex();
     }
 
     /** begin */

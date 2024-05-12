@@ -138,11 +138,8 @@ public abstract class MixinWorldRenderer {
 
     /** setColorRGBA */
     public void func_178961_b(int red, int green, int blue, int alpha) {
-        if (this.LegacyPOSITION) {
-            this.LegacyPOSITIONCOLORI = true;
-            this.ColorR = red; this.ColorG = green; this.ColorB = blue; this.ColorA = alpha;
-            return;
-        }
+        this.LegacyPOSITIONCOLORI = true;
+        this.ColorR = red; this.ColorG = green; this.ColorB = blue; this.ColorA = alpha;
         VertexFormat format = new VertexFormat(POSITION_COLOR);
         this.vertexFormat = format;
         this.vertexFormatElement = format.getElement(this.vertexFormatIndex);

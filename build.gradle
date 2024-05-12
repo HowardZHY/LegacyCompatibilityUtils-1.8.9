@@ -120,13 +120,14 @@ shadowJar {
 jar {
     manifest {
         attributes([
-                "FMLCorePlugin": "space.libs.core.CompatLibCore",
-                "FMLCorePluginContainsFMLMod": "true",
-                //"ForceLoadAsMod": "true",
-                "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
-                "TweakOrder": "-1000",
-                "MixinConfigs": "mixins.compatlib.json",
-                "Manifest-Version": 1.0
+            "FMLAT": "compatlib_at.cfg",
+            "FMLCorePlugin": "space.libs.core.CompatLibCore",
+            "FMLCorePluginContainsFMLMod": "true",
+            //"ForceLoadAsMod": "true",
+            "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
+            "TweakOrder": "-1000",
+            "MixinConfigs": "mixins.compatlib.json",
+            "Manifest-Version": 1.0
         ])
     }
 }
