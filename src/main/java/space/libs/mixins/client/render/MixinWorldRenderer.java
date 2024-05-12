@@ -125,7 +125,6 @@ public abstract class MixinWorldRenderer {
 
     /** setColorOpaque */
     public void func_78913_a(int red, int green, int blue) {
-        this.LegacyPOSITIONCOLORI = true;
         this.ColorR = red; this.ColorG = green; this.ColorB = blue; this.ColorA = 255;
         this.func_178961_b(red, green, blue, 255);
     }
@@ -139,6 +138,11 @@ public abstract class MixinWorldRenderer {
 
     /** setColorRGBA */
     public void func_178961_b(int red, int green, int blue, int alpha) {
+        if (this.LegacyPOSITION) {
+            this.LegacyPOSITIONCOLORI = true;
+            this.ColorR = red; this.ColorG = green; this.ColorB = blue; this.ColorA = alpha;
+            return;
+        }
         VertexFormat format = new VertexFormat(POSITION_COLOR);
         this.vertexFormat = format;
         this.vertexFormatElement = format.getElement(this.vertexFormatIndex);
@@ -263,7 +267,6 @@ public abstract class MixinWorldRenderer {
 
     /** setColorRGBA_I */
     public void func_178974_a(int i, int a) {
-        this.LegacyPOSITIONCOLORI = true;
         int r = i >> 16 & 255;
         int g = i >> 8 & 255;
         int b = i & 255;
