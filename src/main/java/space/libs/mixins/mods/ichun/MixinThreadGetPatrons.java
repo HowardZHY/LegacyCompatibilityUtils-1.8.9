@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Pseudo;
 
 @Pseudo
-@Mixin(targets = "us.ichun.mods.ichunutil.client.thread.ThreadGetPatrons")
+@Mixin(targets = "us.ichun.mods.ichunutil.client.thread.ThreadGetPatrons", remap = false)
 public class MixinThreadGetPatrons {
     /**
      * @author HowardZHY
