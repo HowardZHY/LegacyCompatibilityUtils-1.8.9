@@ -26,6 +26,9 @@ Submit an issue if you met incompatibilities.
 
 # Known Not Working
 
+Bspkrs's Mods: Crash because Forge Internal changes.
+Use 1.8.9 versions by ZenCoder(https://www.curseforge.com/members/zencoder/projects)
+
 [BlockSteps](https://www.curseforge.com/minecraft/mc-mods/blocksteps)
 Blocks won't show, Unknown reason
 

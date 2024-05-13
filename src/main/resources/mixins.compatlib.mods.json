@@ -4,7 +4,8 @@
   "package": "space.libs.mixins.mods",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "di.MixinDIClientProxy"
+    "di.MixinDIClientProxy",
+    "ichun.MixinThreadGetPatrons"
   ],
   "mixins": [
     "ichun.MixinModVersionChecker"
