@@ -1,7 +1,6 @@
 package space.libs.mixins;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -20,6 +19,9 @@ public abstract class MixinEntity {
 
     @Shadow
     public double posX;
+
+    @Shadow
+    public double posY;
 
     @Shadow
     public double posZ;
@@ -68,6 +70,11 @@ public abstract class MixinEntity {
     /** getTeleportDirection */
     public int func_82148_at() {
         return this.teleportDirection.getHorizontalIndex();
+    }
+
+    /** getPosition */
+    public net.minecraft.util.math.BlockPos func_180425_c() {
+        return new net.minecraft.util.math.BlockPos(this.posX, this.posY + 0.5D, this.posZ);
     }
 
 }

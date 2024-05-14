@@ -1,6 +1,7 @@
 package space.libs.mixins;
 
 import net.minecraft.util.Vec3Pool;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,6 +14,12 @@ public abstract class MixinWorld {
     @Shadow
     public abstract Chunk getChunkFromChunkCoords(int chunkX, int chunkZ);
 
+    @Shadow
+    public abstract DifficultyInstance getDifficultyForLocation(net.minecraft.util.BlockPos pos);
+
+    @Shadow
+    public abstract Chunk getChunkFromBlockCoords(net.minecraft.util.BlockPos pos);
+
     private Vec3Pool field_82741_K = new Vec3Pool(300, 2000);
 
     public Vec3Pool func_82732_R() {
@@ -21,5 +28,9 @@ public abstract class MixinWorld {
 
     public Chunk func_175726_f(net.minecraft.util.math.BlockPos pos) {
         return this.getChunkFromChunkCoords(pos.getX() >> 4, pos.getZ() >> 4);
+    }
+
+    public DifficultyInstance func_175649_E(net.minecraft.util.math.BlockPos pos) {
+        return this.getDifficultyForLocation(pos);
     }
 }
