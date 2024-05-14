@@ -1,14 +1,13 @@
 package net.minecraft.util.text;
 
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TextComponentString extends ChatComponentText implements ITextComponent {
-
-    public TextComponentString(String msg) {
-        super(msg);
+public class TextComponentTranslation extends ChatComponentTranslation implements ITextComponent {
+    public TextComponentTranslation(String translationKey, Object... args) {
+        super(translationKey, args);
     }
 
     public List<ITextComponent> func_150253_a() {
@@ -18,8 +17,9 @@ public class TextComponentString extends ChatComponentText implements ITextCompo
             .collect(Collectors.toList());
     }
 
-    public ITextComponent func_150255_a(Style paramStyle) {
-        return this;
+    public ITextComponent func_150255_a(Style style) {
+        super.setChatStyle(style);
+        return (ITextComponent)this;
     }
 
     public Style func_150256_b() {
@@ -34,7 +34,7 @@ public class TextComponentString extends ChatComponentText implements ITextCompo
         return (ITextComponent)this;
     }
 
-    public ITextComponent func_150259_f() {
+    public TextComponentTranslation func_150259_f() {
         super.createCopy();
         return this;
     }

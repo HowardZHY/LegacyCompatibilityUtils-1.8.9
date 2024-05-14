@@ -14,11 +14,14 @@ public interface ITextComponent extends IChatComponent {
 
     ITextComponent func_150257_a(ITextComponent paramITextComponent);
 
-    String func_150261_e();
+    /** func_150261_e() */
+    String getUnformattedTextForChat();
 
-    String func_150260_c();
+    /** func_150260_c() */
+    String getUnformattedText();
 
-    String func_150254_d();
+    /** func_150254_d */
+    String getFormattedText();
 
     List<ITextComponent> func_150253_a();
 
