@@ -69,5 +69,5 @@ public class VertexBuffer {
         renderer.tex(u, v);
         return this;
     }
-    
+
 }
