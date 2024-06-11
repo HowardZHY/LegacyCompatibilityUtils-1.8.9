@@ -1,6 +1,5 @@
 buildscript {
     repositories {
-        mavenCentral()
         maven { url 'https://jitpack.io/' }
         //new forge repository
         maven { url "https://maven.minecraftforge.net" }
@@ -59,7 +58,6 @@ configurations {
 }
 
 repositories {
-    mavenCentral()
     maven { url 'https://jitpack.io/' }
     maven { url 'https://repo.spongepowered.org/maven/' }
     maven {

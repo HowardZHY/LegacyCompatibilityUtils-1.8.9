@@ -1,17 +1,15 @@
 package space.libs.core;
 
-import zone.rong.mixinbooter.ILateMixinLoader;
+import org.spongepowered.asm.mixin.Mixins;
+import zone.rong.mixinbooter.MixinLoader;
 
-import java.util.Collections;
-import java.util.List;
+@SuppressWarnings("all")
+@MixinLoader
+public class CompatLibLateMixinPlugin{
 
-@SuppressWarnings("unused")
-
-public class CompatLibLateMixinPlugin implements ILateMixinLoader {
-
-    @Override
-    public List<String> getMixinConfigs() {
-        return Collections.singletonList("mixins.compatlib.mods.json");
+    public CompatLibLateMixinPlugin() {
+        Mixins.addConfiguration("mixins.compatlib.mods.json");
+        CompatLibCore.LOGGER.info("Loading Late Mixins for mods...");
     }
 
 }
