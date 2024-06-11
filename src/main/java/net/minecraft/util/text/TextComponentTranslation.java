@@ -1,11 +1,13 @@
 package net.minecraft.util.text;
 
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.IChatComponent;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TextComponentTranslation extends ChatComponentTranslation implements ITextComponent {
+public class TextComponentTranslation extends ChatComponentTranslation implements IChatComponent, ITextComponent {
     public TextComponentTranslation(String translationKey, Object... args) {
         super(translationKey, args);
     }
@@ -18,24 +20,22 @@ public class TextComponentTranslation extends ChatComponentTranslation implement
     }
 
     public ITextComponent func_150255_a(Style style) {
-        super.setChatStyle(style);
-        return (ITextComponent)this;
+        return (ITextComponent) super.setChatStyle((ChatStyle) style);
     }
 
     public Style func_150256_b() {
-        return ((ITextComponent)this).func_150256_b();
+        return (Style) super.getChatStyle();
     }
 
-    public ITextComponent func_150257_a(ITextComponent paramITextComponent) {
-        return (ITextComponent)this;
+    public ITextComponent func_150257_a(ITextComponent component) {
+        return (ITextComponent) super.appendSibling((IChatComponent) component);
     }
 
-    public ITextComponent func_150258_a(String paramString) {
-        return (ITextComponent)this;
+    public ITextComponent func_150258_a(String string) {
+        return (ITextComponent) super.appendText(string);
     }
 
-    public TextComponentTranslation func_150259_f() {
-        super.createCopy();
-        return this;
+    public ITextComponent func_150259_f() {
+        return (ITextComponent) super.createCopy();
     }
 }

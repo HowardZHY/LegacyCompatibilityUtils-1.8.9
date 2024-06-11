@@ -50,6 +50,7 @@ minecraft {
     runDir = "run"
     mappings = "stable_22" //mappings for 1.8.9
     makeObfSourceJar = false //disable creation of sources jar
+    clientJvmArgs += ["-Dfml.coreMods.load=space.libs.core.CompatLibCore"]
 }
 
 configurations {
@@ -82,6 +83,8 @@ dependencies {
     //example:
     implementation 'zone.rong:mixinbooter:8.8'
     //compile "org.spongepowered:mixin:0.7.11-SNAPSHOT"
+    //compile shade('com.electronwill.night-config:core:3.6.3')
+    //compile shade('com.electronwill.night-config:toml:3.6.3')
 }
 
 processResources {

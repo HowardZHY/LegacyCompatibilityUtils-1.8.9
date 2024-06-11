@@ -4,9 +4,9 @@ import net.minecraft.util.IChatComponent;
 
 import java.util.List;
 
-@SuppressWarnings("unused")
 public interface ITextComponent extends IChatComponent {
-    ITextComponent func_150255_a(Style paramStyle);
+
+    ITextComponent func_150255_a(Style style);
 
     Style func_150256_b();
 
@@ -26,4 +26,5 @@ public interface ITextComponent extends IChatComponent {
     List<ITextComponent> func_150253_a();
 
     ITextComponent func_150259_f();
+
 }

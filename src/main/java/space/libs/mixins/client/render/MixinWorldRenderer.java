@@ -355,7 +355,7 @@ public abstract class MixinWorldRenderer {
         if (this.field_179008_i >= this.getBufferSize() - this.vertexFormat.getNextOffset()) {
             this.growBuffer(2097152);
         }
-
+        System.out.println("Unknown addVertex call, won't go here...");
         List list = this.vertexFormat.getElements();
         int listSize = list.size();
         for (int i = 0; i < listSize; ++i) {

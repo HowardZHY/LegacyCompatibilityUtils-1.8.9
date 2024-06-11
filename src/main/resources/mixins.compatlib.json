@@ -14,7 +14,9 @@
     "client.MixinPlayerControllerMP",
     "client.MixinPositionedSoundRecord",
     "client.MixinScaledResolution",
+    "client.MixinServerData",
     "client.forge.MixinActionPerformedEvent",
+    "client.forge.MixinClientChatReceivedEvent",
     "client.forge.MixinDrawScreenEvent",
     "client.forge.MixinGUIScreenEvent",
     "client.forge.MixinInitGuiEvent",
@@ -49,7 +51,11 @@
     "MixinBlockSourceImpl",
     "MixinBlockState1",
     "MixinBlockState2",
-    "MixinEntity",
+    "entity.MixinEntity",
+    "entity.MixinEntityAIAvoidEntity",
+    "entity.MixinEntityList",
+    "entity.MixinEntityLivingBase",
+    "entity.MixinEntityRabbitAIAvoidEntity",
     "MixinEnumFacingAxis",
     "MixinPropertyBool",
     "MixinPropertyEnum",
@@ -57,8 +63,12 @@
     "MixinVec3i",
     "MixinWorld",
     "MixinWorldProvider",
+    "forge.MixinASMEventHandler",
     "forge.MixinEntityEvent",
     "forge.MixinEntityJoinWorldEvent",
-    "forge.MixinFMLModContainer"
+    "forge.MixinEventBus",
+    "forge.MixinFMLModContainer",
+    "forge.MixinMinecraftForge",
+    "interfaces.MixinIChatComponent"
   ]
 }

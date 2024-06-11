@@ -29,9 +29,8 @@ public abstract class MixinRenderPlayer extends RendererLivingEntity<AbstractCli
     @Shadow
     public void doRender(AbstractClientPlayer entity, double x, double y, double z, float entityYaw, float partialTicks) {}
 
-    @Dynamic
-    @Shadow(aliases = "renderOffsetLivingLabel")
-    protected void func_177069_a(Entity entityIn, double x, double y, double z, String str, float p_177069_9_, double p_177069_10_) {}
+    @Shadow(aliases = "func_177069_a")
+    protected void renderOffsetLivingLabel(AbstractClientPlayer entityIn, double x, double y, double z, String str, float p_177069_9_, double p_177069_10_) {}
 
     @Shadow
     protected void rotateCorpse(AbstractClientPlayer player, float x, float y, float z) {}

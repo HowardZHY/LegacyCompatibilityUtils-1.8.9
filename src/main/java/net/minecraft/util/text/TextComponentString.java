@@ -1,11 +1,13 @@
 package net.minecraft.util.text;
 
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.IChatComponent;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TextComponentString extends ChatComponentText implements ITextComponent {
+public class TextComponentString extends ChatComponentText implements IChatComponent, ITextComponent {
 
     public TextComponentString(String msg) {
         super(msg);
@@ -18,24 +20,23 @@ public class TextComponentString extends ChatComponentText implements ITextCompo
             .collect(Collectors.toList());
     }
 
-    public ITextComponent func_150255_a(Style paramStyle) {
-        return this;
+    public ITextComponent func_150255_a(Style style) {
+        return (ITextComponent) super.setChatStyle((ChatStyle) style);
     }
 
     public Style func_150256_b() {
-        return ((ITextComponent)this).func_150256_b();
+        return (Style) super.getChatStyle();
     }
 
-    public ITextComponent func_150257_a(ITextComponent paramITextComponent) {
-        return (ITextComponent)this;
+    public ITextComponent func_150257_a(ITextComponent component) {
+        return (ITextComponent) super.appendSibling((IChatComponent) component);
     }
 
-    public ITextComponent func_150258_a(String paramString) {
-        return (ITextComponent)this;
+    public ITextComponent func_150258_a(String string) {
+        return (ITextComponent) super.appendText(string);
     }
 
     public ITextComponent func_150259_f() {
-        super.createCopy();
-        return this;
+        return (ITextComponent) super.createCopy();
     }
 }

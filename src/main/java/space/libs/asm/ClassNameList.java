@@ -2,6 +2,7 @@ package space.libs.asm;
 
 import java.util.Arrays;
 
+@SuppressWarnings("unused")
 public class ClassNameList {
 
     public static boolean Startswith(String name) {
@@ -14,6 +15,7 @@ public class ClassNameList {
 
     /** Things shouldn't be transformed */
     public static String[] WHITELIST = {
+        "cc.polyfrost",
         "club.sk1er.patcher",
         "com.mojang",
         "com.mumfrey.liteloader",

@@ -2,7 +2,6 @@ package net.minecraft.util.math;
 
 import net.minecraft.util.Vec3;
 
-@SuppressWarnings("all")
 public class Vec3d extends Vec3 {
 
     public static final Vec3d field_186680_a = new Vec3d(0.0D, 0.0D, 0.0D);
@@ -14,7 +13,7 @@ public class Vec3d extends Vec3 {
     public Vec3d(Vec3i vector) {
         super(vector.getX(), vector.getY(), vector.getZ());
     }
-    
+
     public boolean equals(Object object) {
         return super.equals(object);
     }
@@ -45,7 +44,7 @@ public class Vec3d extends Vec3 {
     public double func_189985_c() {
         return super.xCoord * super.xCoord + super.yCoord * super.yCoord + super.zCoord * super.zCoord;
     }
-    
+
     public static Vec3d func_189986_a(float p_189986_0_, float p_189986_1_) {
         float f = MathHelper.cos(-p_189986_1_ * 0.017453292F - 3.1415927F);
         float f1 = MathHelper.sin(-p_189986_1_ * 0.017453292F - 3.1415927F);

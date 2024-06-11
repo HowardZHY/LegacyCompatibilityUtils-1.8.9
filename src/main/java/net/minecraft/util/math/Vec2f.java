@@ -1,6 +1,5 @@
 package net.minecraft.util.math;
 
-@SuppressWarnings("unused")
 public class Vec2f {
     public static final Vec2f field_189974_a = new Vec2f(0.0F, 0.0F);
 
