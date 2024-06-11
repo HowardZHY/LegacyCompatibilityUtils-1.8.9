@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
 @Mixin(BlockSourceImpl.class)
-public class MixinBlockSourceImpl {
+public abstract class MixinBlockSourceImpl {
 
     @Final
     @Shadow

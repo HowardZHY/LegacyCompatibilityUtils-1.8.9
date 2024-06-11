@@ -27,6 +27,10 @@ public abstract class MixinFMLModContainer implements ModContainer {
     @Shadow
     private VersionRange minecraftAccepted;
 
+    /**
+     * @author HowardZHY
+     * @reason 1.13+
+     */
     @Overwrite
     @Override
     public String getModId()

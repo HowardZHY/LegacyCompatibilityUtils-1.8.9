@@ -50,6 +50,7 @@
     "MixinBlockState1",
     "MixinBlockState2",
     "MixinEntity",
+    "MixinEntityList",
     "MixinEnumFacingAxis",
     "MixinPropertyBool",
     "MixinPropertyEnum",
