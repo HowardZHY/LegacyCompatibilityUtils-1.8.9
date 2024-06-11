@@ -18,13 +18,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Map;
 
 @SuppressWarnings("all")
-@Mixin(value = FMLModContainer.class, priority = 100)
+@Mixin(value = FMLModContainer.class, priority = 100, remap = false)
 public abstract class MixinFMLModContainer implements ModContainer {
 
-    @Shadow(remap = false)
+    @Shadow
     private Map<String, Object> descriptor;
 
-    @Shadow(remap = false)
+    @Shadow
     private VersionRange minecraftAccepted;
 
     @Overwrite
@@ -38,7 +38,7 @@ public abstract class MixinFMLModContainer implements ModContainer {
         return modid;
     }
 
-    @Inject(method = "bindMetadata", at = @At("TAIL"), remap = false)
+    @Inject(method = "bindMetadata", at = @At("TAIL"))
     public void bindMetadata(MetadataCollection collection, CallbackInfo ci) {
         String mcVersionString = (String)descriptor.get("acceptedMinecraftVersions");
         if ((mcVersionString == null) || (mcVersionString != "[1.8.9]")) {
