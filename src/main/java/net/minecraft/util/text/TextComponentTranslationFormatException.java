@@ -1,6 +1,5 @@
 package net.minecraft.util.text;
 
-@SuppressWarnings("unused")
 public class TextComponentTranslationFormatException extends IllegalArgumentException {
     public TextComponentTranslationFormatException(TextComponentTranslation p_i45161_1_, String p_i45161_2_) {
         super(String.format("Error parsing: %s: %s", p_i45161_1_, p_i45161_2_));
@@ -13,4 +12,5 @@ public class TextComponentTranslationFormatException extends IllegalArgumentExce
     public TextComponentTranslationFormatException(TextComponentTranslation p_i45163_1_, Throwable p_i45163_2_) {
         super(String.format("Error while parsing: %s", p_i45163_1_), p_i45163_2_);
     }
+
 }

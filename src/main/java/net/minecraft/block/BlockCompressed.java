@@ -5,7 +5,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 
-@SuppressWarnings("unused")
 public class BlockCompressed extends Block {
 
     /** mapColor */

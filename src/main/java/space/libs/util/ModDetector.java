@@ -9,8 +9,9 @@ public class ModDetector {
     public ModDetector() {
         try {
             Class<?> c = Class.forName("net.specialattack.forge.core.asm.SpACorePlugin");
-        } catch (Exception e) {
+        } catch (Exception ignored) {
             CompatLibCore.LOGGER.info("SpACore Not Found.");
+            return;
         }
         CompatLibCore.LOGGER.info("Found SpACore, load ASM Transformers of it.");
         hasSpACore = true;

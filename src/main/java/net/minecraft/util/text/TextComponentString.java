@@ -1,11 +1,12 @@
 package net.minecraft.util.text;
 
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TextComponentString extends ChatComponentText implements ITextComponent {
+public class TextComponentString extends ChatComponentText implements IChatComponent, ITextComponent {
 
     public TextComponentString(String msg) {
         super(msg);

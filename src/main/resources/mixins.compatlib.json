@@ -59,6 +59,8 @@
     "MixinWorldProvider",
     "forge.MixinEntityEvent",
     "forge.MixinEntityJoinWorldEvent",
-    "forge.MixinFMLModContainer"
+    "forge.MixinFMLModContainer",
+    "forge.MixinMod",
+    "interfaces.MixinIChatComponent"
   ]
 }
