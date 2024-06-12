@@ -20,23 +20,22 @@ public class TextComponentString extends ChatComponentText implements IChatCompo
     }
 
     public ITextComponent func_150255_a(Style paramStyle) {
-        return this;
+        return (ITextComponent) this;
     }
 
     public Style func_150256_b() {
-        return ((ITextComponent)this).func_150256_b();
+        return ((ITextComponent) this).func_150256_b();
     }
 
     public ITextComponent func_150257_a(ITextComponent paramITextComponent) {
-        return (ITextComponent)this;
+        return (ITextComponent) this;
     }
 
     public ITextComponent func_150258_a(String paramString) {
-        return (ITextComponent)this;
+        return (ITextComponent) this;
     }
 
     public ITextComponent func_150259_f() {
-        super.createCopy();
-        return this;
+        return (ITextComponent) super.createCopy();
     }
 }

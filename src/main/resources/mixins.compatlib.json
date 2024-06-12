@@ -15,6 +15,7 @@
     "client.MixinPositionedSoundRecord",
     "client.MixinScaledResolution",
     "client.forge.MixinActionPerformedEvent",
+    "client.forge.MixinClientChatReceivedEvent",
     "client.forge.MixinDrawScreenEvent",
     "client.forge.MixinGUIScreenEvent",
     "client.forge.MixinInitGuiEvent",
@@ -60,7 +61,9 @@
     "MixinWorldProvider",
     "forge.MixinEntityEvent",
     "forge.MixinEntityJoinWorldEvent",
+    "forge.MixinEventBus",
     "forge.MixinFMLModContainer",
+    "forge.MixinMinecraftForge",
     "forge.MixinMod",
     "interfaces.MixinIChatComponent"
   ]

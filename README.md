@@ -18,6 +18,8 @@ A Relocated https://github.com/FabricCompatibilityLayers/CursedMixinExtensions
 
 1.10.2 MinecraftForge KeyBinding API
 
+https://github.com/jhalterman/typetools
+
 # Notice
 
 If anyone is interested at making another runtime deobf remapper, feel free to open topic in Discussion.
