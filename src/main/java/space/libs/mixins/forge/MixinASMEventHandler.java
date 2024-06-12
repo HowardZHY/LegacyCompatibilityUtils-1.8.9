@@ -18,7 +18,11 @@ public class MixinASMEventHandler {
 
     @Overwrite
     public EventPriority getPriority() {
-        if (subInfo.priority() == null) {
+        try {
+            if (subInfo.priority() == null) {
+                return EventPriority.NORMAL;
+            }
+        } catch (NullPointerException ignored) {
             return EventPriority.NORMAL;
         }
         return subInfo.priority();
