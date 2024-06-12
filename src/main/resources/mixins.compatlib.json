@@ -59,6 +59,7 @@
     "MixinVec3i",
     "MixinWorld",
     "MixinWorldProvider",
+    "forge.MixinASMEventHandler",
     "forge.MixinEntityEvent",
     "forge.MixinEntityJoinWorldEvent",
     "forge.MixinEventBus",

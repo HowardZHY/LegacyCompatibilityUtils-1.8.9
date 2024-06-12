@@ -1,0 +1,25 @@
+package space.libs.mixins.forge;
+
+import net.minecraftforge.eventbus.ASMEventHandler;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
+
+@Mixin(value = ASMEventHandler.class, remap = false)
+public class MixinASMEventHandler {
+
+    @Final
+    @Shadow
+    private SubscribeEvent subInfo;
+
+    @Overwrite
+    public EventPriority getPriority() {
+        if (subInfo.priority() == null) {
+            return EventPriority.NORMAL;
+        }
+        return subInfo.priority();
+    }
+}
