@@ -2,11 +2,15 @@ package space.libs.mixins;
 
 import com.google.common.collect.Sets;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Set;
 
@@ -31,6 +35,9 @@ public abstract class MixinEntity {
 
     @Shadow
     public World worldObj;
+
+    @Shadow
+    private AxisAlignedBB boundingBox;
 
     @Shadow
     protected boolean inPortal;
@@ -78,6 +85,11 @@ public abstract class MixinEntity {
         return this.teleportDirection.getHorizontalIndex();
     }
 
+    /** getBoundingBox */
+    public net.minecraft.util.math.AxisAlignedBB func_174813_aQ() {
+        return (net.minecraft.util.math.AxisAlignedBB) this.boundingBox;
+    }
+
     /** getPosition */
     public net.minecraft.util.math.BlockPos func_180425_c() {
         return new net.minecraft.util.math.BlockPos(this.posX, this.posY + 0.5D, this.posZ);
@@ -99,6 +111,14 @@ public abstract class MixinEntity {
     /** getTags */
     public Set<String> func_184216_O() {
         return this.field_184236_aF;
+    }
+
+    @Inject(method = {"isEntityInsideOpaqueBlock"}, at = {@At("HEAD")}, cancellable = true)
+    public void isEntityInsideOpaqueBlock(CallbackInfoReturnable<Boolean> cir) {
+        if (this.worldObj.isRemote) {
+            cir.setReturnValue(Boolean.valueOf(false));
+            cir.cancel();
+        }
     }
 
 }
