@@ -1,6 +1,7 @@
 package space.libs.mixins.forge;
 
-import net.minecraftforge.eventbus.ASMEventHandler;
+
+import net.minecraftforge.fml.common.eventhandler.ASMEventHandler;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.spongepowered.asm.mixin.Final;
