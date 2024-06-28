@@ -21,5 +21,4 @@ public abstract class MixinEntityLivingBase extends Entity {
             ci.cancel();
         }
     }
-    
 }
