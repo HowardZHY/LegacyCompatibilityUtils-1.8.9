@@ -23,7 +23,7 @@ public class CompatLib {
         LOGGER.info("[CompatLib] Loading...");
     }
 
-    public String getMCVersion() {
+    public static String getMCVersion() {
         return Loader.instance().getMCVersionString();
     }
 
