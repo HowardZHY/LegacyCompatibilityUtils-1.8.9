@@ -28,6 +28,7 @@ public class CompatLibCore implements IFMLLoadingPlugin {
         ArrayList<String> transformersList = new ArrayList<>();
         ModDetector detector = new ModDetector();
         transformersList.add("space.libs.asm.RemapTransformer");
+        transformersList.add("space.libs.asm.FMLTransformer");
 
         if (detector.hasSpACore) {
             transformersList.add("net.specialattack.forge.core.asm.SpACoreModTransformer");

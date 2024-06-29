@@ -88,6 +88,14 @@ public class FMLTransformer implements IClassTransformer {
             }
             return super.map(typeName);
         }
+
+        @Override
+        public String mapDesc(String desc) {
+            if (desc.startsWith("L" + FML_OLD)) {
+                return "L" + FML + desc.substring(FML_OLD.length() + 1);
+            }
+            return super.mapDesc(desc);
+        }
     }
 
 }
