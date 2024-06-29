@@ -1,4 +1,4 @@
-package space.libs.mixins;
+package space.libs.mixins.entity;
 
 import com.google.common.collect.Sets;
 import net.minecraft.entity.Entity;

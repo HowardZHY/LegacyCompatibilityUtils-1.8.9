@@ -1,4 +1,4 @@
-Incompatibilities found: 611 errors, 0 warnings
+Incompatibilities found: 609 errors, 0 warnings
 net/minecraftforge/client/model/IPerspectiveAwareModel$MapWrapper:
   - error: <init>(Lnet/minecraftforge/client/model/IFlexibleBakedModel;Lnet/minecraftforge/client/model/IPerspectiveState;Lnet/minecraftforge/client/model/IModelPart;)V - Method was removed
   - error: getTransforms(Lnet/minecraftforge/client/model/IPerspectiveState;Lnet/minecraftforge/client/model/IModelPart;)Lcom/google/common/collect/ImmutableMap; - Method was removed
@@ -858,8 +858,6 @@ net/minecraft/client/renderer/chunk/RenderChunk:
 
 net/minecraft/world/gen/structure/StructureStrongholdPieces$Stairs:
 
-net/minecraftforge/fml/client/GuiModList$SortType:
-  - error: Class no longer exists
 net/minecraft/client/gui/GuiPlayerTabOverlay$PlayerComparator:
   - error: func_178952_a(Lnet/minecraft/client/network/NetworkPlayerInfo;Lnet/minecraft/client/network/NetworkPlayerInfo;)I - Method was removed
 net/minecraft/util/Vec3i:
@@ -1077,8 +1075,6 @@ net/minecraft/world/gen/structure/StructureComponent:
 
 net/minecraft/network/play/server/S25PacketBlockBreakAnim:
   - error: func_180724_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
-net/minecraftforge/fml/client/GuiSlotModList:
-  - error: Class no longer exists
 net/minecraft/client/renderer/tileentity/RenderWitherSkull:
   - error: func_180564_a(Lnet/minecraft/entity/projectile/EntityWitherSkull;)Lnet/minecraft/util/ResourceLocation; - Method was removed
 net/minecraft/block/BlockMobSpawner:

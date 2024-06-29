@@ -1115,7 +1115,7 @@ net/minecraft/world/biome/BiomeGenBase$Height:
 net/minecraft/client/LoadingScreenRenderer:
 
 net/minecraft/entity/passive/EntityRabbit$AIAvoidEntity:
-  - error: Class no longer exists
+  - error: <init>(Lnet/minecraft/entity/passive/EntityRabbit;Lcom/google/common/base/Predicate;FDD)V - Method was removed
 net/minecraftforge/client/model/IRetexturableModel:
   - error: Class missing interface: net/minecraftforge/client/model/IModelPart
 net/minecraft/world/biome/BiomeGenBase$TempCategory:
