@@ -14,6 +14,7 @@ public class ClassNameList {
 
     /** Things shouldn't be transformed */
     public static String[] WHITELIST = {
+        "cc.polyfrost",
         "club.sk1er.patcher",
         "com.mojang",
         "com.mumfrey.liteloader",
