@@ -14,18 +14,6 @@ net/minecraft/network/play/server/S32PacketConfirmTransaction:
   - error: func_180730_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 net/minecraft/client/renderer/tileentity/TileEntitySignRenderer:
   - error: func_180541_a(Lnet/minecraft/tileentity/TileEntitySign;DDDFI)V - Method was removed
-net/minecraft/block/BlockRedstoneWire$EnumAttachPosition:
-
-net/minecraft/block/Block$EnumOffsetType:
-
-net/minecraft/client/renderer/vertex/VertexFormatElement$EnumType:
-
-net/minecraft/client/gui/GuiMultiplayer:
-
-net/minecraft/world/biome/BiomeGenHills:
-
-net/minecraft/client/model/ModelRenderer:
-
 net/minecraft/client/renderer/WorldVertexBufferUploader:
   - error: func_178177_a(Lnet/minecraft/client/renderer/WorldRenderer;I)I - Method was removed
 
@@ -34,27 +22,10 @@ net/minecraft/tileentity/TileEntityBeacon:
 
 net/minecraft/client/renderer/entity/RenderSkeleton:
   - error: func_180577_a(Lnet/minecraft/entity/monster/EntitySkeleton;)Lnet/minecraft/util/ResourceLocation; - Method was removed
-net/minecraft/block/BlockLog$EnumAxis:
-
-net/minecraft/world/SpawnerAnimals:
-
-net/minecraft/world/gen/structure/StructureStrongholdPieces$ChestCorridor:
-
 net/minecraft/client/renderer/WorldRenderer$SwitchEnumUsage:
   - error: Class no longer exists
 net/minecraft/enchantment/EnchantmentHelper$ModifierDamage:
   - error: <init>(Ljava/lang/Object;)V - Method was removed
-
-net/minecraft/world/gen/structure/StructureComponent$BlockSelector:
-
-net/minecraft/block/BlockStem:
-
-net/minecraft/util/MouseHelper:
-
-net/minecraft/item/ItemMonsterPlacer:
-
-net/minecraft/client/multiplayer/ChunkProviderClient:
-
 net/minecraft/client/renderer/entity/layers/LayerWitherAura:
   - error: func_177214_a(Lnet/minecraft/entity/boss/EntityWither;FFFFFFF)V - Method was removed
 net/minecraftforge/client/MinecraftForgeClient:
@@ -63,9 +34,6 @@ net/minecraftforge/client/MinecraftForgeClient:
   - error: customItemRenderers:Ljava/util/IdentityHashMap; - Field was removed
 net/minecraft/entity/monster/EntitySlime$AISlimeHop:
   - error: this$0:Lnet/minecraft/entity/monster/EntitySlime; - Field was removed
-
-net/minecraft/client/audio/SoundManager:
-
 net/minecraftforge/fml/common/Loader:
   - error: fireMissingMappingEvent(Ljava/util/LinkedHashMap;Ljava/util/LinkedHashMap;ZLnet/minecraftforge/fml/common/registry/GameData;Ljava/util/Map;Ljava/util/Map;)Ljava/util/List; - Method was removed
   - error: fireRemapEvent(Ljava/util/Map;Ljava/util/Map;)V - Method was removed
