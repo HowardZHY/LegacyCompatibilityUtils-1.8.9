@@ -7,21 +7,25 @@ net/minecraft/world/gen/structure/StructureStrongholdPieces$Stones:
 
 net/minecraft/network/play/client/C19PacketResourcePackStatus:
   - error: func_179718_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
+    #DONE
 net/minecraft/enchantment/EnchantmentHelper$HurtIterator:
   - error: <init>(Ljava/lang/Object;)V - Method was removed
 
 net/minecraft/network/play/server/S32PacketConfirmTransaction:
   - error: func_180730_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
+    #DONE
 net/minecraft/client/renderer/tileentity/TileEntitySignRenderer:
   - error: func_180541_a(Lnet/minecraft/tileentity/TileEntitySign;DDDFI)V - Method was removed
+    #DONE
 net/minecraft/client/renderer/WorldVertexBufferUploader:
   - error: func_178177_a(Lnet/minecraft/client/renderer/WorldRenderer;I)I - Method was removed
-
+    #DONE
 net/minecraft/tileentity/TileEntityBeacon:
-  - error: Class missing interface: net/minecraft/server/gui/IUpdatePlayerListBox
-
+  - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
+    #DONE
 net/minecraft/client/renderer/entity/RenderSkeleton:
   - error: func_180577_a(Lnet/minecraft/entity/monster/EntitySkeleton;)Lnet/minecraft/util/ResourceLocation; - Method was removed
+    #DONE
 net/minecraft/client/renderer/WorldRenderer$SwitchEnumUsage:
   - error: Class no longer exists
 net/minecraft/enchantment/EnchantmentHelper$ModifierDamage:
