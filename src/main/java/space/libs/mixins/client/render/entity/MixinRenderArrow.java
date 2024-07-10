@@ -18,12 +18,12 @@ public class MixinRenderArrow {
     @Shadow
     public void doRender(EntityArrow entity, double x, double y, double z, float entityYaw, float partialTicks) {}
 
-    public void func_180551_a(EntityArrow entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        this.doRender(entity, x, y, z, entityYaw, partialTicks);
-    }
-
     public ResourceLocation func_180550_a(EntityArrow var1) {
         return arrowTextures;
+    }
+
+    public void func_180551_a(EntityArrow entity, double x, double y, double z, float entityYaw, float partialTicks) {
+        this.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
 
 }

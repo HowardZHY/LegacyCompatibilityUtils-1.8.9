@@ -1,7 +1,6 @@
 package space.libs.mixins.client.render;
 
 import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
-
 import org.lwjgl.util.vector.Vector3f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -49,4 +48,5 @@ public class MixinItemTransformVec3f {
     private static org.lwjgl.util.vector.Vector3f TransformVec3f(javax.vecmath.Vector3f vec) {
         return new org.lwjgl.util.vector.Vector3f(vec.x, vec.y, vec.z);
     }
+
 }
