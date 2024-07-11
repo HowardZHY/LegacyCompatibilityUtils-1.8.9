@@ -1,5 +1,6 @@
 package space.libs.mixins.client.render;
 
+import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.chunk.RenderChunk;
 import net.minecraft.util.EnumFacing;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,7 +15,7 @@ public class MixinContainerLocalRenderInformation {
     private void ContainerLocalRenderInformation(RenderChunk renderChunkIn, EnumFacing facingIn, int counterIn) {}
 
     @NewConstructor
-    public void ContainerLocalRenderInformation(RenderChunk renderChunkIn, EnumFacing facingIn, int counterIn, Object o) {
+    public void ContainerLocalRenderInformation(RenderGlobal renderer, RenderChunk renderChunkIn, EnumFacing facingIn, int counterIn, Object o) {
         this.ContainerLocalRenderInformation(renderChunkIn, facingIn, counterIn);
     }
 }

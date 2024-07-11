@@ -1,4 +1,4 @@
-Incompatibilities found: 606 errors, 0 warnings
+Incompatibilities found: 604 errors, 0 warnings
 net/minecraftforge/client/model/IPerspectiveAwareModel$MapWrapper:
   - error: <init>(Lnet/minecraftforge/client/model/IFlexibleBakedModel;Lnet/minecraftforge/client/model/IPerspectiveState;Lnet/minecraftforge/client/model/IModelPart;)V - Method was removed
   - error: getTransforms(Lnet/minecraftforge/client/model/IPerspectiveState;Lnet/minecraftforge/client/model/IModelPart;)Lcom/google/common/collect/ImmutableMap; - Method was removed
@@ -363,6 +363,7 @@ net/minecraft/network/play/server/S48PacketResourcePackSend:
 
 net/minecraft/client/renderer/entity/RenderMooshroom:
   - error: func_180582_a(Lnet/minecraft/entity/passive/EntityMooshroom;)Lnet/minecraft/util/ResourceLocation; - Method was removed
+
 net/minecraft/network/play/server/S0APacketUseBed:
   - error: func_180744_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
@@ -417,12 +418,13 @@ net/minecraftforge/fml/common/registry/RegistryDelegate$Delegate:
   - error: setName(Ljava/lang/String;)V - Method was removed
 net/minecraft/block/state/pattern/BlockHelper:
   - error: func_177643_a(Lnet/minecraft/block/state/IBlockState;)Z - Method was removed
+
 net/minecraftforge/fml/common/registry/VillagerRegistry$VillagerProfession:
   - error: delegate:Lnet/minecraftforge/fml/common/registry/RegistryDelegate; - Field was made final
-net/minecraft/entity/passive/EntityMooshroom:
-
+    #INVALID
 net/minecraft/client/multiplayer/ServerData:
   - error: <init>(Ljava/lang/String;Ljava/lang/String;)V - Method was removed
+    #DONE
 net/minecraft/util/EnumFacing$Plane:
   - error: func_179519_a(Lnet/minecraft/util/EnumFacing;)Z - Method was removed
 
@@ -432,12 +434,10 @@ net/minecraft/client/renderer/tileentity/TileEntityEndPortalRenderer:
 net/minecraft/entity/passive/EntityVillager:
   - error: func_180488_b(Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/passive/EntityVillager; - Method was removed
 
-net/minecraft/util/ChatComponentSelector:
-  - error: Class no longer exists
-
 net/minecraftforge/client/model/ModelLoader$VanillaModelWrapper:
   - error: Class missing interface: net/minecraftforge/client/model/IModelPart
   - error: bakeNormal(Lnet/minecraft/client/renderer/block/model/ModelBlock;Lnet/minecraftforge/client/model/IPerspectiveState;Lnet/minecraftforge/client/model/TRSRTransformation;Lnet/minecraft/client/renderer/vertex/VertexFormat;Lcom/google/common/base/Function;Z)Lnet/minecraftforge/client/model/IFlexibleBakedModel; - Method was removed
+    #TODO
 net/minecraft/client/renderer/block/model/ItemCameraTransforms$Deserializer:
   - error: func_178352_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/ItemCameraTransforms; - Method was removed
 
@@ -448,16 +448,17 @@ net/minecraft/client/renderer/WorldRenderer$State:
   - error: <init>(Lnet/minecraft/client/renderer/WorldRenderer;[IIILnet/minecraft/client/renderer/vertex/VertexFormat;)V - Method was removed
   - error: func_179015_b()I - Method was removed
   - error: field_179020_c:I - Field was removed
-
   - error: field_179017_d:I - Field was removed
-
+    #DONE IN FUNCTIONAL, NOT REALLY
 net/minecraft/client/audio/SoundManager$SoundSystemStarterThread:
   - error: <init>(Lnet/minecraft/client/audio/SoundManager;Ljava/lang/Object;)V - Method was removed
 
 net/minecraft/network/play/client/C13PacketPlayerAbilities:
   - error: func_180761_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
+    #DONE
 net/minecraft/network/play/server/S44PacketWorldBorder:
   - error: func_179787_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
+
 net/minecraft/network/play/client/C08PacketPlayerBlockPlacement:
   - error: func_180769_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
 
@@ -471,11 +472,11 @@ net/minecraft/client/renderer/entity/layers/LayerHeldBlock:
 
 net/minecraft/client/renderer/entity/layers/LayerEnderDragonEyes:
   - error: func_177210_a(Lnet/minecraft/entity/boss/EntityDragon;FFFFFFF)V - Method was removed
+
 net/minecraft/client/renderer/entity/RenderWither:
   - error: func_180591_a(Lnet/minecraft/entity/boss/EntityWither;DDDFF)V - Method was removed
   - error: func_180592_a(Lnet/minecraft/entity/boss/EntityWither;F)V - Method was removed
-net/minecraft/world/gen/MapGenRavine:
-
+    #DONE
 net/minecraft/entity/monster/EntityEnderman$AIFindPlayer:
   - error: this$0:Lnet/minecraft/entity/monster/EntityEnderman; - Field was removed
     #INVALID
@@ -940,15 +941,17 @@ net/minecraft/network/play/server/S41PacketServerDifficulty:
 
 net/minecraft/client/renderer/entity/RenderXPOrb:
   - error: func_180555_a(Lnet/minecraft/entity/item/EntityXPOrb;)Lnet/minecraft/util/ResourceLocation; - Method was removed
+
 net/minecraft/client/renderer/GlStateManager:
   - error: field_179169_u:Lnet/minecraft/client/renderer/GlStateManager$Viewport; - Field was removed
-
+    #NOT PLANNED
 net/minecraft/client/renderer/entity/RenderWolf:
   - error: func_177135_a(Lnet/minecraft/entity/passive/EntityWolf;DDDFF)V - Method was removed
   - error: func_180593_a(Lnet/minecraft/entity/passive/EntityWolf;F)F - Method was removed
 
 net/minecraft/client/renderer/entity/RenderFish:
   - error: func_180558_a(Lnet/minecraft/entity/projectile/EntityFishHook;DDDFF)V - Method was removed
+
 net/minecraft/client/renderer/entity/layers/LayerIronGolemFlower:
   - error: func_177153_a(Lnet/minecraft/entity/monster/EntityIronGolem;FFFFFFF)V - Method was removed
 
@@ -971,6 +974,7 @@ net/minecraft/network/play/server/S05PacketSpawnPosition:
   - error: func_180752_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 net/minecraft/client/renderer/GlStateManager$Viewport:
   - error: Class no longer exists
+    #NOT PLANNED
 net/minecraft/block/BlockStoneSlabNew$EnumType:
   - error: <init>(Ljava/lang/String;IILjava/lang/String;)V - Method was removed
     #INVALID - ENUM
@@ -1009,6 +1013,7 @@ net/minecraft/client/resources/model/WeightedBakedModel$MyWeighedRandomItem:
   - error: func_177634_a(Lnet/minecraft/client/resources/model/WeightedBakedModel$MyWeighedRandomItem;)I - Method was removed
 net/minecraft/client/renderer/tileentity/TileEntityMobSpawnerRenderer:
   - error: func_180539_a(Lnet/minecraft/tileentity/TileEntityMobSpawner;DDDFI)V - Method was removed
+
 net/minecraftforge/fml/client/FMLClientHandler:
   - error: guiLoaded:Z - Field was removed
   - error: resourceManager:Lnet/minecraft/client/resources/IReloadableResourceManager; - Field was removed
@@ -1020,15 +1025,15 @@ net/minecraft/client/renderer/entity/RenderLiving:
 net/minecraft/block/BlockHugeMushroom:
   - error: <init>(Lnet/minecraft/block/material/Material;Lnet/minecraft/block/Block;)V - Method was removed
 
-net/minecraft/util/ChatComponentScore:
-  - error: Class no longer exists
-
 net/minecraft/client/shader/ShaderDefault:
   - error: func_148088_a(Ljavax/vecmath/Matrix4f;)V - Method was removed
+
 net/minecraft/dispenser/IBlockSource:
   - error: func_179316_e()Lnet/minecraft/block/Block; - Method was removed
+
 net/minecraft/network/play/server/S46PacketSetCompressionLevel:
   - error: func_179759_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
+
 net/minecraft/block/BlockNewLog$SwitchEnumAxis:
   - error: Class no longer exists
 net/minecraft/client/gui/ScreenChatOptions:
@@ -1233,7 +1238,9 @@ net/minecraft/client/renderer/entity/ArmorStandRenderer:
   - error: func_177101_a(Lnet/minecraft/entity/item/EntityArmorStand;FFF)V - Method was removed
   - error: func_177099_b(Lnet/minecraft/entity/item/EntityArmorStand;)Z - Method was removed
 net/minecraftforge/client/model/IModel:
-  - error: Class missing interface: net/minecraftforge/client/model/IModelPart
+  - error: Class missing interface net/minecraftforge/client/model/IModelPart
+    #DONE
 net/minecraft/block/BlockStone$EnumType:
   - error: <init>(Ljava/lang/String;IILjava/lang/String;)V - Method was removed
   - error: <init>(Ljava/lang/String;IILjava/lang/String;Ljava/lang/String;)V - Method was removed
+    #INVALID - ENUM

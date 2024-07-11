@@ -1,4 +1,4 @@
-package space.libs.mixins.client;
+package space.libs.mixins.client.interfaces;
 
 import net.minecraft.client.audio.ITickableSound;
 import net.minecraft.server.gui.IUpdatePlayerListBox;

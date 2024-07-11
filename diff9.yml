@@ -1,4 +1,4 @@
-Incompatibilities found: 609 errors, 0 warnings
+Incompatibilities found: 607 errors, 0 warnings
 net/minecraftforge/client/model/IPerspectiveAwareModel$MapWrapper:
   - error: <init>(Lnet/minecraftforge/client/model/IFlexibleBakedModel;Lnet/minecraftforge/client/model/IPerspectiveState;Lnet/minecraftforge/client/model/IModelPart;)V - Method was removed
   - error: getTransforms(Lnet/minecraftforge/client/model/IPerspectiveState;Lnet/minecraftforge/client/model/IModelPart;)Lcom/google/common/collect/ImmutableMap; - Method was removed
@@ -452,14 +452,6 @@ net/minecraft/client/renderer/tileentity/TileEntityEndPortalRenderer:
   - error: func_180544_a(Lnet/minecraft/tileentity/TileEntityEndPortal;DDDFI)V - Method was removed
 net/minecraft/entity/passive/EntityVillager:
   - error: func_180488_b(Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/passive/EntityVillager; - Method was removed
-
-net/minecraft/world/gen/structure/StructureStrongholdPieces$Stairs2:
-
-net/minecraft/client/entity/EntityPlayerSP:
-
-net/minecraft/util/ChatComponentSelector:
-  - error: Class no longer exists
-net/minecraft/block/BlockRedstoneComparator:
 
 net/minecraftforge/client/model/ModelLoader$VanillaModelWrapper:
   - error: Class missing interface: net/minecraftforge/client/model/IModelPart
@@ -1263,12 +1255,6 @@ net/minecraft/client/renderer/entity/RenderLiving:
   - error: func_110813_b(Lnet/minecraft/entity/EntityLiving;)Z - Method was removed
 net/minecraft/block/BlockHugeMushroom:
   - error: <init>(Lnet/minecraft/block/material/Material;Lnet/minecraft/block/Block;)V - Method was removed
-
-net/minecraft/client/gui/GuiOverlayDebug:
-
-net/minecraft/util/ChatComponentScore:
-  - error: Class no longer exists
-net/minecraft/network/play/client/C17PacketCustomPayload:
 
 net/minecraft/client/shader/ShaderDefault:
   - error: func_148088_a(Ljavax/vecmath/Matrix4f;)V - Method was removed
