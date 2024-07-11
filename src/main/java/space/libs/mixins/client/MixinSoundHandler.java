@@ -1,12 +1,12 @@
-package space.libs.mixins;
+package space.libs.mixins.client;
 
+import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
-import net.minecraft.tileentity.TileEntityChest;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(TileEntityChest.class)
-public class MixinTileEntityChest implements IUpdatePlayerListBox {
+@Mixin(SoundHandler.class)
+public class MixinSoundHandler implements IUpdatePlayerListBox {
 
     @Override
     @Shadow

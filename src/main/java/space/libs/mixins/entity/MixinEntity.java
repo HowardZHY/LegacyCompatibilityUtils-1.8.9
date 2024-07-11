@@ -53,6 +53,9 @@ public abstract class MixinEntity {
         return 300;
     }
 
+    /** teleportDirection */
+    public int field_82152_aq;
+
     /** tags */
     public Set<String> field_184236_aF = Sets.newHashSet();
 
@@ -72,8 +75,8 @@ public abstract class MixinEntity {
                 } else {
                     facing = y > 0.0D ? EnumFacing.NORTH.getHorizontalIndex() : EnumFacing.SOUTH.getHorizontalIndex();
                 }
-
                 this.teleportDirection = EnumFacing.getHorizontal(facing);
+                this.field_82152_aq = this.teleportDirection.getHorizontalIndex();
             }
 
             this.inPortal = true;
@@ -82,7 +85,7 @@ public abstract class MixinEntity {
 
     /** getTeleportDirection */
     public int func_82148_at() {
-        return this.teleportDirection.getHorizontalIndex();
+        return this.field_82152_aq;
     }
 
     /** getBoundingBox */

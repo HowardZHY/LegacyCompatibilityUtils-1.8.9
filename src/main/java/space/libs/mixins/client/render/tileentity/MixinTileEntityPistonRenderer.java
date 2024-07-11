@@ -1,4 +1,4 @@
-package space.libs.mixins.client.render;
+package space.libs.mixins.client.render.tileentity;
 
 import net.minecraft.client.renderer.tileentity.TileEntityPistonRenderer;
 import net.minecraft.tileentity.TileEntityPiston;

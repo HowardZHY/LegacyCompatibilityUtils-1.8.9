@@ -1,4 +1,4 @@
-package space.libs.mixins.client.render;
+package space.libs.mixins.client.render.tileentity;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySignRenderer;
 import net.minecraft.tileentity.TileEntitySign;

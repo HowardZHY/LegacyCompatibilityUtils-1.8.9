@@ -1,4 +1,4 @@
-package space.libs.mixins;
+package space.libs.mixins.tileentity;
 
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntityMobSpawner;

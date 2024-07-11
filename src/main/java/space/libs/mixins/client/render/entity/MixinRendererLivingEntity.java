@@ -12,8 +12,14 @@ public abstract class MixinRendererLivingEntity {
     @Shadow
     public void renderName(EntityLivingBase entity, double x, double y, double z) {}
 
+    @Shadow
+    protected abstract boolean canRenderName(EntityLivingBase entity);
+
     public void func_77033_b(EntityLivingBase entity, double x, double y, double z) {
         this.renderName(entity, x, y, z);
     }
 
+    public boolean func_110813_b(EntityLivingBase targetEntity) {
+        return this.canRenderName(targetEntity);
+    }
 }

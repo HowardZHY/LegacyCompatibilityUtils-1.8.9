@@ -54,7 +54,7 @@ public abstract class MixinRenderPlayer extends RendererLivingEntity<AbstractCli
     }
 
     public void func_76986_a(Entity entity, double x, double y, double z, float p_76986_8_, float partialTicks) {
-        super.doRender((AbstractClientPlayer) entity, x, y, z, p_76986_8_, partialTicks);
+        this.doRender((AbstractClientPlayer) entity, x, y, z, p_76986_8_, partialTicks);
     }
 
     /** getEntityTexture */
