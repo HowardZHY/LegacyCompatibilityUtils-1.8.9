@@ -20,10 +20,14 @@
     "client.forge.MixinActionPerformedEvent",
     "client.forge.MixinClientChatReceivedEvent",
     "client.forge.MixinDrawScreenEvent",
+    "client.forge.MixinForgeHooksClient",
     "client.forge.MixinGUIScreenEvent",
     "client.forge.MixinInitGuiEvent",
+    "client.forge.MixinItemLayerModel",
+    "client.forge.MixinModelLoaderVanillaModelWrapper",
     "client.forge.MixinVanillaModelWrapper",
     "client.interfaces.MixinIModel",
+    "client.interfaces.MixinIRetexturableModel",
     "client.interfaces.MixinITickableSound",
     "client.render.MixinContainerLocalRenderInformation",
     "client.render.MixinFontRenderer",
@@ -41,6 +45,7 @@
     "client.render.MixinVertexBufferUploader",
     "client.render.MixinVertexFormat",
     "client.render.MixinVertexFormatElement",
+    "client.render.MixinVertexFormatElementEnumUsage",
     "client.render.MixinWorldRenderer",
     "client.render.MixinWorldVertexBufferUploader",
     "client.render.entity.MixinEntityRenderer",
@@ -73,6 +78,7 @@
   "mixins": [
     "MixinBiomeDecorator",
     "MixinBlockBrewingStand",
+    "MixinBlockLever",
     "MixinBlockPos",
     "MixinBlockPressurePlateWeighted",
     "MixinBlockSourceImpl",
@@ -95,6 +101,7 @@
     "entity.MixinEntityMob",
     "entity.MixinEntityRabbitAIAvoidEntity",
     "forge.MixinASMEventHandler",
+    "forge.MixinBiomeManager",
     "forge.MixinEntityEvent",
     "forge.MixinEntityJoinWorldEvent",
     "forge.MixinEventBus",
@@ -120,8 +127,11 @@
     "tileentity.MixinTileEntityBrewingStand",
     "tileentity.MixinTileEntityChest",
     "tileentity.MixinTileEntityDaylightDetector",
+    "tileentity.MixinTileEntityEnchantmentTable",
     "tileentity.MixinTileEntityEnderChest",
     "tileentity.MixinTileEntityFurnace",
-    "tileentity.MixinTileEntityMobSpawner"
+    "tileentity.MixinTileEntityHopper",
+    "tileentity.MixinTileEntityMobSpawner",
+    "tileentity.MixinTileEntityPiston"
   ]
 }
