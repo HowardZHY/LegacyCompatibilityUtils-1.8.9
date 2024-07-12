@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.SwitchEnumUsage;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
-import net.minecraft.util.QuadComparator;
+import net.minecraft.client.util.QuadComparator;
 
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;

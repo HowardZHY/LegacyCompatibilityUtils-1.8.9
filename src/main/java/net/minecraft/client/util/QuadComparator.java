@@ -1,4 +1,4 @@
-package net.minecraft.util;
+package net.minecraft.client.util;
 
 import java.nio.FloatBuffer;
 import java.util.Comparator;
