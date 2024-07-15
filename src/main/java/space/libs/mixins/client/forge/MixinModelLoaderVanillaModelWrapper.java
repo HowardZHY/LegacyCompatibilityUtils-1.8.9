@@ -42,8 +42,8 @@ public abstract class MixinModelLoaderVanillaModelWrapper implements IModelPart 
         boolean uvLocked)
     {
         List<TRSRTransformation> newTransforms = Lists.newArrayList();
-        for(int i = 0; i < model.getElements().size(); i++) {
-            newTransforms.add(null);
+        for (int i = 0; i < model.getElements().size(); i++) {
+            newTransforms.add(trans);
         }
         return this.bakeNormal(
             model,

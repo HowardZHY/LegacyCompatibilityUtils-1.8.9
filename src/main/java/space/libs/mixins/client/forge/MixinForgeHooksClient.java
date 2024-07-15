@@ -31,7 +31,7 @@ import static org.lwjgl.opengl.GL20.*;
 @Mixin(ForgeHooksClient.class)
 public class MixinForgeHooksClient implements IForgeHooksClient {
 
-    @Shadow(prefix = "original$")
+    @Shadow(prefix = "original$", remap = false)
     public static ModelBiped original$getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int slotID, ModelBiped _default) {
         throw new AbstractMethodError();
     }

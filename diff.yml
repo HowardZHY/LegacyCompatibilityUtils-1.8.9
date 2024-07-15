@@ -2,6 +2,7 @@ Incompatibilities found: 604 errors, 0 warnings
 net/minecraftforge/client/model/IPerspectiveAwareModel$MapWrapper:
   - error: <init>(Lnet/minecraftforge/client/model/IFlexibleBakedModel;Lnet/minecraftforge/client/model/IPerspectiveState;Lnet/minecraftforge/client/model/IModelPart;)V - Method was removed
   - error: getTransforms(Lnet/minecraftforge/client/model/IPerspectiveState;Lnet/minecraftforge/client/model/IModelPart;)Lcom/google/common/collect/ImmutableMap; - Method was removed
+    #DONE
 net/minecraft/world/gen/structure/StructureStrongholdPieces$Stones:
   - error: <init>(Ljava/lang/Object;)V - Method was removed
     #INVALID
@@ -146,7 +147,7 @@ net/minecraftforge/fml/common/FMLCommonHandler:
   - error: findMinecraftForge()Ljava/lang/Class; - Method was removed
   - error: callForgeMethod(Ljava/lang/String;)Ljava/lang/Object; - Method was removed
   - error: forge:Ljava/lang/Class; - Field was removed
-    #TODO?
+    #INVALID
 net/minecraftforge/fml/common/registry/VillagerRegistry:
   - error: addExtraVillageComponents(Ljava/util/ArrayList;Ljava/util/Random;I)V - Method was removed
   - error: getVillageComponent(Lnet/minecraft/world/gen/structure/StructureVillagePieces$PieceWeight;Lnet/minecraft/world/gen/structure/StructureVillagePieces$Start;Ljava/util/List;Ljava/util/Random;IIILnet/minecraft/util/EnumFacing;I)Ljava/lang/Object; - Method was removed
@@ -231,7 +232,7 @@ net/minecraft/client/renderer/block/model/ItemTransformVec3f:
   - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
   - error: <init>(Ljavax/vecmath/Vector3f;Ljavax/vecmath/Vector3f;Ljavax/vecmath/Vector3f;)V - Method was removed
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
-    #DONE? The exported class doesn't have that apply?
+    #DONE
 net/minecraft/client/renderer/VertexBufferUploader:
   - error: func_178177_a(Lnet/minecraft/client/renderer/WorldRenderer;I)I - Method was removed
     #DONE
@@ -396,9 +397,10 @@ net/minecraftforge/fml/common/network/handshake/FMLHandshakeMessage$RegistryData
   - error: <init>(ZLjava/lang/String;Lnet/minecraftforge/fml/common/registry/GameData$GameDataSnapshot$Entry;)V - Method was removed
   - error: getName()Ljava/lang/String; - Method was removed
 net/minecraftforge/client/model/ModelLoader$UVLock:
-  - error: Class missing interface: com/google/common/base/Function
+  - error: Class missing interface com/google/common/base/Function
   - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
+    #DONE
 net/minecraft/client/renderer/entity/RenderPainting:
   - error: func_180562_a(Lnet/minecraft/entity/item/EntityPainting;)Lnet/minecraft/util/ResourceLocation; - Method was removed
     #DONE
@@ -611,10 +613,11 @@ net/minecraft/client/renderer/entity/layers/LayerSnowmanHead:
   - error: func_177151_a(Lnet/minecraft/entity/monster/EntitySnowman;FFFFFFF)V - Method was removed
     #DONE
 net/minecraftforge/client/model/ItemLayerModel$BakedModel:
-  - error: Class missing interface: net/minecraftforge/client/model/IPerspectiveAwareModel
+  - error: Class missing interface net/minecraftforge/client/model/IPerspectiveAwareModel
   - error: <init>(Lcom/google/common/collect/ImmutableList;Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;Lnet/minecraft/client/renderer/vertex/VertexFormat;Lcom/google/common/collect/ImmutableMap;)V - Method was removed
   - error: handlePerspective(Lnet/minecraft/client/renderer/block/model/ItemCameraTransforms$TransformType;)Lorg/apache/commons/lang3/tuple/Pair; - Method was removed
   - error: transforms:Lcom/google/common/collect/ImmutableMap; - Field was removed
+    #TODO
 net/minecraft/client/resources/FallbackResourceManager$ImputStreamLeakedResourceLogger:
   - error: Class no longer exists
     #NOT PLANNED
@@ -623,7 +626,7 @@ net/minecraft/client/renderer/entity/RenderTntMinecart:
     #DONE
 net/minecraftforge/client/model/ModelLoader$WeightedPartWrapper:
   - error: Class missing interface net/minecraftforge/client/model/IModelPart
-    #DONE
+    #INVALID Class?
 net/minecraft/world/gen/feature/WorldGenBigTree:
   - error: func_180712_a(Lnet/minecraft/util/BlockPos;FLnet/minecraft/block/Block;)V - Method was removed
     #DONE
@@ -666,9 +669,10 @@ net/minecraft/network/play/server/S2CPacketSpawnGlobalEntity:
   - error: func_180720_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
 net/minecraftforge/client/model/TRSRTransformation:
-  - error: Class missing interface: com/google/common/base/Function
+  - error: Class missing interface com/google/common/base/Function
   - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
+    #DONE
 net/minecraft/util/EnumFacing$Axis:
   - error: func_176718_a(Lnet/minecraft/util/EnumFacing;)Z - Method was removed
 
@@ -685,7 +689,7 @@ net/minecraft/block/BlockChest:
     #DONE
 net/minecraft/client/renderer/block/model/BlockPartRotation:
   - error: <init>(Ljavax/vecmath/Vector3f;Lnet/minecraft/util/EnumFacing$Axis;FZ)V - Method was removed
-    #TODO
+    #DONE
 net/minecraft/server/integrated/IntegratedPlayerList:
   - error: func_180603_b()Lnet/minecraft/server/integrated/IntegratedServer; - Method was removed
     #DONE
@@ -707,11 +711,11 @@ net/minecraft/block/BlockCompressedPowered:
   - error: <init>(Lnet/minecraft/block/material/MapColor;)V - Method was removed
     #TODO?
 net/minecraft/client/resources/model/ModelRotation:
-  - error: Class missing interface: com/google/common/base/Function
+  - error: Class missing interface com/google/common/base/Function
   - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
   - error: func_177525_a()Ljavax/vecmath/Matrix4d; - Method was removed
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
-
+    #DONE
 net/minecraftforge/client/model/ItemLayerModel:
   - error: Class missing interface: net/minecraftforge/client/model/IModelPart
   - error: putVertex(Lnet/minecraftforge/client/model/pipeline/UnpackedBakedQuad$Builder;Lnet/minecraft/client/renderer/vertex/VertexFormat;Lnet/minecraftforge/client/model/TRSRTransformation;Lnet/minecraft/util/EnumFacing;FFFFF)V - Method was removed
@@ -738,10 +742,10 @@ net/minecraft/tileentity/TileEntityEnderChest:
 net/minecraft/network/play/client/C0APacketAnimation:
   - error: func_179721_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
 net/minecraftforge/client/model/IModelState:
-  - error: Class missing interface: com/google/common/base/Function
+  - error: Class missing interface com/google/common/base/Function
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
   - error: apply(Lcom/google/common/base/Optional;)Lcom/google/common/base/Optional; - Method was made abstract
-
+    #DONE
 net/minecraft/client/renderer/entity/RenderHorse:
   - error: func_180580_a(Lnet/minecraft/entity/passive/EntityHorse;F)V - Method was removed
   - error: func_180581_a(Lnet/minecraft/entity/passive/EntityHorse;)Lnet/minecraft/util/ResourceLocation; - Method was removed
@@ -807,7 +811,7 @@ net/minecraft/enchantment/EnchantmentHelper$ModifierLiving:
     #NOT PLANNED
 net/minecraft/client/gui/GuiIngame:
   - error: func_175182_a(Lnet/minecraft/client/gui/ScaledResolution;)V - Method was removed
-    #TODO
+    #DONE
 net/minecraft/block/BlockStoneSlab$EnumType:
   - error: <init>(Ljava/lang/String;IILjava/lang/String;)V - Method was removed
   - error: <init>(Ljava/lang/String;IILjava/lang/String;Ljava/lang/String;)V - Method was removed
@@ -879,11 +883,11 @@ net/minecraft/network/play/server/S47PacketPlayerListHeaderFooter:
   - error: func_179699_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
 net/minecraftforge/client/model/MapModelState:
-  - error: Class missing interface: com/google/common/base/Function
+  - error: Class missing interface com/google/common/base/Function
   - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
   - error: getState(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/IModelState; - Method was removed
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
-
+    #DONE
 net/minecraft/network/NetworkManager:
   - error: func_150726_a(Ljava/net/InetAddress;I)Lnet/minecraft/network/NetworkManager; - Method was removed
     #DONE
@@ -1149,6 +1153,7 @@ net/minecraft/command/common/CommandReplaceItem:
   - error: Class no longer exists
 net/minecraftforge/client/model/IPerspectiveState$Impl:
   - error: Class no longer exists
+    #DONE
 net/minecraft/command/server/CommandTestForBlock:
   - error: func_175775_a(Lnet/minecraft/nbt/NBTBase;Lnet/minecraft/nbt/NBTBase;Z)Z - Method was removed
 
@@ -1169,6 +1174,7 @@ net/minecraft/server/management/UserListWhitelist:
 net/minecraftforge/client/GuiIngameForge:
   - error: WIDGITS:Lnet/minecraft/util/ResourceLocation; - Field was removed
   - error: MC_VERSION:Ljava/lang/String; - Field was removed
+    #DONE
 net/minecraft/network/play/client/C0DPacketCloseWindow:
   - error: func_180759_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
 
