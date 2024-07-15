@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.List;
 
+@SuppressWarnings("all")
 @Mixin(targets = "net.minecraftforge.client.model.ModelLoader$VanillaModelWrapper", remap = false)
 public abstract class MixinModelLoaderVanillaModelWrapper implements IModelPart {
 
