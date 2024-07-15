@@ -28,7 +28,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
 
 @SuppressWarnings("unused")
-@Mixin(ForgeHooksClient.class)
+@Mixin(value = ForgeHooksClient.class, priority = 4000)
 public class MixinForgeHooksClient implements IForgeHooksClient {
 
     @Shadow(prefix = "original$", remap = false)
@@ -109,7 +109,7 @@ public class MixinForgeHooksClient implements IForgeHooksClient {
     }
 
     @Public
-    private static void transform(Vector3d vec, Matrix4f m)
+    private static void transformV3d(Vector3d vec, Matrix4f m)
     {
         Vector4f tmp = new Vector4f((float)vec.x, (float)vec.y, (float)vec.z, 1f);
         m.transform(tmp);

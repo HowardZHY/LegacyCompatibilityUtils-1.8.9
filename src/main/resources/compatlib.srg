@@ -3,3 +3,4 @@ CL: net/minecraft/world/GameType net/minecraft/world/WorldSettings$GameType
 CL: net/minecraft/server/management/PlayerChunkMapEntry net/minecraft/server/management/PlayerManager$PlayerInstance
 CL: net/minecraftforge/fml/common/Mod$EventBusSubscriber net/minecraftforge/fml/common/EventBusSubscriber
 MD: net/minecraft/client/multiplayer/PlayerControllerMP/func_178889_l ()Lnet/minecraft/world/GameType; net/minecraft/client/multiplayer/PlayerControllerMP/func_178889_l ()Lnet/minecraft/world/WorldSettings$GameType;
+MD: net/minecraftforge/client/ForgeHooksClient/transform (Ljavax/vecmath/Vector3d;Ljavax/vecmath/Matrix4f;)V; net/minecraftforge/client/ForgeHooksClient/transformV3d (Ljavax/vecmath/Vector3d;Ljavax/vecmath/Matrix4f;)V;
