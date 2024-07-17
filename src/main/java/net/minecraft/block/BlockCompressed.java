@@ -8,16 +8,23 @@ import net.minecraft.creativetab.CreativeTabs;
 public class BlockCompressed extends Block {
 
     /** mapColor */
-    private final MapColor field_150202_a;
+    public MapColor field_150202_a;
 
-    public BlockCompressed(MapColor var1) {
-        super(Material.iron);
-        this.field_150202_a = var1;
+    public BlockCompressed(MapColor color) {
+        super(Material.iron, color);
+        this.field_150202_a = color;
+        this.setCreativeTab(CreativeTabs.tabBlock);
+    }
+
+    public BlockCompressed(Material material, MapColor color)
+    {
+        super(material, color);
+        this.field_150202_a = color;
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
 
     /** getMapColor */
-    public MapColor func_180659_g(IBlockState var1) {
+    public MapColor func_180659_g(IBlockState color) {
         return this.field_150202_a;
     }
 }

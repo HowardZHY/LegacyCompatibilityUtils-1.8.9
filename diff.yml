@@ -216,7 +216,7 @@ net/minecraft/network/play/server/S19PacketEntityStatus:
     #DONE
 net/minecraft/nbt/NBTTagCompound:
   - error: field_150301_b:Lorg/apache/logging/log4j/Logger; - Field was removed
-    #TODO
+    #DONE
 net/minecraft/client/renderer/entity/RenderWitch:
   - error: func_180590_a(Lnet/minecraft/entity/monster/EntityWitch;DDDFF)V - Method was removed
   - error: func_180589_a(Lnet/minecraft/entity/monster/EntityWitch;)Lnet/minecraft/util/ResourceLocation; - Method was removed
@@ -424,7 +424,7 @@ net/minecraftforge/fml/common/registry/RegistryDelegate$Delegate:
   - error: setName(Ljava/lang/String;)V - Method was removed
 net/minecraft/block/state/pattern/BlockHelper:
   - error: func_177643_a(Lnet/minecraft/block/state/IBlockState;)Z - Method was removed
-
+    #DONE
 net/minecraftforge/fml/common/registry/VillagerRegistry$VillagerProfession:
   - error: delegate:Lnet/minecraftforge/fml/common/registry/RegistryDelegate; - Field was made final
     #INVALID
@@ -439,7 +439,7 @@ net/minecraft/client/renderer/tileentity/TileEntityEndPortalRenderer:
   - error: func_180544_a(Lnet/minecraft/tileentity/TileEntityEndPortal;DDDFI)V - Method was removed
 net/minecraft/entity/passive/EntityVillager:
   - error: func_180488_b(Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/passive/EntityVillager; - Method was removed
-
+    #DONE
 net/minecraftforge/client/model/ModelLoader$VanillaModelWrapper:
   - error: Class missing interface net/minecraftforge/client/model/IModelPart
   - error: bakeNormal(Lnet/minecraft/client/renderer/block/model/ModelBlock;Lnet/minecraftforge/client/model/IPerspectiveState;Lnet/minecraftforge/client/model/TRSRTransformation;Lnet/minecraft/client/renderer/vertex/VertexFormat;Lcom/google/common/base/Function;Z)Lnet/minecraftforge/client/model/IFlexibleBakedModel; - Method was removed
@@ -563,9 +563,10 @@ net/minecraft/client/renderer/tileentity/TileEntitySkullRenderer:
     #DONE
 net/minecraft/client/particle/EntityFireworkStarterFX_Factory:
   - error: Class no longer exists
+
 net/minecraft/entity/passive/EntityOcelot:
   - error: func_180493_b(Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/passive/EntityOcelot; - Method was removed
-
+    #DONE
 net/minecraft/world/gen/feature/WorldGenHugeTrees:
   - error: <init>(ZIIII)V - Method was removed
     #TODO?
@@ -596,6 +597,7 @@ net/minecraft/client/renderer/entity/RenderVillager:
     #DONE
 net/minecraft/client/audio/SoundHandler$SwitchType:
   - error: Class no longer exists
+    #INVALID
 net/minecraft/world/gen/feature/WorldGenSwamp:
   - error: func_175922_a(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;I)V - Method was removed
 
@@ -703,13 +705,14 @@ net/minecraft/client/renderer/Tessellator:
     #DONE
 net/minecraft/entity/passive/EntityRabbit:
   - error: func_175526_b(Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/passive/EntityRabbit; - Method was removed
-
+    #DONE
 net/minecraft/client/renderer/entity/layers/LayerMooshroomMushroom:
   - error: func_177204_a(Lnet/minecraft/entity/passive/EntityMooshroom;FFFFFFF)V - Method was removed
+
 net/minecraft/block/BlockCompressedPowered:
   - error: Class missing superclass of net/minecraft/block/BlockCompressed
   - error: <init>(Lnet/minecraft/block/material/MapColor;)V - Method was removed
-    #TODO?
+    #DONE?
 net/minecraft/client/resources/model/ModelRotation:
   - error: Class missing interface com/google/common/base/Function
   - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
@@ -741,6 +744,7 @@ net/minecraft/tileentity/TileEntityEnderChest:
     #DONE
 net/minecraft/network/play/client/C0APacketAnimation:
   - error: func_179721_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
+    #DONE
 net/minecraftforge/client/model/IModelState:
   - error: Class missing interface com/google/common/base/Function
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
@@ -1151,6 +1155,7 @@ net/minecraft/client/renderer/entity/layers/LayerWolfCollar:
 
 net/minecraft/command/common/CommandReplaceItem:
   - error: Class no longer exists
+    #TODO?
 net/minecraftforge/client/model/IPerspectiveState$Impl:
   - error: Class no longer exists
     #DONE
@@ -1221,7 +1226,7 @@ net/minecraft/client/settings/GameSettings:
     #DONE
 net/minecraft/client/renderer/entity/RenderPotion:
   - error: func_177085_a(Lnet/minecraft/entity/projectile/EntityPotion;)Lnet/minecraft/item/ItemStack; - Method was removed
-
+    #DONE
 net/minecraft/network/play/server/S23PacketBlockChange:
   - error: func_180727_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
