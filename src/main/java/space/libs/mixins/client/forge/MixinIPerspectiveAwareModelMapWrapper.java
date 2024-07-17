@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Forge Development LLC and contributors
+ * SPDX-License-Identifier: LGPL-2.1-only
+ */
 package space.libs.mixins.client.forge;
 
 import com.google.common.collect.ImmutableMap;

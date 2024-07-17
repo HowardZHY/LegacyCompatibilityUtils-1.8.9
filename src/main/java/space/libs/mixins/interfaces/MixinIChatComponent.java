@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 @Mixin(IChatComponent.class)
 public interface MixinIChatComponent {
 

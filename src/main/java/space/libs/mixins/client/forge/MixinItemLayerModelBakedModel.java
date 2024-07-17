@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Forge Development LLC and contributors
+ * SPDX-License-Identifier: LGPL-2.1-only
+ */
 package space.libs.mixins.client.forge;
 
 import com.google.common.collect.ImmutableList;
@@ -13,6 +17,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
+@SuppressWarnings("all")
 @Mixin(ItemLayerModel.BakedModel.class)
 public abstract class MixinItemLayerModelBakedModel implements IPerspectiveAwareModel {
 
