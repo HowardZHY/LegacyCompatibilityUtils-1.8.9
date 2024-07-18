@@ -1,4 +1,4 @@
-package space.libs.mixins.client.render.entity;
+package space.libs.mixins.client.render.entity.layers;
 
 import net.minecraft.client.renderer.entity.layers.LayerSlimeGel;
 import net.minecraft.entity.monster.EntitySlime;

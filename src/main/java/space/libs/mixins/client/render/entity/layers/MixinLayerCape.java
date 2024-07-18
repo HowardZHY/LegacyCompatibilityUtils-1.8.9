@@ -1,4 +1,4 @@
-package space.libs.mixins.client.render.entity;
+package space.libs.mixins.client.render.entity.layers;
 
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerCape;

@@ -1,5 +1,8 @@
 buildscript {
     repositories {
+        maven {
+            url = uri("https://plugins.gradle.org/m2/")
+        }
         maven { url 'https://jitpack.io/' }
         //new forge repository
         maven { url "https://maven.minecraftforge.net" }
@@ -64,6 +67,7 @@ repositories {
     maven {
         url 'https://maven.cleanroommc.com'
     }
+    mavenCentral()
 }
 
 dependencies {
@@ -81,6 +85,7 @@ dependencies {
     //compile will make your library available only in this dev environment
     //your libraries wont be accessible outside of intellij
     //example:
+    shade('net.jodah:typetools:0.6.3')
     implementation 'zone.rong:mixinbooter:8.8'
     //compile 'zone.rong:mixinbooter:8.8'
     //compile "org.spongepowered:mixin:0.7.11-SNAPSHOT"
