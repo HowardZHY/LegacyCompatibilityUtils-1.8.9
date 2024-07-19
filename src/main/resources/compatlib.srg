@@ -1,4 +1,5 @@
 CL: net/minecraft/client/renderer/entity/RenderLivingBase net/minecraft/client/renderer/entity/RendererLivingEntity
+CL: net/minecraft/entity/passive/EntityRabbit$RabbitTypeData net/minecraft/entity/passive/EntityRabbitRabbitTypeData
 CL: net/minecraft/world/GameType net/minecraft/world/WorldSettings$GameType
 CL: net/minecraft/server/management/PlayerChunkMapEntry net/minecraft/server/management/PlayerManager$PlayerInstance
 CL: net/minecraftforge/fml/common/Mod$EventBusSubscriber net/minecraftforge/fml/common/EventBusSubscriber
