@@ -10,7 +10,7 @@ import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowSuperConstructor;
 
 @SuppressWarnings("all")
-@Mixin(IncompatibleSubstitutionException.class)
+@Mixin(value = IncompatibleSubstitutionException.class, remap = false)
 public class MixinIncompatibleSubstitutionException {
 
     @ShadowSuperConstructor
@@ -20,5 +20,4 @@ public class MixinIncompatibleSubstitutionException {
     public void IncompatibleSubstitutionException(String name, Object replacement, Object original) {
         this.RuntimeException(String.format("The substitute %s for %s (type %s) is type incompatible.", replacement.getClass().getName(), name, original.getClass().getName()));
     }
-
 }

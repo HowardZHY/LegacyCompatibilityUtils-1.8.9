@@ -668,17 +668,18 @@ net/minecraft/network/play/client/C14PacketTabComplete:
 
 net/minecraftforge/fml/common/registry/ExistingSubstitutionException:
   - error: <init>(Ljava/lang/String;Ljava/lang/Object;)V - Method was removed
+    #DONE
 net/minecraft/potion/Potion:
   - error: func_180141_c()[Ljava/lang/String; - Method was removed
-    #TODO
+    #DONE
 net/minecraft/client/renderer/block/model/BlockPartFace$Deserializer:
   - error: func_178338_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/BlockPartFace; - Method was removed
+
 net/minecraft/client/renderer/entity/RenderEndermite:
   - error: func_177107_a(Lnet/minecraft/entity/monster/EntityEndermite;)F - Method was removed
   - error: func_177106_b(Lnet/minecraft/entity/monster/EntityEndermite;)Lnet/minecraft/util/ResourceLocation; - Method was removed
-
   - error: $VALUES$:[Lnet/minecraft/util/EnumFacing$AxisDirection; - Field was removed
-    #TODO
+    #DONE & INVALID
 net/minecraft/network/play/server/S0FPacketSpawnMob:
   - error: func_180721_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 net/minecraft/network/play/server/S2CPacketSpawnGlobalEntity:
@@ -691,9 +692,8 @@ net/minecraftforge/client/model/TRSRTransformation:
     #DONE
 net/minecraft/util/EnumFacing$Axis:
   - error: func_176718_a(Lnet/minecraft/util/EnumFacing;)Z - Method was removed
-
   - error: $VALUES$:[Lnet/minecraft/util/EnumFacing$Axis; - Field was removed
-
+    #DONE & INVALID - ENUM
 net/minecraft/network/play/server/S2APacketParticles:
   - error: func_180740_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
