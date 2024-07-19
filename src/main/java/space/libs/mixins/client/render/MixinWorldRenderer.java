@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.client.util.QuadComparator;
 
+import org.apache.logging.log4j.LogManager;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -325,7 +326,6 @@ public abstract class MixinWorldRenderer {
     }
 
     /** addVertex */
-    @SuppressWarnings("all")
     public void func_178984_b(double x, double y, double z) {
 
         if (this.LegacyPOSITIONCOLORF) {
@@ -355,11 +355,12 @@ public abstract class MixinWorldRenderer {
         if (this.field_179008_i >= this.getBufferSize() - this.vertexFormat.getNextOffset()) {
             this.growBuffer(2097152);
         }
-        System.out.println("Unknown addVertex call, won't go here...");
-        List list = this.vertexFormat.getElements();
+
+        LogManager.getLogger().warn("Unknown addVertex call, should't go here...");
+        List<VertexFormatElement> list = this.vertexFormat.getElements();
         int listSize = list.size();
         for (int i = 0; i < listSize; ++i) {
-            VertexFormatElement element = (VertexFormatElement) list.get(i);
+            VertexFormatElement element = list.get(i);
             IVertexFormatElement accessor = (IVertexFormatElement) element;
             int j = accessor.func_177373_a() >> 2;
             int l = this.field_179008_i + j;

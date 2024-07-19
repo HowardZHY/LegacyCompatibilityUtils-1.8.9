@@ -1019,7 +1019,7 @@ net/minecraft/network/play/server/S26PacketMapChunkBulk:
 net/minecraft/util/ClassInheritanceMultiMap:
   - error: func_180213_a(Ljava/lang/Class;)V - Method was lowered in visibility
   - error: func_180212_a(Ljava/lang/Class;Z)Ljava/lang/Class; - Method was removed
-    #TODO
+    #DONE
 net/minecraft/client/shader/Shader:
   - error: func_148045_a(Ljavax/vecmath/Matrix4f;)V - Method was removed
     #DONE
@@ -1050,7 +1050,7 @@ net/minecraft/client/renderer/block/model/BlockPart$SwitchEnumFacing:
     #INVALID
 net/minecraftforge/fml/common/event/FMLPostInitializationEvent:
   - error: buildSoftDependProxy(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object; - Method was removed
-
+    #DONE
 net/minecraft/server/management/PlayerProfileCache$ProfileEntry:
   - error: <init>(Lnet/minecraft/server/management/PlayerProfileCache;Lcom/mojang/authlib/GameProfile;Ljava/util/Date;Ljava/lang/Object;)V - Method was removed
   - error: this$0:Lnet/minecraft/server/management/PlayerProfileCache; - Field was removed
@@ -1221,6 +1221,7 @@ net/minecraft/network/play/server/S42PacketCombatEvent:
 
 net/minecraft/util/Cartesian$GetList:
   - error: func_179324_a([Ljava/lang/Object;)Ljava/util/List; - Method was removed
+
 net/minecraft/client/renderer/block/statemap/StateMap:
   - error: <init>(Lnet/minecraft/block/properties/IProperty;Ljava/lang/String;Ljava/util/List;Ljava/lang/Object;)V - Method was removed
     #DONE
@@ -1234,7 +1235,7 @@ net/minecraft/client/renderer/entity/RenderIronGolem:
     #DONE
 net/minecraft/client/renderer/entity/RenderMinecartMobSpawner:
   - error: func_177081_a(Lnet/minecraft/entity/ai/EntityMinecartMobSpawner;FLnet/minecraft/block/state/IBlockState;)V - Method was removed
-
+    #DONE
 net/minecraft/util/Cartesian$Product$ProductIterator:
   - error: func_179421_a()[Ljava/lang/Object; - Method was removed
 
@@ -1249,7 +1250,7 @@ net/minecraft/client/renderer/block/model/FaceBakery:
   - error: func_178403_a(Ljavax/vecmath/Vector3f;Ljavax/vecmath/Vector3f;)[F - Method was removed
   - error: func_178407_a(Ljavax/vecmath/Vector3d;Lnet/minecraft/client/renderer/block/model/BlockPartRotation;)V - Method was removed
   - error: func_178415_a(Ljavax/vecmath/Vector3d;Lnet/minecraft/util/EnumFacing;ILnet/minecraft/client/resources/model/ModelRotation;Z)I - Method was removed
-    #TODO?
+    #DONE
 net/minecraft/entity/monster/EntitySlime$AISlimeFaceRandom:
   - error: this$0:Lnet/minecraft/entity/monster/EntitySlime; - Field was removed
     #INVALID
