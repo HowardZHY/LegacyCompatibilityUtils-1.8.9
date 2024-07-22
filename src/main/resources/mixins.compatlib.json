@@ -118,6 +118,7 @@
     "client.render.entity.MixinRenderWolf",
     "client.render.entity.MixinRenderXPOrb",
     "client.render.entity.MixinRenderZombie",
+    "client.render.entity.layers.MixinLayerArmorBase",
     "client.render.entity.layers.MixinLayerBipedArmor",
     "client.render.entity.layers.MixinLayerCape",
     "client.render.entity.layers.MixinLayerCreeperCharge",

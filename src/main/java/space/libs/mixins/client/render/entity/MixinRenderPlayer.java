@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -50,7 +49,7 @@ public abstract class MixinRenderPlayer extends RendererLivingEntity<AbstractCli
     }
 
     public void func_76986_a(EntityLivingBase entity, double x, double y, double z, float p_76986_8_, float partialTicks) {
-        this.func_180596_a((AbstractClientPlayer)entity, x, y, z, p_76986_8_, partialTicks);
+        this.doRender((AbstractClientPlayer)entity, x, y, z, p_76986_8_, partialTicks);
     }
 
     public void func_76986_a(Entity entity, double x, double y, double z, float p_76986_8_, float partialTicks) {

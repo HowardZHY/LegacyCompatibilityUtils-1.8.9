@@ -25,7 +25,7 @@ import java.util.PriorityQueue;
 import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.*;
 
 @SuppressWarnings("unused")
-@Mixin(WorldRenderer.class)
+@Mixin(value = WorldRenderer.class, priority = 800)
 public abstract class MixinWorldRenderer {
 
     @Shadow
@@ -144,9 +144,6 @@ public abstract class MixinWorldRenderer {
         if (this.LegacyPOSITION) {
             return;
         }
-        VertexFormat format = new VertexFormat(POSITION_COLOR);
-        this.vertexFormat = format;
-        this.vertexFormatElement = format.getElement(this.vertexFormatIndex);
         if (!this.noColor) {
             if (red > 255) {
                 red = 255;
@@ -172,6 +169,9 @@ public abstract class MixinWorldRenderer {
             if (alpha < 0) {
                 alpha = 0;
             }
+            VertexFormat format = new VertexFormat(POSITION_COLOR);
+            this.vertexFormat = format;
+            this.vertexFormatElement = format.getElement(this.vertexFormatIndex);
             if (!this.vertexFormat.hasColor()) {
                 VertexFormatElement element = new VertexFormatElement(0, VertexFormatElement.EnumType.UBYTE, VertexFormatElement.EnumUsage.COLOR, 4);
                 this.vertexFormat.addElement(element);
@@ -183,17 +183,6 @@ public abstract class MixinWorldRenderer {
             }
             this.endVertex();
         }
-    }
-
-    /** putBrightness4 */
-    public void func_178962_a(int p_178962_1_, int p_178962_2_, int p_178962_3_, int p_178962_4_)
-    {
-        int index = (this.vertexCount - 4) * (this.vertexFormat.getNextOffset() / 4) + this.vertexFormat.getUvOffsetById(1) / 4;
-        int offset = this.vertexFormat.getNextOffset() >> 2;
-        this.rawIntBuffer.put(index, p_178962_1_);
-        this.rawIntBuffer.put(index + offset, p_178962_2_);
-        this.rawIntBuffer.put(index + offset * 2, p_178962_3_);
-        this.rawIntBuffer.put(index + offset * 3, p_178962_4_);
     }
 
     /** setBrightness */
@@ -357,6 +346,7 @@ public abstract class MixinWorldRenderer {
         }
 
         LogManager.getLogger().warn("Unknown addVertex call, should't go here...");
+
         List<VertexFormatElement> list = this.vertexFormat.getElements();
         int listSize = list.size();
         for (int i = 0; i < listSize; ++i) {
@@ -450,7 +440,7 @@ public abstract class MixinWorldRenderer {
     }
 
     @Inject(method = "putPosition", at = @At("HEAD"))
-    private void putPosition(double x, double y, double z, CallbackInfo ci) {
+    public void putPosition(double x, double y, double z, CallbackInfo ci) {
         if (this.field_179008_i >= this.getBufferSize() - this.vertexFormat.getNextOffset()) {
             this.growBuffer(2097152);
         }
@@ -459,6 +449,14 @@ public abstract class MixinWorldRenderer {
     @Inject(method = "addVertexData", at = @At("TAIL"))
     public void addVertexData(int[] vertexData, CallbackInfo ci) {
         this.field_179008_i += vertexData.length;
+    }
+
+    /** Reset Flags */
+    @Inject(method = "finishDrawing", at = @At("HEAD"))
+    public void finishDrawing(CallbackInfo ci) {
+        this.LegacyPOSITION = false;
+        this.LegacyPOSITIONCOLORF = false;
+        this.LegacyPOSITIONCOLORI = false;
     }
 
     /* State members */
