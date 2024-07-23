@@ -14,7 +14,7 @@ public abstract class MixinTexturedQuad {
     public void draw(WorldRenderer renderer, float scale) {}
 
     public void func_178765_a(VertexBuffer buffer, float scale) {
-        this.draw(buffer.renderer, scale);
+        this.draw(buffer, scale);
     }
 
 }

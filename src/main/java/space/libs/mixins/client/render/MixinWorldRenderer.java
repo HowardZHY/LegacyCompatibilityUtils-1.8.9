@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import space.libs.interfaces.IVertexFormatElement;
+import space.libs.interfaces.IWorldRenderer;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -25,8 +26,8 @@ import java.util.PriorityQueue;
 import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.*;
 
 @SuppressWarnings("unused")
-@Mixin(value = WorldRenderer.class, priority = 800)
-public abstract class MixinWorldRenderer {
+@Mixin(value = WorldRenderer.class, priority = 100)
+public abstract class MixinWorldRenderer implements IWorldRenderer {
 
     @Shadow
     private boolean isDrawing;
@@ -345,7 +346,7 @@ public abstract class MixinWorldRenderer {
             this.growBuffer(2097152);
         }
 
-        LogManager.getLogger().warn("Unknown addVertex call, should't go here...");
+        LogManager.getLogger().warn("Unknown addVertex call, shouldn't go here...");
 
         List<VertexFormatElement> list = this.vertexFormat.getElements();
         int listSize = list.size();
@@ -413,6 +414,10 @@ public abstract class MixinWorldRenderer {
         }
         this.field_178998_e = u;
         this.field_178995_f = v;
+    }
+
+    public WorldRenderer getRenderer() {
+        return (WorldRenderer) (Object) this;
     }
 
     @Inject(method = "<init>", at = @At("RETURN"))

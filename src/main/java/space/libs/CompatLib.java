@@ -27,4 +27,10 @@ public class CompatLib {
         return Loader.instance().getMCVersionString();
     }
 
+    public static String getMoBendsVersion() {
+        try {
+            
+        }
+    }
+
 }

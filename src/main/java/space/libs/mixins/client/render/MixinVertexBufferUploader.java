@@ -19,7 +19,7 @@ public class MixinVertexBufferUploader {
     }
 
     public void func_181679_a(VertexBuffer buffer) {
-        this.draw(buffer.renderer);
+        this.draw(buffer);
     }
 
 }

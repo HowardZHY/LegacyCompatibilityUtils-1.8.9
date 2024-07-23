@@ -8,12 +8,10 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
 @Mixin(LayerArmorBase.class)
-public abstract class MixinLayerArmorBase {
+public abstract class MixinLayerArmorBase<T extends ModelBase> {
 
     @Shadow
-    protected abstract void setModelPartVisible(ModelBase model, int armorSlot);
+    protected abstract void setModelPartVisible(T model, int armorSlot);
 
-    public void func_177195_a(ModelBiped p_177195_1_, int p_177195_2_) {
-        this.setModelPartVisible(p_177195_1_, p_177195_2_);
-    }
+    public abstract void func_177195_a(ModelBiped p_177195_1_, int p_177195_2_);
 }

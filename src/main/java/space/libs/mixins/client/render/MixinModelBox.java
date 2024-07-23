@@ -14,7 +14,7 @@ public abstract class MixinModelBox {
     public abstract void render(WorldRenderer renderer, float scale);
 
     public void func_178780_a(VertexBuffer buffer, float scale) {
-        this.render(buffer.renderer, scale);
+        this.render(buffer, scale);
     }
 
 }

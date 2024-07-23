@@ -53,6 +53,9 @@ public abstract class MixinEntity {
         return 300;
     }
 
+    @Shadow
+    public abstract boolean isRiding();
+
     /** teleportDirection */
     public int field_82152_aq;
 
@@ -90,7 +93,10 @@ public abstract class MixinEntity {
 
     /** getBoundingBox */
     public net.minecraft.util.math.AxisAlignedBB func_174813_aQ() {
-        return (net.minecraft.util.math.AxisAlignedBB) this.boundingBox;
+        return new net.minecraft.util.math.AxisAlignedBB (
+            this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.minZ,
+            this.boundingBox.maxX, this.boundingBox.maxY, this.boundingBox.maxZ
+        );
     }
 
     /** getPosition */
@@ -116,4 +122,7 @@ public abstract class MixinEntity {
         return this.field_184236_aF;
     }
 
+    public boolean func_184218_aH() {
+        return this.isRiding();
+    }
 }

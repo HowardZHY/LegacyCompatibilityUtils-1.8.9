@@ -79,6 +79,11 @@ public class MixinGlStateManager {
     }
 
     @Public
+    private static void func_187415_K() {
+        GL11.glEndList();
+    }
+
+    @Public
     private static void func_187423_f(int p_187423_0_, int p_187423_1_) {
         GL11.glNewList(p_187423_0_, p_187423_1_);
     }
