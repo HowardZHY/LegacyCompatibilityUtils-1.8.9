@@ -5,6 +5,8 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.Field;
+
 @SuppressWarnings("all")
 @Mod(
     modid = "compatlib",
@@ -25,12 +27,6 @@ public class CompatLib {
 
     public static String getMCVersion() {
         return Loader.instance().getMCVersionString();
-    }
-
-    public static String getMoBendsVersion() {
-        try {
-            
-        }
     }
 
 }

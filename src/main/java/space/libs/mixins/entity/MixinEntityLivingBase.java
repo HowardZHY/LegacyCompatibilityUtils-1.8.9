@@ -3,6 +3,7 @@ package space.libs.mixins.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
@@ -22,6 +23,11 @@ public abstract class MixinEntityLivingBase extends Entity {
     @Shadow
     public abstract ItemStack getHeldItem();
 
+    /** getItemStackFromSlot */
+    public ItemStack func_184582_a(EntityEquipmentSlot slot) {
+        return null;
+    }
+
     public ItemStack func_184586_b(EnumHand hand) {
         return this.getHeldItem();
     }
@@ -33,6 +39,11 @@ public abstract class MixinEntityLivingBase extends Entity {
 
     public EnumHandSide func_184591_cq() {
         return EnumHandSide.RIGHT;
+    }
+
+    /** getHeldItemOffhand */
+    public ItemStack func_184592_cb() {
+        return null;
     }
 
     /** setActiveHand */
@@ -61,4 +72,7 @@ public abstract class MixinEntityLivingBase extends Entity {
         return false;
     }
 
+    public ItemStack func_184614_ca() {
+        return this.getHeldItem();
+    }
 }

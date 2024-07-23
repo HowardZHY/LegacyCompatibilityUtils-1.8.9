@@ -2,6 +2,8 @@ package space.libs.util;
 
 import space.libs.core.CompatLibCore;
 
+import java.lang.reflect.Field;
+
 public class ModDetector {
 
     public static boolean hasSpACore = false;
@@ -16,6 +18,20 @@ public class ModDetector {
         CompatLibCore.LOGGER.info("Found SpACore, load ASM Transformers of it.");
         hasSpACore = true;
 
+    }
+
+    public static String getMoBendsVersion() {
+        String version = "";
+        try {
+            Class<?> c = Class.forName("net.gobbob.mobends.MoBends");
+            Field versionField = c.getField("VERSION");
+            version = (String) versionField.get(null);
+        } catch (Exception ignored) {
+            CompatLibCore.LOGGER.info("MoBends Version not found.");
+            return "";
+        }
+        CompatLibCore.LOGGER.info("MoBends Version: "+ version);
+        return version;
     }
 
 }

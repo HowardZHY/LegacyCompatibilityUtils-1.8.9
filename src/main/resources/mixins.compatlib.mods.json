@@ -1,11 +1,16 @@
 {
-  "required": false,
+  "required": true,
   "minVersion": "0.7",
   "package": "space.libs.mixins.mods",
+  "refmap": "mixins.compatlib.mods.refmap.json",
+  "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",
   "client": [
     "di.MixinDIClientProxy",
-    "ichun.MixinThreadGetPatrons"
+    "ichun.MixinThreadGetPatrons",
+    "mobends.MixinLayerBendsBipedArmor",
+    "mobends.MixinLayerBendsElytra",
+    "mobends.MixinLayerBendsHeldItem"
   ],
   "mixins": [
     "ichun.MixinModVersionChecker"

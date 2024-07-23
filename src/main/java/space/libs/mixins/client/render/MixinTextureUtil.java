@@ -20,9 +20,8 @@ import java.nio.IntBuffer;
 @Mixin(TextureUtil.class)
 public abstract class MixinTextureUtil {
 
-    @Final
     @Shadow
-    private static Logger logger = LogManager.getLogger();
+    private static @Final Logger logger = LogManager.getLogger();
 
     @Shadow
     static void bindTexture(int p_94277_0_) {}

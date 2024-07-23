@@ -1,8 +1,6 @@
 buildscript {
     repositories {
-        maven {
-            url = uri("https://plugins.gradle.org/m2/")
-        }
+        maven { url "https://plugins.gradle.org/m2/" }
         maven { url 'https://jitpack.io/' }
         //new forge repository
         maven { url "https://maven.minecraftforge.net" }
@@ -67,6 +65,9 @@ repositories {
     maven {
         url 'https://maven.cleanroommc.com'
     }
+    maven {
+        url "https://cursemaven.com"
+    }
     mavenCentral()
 }
 
@@ -85,6 +86,7 @@ dependencies {
     //compile will make your library available only in this dev environment
     //your libraries wont be accessible outside of intellij
     //example:
+    compileOnly("curse.maven:mo-bends-231347:2330799")
     shade('net.jodah:typetools:0.6.3')
     implementation 'zone.rong:mixinbooter:8.8'
     //compile 'zone.rong:mixinbooter:8.8'
@@ -130,7 +132,7 @@ jar {
             "FMLAT": "compatlib_at.cfg",
             "FMLCorePlugin": "space.libs.core.CompatLibCore",
             "FMLCorePluginContainsFMLMod": "true",
-            //"ForceLoadAsMod": "true",
+            "ForceLoadAsMod": "true",
             "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
             "TweakOrder": "-1000",
             "MixinConfigs": "mixins.compatlib.json",

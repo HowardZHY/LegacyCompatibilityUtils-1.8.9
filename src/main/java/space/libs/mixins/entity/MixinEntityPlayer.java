@@ -1,6 +1,8 @@
 package space.libs.mixins.entity;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
@@ -17,7 +19,22 @@ public abstract class MixinEntityPlayer extends MixinEntityLivingBase {
     }
 
     @Shadow
+    public InventoryPlayer inventory;
+
+    @Shadow
     public abstract ItemStack getHeldItem();
+
+    /** getItemStackFromSlot */
+    @Override
+    public ItemStack func_184582_a(EntityEquipmentSlot slot) {
+        if (slot == EntityEquipmentSlot.MAINHAND) {
+            return this.inventory.getCurrentItem();
+        } else if (slot.func_188453_a() == EntityEquipmentSlot.Type.ARMOR) {
+            return this.inventory.armorInventory[slot.func_188454_b()];
+        } else {
+            return null;
+        }
+    }
 
     @Override
     public ItemStack func_184586_b(EnumHand hand) {

@@ -1,5 +1,6 @@
 package net.minecraft.inventory;
 
+@SuppressWarnings("all")
 public enum EntityEquipmentSlot {
 
     MAINHAND(Type.HAND, 0, 0, "mainhand"),
@@ -48,6 +49,24 @@ public enum EntityEquipmentSlot {
             }
         }
         throw new IllegalArgumentException("Invalid slot '" + name + "'");
+    }
+
+    public static EntityEquipmentSlot fromArmorIndex(int id) {
+        for (EntityEquipmentSlot entityequipmentslot : values()) {
+            if (entityequipmentslot.func_188454_b() == (id)) {
+                return entityequipmentslot;
+            }
+        }
+        throw new IllegalArgumentException("Invalid slot '" + id + "'");
+    }
+
+    public static EntityEquipmentSlot fromArmorSlotIndex(int id) {
+        for (EntityEquipmentSlot entityequipmentslot : values()) {
+            if (entityequipmentslot.func_188452_c() == (id)) {
+                return entityequipmentslot;
+            }
+        }
+        throw new IllegalArgumentException("Invalid slot '" + id + "'");
     }
 
     public enum Type {

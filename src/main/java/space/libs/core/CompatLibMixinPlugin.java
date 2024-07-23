@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Set;
 
 public class CompatLibMixinPlugin implements IMixinConfigPlugin {
+
     @Override
-    public void onLoad(String mixinPackage) {
-    }
+    public void onLoad(String mixinPackage) {}
 
     @Override
     public String getRefMapperConfig() {
@@ -23,9 +23,7 @@ public class CompatLibMixinPlugin implements IMixinConfigPlugin {
     }
 
     @Override
-    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {
-
-    }
+    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {}
 
     @Override
     public List<String> getMixins() {
