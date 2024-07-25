@@ -24,6 +24,9 @@ public abstract class MixinEntityLivingBase extends Entity {
     public abstract ItemStack getHeldItem();
 
     @Shadow
+    public abstract ItemStack getEquipmentInSlot(int slotIn);
+
+    @Shadow
     public abstract Vec3 getLookVec();
 
     /** getLookVec */
@@ -34,7 +37,10 @@ public abstract class MixinEntityLivingBase extends Entity {
 
     /** getItemStackFromSlot */
     public ItemStack func_184582_a(EntityEquipmentSlot slot) {
-        return null;
+        if (slot.func_188453_a() == EntityEquipmentSlot.Type.HAND) {
+            return this.getHeldItem();
+        }
+        else return this.getEquipmentInSlot(slot.func_188452_c());
     }
 
     public ItemStack func_184586_b(EnumHand hand) {
