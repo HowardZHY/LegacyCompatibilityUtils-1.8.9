@@ -42,6 +42,7 @@ public abstract class MixinEntityPlayer extends MixinEntityLivingBase {
     }
 
     /** isHandActive */
+    @Override
     public boolean func_184587_cr() {
         return (this.getHeldItem() != null);
     }

@@ -2,13 +2,13 @@ package space.libs.mixins.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
+import net.minecraft.util.Vec3;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.event.ForgeEventFactory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -22,6 +22,15 @@ public abstract class MixinEntityLivingBase extends Entity {
 
     @Shadow
     public abstract ItemStack getHeldItem();
+
+    @Shadow
+    public abstract Vec3 getLookVec();
+
+    /** getLookVec */
+    public Vec3d func_70040_Z() {
+        Vec3 v3 = this.getLookVec();
+        return new Vec3d(v3.xCoord, v3.yCoord, v3.zCoord);
+    }
 
     /** getItemStackFromSlot */
     public ItemStack func_184582_a(EntityEquipmentSlot slot) {
@@ -47,8 +56,10 @@ public abstract class MixinEntityLivingBase extends Entity {
     }
 
     /** setActiveHand */
-    public void func_184598_c(EnumHand hand) {
+    public void func_184598_c(EnumHand hand) {}
 
+    public EnumHand func_184600_cs() {
+        return EnumHand.MAIN_HAND;
     }
 
     /** getItemInUseCount */
@@ -72,6 +83,7 @@ public abstract class MixinEntityLivingBase extends Entity {
         return false;
     }
 
+    /** getHeldItemMainhand */
     public ItemStack func_184614_ca() {
         return this.getHeldItem();
     }
