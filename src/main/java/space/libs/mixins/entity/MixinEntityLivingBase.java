@@ -85,6 +85,7 @@ public abstract class MixinEntityLivingBase extends Entity {
         else return 0;
     }
 
+    /** isElytraFlying */
     public boolean func_184613_cA() {
         return false;
     }

@@ -1,4 +1,4 @@
-Incompatibilities found: 604 errors, 0 warnings
+Incompatibilities found: 603 errors, 0 warnings
 net/minecraftforge/client/model/IPerspectiveAwareModel$MapWrapper:
   - error: <init>(Lnet/minecraftforge/client/model/IFlexibleBakedModel;Lnet/minecraftforge/client/model/IPerspectiveState;Lnet/minecraftforge/client/model/IModelPart;)V - Method was removed
   - error: getTransforms(Lnet/minecraftforge/client/model/IPerspectiveState;Lnet/minecraftforge/client/model/IModelPart;)Lcom/google/common/collect/ImmutableMap; - Method was removed
@@ -48,7 +48,7 @@ net/minecraftforge/fml/common/Loader:
   - error: fireMissingMappingEvent(Ljava/util/LinkedHashMap;Ljava/util/LinkedHashMap;ZLnet/minecraftforge/fml/common/registry/GameData;Ljava/util/Map;Ljava/util/Map;)Ljava/util/List; - Method was removed
   - error: fireRemapEvent(Ljava/util/Map;Ljava/util/Map;)V - Method was removed
   - error: getModClassLoader()Ljava/lang/ClassLoader; - Method was removed
-    #TODO?
+    #DONE WITH UNSUPPORTED NOTICE
 net/minecraftforge/fluids/FluidRegistry:
   - error: getFluidName(I)Ljava/lang/String; - Method was removed
   - error: getRegisteredFluidIDsByFluid()Ljava/util/Map; - Method was removed
@@ -272,6 +272,7 @@ net/minecraft/network/play/server/S49PacketUpdateEntityNBT:
     #DONE
 net/minecraft/network/play/server/S34PacketMaps:
   - error: func_180741_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
+
 net/minecraft/network/play/server/S39PacketPlayerAbilities:
   - error: func_180742_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
     #DONE
@@ -356,7 +357,7 @@ net/minecraftforge/fml/common/registry/IncompatibleSubstitutionException:
     #DONE
 net/minecraftforge/fml/client/GuiIngameModOptions:
   - error: Class no longer exists
-    #TODO
+    #TODO?
 net/minecraft/client/renderer/block/model/ItemTransformVec3f$Deserializer:
   - error: func_178359_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/ItemTransformVec3f; - Method was removed
   - error: func_178358_a(Lcom/google/gson/JsonObject;Ljava/lang/String;Ljavax/vecmath/Vector3f;)Ljavax/vecmath/Vector3f; - Method was removed
@@ -530,6 +531,7 @@ net/minecraft/client/renderer/WorldRenderer:
     #DONE BUT MAY HAVE BUGS
 net/minecraft/network/play/client/C0CPacketInput:
   - error: func_180766_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
+
 net/minecraft/network/play/server/S10PacketSpawnPainting:
   - error: func_180722_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
@@ -567,8 +569,6 @@ net/minecraft/client/renderer/block/model/ModelBlock:
     #DONE
 net/minecraft/network/play/server/S31PacketWindowProperty:
   - error: func_180733_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
-net/minecraft/client/gui/achievement/GuiStats$StatsMobsList:
-  - error: Class no longer exists
 
 net/minecraft/client/renderer/tileentity/TileEntitySkullRenderer:
   - error: func_180542_a(Lnet/minecraft/tileentity/TileEntitySkull;DDDFI)V - Method was removed
@@ -603,7 +603,7 @@ net/minecraft/client/renderer/entity/RenderItem:
   - error: field_175056_c:F - Field was removed
   - error: field_175061_h:F - Field was removed
   - error: field_175062_i:F - Field was removed
-    #TODO
+    #DONE
 net/minecraft/client/renderer/entity/RenderVillager:
   - error: func_177134_g()Lnet/minecraft/client/model/ModelVillager; - Method was removed
     #DONE
@@ -1187,13 +1187,13 @@ net/minecraft/client/renderer/entity/layers/LayerWolfCollar:
     #DONE
 net/minecraft/command/common/CommandReplaceItem:
   - error: Class no longer exists
-    #TODO?
+    #DONE
 net/minecraftforge/client/model/IPerspectiveState$Impl:
   - error: Class no longer exists
     #DONE
 net/minecraft/command/server/CommandTestForBlock:
   - error: func_175775_a(Lnet/minecraft/nbt/NBTBase;Lnet/minecraft/nbt/NBTBase;Z)Z - Method was removed
-
+    #DONE
 net/minecraftforge/common/MinecraftForge:
   - error: getBrandingVersion()Ljava/lang/String; - Method was removed
     #DONE

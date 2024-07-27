@@ -39,7 +39,8 @@ public class MixinLayerBendsHeldItem {
                 GlStateManager.rotate(-20.0F, -1.0F, 0.0F, 0.0F);
                 GlStateManager.scale(f, f, f);
             }
-            ((ModelBiped)this.livingEntityRenderer.getMainModel()).postRenderArm(0.0625F);
+            ModelBiped biped = ((ModelBiped)this.livingEntityRenderer.getMainModel());
+            biped.bipedRightArm.postRender(0.0625F);
             GlStateManager.translate(-0.0625F, 0.4375F, 0.0625F);
             if (entitylivingbaseIn instanceof EntityPlayer && ((EntityPlayer)entitylivingbaseIn).fishEntity != null) {
                 stack = new ItemStack(Items.fishing_rod, 0);
@@ -56,6 +57,5 @@ public class MixinLayerBendsHeldItem {
             minecraft.getItemRenderer().renderItem(entitylivingbaseIn, stack, ItemCameraTransforms.TransformType.THIRD_PERSON);
             GlStateManager.popMatrix();
         }
-
     }
 }

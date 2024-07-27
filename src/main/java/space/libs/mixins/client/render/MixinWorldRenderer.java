@@ -401,7 +401,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
     /** setColorOpaque_I */
     public void func_178991_c(int var1) {
         int r = var1 >> 16 & 255;
-        int g  = var1 >> 8 & 255;
+        int g = var1 >> 8 & 255;
         int b = var1 & 255;
         this.func_78913_a(r, g, b);
     }

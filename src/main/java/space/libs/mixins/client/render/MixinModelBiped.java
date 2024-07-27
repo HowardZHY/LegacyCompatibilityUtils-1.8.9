@@ -6,19 +6,17 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.EnumHandSide;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import space.libs.interfaces.IModelBiped;
 
 @SuppressWarnings("unused")
 @Mixin(ModelBiped.class)
-public abstract class MixinModelBiped {
+public abstract class MixinModelBiped implements IModelBiped {
 
     @Shadow
     public ModelRenderer bipedRightArm;
 
     @Shadow
     public ModelRenderer bipedLeftArm;
-
-    @Shadow
-    public void postRenderArm(float scale) {}
 
     /** leftArmPose */
     public EnumArmPose field_187075_l = EnumArmPose.EMPTY;
@@ -27,7 +25,11 @@ public abstract class MixinModelBiped {
     public EnumArmPose field_187076_m = EnumArmPose.EMPTY;
 
     public void func_187073_a(float scale, EnumHandSide side) {
-        this.postRenderArm(scale);
+        if (side == EnumHandSide.LEFT) {
+            this.bipedLeftArm.postRender(scale);
+        } else {
+            this.bipedRightArm.postRender(scale);
+        }
     }
 
     /** getArmForSide */

@@ -10,7 +10,8 @@
     "ichun.MixinThreadGetPatrons",
     "mobends.MixinLayerBendsBipedArmor",
     "mobends.MixinLayerBendsElytra",
-    "mobends.MixinLayerBendsHeldItem"
+    "mobends.MixinLayerBendsHeldItem",
+    "mobends.MixinModelBendsPlayer"
   ],
   "mixins": [
     "ichun.MixinModVersionChecker"
