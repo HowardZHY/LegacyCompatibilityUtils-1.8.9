@@ -219,7 +219,6 @@
     "forge.MixinFMLModContainer",
     "forge.MixinFMLPostInitializationEvent",
     "forge.MixinIncompatibleSubstitutionException",
-    "forge.MixinLoader",
     "forge.MixinMinecraftForge",
     "forge.MixinRegistryDelegate",
     "interfaces.MixinIBlockSource",

@@ -48,7 +48,7 @@ net/minecraftforge/fml/common/Loader:
   - error: fireMissingMappingEvent(Ljava/util/LinkedHashMap;Ljava/util/LinkedHashMap;ZLnet/minecraftforge/fml/common/registry/GameData;Ljava/util/Map;Ljava/util/Map;)Ljava/util/List; - Method was removed
   - error: fireRemapEvent(Ljava/util/Map;Ljava/util/Map;)V - Method was removed
   - error: getModClassLoader()Ljava/lang/ClassLoader; - Method was removed
-    #DONE WITH UNSUPPORTED NOTICE
+    #NOT PLANNED`
 net/minecraftforge/fluids/FluidRegistry:
   - error: getFluidName(I)Ljava/lang/String; - Method was removed
   - error: getRegisteredFluidIDsByFluid()Ljava/util/Map; - Method was removed
