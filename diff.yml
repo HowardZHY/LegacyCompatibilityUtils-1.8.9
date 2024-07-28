@@ -641,7 +641,7 @@ net/minecraft/client/renderer/entity/RenderTntMinecart:
     #DONE
 net/minecraftforge/client/model/ModelLoader$WeightedPartWrapper:
   - error: Class missing interface net/minecraftforge/client/model/IModelPart
-    #INVALID Class?
+    #DONE
 net/minecraft/world/gen/feature/WorldGenBigTree:
   - error: func_180712_a(Lnet/minecraft/util/BlockPos;FLnet/minecraft/block/Block;)V - Method was removed
     #DONE

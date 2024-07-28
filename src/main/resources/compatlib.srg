@@ -3,6 +3,7 @@ CL: net/minecraft/client/renderer/entity/RenderLivingBase net/minecraft/client/r
 CL: net/minecraft/entity/passive/EntityRabbit$RabbitTypeData net/minecraft/entity/passive/EntityRabbitRabbitTypeData
 CL: net/minecraft/world/GameType net/minecraft/world/WorldSettings$GameType
 CL: net/minecraft/server/management/PlayerChunkMapEntry net/minecraft/server/management/PlayerManager$PlayerInstance
+CL: net/minecraftforge/client/model/ModelLoader$WeightedPartWrapper net/minecraftforge/client/model/ModelLoaderWeightedPartWrapper
 CL: net/minecraftforge/fml/common/Mod$EventBusSubscriber net/minecraftforge/fml/common/EventBusSubscriber
 FD: net/minecraft/client/renderer/block/model/ItemCameraTransforms$TransformType/FIRST_PERSON_RIGHT_HAND net/minecraft/client/renderer/block/model/ItemCameraTransforms$TransformType/FIRST_PERSON
 FD: net/minecraft/client/renderer/block/model/ItemCameraTransforms$TransformType/THIRD_PERSON_RIGHT_HAND net/minecraft/client/renderer/block/model/ItemCameraTransforms$TransformType/THIRD_PERSON
