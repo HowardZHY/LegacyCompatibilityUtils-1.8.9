@@ -155,6 +155,7 @@
     "client.render.tileentity.MixinTileEntitySkullRenderer"
   ],
   "mixins": [
+    "MixinAchievement",
     "MixinAnvilChunkLoader",
     "MixinBiomeDecorator",
     "MixinBlockBrewingStand",
@@ -169,6 +170,7 @@
     "MixinBlockState1",
     "MixinBlockState2",
     "MixinBlockStateHelper",
+    "MixinBlockVine",
     "MixinClassInheritanceMultiMap",
     "MixinCommandTestForBlock",
     "MixinEnchantment",
@@ -186,12 +188,6 @@
     "MixinTeleporter",
     "MixinVec3i",
     "MixinWorld",
-    "MixinWorldGenBigMushroom",
-    "MixinWorldGenBigTree",
-    "MixinWorldGenerator",
-    "MixinWorldGenHugeTrees",
-    "MixinWorldGenMegaJungle",
-    "MixinWorldGenSwamp",
     "MixinWorldProvider",
     "entity.MixinEntity",
     "entity.MixinEntityAIAvoidEntity",
@@ -274,6 +270,14 @@
     "tileentity.MixinTileEntityFurnace",
     "tileentity.MixinTileEntityHopper",
     "tileentity.MixinTileEntityMobSpawner",
-    "tileentity.MixinTileEntityPiston"
+    "tileentity.MixinTileEntityPiston",
+    "worldgen.MixinWorldGenAbstractTree",
+    "worldgen.MixinWorldGenBigMushroom",
+    "worldgen.MixinWorldGenBigTree",
+    "worldgen.MixinWorldGenerator",
+    "worldgen.MixinWorldGenHugeTrees",
+    "worldgen.MixinWorldGenMegaJungle",
+    "worldgen.MixinWorldGenSwamp",
+    "worldgen.MixinWorldGenTrees"
   ]
 }

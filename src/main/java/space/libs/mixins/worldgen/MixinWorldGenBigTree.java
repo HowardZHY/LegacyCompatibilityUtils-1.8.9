@@ -1,4 +1,4 @@
-package space.libs.mixins;
+package space.libs.mixins.worldgen;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -6,10 +6,11 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenBigTree;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import space.libs.mixins.worldgen.MixinWorldGenAbstractTree;
 
 @SuppressWarnings("unused")
 @Mixin(WorldGenBigTree.class)
-public abstract class MixinWorldGenBigTree {
+public abstract class MixinWorldGenBigTree extends MixinWorldGenAbstractTree {
 
     @Shadow
     void func_181631_a(BlockPos p_181631_1_, float p_181631_2_, IBlockState p_181631_3_) {}

@@ -1,4 +1,4 @@
-package space.libs.mixins;
+package space.libs.mixins.worldgen;
 
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import org.spongepowered.asm.mixin.Mixin;

@@ -243,7 +243,7 @@ net/minecraft/client/renderer/entity/RenderEntityItem:
 net/minecraft/world/gen/feature/WorldGenMegaJungle:
   - error: <init>(ZIIII)V - Method was removed
   - error: func_175932_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/BlockPos;I)V - Method was removed
-    #TODO
+    #DONE
 net/minecraft/client/renderer/texture/TextureUtil:
   - error: func_177055_a(Ljava/lang/String;IIII)V - Method was removed
     #DONE
@@ -470,7 +470,7 @@ net/minecraft/client/renderer/WorldRenderer$State:
     #DONE IN FUNCTIONAL, NOT REALLY
 net/minecraft/client/audio/SoundManager$SoundSystemStarterThread:
   - error: <init>(Lnet/minecraft/client/audio/SoundManager;Ljava/lang/Object;)V - Method was removed
-
+    #INVALID - PRIVATE
 net/minecraft/network/play/client/C13PacketPlayerAbilities:
   - error: func_180761_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
     #DONE
@@ -539,7 +539,7 @@ net/minecraft/world/gen/feature/WorldGenShrub:
   - error: <init>(II)V - Method was removed
   - error: field_150527_b:I - Field was made final
   - error: field_150528_a:I - Field was made final
-    #TODO
+    #DONE
 net/minecraft/block/properties/PropertyInteger:
   - error: func_177718_a(Ljava/lang/Integer;)Ljava/lang/String; - Method was removed
     #DONE
@@ -581,14 +581,14 @@ net/minecraft/entity/passive/EntityOcelot:
     #DONE
 net/minecraft/world/gen/feature/WorldGenHugeTrees:
   - error: <init>(ZIIII)V - Method was removed
-    #TODO?
+    #DONE
 net/minecraft/item/crafting/ShapedRecipes:
   - error: func_92100_c()Lnet/minecraft/item/crafting/ShapedRecipes; - Method was removed
     #DONE
 net/minecraft/world/gen/feature/WorldGenTrees:
   - error: <init>(ZIIIZ)V - Method was removed
   - error: func_175923_a(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;I)V - Method was removed
-    #TODO
+    #DONE
 net/minecraft/client/renderer/entity/RenderItem:
   - error: applyVanillaTransform(Lnet/minecraft/client/renderer/block/model/ItemTransformVec3f;)V - Method was removed
   - error: func_175034_a(Lnet/minecraft/client/renderer/block/model/ItemTransformVec3f;)V - Method was removed
@@ -623,7 +623,7 @@ net/minecraft/stats/Achievement:
   - error: func_180788_c()Lnet/minecraft/stats/Achievement; - Method was removed
   - error: func_180787_a(Ljava/lang/Class;)Lnet/minecraft/stats/Achievement; - Method was removed
   - error: func_180789_a()Lnet/minecraft/stats/Achievement; - Method was removed
-    #TODO
+    #DONE
 net/minecraft/client/renderer/entity/layers/LayerSnowmanHead:
   - error: func_177151_a(Lnet/minecraft/entity/monster/EntitySnowman;FFFFFFF)V - Method was removed
     #DONE
@@ -797,7 +797,7 @@ net/minecraft/client/renderer/tileentity/RenderWitherSkull:
     #DONE
 net/minecraft/server/management/UserListOpsEntry:
   - error: <init>(Lcom/mojang/authlib/GameProfile;I)V - Method was removed
-    #TODO
+    #NOT PLANNED - DEDICATED SERVER
 net/minecraft/client/renderer/entity/RenderPigZombie:
   - error: func_177119_a(Lnet/minecraft/entity/monster/EntityPigZombie;)Lnet/minecraft/util/ResourceLocation; - Method was removed
     #DONE
@@ -894,7 +894,7 @@ net/minecraftforge/fml/common/registry/GameData:
   - error: registryTypes:Lcom/google/common/collect/BiMap; - Field was removed
   - error: blockedIds:Ljava/util/Set; - Field was removed
   - error: blockSubstitutions:Lcom/google/common/collect/BiMap; - Field was removed
-
+    #NOT PLANNED
 net/minecraftforge/client/ForgeHooksClient:
   - error: transform(Ljavax/vecmath/Vector3d;Ljavax/vecmath/Matrix4f;)V - Method was removed
   - error: postDraw(Lnet/minecraft/client/renderer/vertex/VertexFormatElement$EnumUsage;Lnet/minecraft/client/renderer/vertex/VertexFormatElement;ILjava/nio/ByteBuffer;)V - Method was removed
@@ -919,7 +919,7 @@ net/minecraft/network/NetworkManager:
     #DONE
 net/minecraft/server/management/UserListBans:
   - error: func_152701_b(Lcom/mojang/authlib/GameProfile;)Ljava/lang/String; - Method was removed
-
+    #NOT PLANNED - DEDICATED SERVER
 net/minecraft/entity/monster/EntityEnderman$AITakeBlock:
   - error: this$0:Lnet/minecraft/entity/monster/EntityEnderman; - Field was removed
     #INVALID
@@ -939,10 +939,9 @@ net/minecraft/block/BlockVine:
   - error: func_176270_b(Lnet/minecraft/util/EnumFacing;)I - Method was removed
   - error: field_176271_T:I - Field was removed
   - error: field_176272_Q:I - Field was removed
-
   - error: field_176275_S:I - Field was removed
   - error: field_176276_R:I - Field was removed
-    #TODO
+    #DONE
 net/minecraftforge/fluids/Fluid:
   - error: getFlowingIcon()Lnet/minecraft/client/renderer/texture/TextureAtlasSprite; - Method was removed
   - error: getIcon(Lnet/minecraftforge/fluids/FluidStack;)Lnet/minecraft/client/renderer/texture/TextureAtlasSprite; - Method was removed
@@ -958,7 +957,7 @@ net/minecraftforge/fluids/Fluid:
   - error: getIcon()Lnet/minecraft/client/renderer/texture/TextureAtlasSprite; - Method was removed
   - error: stillIcon:Lnet/minecraft/client/renderer/texture/TextureAtlasSprite; - Field was removed
   - error: flowingIcon:Lnet/minecraft/client/renderer/texture/TextureAtlasSprite; - Field was removed
-
+    #NOT PLANNED
 net/minecraft/client/renderer/RenderGlobal:
   - error: func_174962_a(Lnet/minecraft/entity/Entity;D)Ljavax/vecmath/Vector3f; - Method was removed
   - error: func_147590_a(Lnet/minecraft/util/AxisAlignedBB;I)V - Method was removed
@@ -1156,7 +1155,7 @@ net/minecraft/client/renderer/block/model/ModelBlock$Deserializer:
 
 net/minecraft/server/management/UserListOps:
   - error: func_152699_b(Lcom/mojang/authlib/GameProfile;)Ljava/lang/String; - Method was removed
-    #TODO
+    #NOT PLANNED - DEDICATED SERVER
 net/minecraft/client/renderer/entity/RenderCreeper:
   - error: func_180571_a(Lnet/minecraft/entity/monster/EntityCreeper;FF)I - Method was removed
   - error: func_180570_a(Lnet/minecraft/entity/monster/EntityCreeper;F)V - Method was removed
@@ -1208,7 +1207,7 @@ net/minecraft/tileentity/TileEntityPiston:
     #DONE
 net/minecraft/server/management/UserListWhitelist:
   - error: func_152704_b(Lcom/mojang/authlib/GameProfile;)Ljava/lang/String; - Method was removed
-    #TODO?
+    #NOT PLANNED - DEDICATED SERVER
 net/minecraftforge/client/GuiIngameForge:
   - error: WIDGITS:Lnet/minecraft/util/ResourceLocation; - Field was removed
   - error: MC_VERSION:Ljava/lang/String; - Field was removed
