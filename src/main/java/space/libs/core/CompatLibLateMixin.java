@@ -9,9 +9,9 @@ import java.util.List;
 
 @SuppressWarnings("all")
 @MixinLoader
-public class CompatLibLateMixinPlugin implements ILateMixinLoader {
+public class CompatLibLateMixin implements ILateMixinLoader {
 
-    public CompatLibLateMixinPlugin() {
+    public CompatLibLateMixin() {
         CompatLibCore.LOGGER.info("Loading Late Mixins for mods...");
         Mixins.addConfiguration("mixins.compatlib.mods.json");
     }

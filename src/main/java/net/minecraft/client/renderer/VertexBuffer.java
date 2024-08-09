@@ -11,6 +11,11 @@ public class VertexBuffer extends WorldRenderer {
         return (VertexBuffer) this.pos(x, y, z);
     }
 
+    /** normal */
+    public net.minecraft.client.renderer.VertexBuffer func_181663_c(float p_181663_1_, float p_181663_2_, float p_181663_3_) {
+        return (VertexBuffer) this.normal(p_181663_1_, p_181663_2_, p_181663_3_);
+    }
+
     /** color */
     public net.minecraft.client.renderer.VertexBuffer func_181666_a(float r, float g, float b, float a) {
         return (VertexBuffer) this.color(r, g, b, a);
@@ -26,8 +31,16 @@ public class VertexBuffer extends WorldRenderer {
         return (VertexBuffer) this.lightmap(p_181671_1_, p_181671_2_);
     }
 
+    public net.minecraft.client.renderer.VertexBuffer func_187314_a(int u, int v) {
+        return (VertexBuffer) this.lightmap(u, v);
+    }
+
     /** tex */
-    public net.minecraft.client.renderer.VertexBuffer func_187315_a(double u, double v){
+    public net.minecraft.client.renderer.VertexBuffer func_181673_a (double u, double v) {
+        return (VertexBuffer) this.tex(u, v);
+    }
+
+    public net.minecraft.client.renderer.VertexBuffer func_187315_a(double u, double v) {
         return (VertexBuffer) this.tex(u, v);
     }
 

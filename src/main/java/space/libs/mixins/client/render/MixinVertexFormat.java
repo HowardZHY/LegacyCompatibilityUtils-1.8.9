@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,17 +23,12 @@ public abstract class MixinVertexFormat {
     private int nextOffset;
 
     @Final
+    @Mutable
     @Shadow
     private List<VertexFormatElement> elements;
 
-    @Final
     @Shadow
-    private static Logger LOGGER = LogManager.getLogger();
-
-    @Shadow
-    public VertexFormat addElement(VertexFormatElement element) {
-        return (VertexFormat) (Object) this;
-    }
+    public abstract VertexFormat addElement(VertexFormatElement element);
 
     public void func_177349_a(VertexFormatElement element) {
         this.addElement(element);

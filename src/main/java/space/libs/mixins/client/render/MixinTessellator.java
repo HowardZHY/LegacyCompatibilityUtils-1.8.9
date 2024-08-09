@@ -1,7 +1,7 @@
 package space.libs.mixins.client.render;
 
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.WorldRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,17 +16,17 @@ public abstract class MixinTessellator {
     @Shadow
     private WorldRenderer worldRenderer;
 
-    @Inject(method = "<init>", at = @At("TAIL"))
-    public void init(int bufferSize, CallbackInfo ci) {
-        this.field_178183_a = new VertexBuffer(bufferSize);
-        this.worldRenderer = func_178180_c();
-    }
-
     @Shadow
     public abstract void draw();
 
-    /** worldRenderer */
-    public VertexBuffer field_178183_a;
+    @Inject(method = "<init>", at = @At("TAIL"))
+    public void init(int bufferSize, CallbackInfo ci) {
+        this.field_178183_a = new BufferBuilder(bufferSize);
+        this.worldRenderer = func_178180_c();
+    }
+
+    /** buffer */
+    public BufferBuilder field_178183_a;
 
     /** draw */
     public int func_78381_a() {
@@ -35,8 +35,7 @@ public abstract class MixinTessellator {
     }
 
     /** getBuffer */
-    public VertexBuffer func_178180_c() {
+    public BufferBuilder func_178180_c() {
         return this.field_178183_a;
     }
-
 }
