@@ -4,6 +4,7 @@ import space.libs.core.CompatLibCore;
 
 import java.lang.reflect.Field;
 
+@SuppressWarnings("all")
 public class ModDetector {
 
     public static boolean hasSpACore = false;
@@ -17,7 +18,6 @@ public class ModDetector {
         }
         CompatLibCore.LOGGER.info("Found SpACore, load ASM Transformers of it.");
         hasSpACore = true;
-
     }
 
     public static String getMoBendsVersion() {

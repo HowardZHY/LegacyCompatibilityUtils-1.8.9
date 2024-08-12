@@ -3,6 +3,7 @@
   "minVersion": "0.7",
   "package": "space.libs.mixins.mods",
   "refmap": "mixins.compatlib.mods.refmap.json",
+  "plugin": "space.libs.core.CompatLibLateMixinPlugin",
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",
   "client": [
