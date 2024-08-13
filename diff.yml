@@ -361,7 +361,7 @@ net/minecraftforge/fml/client/GuiIngameModOptions:
 net/minecraft/client/renderer/block/model/ItemTransformVec3f$Deserializer:
   - error: func_178359_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/ItemTransformVec3f; - Method was removed
   - error: func_178358_a(Lcom/google/gson/JsonObject;Ljava/lang/String;Ljavax/vecmath/Vector3f;)Ljavax/vecmath/Vector3f; - Method was removed
-
+    #NOT PLANNED - NOT PUBLIC
 net/minecraft/client/audio/ITickableSound:
   - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
     #DONE
@@ -458,7 +458,7 @@ net/minecraftforge/client/model/ModelLoader$VanillaModelWrapper:
     #DONE
 net/minecraft/client/renderer/block/model/ItemCameraTransforms$Deserializer:
   - error: func_178352_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/ItemCameraTransforms; - Method was removed
-
+    #NOT PLANNED - NOT PUBLIC
 net/minecraft/client/renderer/entity/RenderGhast:
   - error: func_180576_a(Lnet/minecraft/entity/monster/EntityGhast;)Lnet/minecraft/util/ResourceLocation; - Method was removed
     #DONE
@@ -531,7 +531,7 @@ net/minecraft/client/renderer/WorldRenderer:
     #DONE BUT MAY HAVE BUGS
 net/minecraft/network/play/client/C0CPacketInput:
   - error: func_180766_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
-
+    #DONE
 net/minecraft/network/play/server/S10PacketSpawnPainting:
   - error: func_180722_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
@@ -557,7 +557,7 @@ net/minecraft/network/play/server/S20PacketEntityProperties:
     #DONE
 net/minecraft/block/state/BlockState$StateImplementation:
   - error: <init>(Lnet/minecraft/block/Block;Lcom/google/common/collect/ImmutableMap;Ljava/lang/Object;)V - Method was removed
-
+    #INVALID
 net/minecraft/network/handshake/client/C00Handshake:
   - error: func_180770_a(Lnet/minecraft/network/handshake/INetHandlerHandshakeServer;)V - Method was removed
 
@@ -653,7 +653,7 @@ net/minecraft/client/renderer/chunk/RenderChunk:
     #DONE
 net/minecraft/client/gui/GuiPlayerTabOverlay$PlayerComparator:
   - error: func_178952_a(Lnet/minecraft/client/network/NetworkPlayerInfo;Lnet/minecraft/client/network/NetworkPlayerInfo;)I - Method was removed
-
+    #DONE
 net/minecraft/util/Vec3i:
   - error: func_177953_g(Lnet/minecraft/util/Vec3i;)I - Method was removed
     #DONE
@@ -665,7 +665,7 @@ net/minecraft/client/network/NetHandlerPlayClient$SwitchAction:
     #INVALID
 net/minecraft/network/play/client/C14PacketTabComplete:
   - error: func_180756_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
-
+    #DONE
 net/minecraftforge/fml/common/registry/ExistingSubstitutionException:
   - error: <init>(Ljava/lang/String;Ljava/lang/Object;)V - Method was removed
     #DONE
@@ -682,6 +682,7 @@ net/minecraft/client/renderer/entity/RenderEndermite:
     #DONE & INVALID
 net/minecraft/network/play/server/S0FPacketSpawnMob:
   - error: func_180721_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
+
 net/minecraft/network/play/server/S2CPacketSpawnGlobalEntity:
   - error: func_180720_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
@@ -1065,7 +1066,7 @@ net/minecraft/network/play/server/S24PacketBlockAction:
 
 net/minecraft/client/resources/model/WeightedBakedModel$MyWeighedRandomItem:
   - error: func_177634_a(Lnet/minecraft/client/resources/model/WeightedBakedModel$MyWeighedRandomItem;)I - Method was removed
-
+    #TODO?
 net/minecraft/client/renderer/tileentity/TileEntityMobSpawnerRenderer:
   - error: func_180539_a(Lnet/minecraft/tileentity/TileEntityMobSpawner;DDDFI)V - Method was removed
     #DONE
