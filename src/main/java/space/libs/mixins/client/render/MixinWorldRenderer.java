@@ -97,9 +97,13 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
 
     public boolean LegacyPOSITIONCOLORI;
 
+    public boolean LegacyNORMAL;
+
     public int ColorR, ColorG, ColorB, ColorA;
 
     public float ColorRF, ColorGF, ColorBF, ColorAF;
+
+    public float Normal1, Normal2, Normal3;
 
     /** textureU */
     public double field_178998_e;
@@ -293,6 +297,14 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
 
     /** setNormal */
     public void func_178980_d(float f1, float f2, float f3) {
+        this.LegacyNORMAL = true;
+        this.Normal1 = f1;
+        this.Normal2 = f2;
+        this.Normal3 = f3;
+        if (this.LegacyPOSITION) {
+            return;
+        }
+        LogManager.getLogger().warn("");
         if (!this.vertexFormat.hasNormal()) {
             VertexFormatElement element = new VertexFormatElement(0, VertexFormatElement.EnumType.BYTE, VertexFormatElement.EnumUsage.NORMAL, 3);
             this.vertexFormat.addElement(element);
@@ -387,6 +399,13 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
      * this.func_178984_b(x, y, z);
      * */
     public void func_178985_a(double x, double y, double z, double u, double v) {
+        if (this.LegacyNORMAL) {
+            VertexFormat format = new VertexFormat(POSITION_TEX_NORMAL);
+            this.vertexFormat = format;
+            this.vertexFormatElement = format.getElement(this.vertexFormatIndex);
+            this.pos(x, y, z).tex(u, v).normal(Normal1, Normal2, Normal3).endVertex();
+            return;
+        }
         VertexFormat format = new VertexFormat(POSITION_TEX);
         this.vertexFormat = format;
         this.vertexFormatElement = format.getElement(this.vertexFormatIndex);
@@ -426,6 +445,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         this.LegacyPOSITION = false;
         this.LegacyPOSITIONCOLORF = false;
         this.LegacyPOSITIONCOLORI = false;
+        this.LegacyNORMAL = false;
     }
 
     @Dynamic
@@ -462,6 +482,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         this.LegacyPOSITION = false;
         this.LegacyPOSITIONCOLORF = false;
         this.LegacyPOSITIONCOLORI = false;
+        this.LegacyNORMAL = false;
     }
 
     /* State members */
