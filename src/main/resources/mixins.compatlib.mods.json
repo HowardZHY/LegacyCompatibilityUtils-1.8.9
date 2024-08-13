@@ -12,7 +12,8 @@
     "mobends.MixinLayerBendsBipedArmor",
     "mobends.MixinLayerBendsElytra",
     "mobends.MixinLayerBendsHeldItem",
-    "mobends.MixinModelBendsPlayer"
+    "mobends.MixinModelBendsPlayer",
+    "mpm.MixinRenderEvent"
   ],
   "mixins": [
     "ichun.MixinModVersionChecker"

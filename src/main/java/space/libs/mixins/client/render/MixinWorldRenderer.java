@@ -304,7 +304,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         if (this.LegacyPOSITION) {
             return;
         }
-        LogManager.getLogger().warn("");
+        LogManager.getLogger().warn("Unknown setNormal call...");
         if (!this.vertexFormat.hasNormal()) {
             VertexFormatElement element = new VertexFormatElement(0, VertexFormatElement.EnumType.BYTE, VertexFormatElement.EnumUsage.NORMAL, 3);
             this.vertexFormat.addElement(element);
@@ -354,11 +354,11 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
             return;
         }
 
+        LogManager.getLogger().warn("Unknown addVertex call, shouldn't go here...");
+
         if (this.field_179008_i >= this.getBufferSize() - this.vertexFormat.getNextOffset()) {
             this.growBuffer(2097152);
         }
-
-        LogManager.getLogger().warn("Unknown addVertex call, shouldn't go here...");
 
         List<VertexFormatElement> list = this.vertexFormat.getElements();
         int listSize = list.size();

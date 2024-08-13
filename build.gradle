@@ -73,7 +73,6 @@ repositories {
 
 dependencies {
     //shade will bundle your library to the output jar
-    //your libraries will be accessible outside of intellij
     //example:
     /*shade('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
         exclude module: 'launchwrapper'
@@ -82,11 +81,11 @@ dependencies {
         exclude module: 'commons-io'
         exclude module: 'log4j-core'
     }*/
-
     //compile will make your library available only in this dev environment
     //your libraries wont be accessible outside of intellij
     //example:
     compileOnly("curse.maven:mo-bends-231347:2330799")
+    compileOnly("curse.maven:more-player-models-221939:2284120")
     shade('net.jodah:typetools:0.6.3')
     implementation 'zone.rong:mixinbooter:9.2'
     //compile 'zone.rong:mixinbooter:8.8'
