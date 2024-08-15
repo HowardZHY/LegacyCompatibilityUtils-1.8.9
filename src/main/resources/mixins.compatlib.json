@@ -47,6 +47,7 @@
     "client.interfaces.MixinIRetexturableModel",
     "client.interfaces.MixinITickableSound",
     "client.render.MixinBlockPart",
+    "client.render.MixinBlockPartDeserializer",
     "client.render.MixinBlockPartRotation",
     "client.render.MixinContainerLocalRenderInformation",
     "client.render.MixinFaceBakery",

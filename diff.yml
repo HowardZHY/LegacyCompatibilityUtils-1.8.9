@@ -40,7 +40,7 @@ net/minecraftforge/client/MinecraftForgeClient:
   - error: getItemRenderer(Lnet/minecraft/item/ItemStack;Lnet/minecraftforge/client/IItemRenderer$ItemRenderType;)Lnet/minecraftforge/client/IItemRenderer; - Method was removed
   - error: registerItemRenderer(Lnet/minecraft/item/Item;Lnet/minecraftforge/client/IItemRenderer;)V - Method was removed
   - error: customItemRenderers:Ljava/util/IdentityHashMap; - Field was removed
-    #TODO
+    #NOT PLANNED
 net/minecraft/entity/monster/EntitySlime$AISlimeHop:
   - error: this$0:Lnet/minecraft/entity/monster/EntitySlime; - Field was removed
     #INVALID
@@ -48,7 +48,7 @@ net/minecraftforge/fml/common/Loader:
   - error: fireMissingMappingEvent(Ljava/util/LinkedHashMap;Ljava/util/LinkedHashMap;ZLnet/minecraftforge/fml/common/registry/GameData;Ljava/util/Map;Ljava/util/Map;)Ljava/util/List; - Method was removed
   - error: fireRemapEvent(Ljava/util/Map;Ljava/util/Map;)V - Method was removed
   - error: getModClassLoader()Ljava/lang/ClassLoader; - Method was removed
-    #NOT PLANNED`
+    #NOT PLANNED
 net/minecraftforge/fluids/FluidRegistry:
   - error: getFluidName(I)Ljava/lang/String; - Method was removed
   - error: getRegisteredFluidIDsByFluid()Ljava/util/Map; - Method was removed
@@ -121,7 +121,7 @@ net/minecraft/client/renderer/entity/RenderFallingBlock:
     #DONE
 net/minecraft/client/particle/EntityFireworkStarterFX:
   - error: Class no longer exists
-    #TODO
+    #DONE
 net/minecraft/server/management/PlayerProfileCache$Serializer:
   - error: serialize(Ljava/lang/Object;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement; - Method was removed
   - error: func_152676_a(Lnet/minecraft/server/management/PlayerProfileCache$ProfileEntry;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement; - Method was removed
@@ -129,16 +129,16 @@ net/minecraft/server/management/PlayerProfileCache$Serializer:
   - error: <init>(Lnet/minecraft/server/management/PlayerProfileCache;Ljava/lang/Object;)V - Method was removed
   - error: func_152675_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/server/management/PlayerProfileCache$ProfileEntry; - Method was removed
   - error: this$0:Lnet/minecraft/server/management/PlayerProfileCache; - Field was removed
-
+    #NOT PLANNED
 net/minecraft/client/gui/FontRenderer:
   - error: func_78278_a(ICZ)F - Method was removed
     #DONE
 net/minecraftforge/fml/client/GuiModOptionList:
   - error: Class no longer exists
-
+    #DONE
 net/minecraft/client/particle/EntityFireworkSparkFX:
   - error: Class no longer exists
-    #TODO
+    #DONE
 net/minecraft/client/renderer/entity/RenderArrow:
   - error: func_180551_a(Lnet/minecraft/entity/projectile/EntityArrow;DDDFF)V - Method was removed
   - error: func_180550_a(Lnet/minecraft/entity/projectile/EntityArrow;)Lnet/minecraft/util/ResourceLocation; - Method was removed
@@ -189,7 +189,7 @@ net/minecraft/client/renderer/block/model/BlockPart$Deserializer:
   - error: func_178249_e(Lcom/google/gson/JsonObject;)Ljavax/vecmath/Vector3f; - Method was removed
   - error: func_178247_d(Lcom/google/gson/JsonObject;)Ljavax/vecmath/Vector3f; - Method was removed
   - error: func_178251_a(Lcom/google/gson/JsonObject;Ljava/lang/String;)Ljavax/vecmath/Vector3f; - Method was removed
-    #TODO?
+    #DONE
 net/minecraft/client/renderer/tileentity/TileEntityPistonRenderer:
   - error: func_178461_a(Lnet/minecraft/tileentity/TileEntityPiston;DDDFI)V - Method was removed
     #DONE
@@ -357,7 +357,7 @@ net/minecraftforge/fml/common/registry/IncompatibleSubstitutionException:
     #DONE
 net/minecraftforge/fml/client/GuiIngameModOptions:
   - error: Class no longer exists
-    #TODO?
+    #DONE
 net/minecraft/client/renderer/block/model/ItemTransformVec3f$Deserializer:
   - error: func_178359_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/ItemTransformVec3f; - Method was removed
   - error: func_178358_a(Lcom/google/gson/JsonObject;Ljava/lang/String;Ljavax/vecmath/Vector3f;)Ljavax/vecmath/Vector3f; - Method was removed
@@ -575,7 +575,7 @@ net/minecraft/client/renderer/tileentity/TileEntitySkullRenderer:
     #DONE
 net/minecraft/client/particle/EntityFireworkStarterFX_Factory:
   - error: Class no longer exists
-
+    #INVALID?
 net/minecraft/entity/passive/EntityOcelot:
   - error: func_180493_b(Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/passive/EntityOcelot; - Method was removed
     #DONE
@@ -1066,7 +1066,7 @@ net/minecraft/network/play/server/S24PacketBlockAction:
 
 net/minecraft/client/resources/model/WeightedBakedModel$MyWeighedRandomItem:
   - error: func_177634_a(Lnet/minecraft/client/resources/model/WeightedBakedModel$MyWeighedRandomItem;)I - Method was removed
-    #TODO?
+    #INVALID - NOT PUBLIC
 net/minecraft/client/renderer/tileentity/TileEntityMobSpawnerRenderer:
   - error: func_180539_a(Lnet/minecraft/tileentity/TileEntityMobSpawner;DDDFI)V - Method was removed
     #DONE
