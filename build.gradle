@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        maven { setUrl("file://${project.rootDir}/repositories") }
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url 'https://jitpack.io/' }
         //new forge repository
@@ -7,7 +8,7 @@ buildscript {
         maven { url 'https://repo.spongepowered.org/maven'}
     }
     dependencies {
-        classpath "net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT"
+        classpath "net.minecraftforge.gradle:ForgeGradle:2.1-20211118.174922-42"
         classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
     }
 }
