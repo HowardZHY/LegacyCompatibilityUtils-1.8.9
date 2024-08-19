@@ -7,6 +7,7 @@ import com.google.gson.JsonParseException;
 import net.minecraft.client.renderer.block.model.BlockPart;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import space.libs.util.cursedmixinextensions.annotations.Public;
 
 import java.lang.reflect.Type;
 
@@ -48,7 +49,8 @@ public abstract class MixinBlockPartDeserializer {
         return TransformVec3f(this.parsePosition(jo, s));
     }
 
-    static javax.vecmath.Vector3f TransformVec3f(org.lwjgl.util.vector.Vector3f vec) {
+    @Public
+    private static javax.vecmath.Vector3f TransformVec3f(org.lwjgl.util.vector.Vector3f vec) {
         return new javax.vecmath.Vector3f(vec.x, vec.y, vec.z);
     }
 }

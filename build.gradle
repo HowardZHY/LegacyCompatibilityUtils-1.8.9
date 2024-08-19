@@ -88,7 +88,7 @@ dependencies {
     compileOnly("curse.maven:mo-bends-231347:2330799")
     compileOnly("curse.maven:more-player-models-221939:2284120")
     shade('net.jodah:typetools:0.6.3')
-    implementation 'zone.rong:mixinbooter:9.2'
+    implementation 'zone.rong:mixinbooter:9.3'
     //compile 'zone.rong:mixinbooter:8.8'
     //compile "org.spongepowered:mixin:0.7.11-SNAPSHOT"
     //compile shade('com.electronwill.night-config:core:3.6.3')

@@ -54,7 +54,7 @@ net/minecraftforge/fluids/FluidRegistry:
   - error: getRegisteredFluidIDsByFluid()Ljava/util/Map; - Method was removed
   - error: onTextureStitchedPre(Lnet/minecraft/client/renderer/texture/TextureMap;)V - Method was removed
   - error: renderIdFluid:I - Field was removed
-    #TODO?
+    #DONE
 net/minecraft/client/renderer/entity/RenderEnderman:
   - error: func_180573_a(Lnet/minecraft/entity/monster/EntityEnderman;)Lnet/minecraft/util/ResourceLocation; - Method was removed
     #DONE
@@ -958,7 +958,7 @@ net/minecraftforge/fluids/Fluid:
   - error: getIcon()Lnet/minecraft/client/renderer/texture/TextureAtlasSprite; - Method was removed
   - error: stillIcon:Lnet/minecraft/client/renderer/texture/TextureAtlasSprite; - Field was removed
   - error: flowingIcon:Lnet/minecraft/client/renderer/texture/TextureAtlasSprite; - Field was removed
-    #NOT PLANNED
+    #DONE
 net/minecraft/client/renderer/RenderGlobal:
   - error: func_174962_a(Lnet/minecraft/entity/Entity;D)Ljavax/vecmath/Vector3f; - Method was removed
   - error: func_147590_a(Lnet/minecraft/util/AxisAlignedBB;I)V - Method was removed

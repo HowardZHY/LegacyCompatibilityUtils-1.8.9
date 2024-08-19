@@ -212,6 +212,7 @@
     "forge.MixinEntityJoinWorldEvent",
     "forge.MixinEventBus",
     "forge.MixinExistingSubstitutionException",
+    "forge.MixinFluid",
     "forge.MixinFluidRegistry",
     "forge.MixinFMLHandshakeMessageRegistryData",
     "forge.MixinFMLModContainer",
