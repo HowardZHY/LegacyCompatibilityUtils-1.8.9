@@ -4,13 +4,11 @@
 
 ## The Most Cursed 1.8.9 Forge Mod
 
-(CompatLib in short) Made many 1.8.0 mod working on 1.8.9 (except some coremods like with `@MCVersion("1.8")` ).
+(CompatLib in short) Made many 1.8.0 Forge Mods working on 1.8.9 (except some coremods like with `@MCVersion("1.8")` ).
 
 This is done by re-add removed classes and srg methods/fields.
 
-Requires [MixinBooter](https://github.com/CleanroomMC/MixinBooter).
-
-Use version 8.4 and remove the line with crash report in `mixin.mixinbooter.init.json` if you crash with OptiFine.
+Requires [MixinBooter](https://github.com/CleanroomMC/MixinBooter) version 9.2+.
 
 This mod contains following libs:
 
@@ -28,14 +26,14 @@ Submit an issue if you met incompatibilities.
 
 # Known Not Working
 
-Bspkrs's Mods: Crash because Forge Internal changes.
+Bspkrs's Mods: Crash because Forge Registry Internal changes.
 Use 1.8.9 versions by ZenCoder(https://www.curseforge.com/members/zencoder/projects)
 
 [BlockSteps](https://www.curseforge.com/minecraft/mc-mods/blocksteps)
 Blocks won't show, Unknown reason
 
 [Mo' Bends](https://www.curseforge.com/minecraft/mc-mods/mo-bends)
-Players & Zombies Actions won't show, Unknown reason
+1.8 Players & Zombies Actions won't show, Unknown reason, use the 1.9 version
 
 [Gender & Age Mod](https://www.curseforge.com/minecraft/mc-mods/gender)
 Notch Code ASM
