@@ -1,5 +1,6 @@
 package space.libs.mixins.client.render.entity;
 
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderZombie;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -11,7 +12,11 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
 @Mixin(RenderZombie.class)
-public abstract class MixinRenderZombie {
+public abstract class MixinRenderZombie extends MixinRenderBiped<EntityZombie> {
+
+    public MixinRenderZombie(RenderManager renderManager) {
+        super(renderManager);
+    }
 
     @Shadow
     public void doRender(EntityZombie entity, double x, double y, double z, float entityYaw, float partialTicks) {}

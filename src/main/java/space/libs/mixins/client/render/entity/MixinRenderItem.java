@@ -26,30 +26,39 @@ public class MixinRenderItem {
     @Shadow
     protected void renderItemModelTransform(ItemStack stack, IBakedModel model, ItemCameraTransforms.TransformType cameraTransformType) {}
 
+    /** debugItemOffsetX */
     @Public
     private static float field_175055_b = 0.0F;
 
+    /** debugItemOffsetY */
     @Public
     private static float field_175056_c = 0.0F;
 
+    /** debugItemOffsetZ */
     @Public
     private static float field_175053_d = 0.0F;
 
+    /** debugItemRotationOffsetX */
     @Public
     private static float field_175054_e = 0.0F;
 
+    /** debugItemRotationOffsetY */
     @Public
     private static float field_175051_f = 0.0F;
 
+    /** debugItemRotationOffsetZ */
     @Public
     private static float field_175052_g = 0.0F;
 
+    /** debugItemScaleX */
     @Public
     private static float field_175061_h = 0.0F;
 
+    /** debugItemScaleY */
     @Public
     private static float field_175062_i = 0.0F;
 
+    /** debugItemScaleZ */
     @Public
     private static float field_175060_j = 0.0F;
 

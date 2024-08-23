@@ -1,5 +1,7 @@
 package space.libs.mixins.client.render.entity;
 
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.entity.EntityLivingBase;
 import org.spongepowered.asm.mixin.Mixin;
@@ -7,7 +9,11 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
 @Mixin(RendererLivingEntity.class)
-public abstract class MixinRendererLivingEntity {
+public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> extends Render<T> {
+
+    public MixinRendererLivingEntity(RenderManager renderManager) {
+        super(renderManager);
+    }
 
     @Shadow
     public void renderName(EntityLivingBase entity, double x, double y, double z) {}

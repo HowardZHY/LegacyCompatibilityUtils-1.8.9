@@ -2,13 +2,18 @@ package space.libs.mixins.client.render.entity;
 
 import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
 @Mixin(RenderLiving.class)
-public abstract class MixinRenderLiving {
+public abstract class MixinRenderLiving<T extends EntityLiving> extends MixinRendererLivingEntity<T> {
+
+    public MixinRenderLiving(RenderManager renderManager) {
+        super(renderManager);
+    }
 
     @Shadow
     protected abstract boolean canRenderName(EntityLiving entity);

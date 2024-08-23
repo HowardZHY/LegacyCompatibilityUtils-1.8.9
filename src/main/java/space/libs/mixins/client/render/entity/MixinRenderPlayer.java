@@ -21,9 +21,7 @@ public abstract class MixinRenderPlayer extends RendererLivingEntity<AbstractCli
     }
 
     @Shadow
-    public ModelPlayer getMainModel() {
-        throw new AbstractMethodError();
-    }
+    public abstract ModelPlayer getMainModel();
 
     @Shadow
     public void doRender(AbstractClientPlayer entity, double x, double y, double z, float entityYaw, float partialTicks) {}

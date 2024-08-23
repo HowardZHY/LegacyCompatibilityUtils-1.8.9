@@ -82,6 +82,7 @@
     "client.render.entity.MixinEntityRenderer",
     "client.render.entity.MixinRenderArrow",
     "client.render.entity.MixinRenderBat",
+    "client.render.entity.MixinRenderBiped",
     "client.render.entity.MixinRenderBoat",
     "client.render.entity.MixinRenderCaveSpider",
     "client.render.entity.MixinRenderChicken",
