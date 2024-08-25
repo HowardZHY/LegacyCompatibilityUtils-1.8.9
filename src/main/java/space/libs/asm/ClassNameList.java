@@ -50,6 +50,7 @@ public class ClassNameList {
         "mixinbooter",
         "mixinextras",
         "optifine",
+        "shadersmod"
     };
 
     /** Mod packages that requires addtional transforms */
