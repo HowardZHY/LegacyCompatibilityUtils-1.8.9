@@ -9,6 +9,10 @@ public class ClassNameList {
         return Arrays.stream(ClassNameList.WHITELIST).anyMatch(name::startsWith);
     }
 
+    public static boolean StartswithBlacklist(String name) {
+        return Arrays.stream(ClassNameList.BLACKLIST).anyMatch(name::startsWith);
+    }
+
     public static boolean Contains(String name) {
         return Arrays.stream(ClassNameList.CONTAINS_WHITELIST).anyMatch(name::contains);
     }
@@ -53,12 +57,12 @@ public class ClassNameList {
         "shadersmod"
     };
 
-    /** Mod packages that requires addtional transforms */
+    /** Mod packages that requires additional transforms */
     public static String[] BLACKLIST = {
-        ""
+        "com.shadowhawk"
     };
 
-    /** Mod that requires addtional transforms */
+    /** Mod that requires additional transforms */
     public static String[] CONTAINS_BLACKLIST = {
         "TMI"
     };
