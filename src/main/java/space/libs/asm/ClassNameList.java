@@ -25,9 +25,11 @@ public class ClassNameList {
         "com.mumfrey.liteloader",
         "com.google",
         "com.gtnewhorizon",
+        "com.shadowhawk",
         "com.sun",
         "customskinloader",
         "gg.essential",
+        "gnu.trove",
         "io.github.legacymoddingmc",
         "io.netty",
         "it.unimi",
@@ -37,6 +39,7 @@ public class ClassNameList {
         "org.slf4j",
         "org.spongepowered",
         "org.yaml",
+        "net.md_5.specialsource",
         "net.minecraft",
         "net.minecraftforge.fml",
         "space.libs",
@@ -59,7 +62,8 @@ public class ClassNameList {
 
     /** Mod packages that requires additional transforms */
     public static String[] BLACKLIST = {
-        "com.shadowhawk"
+        "maya.biomeborders",
+        "net.eq2online.macros"
     };
 
     /** Mod that requires additional transforms */
