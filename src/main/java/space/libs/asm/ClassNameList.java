@@ -17,10 +17,15 @@ public class ClassNameList {
         return Arrays.stream(ClassNameList.CONTAINS_WHITELIST).anyMatch(name::contains);
     }
 
+    public static boolean ContainsBlacklist(String name) {
+        return Arrays.stream(ClassNameList.CONTAINS_BLACKLIST).anyMatch(name::startsWith);
+    }
+
     /** Things shouldn't be transformed */
     public static String[] WHITELIST = {
         "cc.polyfrost",
         "club.sk1er.patcher",
+        "com.llamalad7",
         "com.mojang",
         "com.mumfrey.liteloader",
         "com.google",
@@ -30,19 +35,26 @@ public class ClassNameList {
         "customskinloader",
         "gg.essential",
         "gnu.trove",
+        "groovy",
         "io.github.legacymoddingmc",
         "io.netty",
         "it.unimi",
+        "java",
+        "javax",
         "joptsimple",
         "oshi",
-        "org.apache.commons",
+        "org.apache",
+        "org.objectweb",
+        "org.polyfrost",
         "org.slf4j",
         "org.spongepowered",
         "org.yaml",
         "net.md_5.specialsource",
         "net.minecraft",
         "net.minecraftforge.fml",
+        "scala",
         "space.libs",
+        "sun.misc",
         "zone.rong",
         "kotlin",
         "kotlinx"
@@ -57,7 +69,8 @@ public class ClassNameList {
         "mixinbooter",
         "mixinextras",
         "optifine",
-        "shadersmod"
+        "shadersmod",
+        "twitch"
     };
 
     /** Mod packages that requires additional transforms */

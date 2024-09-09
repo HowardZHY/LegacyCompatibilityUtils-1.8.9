@@ -1,10 +1,12 @@
 package space.libs.mixins.forge;
 
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.RegistryDelegate;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(targets = "net.minecraftforge.fml.common.registry.RegistryDelegate$Delegate", remap = false)
+@SuppressWarnings("all")
+@Mixin(value = RegistryDelegate.Delegate.class, remap = false)
 public class MixinRegistryDelegate {
 
     @Shadow
@@ -13,4 +15,5 @@ public class MixinRegistryDelegate {
     public void setName(String name) {
         this.name = new ResourceLocation(name);
     }
+
 }
