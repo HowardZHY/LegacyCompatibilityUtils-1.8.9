@@ -60,9 +60,6 @@ import java.util.Set;
 @SuppressWarnings("all")
 public class RemapTransformer extends Remapper implements IClassTransformer, IClassNameTransformer {
 
-    /** Is it the start of sth? */
-    // public static File MAPPINGS_FOLDER = new File("mappings");
-
     public static String DEFAULT_MAPPINGS = "compatlib.srg";
 
     private final ImmutableBiMap<String, String> classes;

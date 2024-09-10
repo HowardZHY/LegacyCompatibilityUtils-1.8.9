@@ -87,6 +87,14 @@ dependencies {
     //example:
     compileOnly("curse.maven:mo-bends-231347:2330799")
     compileOnly("curse.maven:more-player-models-221939:2284120")
+    //shade
+    compileOnly("net.md-5:SpecialSource:1.7.4") {
+        exclude module: 'asm-debug-all'
+        exclude module: 'guava'
+        exclude module: 'jopt-simple'
+        exclude module: 'lombok'
+        exclude module: 'opencsv'
+    }
     shade('net.jodah:typetools:0.6.3')
     implementation 'zone.rong:mixinbooter:9.3'
     //compile 'zone.rong:mixinbooter:8.8'
