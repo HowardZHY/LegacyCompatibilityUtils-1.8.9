@@ -24,7 +24,6 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.commons.Remapper;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
-import space.libs.core.CompatLibCore;
 
 import java.io.IOException;
 import java.net.URL;
@@ -194,7 +193,7 @@ public class CustomRemapRemapper extends Remapper {
             return name;
         }
         Map<String, String> fieldMap = getFieldMap(owner);
-        return fieldMap!=null && fieldMap.containsKey(name+":"+desc) ? fieldMap.get(name+":"+desc) : name;
+        return fieldMap != null && fieldMap.containsKey(name + ":" + desc) ? fieldMap.get(name + ":" + desc) : name;
     }
 
     @Override
@@ -243,8 +242,8 @@ public class CustomRemapRemapper extends Remapper {
             if (!fieldNameMaps.containsKey(className)) {
                 negativeCacheFields.add(className);
             }
-            if (DEBUG_REMAPPING) {
-                CompatLibCore.LOGGER.info("Field map for " + className + " : " + fieldNameMaps.get(className));
+            if (DEBUG_REMAPPING && !className.startsWith("java")) {
+                LOGGER.info("Field map for " + className + " : " + fieldNameMaps.get(className));
             }
         }
         return fieldNameMaps.get(className);
@@ -256,7 +255,7 @@ public class CustomRemapRemapper extends Remapper {
             if (!methodNameMaps.containsKey(className)) {
                 negativeCacheMethods.add(className);
             }
-            if (DEBUG_REMAPPING) {
+            if (DEBUG_REMAPPING && !className.startsWith("java")) {
                 LOGGER.info("Method map for " + className + " : " + methodNameMaps.get(className));
             }
         }

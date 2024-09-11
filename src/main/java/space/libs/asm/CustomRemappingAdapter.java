@@ -57,12 +57,14 @@ public class CustomRemappingAdapter extends RemappingClassAdapter {
             String type = getRemapper().mapType(originalType);
             String fieldName = getRemapper().mapFieldName(originalType, originalName, desc);
             String newDesc = getRemapper().mapDesc(desc);
-            if (opcode == Opcodes.GETSTATIC) // && type.startsWith("net/minecraft/") && newDesc.startsWith("Lnet/minecraft/"))
-            {
+            if (opcode == Opcodes.GETSTATIC) { // && type.startsWith("net/minecraft/") && newDesc.startsWith("Lnet/minecraft/"))
                 String replDesc = getRemapper().getStaticFieldType(originalType, originalName, type, fieldName);
                 if (replDesc != null) {
                     newDesc = getRemapper().mapDesc(replDesc);
                 }
+            }
+            if (type.startsWith("net/minecraft") || !type.contains("/")) {
+                CustomRemapRemapper.LOGGER.info("Remapping Field: " + type + "." + fieldName + ":" + newDesc + " from: " + originalType + "." + originalName + ":" +desc);
             }
             // super.super
             if (mv != null) {
