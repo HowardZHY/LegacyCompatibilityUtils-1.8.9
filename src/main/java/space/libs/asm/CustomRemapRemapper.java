@@ -130,7 +130,7 @@ public class CustomRemapRemapper extends Remapper {
         }
         String mappedName = this.map(name);
         String realName = FMLDeobfuscatingRemapper.INSTANCE.unmap(mappedName);
-        //LOGGER.info("Get " + name + "'s unmapped name " + realName + " from " + mappedName);
+        // LOGGER.info("Get " + name + "'s unmapped name " + realName + " from " + mappedName);
         return realName;
     }
 
@@ -193,7 +193,17 @@ public class CustomRemapRemapper extends Remapper {
             return name;
         }
         Map<String, String> fieldMap = getFieldMap(owner);
-        return fieldMap != null && fieldMap.containsKey(name + ":" + desc) ? fieldMap.get(name + ":" + desc) : name;
+        if (fieldMap != null && fieldMap.containsKey(name + ":" + desc)) {
+            return fieldMap.get(name + ":" + desc);
+        } else {
+            if (!owner.contains("/")) {
+                LOGGER.info("Try map field without desc " + owner + "." + name + " to " + fieldMap.get(name + ":null"));
+            }
+            if (fieldMap.get(name + ":null") != null) {
+                return fieldMap.get(name + ":null");
+            }
+            return name;
+        }
     }
 
     @Override
@@ -287,6 +297,10 @@ public class CustomRemapRemapper extends Remapper {
             return;
         }
         List<String> allParents = ImmutableList.<String>builder().add(superName).addAll(Arrays.asList(interfaces)).build();
+        if (!superName.contains("/")) {
+            LOGGER.info("Merging super name: " + name + ", " + superName + ", " + getRealName(superName));
+            allParents = ImmutableList.<String>builder().add(getRealName(superName)).addAll(Arrays.asList(interfaces)).build();
+        }
         // generate maps for all parent objects
         for (String parentThing : allParents) {
             if (!methodNameMaps.containsKey(parentThing)) {

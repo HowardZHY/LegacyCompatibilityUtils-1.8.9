@@ -51,20 +51,20 @@ public class CustomRemappingAdapter extends RemappingClassAdapter {
         }
 
         @Override
-        public void visitFieldInsn(int opcode, String originalType, String originalName, String desc) {
+        public void visitFieldInsn(int opcode, String originalOwner, String originalName, String desc) {
             // This method solves the problem of a static field reference changing type. In all probability it is a
             // compatible change, however we need to fix up the desc to point at the new type
-            String type = getRemapper().mapType(originalType);
-            String fieldName = getRemapper().mapFieldName(originalType, originalName, desc);
+            String type = getRemapper().mapType(originalOwner);
+            String fieldName = getRemapper().mapFieldName(originalOwner, originalName, getRemapper().getRealName(desc));
             String newDesc = getRemapper().mapDesc(desc);
             if (opcode == Opcodes.GETSTATIC) { // && type.startsWith("net/minecraft/") && newDesc.startsWith("Lnet/minecraft/"))
-                String replDesc = getRemapper().getStaticFieldType(originalType, originalName, type, fieldName);
+                String replDesc = getRemapper().getStaticFieldType(originalOwner, originalName, type, fieldName);
                 if (replDesc != null) {
                     newDesc = getRemapper().mapDesc(replDesc);
                 }
             }
             if (type.startsWith("net/minecraft") || !type.contains("/")) {
-                CustomRemapRemapper.LOGGER.info("Remapping Field: " + type + "." + fieldName + ":" + newDesc + " from: " + originalType + "." + originalName + ":" +desc);
+                CustomRemapRemapper.LOGGER.info("Remapping Field: " + type + "." + fieldName + ":" + newDesc + " from: " + originalOwner + "." + originalName + ":" +desc);
             }
             // super.super
             if (mv != null) {
