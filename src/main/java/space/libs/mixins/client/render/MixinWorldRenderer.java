@@ -203,13 +203,16 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
     }
 
     /** startDrawing */
-    public void func_178964_a(int i) {
+    public void func_178964_a(int mode) {
         if (this.isDrawing) {
             throw new IllegalStateException("Already building!");
         } else {
+            if (mode == 7) {
+                this.LegacyPOSITION = true;
+            }
             this.isDrawing = true;
             this.reset();
-            this.drawMode = i;
+            this.drawMode = mode;
             this.noColor = false;
             this.byteBuffer.limit(this.byteBuffer.capacity());
         }
@@ -222,7 +225,6 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
 
     /** startDrawingQuads */
     public void func_178970_b() {
-        this.LegacyPOSITION = true;
         this.func_178964_a(7);
     }
 
