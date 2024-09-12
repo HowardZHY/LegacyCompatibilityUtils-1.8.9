@@ -1,16 +1,16 @@
 buildscript {
     repositories {
         maven { setUrl("file://${project.rootDir}/repositories") }
+        maven { url "https://bmclapi2.bangbang93.com/maven" }
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url 'https://jitpack.io/' }
-        maven { url "https://bmclapi2.bangbang93.com/maven" }
         //new forge repository
-        maven { url "https://maven.minecraftforge.net" }
+        //maven { url "https://maven.minecraftforge.net" }
         maven { url 'https://repo.spongepowered.org/maven'}
     }
     dependencies {
         classpath "net.minecraftforge.gradle:ForgeGradle:2.1-20211118.174922-42"
-        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.6-20171001.194726-1'
     }
 }
 
