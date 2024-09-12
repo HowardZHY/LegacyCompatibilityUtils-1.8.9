@@ -2,7 +2,6 @@ package space.libs.asm;
 
 import java.util.Arrays;
 
-@SuppressWarnings("unused")
 public class ClassNameList {
 
     public static boolean Startswith(String name) {
@@ -75,8 +74,16 @@ public class ClassNameList {
 
     /** Mod packages that requires additional transforms */
     public static String[] BLACKLIST = {
+        "com.mamiyaotaru.chatbubbles",
+        "com.mamiyaotaru.jukebox",
         "maya.biomeborders",
-        "net.eq2online.macros"
+        "mnm.mods.linkinfo",
+        "net.easymfne.omniscience",
+        "net.easymfne.potioncolorizer",
+        "net.eq2online.macros",
+        "troy.autofish",
+        "troy.chunkborders",
+        "xaero.mods"
     };
 
     /** Mod that requires additional transforms */
