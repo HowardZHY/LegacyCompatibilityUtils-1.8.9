@@ -125,6 +125,9 @@ public class CustomRemapRemapper extends Remapper {
     private Set<String> negativeCacheFields = Sets.newHashSet();
 
     public String getRealName(String name) {
+        if (Strings.isNullOrEmpty(name)) {
+            return name;
+        }
         if (name.contains("/")) {
             return name; // Not mapped by Forge
         }
@@ -132,6 +135,18 @@ public class CustomRemapRemapper extends Remapper {
         String realName = FMLDeobfuscatingRemapper.INSTANCE.unmap(mappedName);
         // LOGGER.info("Get " + name + "'s unmapped name " + realName + " from " + mappedName);
         return realName;
+    }
+
+    public String getLegacyName(String name) {
+        if (Strings.isNullOrEmpty(name)) {
+            return name;
+        }
+        if (name.contains("/")) {
+            return name; // Not mapped
+        }
+        String mappedName = FMLDeobfuscatingRemapper.INSTANCE.map(name);
+        String legacyName = this.unmap(mappedName);
+        return legacyName;
     }
 
     private static byte[] getBytes(String name) {
@@ -235,7 +250,6 @@ public class CustomRemapRemapper extends Remapper {
         return typeName;
     }
 
-
     @Override
     public String mapMethodName(String owner, String name, String desc) {
         if (classNameBiMap == null || classNameBiMap.isEmpty()) {
@@ -282,28 +296,29 @@ public class CustomRemapRemapper extends Remapper {
                 superName = cr.getSuperName();
                 interfaces = cr.getInterfaces();
             }
-            mergeSuperMaps(name, superName, interfaces);
+            if ((!Strings.isNullOrEmpty(name)) && !name.startsWith("java")) {
+                LOGGER.info("Try finding super map for " + name + " to " + superName);
+            }
+            mergeSuperMaps(name, getLegacyName(superName), interfaces);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void mergeSuperMaps(String name, String superName, String[] interfaces) {
-//      System.out.printf("Computing super maps for %s: %s %s\n", name, superName, Arrays.asList(interfaces));
         if (classNameBiMap == null || classNameBiMap.isEmpty()) {
             return;
         }
         if (Strings.isNullOrEmpty(superName)) {
             return;
         }
-        List<String> allParents = ImmutableList.<String>builder().add(superName).addAll(Arrays.asList(interfaces)).build();
-        if (!superName.contains("/")) {
-            LOGGER.info("Merging super name: " + name + ", " + superName + ", " + getRealName(superName));
-            allParents = ImmutableList.<String>builder().add(getRealName(superName)).addAll(Arrays.asList(interfaces)).build();
+        if (!name.startsWith("java") || !superName.startsWith("java")) {
+            LOGGER.info("Computing super maps for " + name + " & " + superName);
         }
+        List<String> allParents = ImmutableList.<String>builder().add(superName).addAll(Arrays.asList(interfaces)).build();
         // generate maps for all parent objects
         for (String parentThing : allParents) {
-            if (!methodNameMaps.containsKey(parentThing)) {
+            if (!methodNameMaps.containsKey(parentThing) || !methodNameMaps.containsKey(getRealName(parentThing))) {
                 findAndMergeSuperMaps(parentThing);
             }
         }
