@@ -5,6 +5,7 @@
 run
 build
 temp
+libs/**.jar
 /eclipse/
 .classpath
 .project
@@ -36,9 +37,5 @@ addon.local.gradle.kts
 addon.late.local.gradle
 addon.late.local.gradle.kts
 layout.json
-
-# Ignore Gradle GUI config
-gradle-app.setting
-
 # Cache of project
 .gradletasknamecache

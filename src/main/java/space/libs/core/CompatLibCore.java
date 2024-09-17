@@ -30,7 +30,9 @@ public class CompatLibCore implements IFMLLoadingPlugin {
         transformersList.add("space.libs.asm.RemapTransformer");
         transformersList.add("space.libs.asm.ReplaceTransformer");
         transformersList.add("space.libs.asm.FMLTransformer");
-        transformersList.add("space.libs.asm.ObfTransformer");
+        transformersList.add("space.libs.asm.LegacyObfTransformer");
+        transformersList.add("space.libs.asm.LiteLoaderObfTransformer");
+        transformersList.add("space.libs.asm.LiteLoaderVersionTransformer");
 
         if (detector.hasSpACore) {
             transformersList.add("net.specialattack.forge.core.asm.SpACoreModTransformer");

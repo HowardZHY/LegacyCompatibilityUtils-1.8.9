@@ -211,11 +211,15 @@ public class CustomRemapRemapper extends Remapper {
         if (fieldMap != null && fieldMap.containsKey(name + ":" + desc)) {
             return fieldMap.get(name + ":" + desc);
         } else {
-            if (!owner.contains("/")) {
-                LOGGER.info("Try map field without desc " + owner + "." + name + " to " + fieldMap.get(name + ":null"));
-            }
-            if (fieldMap.get(name + ":null") != null) {
-                return fieldMap.get(name + ":null");
+            try {
+                if ((!owner.contains("/") || owner.contains("net")) && fieldMap.get(name + ":null") != null) {
+                    LOGGER.info("Try map field without desc " + owner + "." + name + " to " + fieldMap.get(name + ":null"));
+                }
+                if (fieldMap.get(name + ":null") != null) {
+                    return fieldMap.get(name + ":null");
+                }
+            } catch (NullPointerException npe) {
+                LOGGER.error("NPE when mapping field name: " + owner + "." + name + ":" + desc);
             }
             return name;
         }
@@ -267,7 +271,7 @@ public class CustomRemapRemapper extends Remapper {
                 negativeCacheFields.add(className);
             }
             if (DEBUG_REMAPPING && !className.startsWith("java")) {
-                LOGGER.info("Field map for " + className + " : " + fieldNameMaps.get(className));
+                // LOGGER.info("Field map for " + className + " : " + fieldNameMaps.get(className));
             }
         }
         return fieldNameMaps.get(className);
@@ -280,7 +284,7 @@ public class CustomRemapRemapper extends Remapper {
                 negativeCacheMethods.add(className);
             }
             if (DEBUG_REMAPPING && !className.startsWith("java")) {
-                LOGGER.info("Method map for " + className + " : " + methodNameMaps.get(className));
+                // LOGGER.info("Method map for " + className + " : " + methodNameMaps.get(className));
             }
         }
         return methodNameMaps.get(className);
@@ -296,10 +300,14 @@ public class CustomRemapRemapper extends Remapper {
                 superName = cr.getSuperName();
                 interfaces = cr.getInterfaces();
             }
-            if ((!Strings.isNullOrEmpty(name)) && !name.startsWith("java")) {
+            String[] legacyInterfaces = new String[interfaces.length];
+            for (int i = 0; i < interfaces.length; i++) {
+                legacyInterfaces[i] = getLegacyName(interfaces[i]);
+            }
+            if ((!Strings.isNullOrEmpty(name)) && (!Strings.isNullOrEmpty(superName)) && !name.startsWith("java")) {
                 LOGGER.info("Try finding super map for " + name + " to " + superName);
             }
-            mergeSuperMaps(name, getLegacyName(superName), interfaces);
+            mergeSuperMaps(name, getLegacyName(superName), legacyInterfaces);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -314,11 +322,14 @@ public class CustomRemapRemapper extends Remapper {
         }
         if (!name.startsWith("java") || !superName.startsWith("java")) {
             LOGGER.info("Computing super maps for " + name + " & " + superName);
+            for (String itf : interfaces) {
+                LOGGER.info("Interfaces: " + itf);
+            }
         }
         List<String> allParents = ImmutableList.<String>builder().add(superName).addAll(Arrays.asList(interfaces)).build();
         // generate maps for all parent objects
         for (String parentThing : allParents) {
-            if (!methodNameMaps.containsKey(parentThing) || !methodNameMaps.containsKey(getRealName(parentThing))) {
+            if (!methodNameMaps.containsKey(parentThing)) {
                 findAndMergeSuperMaps(parentThing);
             }
         }
@@ -340,7 +351,7 @@ public class CustomRemapRemapper extends Remapper {
         }
         methodNameMaps.put(name, ImmutableMap.copyOf(methodMap));
         fieldNameMaps.put(name, ImmutableMap.copyOf(fieldMap));
-//      System.out.printf("Maps: %s %s\n", name, methodMap);
+        //LOGGER.info("Field Maps of " + name + ": " + fieldMap);
     }
 
     public Set<String> getObfedClasses() {
@@ -348,6 +359,7 @@ public class CustomRemapRemapper extends Remapper {
     }
 
     public String getStaticFieldType(String oldType, String oldName, String newType, String newName) {
+        //LOGGER.info("Static field: " + oldName + ":" + oldType + " & " + newName + ":" + newType);
         String fType = getFieldType(oldType, oldName);
         if (oldType.equals(newType)) {
             return fType;

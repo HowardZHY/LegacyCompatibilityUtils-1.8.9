@@ -70,7 +70,26 @@ repositories {
     maven {
         url "https://cursemaven.com"
     }
+    flatDir {
+        dirs 'libs'
+    }
     mavenCentral()
+}
+
+task LiteLoader {
+    try {
+        def jarUrl = new URL('https://jenkins.liteloader.com/view/1.8.9/job/LiteLoader%201.8.9/lastSuccessfulBuild/artifact/build/libs/liteloader-1.8.9-SNAPSHOT.jar')
+        def jarFile = new File('libs/liteloader-1.8.9-SNAPSHOT.jar')
+        jarUrl.withInputStream { inputStream ->
+            jarFile.withOutputStream { outputStream ->
+                inputStream.eachByte(1024) { buffer, bytesRead ->
+                    outputStream.write(buffer, 0, bytesRead)
+                }
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace()
+    }
 }
 
 dependencies {
@@ -84,10 +103,9 @@ dependencies {
         exclude module: 'log4j-core'
     }*/
     //compile will make your library available only in this dev environment
-    //your libraries wont be accessible outside of intellij
-    //example:
     compileOnly("curse.maven:mo-bends-231347:2330799")
     compileOnly("curse.maven:more-player-models-221939:2284120")
+    compileOnly("com.mumfrey:liteloader:1.8.9-SNAPSHOT")
     //shade
     compileOnly("net.md-5:SpecialSource:1.7.4") {
         exclude module: 'asm-debug-all'
@@ -98,7 +116,6 @@ dependencies {
     }
     shade('net.jodah:typetools:0.6.3')
     implementation 'zone.rong:mixinbooter:9.3'
-    //compile 'zone.rong:mixinbooter:8.8'
     //compile "org.spongepowered:mixin:0.7.11-SNAPSHOT"
     //compile shade('com.electronwill.night-config:core:3.6.3')
     //compile shade('com.electronwill.night-config:toml:3.6.3')

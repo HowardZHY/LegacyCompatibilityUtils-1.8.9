@@ -29,7 +29,7 @@ import org.objectweb.asm.*;
 import org.objectweb.asm.commons.RemappingClassAdapter;
 
 @SuppressWarnings("all")
-public class ObfTransformer implements IClassTransformer {
+public class LegacyObfTransformer implements IClassTransformer {
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] bytes) {
