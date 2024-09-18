@@ -63,10 +63,10 @@ public class CustomRemappingAdapter extends RemappingClassAdapter {
                     CustomRemapRemapper.LOGGER.info("Field Desc: " + desc + "&" + newDesc + "&" + replDesc);
                     newDesc = getRemapper().mapDesc(replDesc);
                 }
-            }*/
+            } // Not needed anymore?
             if (CustomRemapRemapper.DEBUG_REMAPPING && (type.startsWith("net/minecraft") || !type.contains("/"))) {
                 CustomRemapRemapper.LOGGER.info("Remapping Field: " + type + "." + fieldName + ":" + newDesc + " from: " + originalOwner + "." + originalName + ":" + desc);
-            }
+            } */
             // super.super
             if (mv != null) {
                 mv.visitFieldInsn(opcode, type, fieldName, newDesc);

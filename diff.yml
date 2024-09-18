@@ -398,7 +398,7 @@ net/minecraftforge/fml/common/registry/RegistryDelegate:
     #INVALID
 net/minecraft/network/play/server/S3DPacketDisplayScoreboard:
   - error: func_180747_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
-
+    #DONE
 net/minecraftforge/fml/common/network/handshake/FMLHandshakeMessage$RegistryData:
   - error: <init>(ZLjava/lang/String;Lnet/minecraftforge/fml/common/registry/GameData$GameDataSnapshot$Entry;)V - Method was removed
   - error: getName()Ljava/lang/String; - Method was removed
@@ -416,7 +416,7 @@ net/minecraft/network/play/client/C0BPacketEntityAction:
     #DONE
 net/minecraft/client/renderer/block/model/BlockFaceUV$Deserializer:
   - error: func_178293_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/BlockFaceUV; - Method was removed
-
+    #DONE
 net/minecraftforge/client/model/IPerspectiveState:
   - error: Class no longer exists
     #DONE
@@ -479,10 +479,10 @@ net/minecraft/network/play/server/S44PacketWorldBorder:
 
 net/minecraft/network/play/client/C08PacketPlayerBlockPlacement:
   - error: func_180769_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
-
+    #DONE
 net/minecraftforge/fml/common/event/FMLModIdMappingEvent:
   - error: <init>(Ljava/util/Map;Ljava/util/Map;)V - Method was removed
-
+    #NOT PLANNED
 net/minecraft/client/renderer/entity/layers/LayerHeldItemWitch:
   - error: func_177143_a(Lnet/minecraft/entity/monster/EntityWitch;FFFFFFF)V - Method was removed
     #DONE
@@ -569,7 +569,7 @@ net/minecraft/client/renderer/block/model/ModelBlock:
     #DONE
 net/minecraft/network/play/server/S31PacketWindowProperty:
   - error: func_180733_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
-
+    #DONE
 net/minecraft/client/renderer/tileentity/TileEntitySkullRenderer:
   - error: func_180542_a(Lnet/minecraft/tileentity/TileEntitySkull;DDDFI)V - Method was removed
     #DONE

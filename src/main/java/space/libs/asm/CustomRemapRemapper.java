@@ -320,7 +320,7 @@ public class CustomRemapRemapper extends Remapper {
         if (Strings.isNullOrEmpty(superName)) {
             return;
         }
-        if (!name.startsWith("java") || !superName.startsWith("java")) {
+        if (DEBUG_REMAPPING && (!name.startsWith("java") || !superName.startsWith("java"))) {
             LOGGER.info("Computing super maps for " + name + " & " + superName);
             for (String itf : interfaces) {
                 LOGGER.info("Interfaces: " + itf);
