@@ -4,7 +4,7 @@
 
 ## The Most Cursed 1.8.9 Forge Mod
 
-(CompatLib in short) Made many 1.8.0 Forge Mods working on 1.8.9 (except some coremods like with `@MCVersion("1.8")` ).
+(CompatLib in short) Made many 1.8.0 Forge and LiteLoader Mods working on 1.8.9 (except some coremods like with `@MCVersion("1.8")` ).
 
 This is done by re-add removed classes and srg methods/fields.
 
@@ -26,20 +26,22 @@ Submit an issue if you met incompatibilities.
 
 # Known Not Working
 
-Bspkrs's Mods: Crash because Forge Registry Internal changes.
-Use 1.8.9 versions by ZenCoder(https://www.curseforge.com/members/zencoder/projects)
+### [BlockSteps](https://www.curseforge.com/minecraft/mc-mods/blocksteps)
 
-[BlockSteps](https://www.curseforge.com/minecraft/mc-mods/blocksteps)
 Blocks won't show, Unknown reason
 
-[Mo' Bends](https://www.curseforge.com/minecraft/mc-mods/mo-bends)
+### [Mo' Bends](https://www.curseforge.com/minecraft/mc-mods/mo-bends)
+
 1.8 Players & Zombies Actions won't show, Unknown reason, use the 1.9 version
 
-[Gender & Age Mod](https://www.curseforge.com/minecraft/mc-mods/gender)
+### [Gender & Age Mod](https://www.curseforge.com/minecraft/mc-mods/gender)
+
 Notch Code ASM
 
-NEI, maybe other mods using ChickenBones Core as well
-Coremods with ASM
+### NEI and other mods using ChickenBones' Core as well
 
-TMI (Official 1.8 Forge Version)
+Coremods using APIs with FML Core breaking changes
+
+### TMI (Official 1.8 Forge Version)
+
 The Only 1.8 Forge Mod in Totally Notch Code

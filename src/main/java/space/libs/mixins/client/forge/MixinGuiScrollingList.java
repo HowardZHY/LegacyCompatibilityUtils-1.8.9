@@ -17,16 +17,16 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(GuiScrollingList.class)
 public class MixinGuiScrollingList {
 
-    @Shadow
+    @Shadow(remap = false)
     private @Final Minecraft client;
 
-    @Shadow
+    @Shadow(remap = false)
     protected @Final int listWidth;
 
-    @Shadow
+    @Shadow(remap = false)
     protected @Final int screenWidth;
 
-    @Shadow
+    @Shadow(remap = false)
     protected @Final int left;
 
     public void overlayBackground(int top, int height, int alpha1, int alpha2)

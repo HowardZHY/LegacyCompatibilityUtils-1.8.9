@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(FMLControlledNamespacedRegistry.class)
+@Mixin(value = FMLControlledNamespacedRegistry.class, remap = false)
 public class MixinFMLControlledNamespacedRegistry<K, V> extends RegistryNamespacedDefaultedByKey<K, Object> {
 
     public MixinFMLControlledNamespacedRegistry(K defaultValueKeyIn) {
