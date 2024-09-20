@@ -76,6 +76,7 @@ public class ClassNameList {
     public static String[] BLACKLIST = {
         "com.mamiyaotaru.chatbubbles",
         "com.mamiyaotaru.jukebox",
+        "com.mumfrey.worldeditcui",
         "maya.biomeborders",
         "mnm.mods.linkinfo",
         "net.easymfne.omniscience",

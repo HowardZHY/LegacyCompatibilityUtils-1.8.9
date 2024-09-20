@@ -32,7 +32,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
     @Shadow
     private boolean isDrawing;
 
-    /** 1.8 needsUpdate */
+    /** 1.8's needsUpdate */
     @Shadow
     private boolean noColor;
 
@@ -207,9 +207,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         if (this.isDrawing) {
             throw new IllegalStateException("Already building!");
         } else {
-            if (mode == 7) {
-                this.LegacyPOSITION = true;
-            }
+            this.LegacyPOSITION = true;
             this.isDrawing = true;
             this.reset();
             this.drawMode = mode;
