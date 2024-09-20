@@ -304,7 +304,7 @@ public class CustomRemapRemapper extends Remapper {
             for (int i = 0; i < interfaces.length; i++) {
                 legacyInterfaces[i] = getLegacyName(interfaces[i]);
             }
-            if ((!Strings.isNullOrEmpty(name)) && (!Strings.isNullOrEmpty(superName)) && !name.startsWith("java")) {
+            if (DEBUG_REMAPPING && (!Strings.isNullOrEmpty(name)) && (!Strings.isNullOrEmpty(superName)) && !name.startsWith("java")) {
                 LOGGER.info("Try finding super map for " + name + " to " + superName);
             }
             mergeSuperMaps(name, getLegacyName(superName), legacyInterfaces);
