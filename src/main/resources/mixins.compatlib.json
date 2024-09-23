@@ -34,6 +34,7 @@
     "client.forge.MixinItemLayerModel",
     "client.forge.MixinItemLayerModelBakedModel",
     "client.forge.MixinMapModelState",
+    "client.forge.MixinMinecraftForgeClient",
     "client.forge.MixinModelLoader",
     "client.forge.MixinModelLoaderUVLock",
     "client.forge.MixinModelLoaderVanillaModelWrapper",

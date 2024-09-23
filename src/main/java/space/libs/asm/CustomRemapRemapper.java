@@ -24,6 +24,7 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.commons.Remapper;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
+import space.libs.core.CompatLibCore;
 
 import java.io.IOException;
 import java.net.URL;
@@ -53,7 +54,7 @@ public class CustomRemapRemapper extends Remapper {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public static boolean DEBUG_REMAPPING = false;
+    public static boolean DEBUG_REMAPPING = CompatLibCore.DEBUG;
 
     public CustomRemapRemapper() {
         classNameBiMap = ImmutableBiMap.of();
@@ -133,7 +134,9 @@ public class CustomRemapRemapper extends Remapper {
         }
         String mappedName = this.map(name);
         String realName = FMLDeobfuscatingRemapper.INSTANCE.unmap(mappedName);
-        // LOGGER.info("Get " + name + "'s unmapped name " + realName + " from " + mappedName);
+        if (DEBUG_REMAPPING) {
+            LOGGER.info("Get " + name + "'s unmapped name " + realName + " from " + mappedName);
+        }
         return realName;
     }
 
@@ -212,10 +215,10 @@ public class CustomRemapRemapper extends Remapper {
             return fieldMap.get(name + ":" + desc);
         } else {
             try {
-                if ((!owner.contains("/") || owner.contains("net")) && fieldMap.get(name + ":null") != null) {
-                    LOGGER.info("Try map field without desc " + owner + "." + name + " to " + fieldMap.get(name + ":null"));
-                }
                 if (fieldMap.get(name + ":null") != null) {
+                    if (!owner.contains("/") || owner.contains("net")) {
+                        LOGGER.info("Try map field without desc " + owner + "." + name + " to " + fieldMap.get(name + ":null"));
+                    }
                     return fieldMap.get(name + ":null");
                 }
             } catch (NullPointerException npe) {
@@ -271,7 +274,7 @@ public class CustomRemapRemapper extends Remapper {
                 negativeCacheFields.add(className);
             }
             if (DEBUG_REMAPPING && !className.startsWith("java")) {
-                // LOGGER.info("Field map for " + className + " : " + fieldNameMaps.get(className));
+                LOGGER.info("Field map for " + className + " : " + fieldNameMaps.get(className));
             }
         }
         return fieldNameMaps.get(className);
@@ -358,9 +361,9 @@ public class CustomRemapRemapper extends Remapper {
         return ImmutableSet.copyOf(classNameBiMap.keySet());
     }
 
-    public String getStaticFieldType(String oldType, String oldName, String newType, String newName) {
-        //LOGGER.info("Static field: " + oldName + ":" + oldType + " & " + newName + ":" + newType);
+    /*public String getStaticFieldType(String oldType, String oldName, String newType, String newName) {
         String fType = getFieldType(oldType, oldName);
+        LOGGER.info("Static Field: " + oldType + "+" + oldName + " & " + newType + "+" + newName + " fT: " + fType);
         if (oldType.equals(newType)) {
             return fType;
         }
@@ -371,5 +374,5 @@ public class CustomRemapRemapper extends Remapper {
         }
         newClassMap.put(newName, fType);
         return fType;
-    }
+    }*/
 }

@@ -10,6 +10,13 @@ public class ModDetector {
     public static boolean hasSpACore = false;
 
     public ModDetector() {
+        if (hasSpACore) {
+            return;
+        }
+        this.getSpACore();
+    }
+
+    public static void getSpACore() {
         try {
             Class<?> c = Class.forName("net.specialattack.forge.core.asm.SpACorePlugin");
         } catch (Exception ignored) {

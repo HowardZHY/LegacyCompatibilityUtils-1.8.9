@@ -9,4 +9,7 @@ public interface IWorldRenderer {
 
     WorldRenderer getRenderer();
 
+    /** finishDrawing */
+    int func_178977_d();
+
 }

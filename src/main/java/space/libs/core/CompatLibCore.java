@@ -14,6 +14,8 @@ import java.util.Map;
 @IFMLLoadingPlugin.SortingIndex(Integer.MIN_VALUE + 2)
 public class CompatLibCore implements IFMLLoadingPlugin {
 
+    public static boolean DEBUG = false;
+
     public static Logger LOGGER = LogManager.getLogger("CompatLibCore");
 
     public CompatLibCore() {}

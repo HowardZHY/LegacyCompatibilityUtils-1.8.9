@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.fml.common.FMLLog;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,9 +28,12 @@ import java.nio.ByteBuffer;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("all")
 @Mixin(value = ForgeHooksClient.class, priority = 4000)
 public class MixinForgeHooksClient implements IForgeHooksClient {
+
+    @Public
+    private static EnumWorldBlockLayer renderLayer = EnumWorldBlockLayer.SOLID;
 
     @Shadow(prefix = "original$", remap = false)
     public static ModelBiped original$getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int slotID, ModelBiped _default) {
@@ -45,8 +49,7 @@ public class MixinForgeHooksClient implements IForgeHooksClient {
     private static void preDraw(VertexFormatElement.EnumUsage attrType, VertexFormatElement element, int stride, ByteBuffer buffer) {
         IVertexFormatElement accessor = (IVertexFormatElement) element;
         buffer.position(accessor.func_177373_a());
-        switch(attrType)
-        {
+        switch(attrType) {
             case POSITION:
                 glVertexPointer(element.getElementCount(), element.getType().getGlConstant(), stride, buffer);
                 glEnableClientState(GL_VERTEX_ARRAY);
@@ -81,8 +84,7 @@ public class MixinForgeHooksClient implements IForgeHooksClient {
 
     @Public
     private static void postDraw(VertexFormatElement.EnumUsage attrType, VertexFormatElement element, int stride, ByteBuffer buffer) {
-        switch(attrType)
-        {
+        switch(attrType) {
             case POSITION:
                 glDisableClientState(GL_VERTEX_ARRAY);
                 break;
@@ -109,8 +111,7 @@ public class MixinForgeHooksClient implements IForgeHooksClient {
     }
 
     @Public
-    private static void transformV3d(Vector3d vec, Matrix4f m)
-    {
+    private static void transformV3d(Vector3d vec, Matrix4f m) {
         Vector4f tmp = new Vector4f((float)vec.x, (float)vec.y, (float)vec.z, 1f);
         m.transform(tmp);
         if (Math.abs(tmp.w - 1f) > 1e-5) tmp.scale(1f / tmp.w);

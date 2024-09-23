@@ -41,6 +41,7 @@ import net.minecraft.launchwrapper.IClassTransformer;
 import net.minecraft.launchwrapper.Launch;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
@@ -51,6 +52,7 @@ import org.objectweb.asm.commons.RemappingClassAdapter;
 import org.objectweb.asm.commons.RemappingMethodAdapter;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
+import space.libs.core.CompatLibCore;
 
 import java.io.IOException;
 import java.net.URL;
@@ -154,8 +156,8 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
             return bytes;
         }
 
-        ClassWriter writer = new ClassWriter(0);
         ClassReader reader = new ClassReader(bytes);
+        ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
         reader.accept(new RemappingAdapter(writer), ClassReader.EXPAND_FRAMES);
         return writer.toByteArray();
     }
@@ -178,16 +180,13 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
         if (fieldDescriptions != null) {
             return fieldDescriptions.get(name);
         }
-
         byte[] bytes = getBytes(owner);
         if (bytes == null) {
             return null;
         }
-
         ClassReader reader = new ClassReader(bytes);
         ClassNode classNode = new ClassNode();
         reader.accept(classNode, ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
-
         String result = null;
         fieldDescriptions = Maps.newHashMapWithExpectedSize(classNode.fields.size());
         for (FieldNode fieldNode : classNode.fields) {
@@ -196,7 +195,6 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
                 result = fieldNode.desc;
             }
         }
-
         this.fieldDescriptions.put(owner, fieldDescriptions);
         return result;
     }
@@ -206,19 +204,15 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
         if (this.classes == null) {
             return className;
         }
-
         String name = this.classes.get(className);
-
         if (name != null) {
             return name;
         }
-
         // We may have no name for the inner class directly, but it should be still part of the outer class
         int innerClassPos = className.lastIndexOf('$');
         if (innerClassPos >= 0) {
             return map(className.substring(0, innerClassPos)) + className.substring(innerClassPos);
         }
-
         return className; // Unknown class
     }
 
@@ -226,18 +220,15 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
         if (this.classes == null) {
             return className;
         }
-
         String name = this.classes.inverse().get(className);
         if (name != null) {
             return name;
         }
-
         // We may have no name for the inner class directly, but it should be still part of the outer class
         int innerClassPos = className.lastIndexOf('$');
         if (innerClassPos >= 0) {
             return unmap(className.substring(0, innerClassPos)) + className.substring(innerClassPos);
         }
-
         return className; // Unknown class
     }
 
@@ -246,15 +237,22 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
         if (this.classes == null) {
             return fieldName;
         }
-
         Map<String, String> fields = getFieldMap(owner);
         if (fields != null) {
             String name = fields.get(fieldName + ':' + desc);
             if (name != null) {
                 return name;
+            } else {
+                try {
+                    if (fields.get(name + ":null") != null) {
+                        if (CompatLibCore.DEBUG && (!owner.contains("/") || owner.contains("net"))) {
+                            LogManager.getLogger().info("Try map field without desc " + owner + "." + name + " to " + fields.get(name + ":null"));
+                        }
+                        return fields.get(name + ":null");
+                    }
+                } catch (NullPointerException ignored) {}
             }
         }
-
         return fieldName;
     }
 
@@ -263,14 +261,12 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
         if (result != null) {
             return result;
         }
-
         if (!this.failedFields.contains(owner)) {
             loadSuperMaps(owner);
             if (!this.fields.containsKey(owner)) {
                 this.failedFields.add(owner);
             }
         }
-
         return this.fields.get(owner);
     }
 
@@ -279,7 +275,6 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
         if (this.classes == null) {
             return methodName;
         }
-
         Map<String, String> methods = getMethodMap(owner);
         if (methods != null) {
             String name = methods.get(methodName + desc);
@@ -287,7 +282,6 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
                 return name;
             }
         }
-
         return methodName;
     }
 
@@ -296,14 +290,12 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
         if (result != null) {
             return result;
         }
-
         if (!this.failedMethods.contains(owner)) {
             loadSuperMaps(owner);
             if (!this.methods.containsKey(owner)) {
                 this.failedMethods.add(owner);
             }
         }
-
         return this.methods.get(owner);
     }
 
@@ -325,7 +317,7 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
         }
     }
 
-    void createSuperMaps(String name, String superName, String[] interfaces) {
+    public void createSuperMaps(String name, String superName, String[] interfaces) {
         if (Strings.isNullOrEmpty(superName)) {
             return;
         }
@@ -362,7 +354,7 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
         this.methods.put(name, ImmutableMap.copyOf(methods));
     }
 
-    String getStaticFieldType(String oldType, String oldName, String newType, String newName) {
+    public String getStaticFieldType(String oldType, String oldName, String newType, String newName) {
         String type = getFieldType(oldType, oldName);
         if (oldType.equals(newType)) {
             return type;
@@ -428,7 +420,7 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
                     String type = this.remapper.mapType(owner);
                     String fieldName = this.remapper.mapFieldName(owner, name, desc);
                     String newDesc = this.remapper.mapDesc(desc);
-                    if (opcode == Opcodes.GETSTATIC && type.startsWith("net/minecraft/") && newDesc.startsWith("Lnet/minecraft/")) {
+                    if ((opcode == Opcodes.GETSTATIC) && type.startsWith("net/minecraft/") && newDesc.startsWith("Lnet/minecraft/")) {
                         String replDesc = getStaticFieldType(owner, name, type, fieldName);
                         if (replDesc != null) {
                             newDesc = this.remapper.mapDesc(replDesc);

@@ -40,7 +40,7 @@ net/minecraftforge/client/MinecraftForgeClient:
   - error: getItemRenderer(Lnet/minecraft/item/ItemStack;Lnet/minecraftforge/client/IItemRenderer$ItemRenderType;)Lnet/minecraftforge/client/IItemRenderer; - Method was removed
   - error: registerItemRenderer(Lnet/minecraft/item/Item;Lnet/minecraftforge/client/IItemRenderer;)V - Method was removed
   - error: customItemRenderers:Ljava/util/IdentityHashMap; - Field was removed
-    #NOT PLANNED
+    #DONE
 net/minecraft/entity/monster/EntitySlime$AISlimeHop:
   - error: this$0:Lnet/minecraft/entity/monster/EntitySlime; - Field was removed
     #INVALID

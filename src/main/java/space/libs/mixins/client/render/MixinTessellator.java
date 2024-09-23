@@ -31,7 +31,7 @@ public abstract class MixinTessellator {
     /** draw */
     public int func_78381_a() {
         this.draw();
-        return 0;
+        return 0; // Incorrect
     }
 
     /** getBuffer */
