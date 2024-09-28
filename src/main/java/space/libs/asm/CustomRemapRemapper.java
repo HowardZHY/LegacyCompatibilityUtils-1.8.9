@@ -24,7 +24,7 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.commons.Remapper;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
-import space.libs.core.CompatLibCore;
+import space.libs.core.CompatLibDebug;
 
 import java.io.IOException;
 import java.net.URL;
@@ -54,7 +54,7 @@ public class CustomRemapRemapper extends Remapper {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public static boolean DEBUG_REMAPPING = CompatLibCore.DEBUG;
+    public static boolean DEBUG_REMAPPING = CompatLibDebug.DEBUG;
 
     public CustomRemapRemapper() {
         classNameBiMap = ImmutableBiMap.of();
@@ -134,7 +134,7 @@ public class CustomRemapRemapper extends Remapper {
         }
         String mappedName = this.map(name);
         String realName = FMLDeobfuscatingRemapper.INSTANCE.unmap(mappedName);
-        if (DEBUG_REMAPPING) {
+        if (DEBUG_REMAPPING && (name != realName)) {
             LOGGER.info("Get " + name + "'s unmapped name " + realName + " from " + mappedName);
         }
         return realName;

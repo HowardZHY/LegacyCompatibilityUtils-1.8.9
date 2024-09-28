@@ -52,7 +52,7 @@ import org.objectweb.asm.commons.RemappingClassAdapter;
 import org.objectweb.asm.commons.RemappingMethodAdapter;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
-import space.libs.core.CompatLibCore;
+import space.libs.core.CompatLibDebug;
 
 import java.io.IOException;
 import java.net.URL;
@@ -245,7 +245,7 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
             } else {
                 try {
                     if (fields.get(name + ":null") != null) {
-                        if (CompatLibCore.DEBUG && (!owner.contains("/") || owner.contains("net"))) {
+                        if (CompatLibDebug.DEBUG && (!owner.contains("/") || owner.contains("net"))) {
                             LogManager.getLogger().info("Try map field without desc " + owner + "." + name + " to " + fields.get(name + ":null"));
                         }
                         return fields.get(name + ":null");
