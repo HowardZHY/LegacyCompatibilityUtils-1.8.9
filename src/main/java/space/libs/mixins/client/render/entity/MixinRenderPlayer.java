@@ -2,6 +2,7 @@ package space.libs.mixins.client.render.entity;
 
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -34,11 +35,11 @@ public abstract class MixinRenderPlayer extends RendererLivingEntity<AbstractCli
 
     /** getMainModel */
     public ModelPlayer func_177136_g() {
-        return this.getMainModel();
+        return (ModelPlayer) this.mainModel;
     }
 
     public ModelBase func_177087_b() {
-        return this.func_177136_g();
+        return this.mainModel;
     }
 
     /** doRender */
