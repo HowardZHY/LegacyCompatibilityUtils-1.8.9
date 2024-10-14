@@ -28,7 +28,7 @@ Submit an issue if you met incompatibilities.
 
 ### [BlockSteps](https://www.curseforge.com/minecraft/mc-mods/blocksteps)
 
-Blocks won't show, Unknown reason
+Disable use VBOs in Video Settings if you use this mod, otherwise blocks won't show.
 
 ### [Mo' Bends](https://www.curseforge.com/minecraft/mc-mods/mo-bends)
 
