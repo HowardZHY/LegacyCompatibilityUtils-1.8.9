@@ -13,6 +13,7 @@ import java.io.IOException;
 
 @Mixin(GuiContainer.class)
 public abstract class MixinGuiContainer extends GuiScreen {
+
     @Shadow
     public int guiLeft;
     @Shadow
@@ -58,18 +59,18 @@ public abstract class MixinGuiContainer extends GuiScreen {
     }
 
     @Inject( method = "keyTyped", at = @At("HEAD"), cancellable = true )
-    public void keyTyped(char typedChar, int keyCode, CallbackInfo ci ) {
+    public void keyTyped(char typedChar, int keyCode, CallbackInfo ci) {
         if (!TMI.instance.controller.onKeypress(typedChar, keyCode))
             ci.cancel();
     }
 
     @Inject( method = "onGuiClosed", at = @At("HEAD") )
-    public void onGuiClosed(CallbackInfo ci ) {
+    public void onGuiClosed(CallbackInfo ci) {
         TMI.instance.controller.onClose();
     }
 
     @Inject(method = "doesGuiPauseGame", at = @At("HEAD"), cancellable = true)
-    public void doesGuiPauseGame(CallbackInfoReturnable<Boolean> cir ) {
+    public void doesGuiPauseGame(CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(TMI.instance.controller.shouldPauseGame());
     }
 }

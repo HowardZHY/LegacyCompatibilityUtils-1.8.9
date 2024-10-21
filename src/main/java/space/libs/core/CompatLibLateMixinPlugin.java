@@ -23,7 +23,11 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (mixinClassName.contains("mobends")) {
-            return ModDetector.getMoBendsVersion().startsWith("0.22");
+            if (mixinClassName.contains("Bends")) {
+                return ModDetector.getMoBendsVersion().startsWith("0.22");
+            } else {
+                return !(ModDetector.getMoBendsVersion().startsWith("0.22"));
+            }
         }
         return true;
     }

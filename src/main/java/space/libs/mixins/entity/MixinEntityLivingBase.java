@@ -43,7 +43,11 @@ public abstract class MixinEntityLivingBase extends Entity {
         else return this.getEquipmentInSlot(slot.func_188452_c());
     }
 
+    /** getHeldItem */
     public ItemStack func_184586_b(EnumHand hand) {
+        if (hand == EnumHand.OFF_HAND) {
+            return null;
+        }
         return this.getHeldItem();
     }
 

@@ -115,7 +115,7 @@ dependencies {
         exclude module: 'opencsv'
     }
     shade('net.jodah:typetools:0.6.3')
-    implementation 'zone.rong:mixinbooter:9.3'
+    implementation 'zone.rong:mixinbooter:9.4'
     //compile "org.spongepowered:mixin:0.7.11-SNAPSHOT"
     //compile shade('com.electronwill.night-config:core:3.6.3')
     //compile shade('com.electronwill.night-config:toml:3.6.3')

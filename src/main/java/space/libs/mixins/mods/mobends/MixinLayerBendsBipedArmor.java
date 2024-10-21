@@ -13,16 +13,11 @@ import org.spongepowered.asm.mixin.Shadow;
 @SuppressWarnings("unchecked, rawtypes")
 @Pseudo
 @Mixin(targets = "net.gobbob.mobends.client.renderer.entity.layers.LayerBendsBipedArmor")
-public class MixinLayerBendsBipedArmor extends LayerArmorBase {
+public abstract class MixinLayerBendsBipedArmor extends LayerArmorBase {
 
     public MixinLayerBendsBipedArmor(RendererLivingEntity rendererIn) {
         super(rendererIn);
     }
-
-    @Dynamic
-    @Override
-    @Shadow
-    protected void initArmor() {}
 
     @Shadow(remap = false)
     protected void setModelSlotVisible(ModelBendsBipedArmor model, EntityEquipmentSlot p_188359_2_) {}
