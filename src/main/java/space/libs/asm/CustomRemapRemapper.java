@@ -216,13 +216,15 @@ public class CustomRemapRemapper extends Remapper {
         } else {
             try {
                 if (fieldMap.get(name + ":null") != null) {
-                    if (!owner.contains("/") || owner.contains("net")) {
+                    if (DEBUG_REMAPPING && (!owner.contains("/") || owner.contains("net"))) {
                         LOGGER.info("Try map field without desc " + owner + "." + name + " to " + fieldMap.get(name + ":null"));
                     }
                     return fieldMap.get(name + ":null");
                 }
-            } catch (NullPointerException npe) {
-                LOGGER.error("NPE when mapping field name: " + owner + "." + name + ":" + desc);
+            } catch (NullPointerException ignored) {
+                if (DEBUG_REMAPPING) {
+                    LOGGER.error("NPE when mapping field name: " + owner + "." + name + ":" + desc);
+                }
             }
             return name;
         }

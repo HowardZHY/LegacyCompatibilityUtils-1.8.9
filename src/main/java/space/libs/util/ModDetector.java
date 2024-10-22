@@ -1,13 +1,19 @@
 package space.libs.util;
 
+import com.google.common.base.Strings;
 import space.libs.core.CompatLibCore;
 
 import java.lang.reflect.Field;
+import java.util.Objects;
 
 @SuppressWarnings("all")
 public class ModDetector {
 
     public static boolean hasSpACore = false;
+
+    public static int hasMobends = 0;
+
+    public static String mobends = "";
 
     public ModDetector() {
         if (hasSpACore) {
@@ -28,17 +34,20 @@ public class ModDetector {
     }
 
     public static String getMoBendsVersion() {
-        String version = "";
-        try {
-            Class<?> c = Class.forName("net.gobbob.mobends.MoBends");
-            Field versionField = c.getField("VERSION");
-            version = (String) versionField.get(null);
-        } catch (Exception ignored) {
-            CompatLibCore.LOGGER.info("MoBends Version not found.");
-            return "";
+        if (hasMobends == 0) {
+            try {
+                Class<?> c = Class.forName("net.gobbob.mobends.MoBends");
+                Field versionField = c.getField("VERSION");
+                mobends = (String) versionField.get(null);
+            } catch (Exception ignored) {
+                CompatLibCore.LOGGER.info("MoBends Version not found.");
+                hasMobends = 1;
+                return "";
+            }
+            hasMobends = 2;
+            CompatLibCore.LOGGER.info("MoBends Version: " + mobends);
         }
-        CompatLibCore.LOGGER.info("MoBends Version: "+ version);
-        return version;
+        return mobends;
     }
 
 }

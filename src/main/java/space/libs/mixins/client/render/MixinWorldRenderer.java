@@ -449,7 +449,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
     }
 
     @Dynamic
-    @Inject(method = "growBuffer", at = @At(value = "INVOKE_ASSIGN", target = "Lorg/apache/logging/log4j/Logger;warn(Ljava/lang/String;)V"))
+    @Inject(method = "func_181670_b", at = @At(value = "INVOKE_ASSIGN", target = "Lorg/apache/logging/log4j/Logger;warn(Ljava/lang/String;)V"), remap = false)
     public void growBuffer(int p_181670_1_, CallbackInfo ci) {
         this.field_179009_s += p_181670_1_ / 4;
     }

@@ -13,7 +13,7 @@ public class LiteLoaderObfTransformer implements IClassTransformer {
         }
         if (name.equals("com.mumfrey.liteloader.core.runtime.Obf")) {
             ClassReader cr = new ClassReader(bytes);
-            ClassWriter cw = new ClassWriter(cr, 0);
+            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
             ClassVisitor cv = new ObfVisitor(cw);
             cr.accept(cv, 0);
             return cw.toByteArray();
