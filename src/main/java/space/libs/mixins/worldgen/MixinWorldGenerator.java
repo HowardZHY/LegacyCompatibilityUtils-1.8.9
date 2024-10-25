@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
-@Mixin(WorldGenerator.class)
+@Mixin(value = WorldGenerator.class, priority = 100)
 public abstract class MixinWorldGenerator {
 
     @Shadow

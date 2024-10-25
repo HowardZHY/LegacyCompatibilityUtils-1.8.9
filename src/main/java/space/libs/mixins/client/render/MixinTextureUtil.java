@@ -21,10 +21,10 @@ import java.nio.IntBuffer;
 public abstract class MixinTextureUtil {
 
     @Shadow
-    private static @Final Logger logger = LogManager.getLogger();
+    private static @Final Logger logger;
 
     @Shadow
-    static void bindTexture(int p_94277_0_) {}
+    public static void bindTexture(int p_94277_0_) {}
 
     @Public
     private static void func_177055_a(String name, int textureId, int mipmapLevels, int width, int height) {
