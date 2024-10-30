@@ -8,10 +8,11 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import space.libs.interfaces.ITessellator;
 
 @SuppressWarnings("unused")
 @Mixin(value = Tessellator.class, priority = 100)
-public abstract class MixinTessellator {
+public abstract class MixinTessellator implements ITessellator {
 
     @Shadow
     private WorldRenderer worldRenderer;
