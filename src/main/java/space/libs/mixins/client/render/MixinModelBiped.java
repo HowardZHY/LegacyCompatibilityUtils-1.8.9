@@ -38,4 +38,12 @@ public abstract class MixinModelBiped implements IModelBiped {
             return this.bipedLeftArm;
         return this.bipedRightArm;
     }
+
+    public EnumArmPose getRightArmPose() {
+        return this.field_187076_m;
+    }
+
+    public void setRightArmPose(EnumArmPose pose) {
+        this.field_187076_m = pose;
+    }
 }

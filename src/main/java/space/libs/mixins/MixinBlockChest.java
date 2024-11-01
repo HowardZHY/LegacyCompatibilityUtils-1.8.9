@@ -8,5 +8,6 @@ import java.util.Random;
 @SuppressWarnings("unused")
 @Mixin(BlockChest.class)
 public class MixinBlockChest {
+
     public Random field_149955_b = new Random();
 }

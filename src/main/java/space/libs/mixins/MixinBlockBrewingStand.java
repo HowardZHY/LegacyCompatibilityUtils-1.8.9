@@ -10,5 +10,4 @@ import java.util.Random;
 public class MixinBlockBrewingStand {
 
     public Random field_149961_a = new Random();
-
 }
