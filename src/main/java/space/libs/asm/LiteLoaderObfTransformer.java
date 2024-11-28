@@ -57,7 +57,7 @@ public class LiteLoaderObfTransformer implements IClassTransformer {
                             mv.visitTypeInsn(Opcodes.NEW, "com/mumfrey/liteloader/core/runtime/Obf");
                             mv.visitInsn(Opcodes.DUP);
                             mv.visitLdcInsn("net.minecraft.client.gui.GuiTextField");
-                            mv.visitLdcInsn("bul");
+                            mv.visitLdcInsn("avw");
                             mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "com/mumfrey/liteloader/core/runtime/Obf", "<init>", "(Ljava/lang/String;Ljava/lang/String;)V", false);
                             mv.visitFieldInsn(Opcodes.PUTSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "GuiTextField", "Lcom/mumfrey/liteloader/core/runtime/Obf;");
                         }
