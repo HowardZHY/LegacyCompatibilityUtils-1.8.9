@@ -9,10 +9,13 @@
   "client": [
     "di.MixinDIClientProxy",
     "ichun.MixinThreadGetPatrons",
-    "mobends.MixinLayerBendsBipedArmor",
-    "mobends.MixinLayerBendsElytra",
-    "mobends.MixinLayerBendsHeldItem",
-    "mobends.MixinModelBendsPlayer",
+    "mobends.MixinDataZombie",
+    "mobends.MixinEventHandlerRenderPlayer",
+    "mobends.MixinModelBendsZombie",
+    "mobends.MixinModelRendererBends",
+    "mobends.MixinSmoothVector3f",
+    "mobends.test.MixinLayerBendsElytra",
+    "mobends.test.MixinLayerBendsHeldItem",
     "mpm.MixinRenderEvent"
   ],
   "mixins": [

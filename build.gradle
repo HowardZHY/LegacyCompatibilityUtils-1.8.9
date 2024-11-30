@@ -103,10 +103,10 @@ dependencies {
         exclude module: 'log4j-core'
     }*/
     //compile will make your library available only in this dev environment
-    compileOnly("curse.maven:mo-bends-231347:2330799")
+    compileOnly("curse.maven:mo-bends-231347:2272295")
+    // compileOnly("curse.maven:mo-bends-231347:2330799")
     compileOnly("curse.maven:more-player-models-221939:2284120")
     compileOnly("com.mumfrey:liteloader:1.8.9-SNAPSHOT")
-    //shade
     compileOnly("net.md-5:SpecialSource:1.7.4") {
         exclude module: 'asm-debug-all'
         exclude module: 'guava'
@@ -181,7 +181,11 @@ reobf {
 tasks.reobfShadowJar.mustRunAfter shadowJar
 
 sourceSets {
+    dummy {
+        compileClasspath += main.compileClasspath
+    }
     main {
         ext.refMap = "mixins.compatlib.refmap.json"
+        compileClasspath += dummy.output
     }
 }

@@ -1,0 +1,179 @@
+package space.libs.mixins.mods.mobends.test;
+
+import net.gobbob.mobends.animatedentity.AnimatedEntity;
+import net.gobbob.mobends.client.model.ModelRendererBends;
+import net.gobbob.mobends.client.model.entity.ModelBendsPlayer;
+import net.gobbob.mobends.data.Data_Player;
+import net.gobbob.mobends.data.EntityData;
+import net.gobbob.mobends.pack.BendsPack;
+import net.gobbob.mobends.pack.BendsVar;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.EnumArmPose;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.*;
+import net.minecraft.util.MathHelper;
+import org.lwjgl.util.vector.Vector3f;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Pseudo;
+import space.libs.interfaces.IModelBiped;
+
+@SuppressWarnings("unused")
+@Pseudo
+@Mixin(targets = "net.gobbob.mobends.client.model.entity.ModelBendsPlayer")
+public abstract class MixinModelBendsPlayer {
+
+    /**
+     * @author HowardZHY
+     * @reason Fix
+     */
+    @Overwrite(remap = false)
+    public void func_78087_a(float argSwingTime, float argSwingAmount, float argArmSway, float argHeadY, float argHeadX, float argNr6, Entity argEntity) {
+        if (Minecraft.getMinecraft().theWorld == null) return;
+        ModelBendsPlayer This = (ModelBendsPlayer) (Object) this;
+        Data_Player data = (Data_Player) EntityData.get(EntityData.PLAYER_DATA, argEntity.getEntityId());
+        AnimatedEntity aEntity = AnimatedEntity.getByEntity(argEntity);
+        This.armSwing = argSwingTime;
+        This.armSwingAmount = argSwingAmount;
+        This.headRotationX = MathHelper.wrapAngleTo180_float(argHeadX);
+        This.headRotationY = MathHelper.wrapAngleTo180_float(argHeadY);
+        ((ModelRendererBends) This.bipedHead).sync(data.head);
+        ((ModelRendererBends) This.bipedHeadwear).sync(data.headwear);
+        ((ModelRendererBends) This.bipedBody).sync(data.body);
+        ((ModelRendererBends) This.bipedRightArm).sync(data.rightArm);
+        ((ModelRendererBends) This.bipedLeftArm).sync(data.leftArm);
+        ((ModelRendererBends) This.bipedRightLeg).sync(data.rightLeg);
+        ((ModelRendererBends) This.bipedLeftLeg).sync(data.leftLeg);
+        ((ModelRendererBends) This.bipedRightForeArm).sync(data.rightForeArm);
+        ((ModelRendererBends) This.bipedLeftForeArm).sync(data.leftForeArm);
+        ((ModelRendererBends) This.bipedRightForeLeg).sync(data.rightForeLeg);
+        ((ModelRendererBends) This.bipedLeftForeLeg).sync(data.leftForeLeg);
+        This.renderOffset.set(data.renderOffset);
+        This.renderRotation.set(data.renderRotation);
+        This.renderRightItemRotation.set(data.renderRightItemRotation);
+        This.renderLeftItemRotation.set(data.renderLeftItemRotation);
+        This.swordTrail = data.swordTrail;
+        if (This.isRenderedInGui()) {
+            ((ModelRendererBends) This.bipedHead).rotation.setY(This.headRotationY);
+            ((ModelRendererBends) This.bipedHead).rotation.setX(This.headRotationX);
+        }
+        if (data.canBeUpdated()) {
+            This.renderOffset.setSmooth(new Vector3f(0, -1f, 0), 0.5f);
+            This.renderRotation.setSmooth(new Vector3f(0, 0, 0), 0.5f);
+            This.renderRightItemRotation.setSmooth(new Vector3f(0, 0, 0), 0.5f);
+            This.renderLeftItemRotation.setSmooth(new Vector3f(0, 0, 0), 0.5f);
+            ((ModelRendererBends) This.bipedHead).resetScale();
+            ((ModelRendererBends) This.bipedHeadwear).resetScale();
+            ((ModelRendererBends) This.bipedBody).resetScale();
+            ((ModelRendererBends) This.bipedRightArm).resetScale();
+            ((ModelRendererBends) This.bipedLeftArm).resetScale();
+            ((ModelRendererBends) This.bipedRightLeg).resetScale();
+            ((ModelRendererBends) This.bipedLeftLeg).resetScale();
+            ((ModelRendererBends) This.bipedRightForeArm).resetScale();
+            ((ModelRendererBends) This.bipedLeftForeArm).resetScale();
+            ((ModelRendererBends) This.bipedRightForeLeg).resetScale();
+            ((ModelRendererBends) This.bipedLeftForeLeg).resetScale();
+            BendsVar.tempData = data;
+            boolean handleLadderGetoff = false;
+            if (!data.calcClimbing() && data.climbing) {
+                data.climbing = false;
+                handleLadderGetoff = true;
+            }
+            if (argEntity.isRiding()) {
+                aEntity.get("riding").animate((EntityLivingBase) argEntity, This, data);
+                BendsPack.animate(This, "player", "riding");
+            } else {
+                if (data.isClimbing()) {
+                    aEntity.get("climbing").animate((EntityLivingBase) argEntity, This, data);
+                    BendsPack.animate(This, "player", "climbing");
+                } else {
+                    if (argEntity.isInWater()) {
+                        aEntity.get("swimming").animate((EntityLivingBase) argEntity, This, data);
+                        BendsPack.animate(This, "player", "swimming");
+                    } else {
+                        if (!data.isOnGround() | data.ticksAfterTouchdown < 2) {
+                            aEntity.get("jump").animate((EntityLivingBase) argEntity, This, data);
+                            BendsPack.animate(This, "player", "jump");
+                        } else {
+                            if (data.motion.x == 0.0f & data.motion.z == 0.0f) {
+                                aEntity.get("stand").animate((EntityLivingBase) argEntity, This, data);
+                                BendsPack.animate(This, "player", "stand");
+                            } else {
+                                if (argEntity.isSprinting()) {
+                                    aEntity.get("sprint").animate((EntityLivingBase) argEntity, This, data);
+                                    BendsPack.animate(This, "player", "sprint");
+                                } else {
+                                    aEntity.get("walk").animate((EntityLivingBase) argEntity, This, data);
+                                    BendsPack.animate(This, "player", "walk");
+                                }
+                            }
+                            if (argEntity.isSneaking()) {
+                                aEntity.get("sneak").animate((EntityLivingBase) argEntity, This, data);
+                                BendsPack.animate(This, "player", "sneak");
+                            }
+                        }
+                    }
+                }
+            }
+            if (handleLadderGetoff) {
+                This.renderRotation.setY(This.renderRotation.vFinal.y);
+            }
+            ItemStack rightHandItemStack = ((EntityPlayer) argEntity).getHeldItem();
+            IModelBiped accessor = (IModelBiped) this;
+            if (rightHandItemStack != null && rightHandItemStack.getItem() == Items.bow && ((EntityPlayer) argEntity).getHeldItem().getMaxItemUseDuration() != 0) {
+                accessor.setRightArmPose(EnumArmPose.BOW_AND_ARROW);
+            }
+            if (This.shouldPerformGuardingAnimation((EntityPlayer) argEntity)) {
+                aEntity.get("guard").animate((EntityLivingBase) argEntity, This, data);
+                if (This.heldItemRight == 3) {
+                    This.renderRightItemRotation.set(45.0f, -30.0f, 50.0f);
+                } else {
+                    This.renderLeftItemRotation.set(45.0f, 30.0f, -50.0f);
+                }
+            } else {
+                if (accessor.getRightArmPose() == EnumArmPose.BOW_AND_ARROW) {
+                    aEntity.get("bow").animate((EntityLivingBase) argEntity, This, data);
+                    BendsPack.animate(This, "player", "bow");
+                } else {
+                    ItemStack stack = ((EntityPlayer) argEntity).getHeldItem();
+                    if (((stack != null && stack.getItem() instanceof ItemPickaxe) || (stack != null && Block.getBlockFromItem(stack.getItem()) != null))) {
+                        aEntity.get("mining").animate((EntityLivingBase) argEntity, This, data);
+                        BendsPack.animate(This, "player", "mining");
+                    } else if ((stack != null) && (stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemSword)) {
+                        aEntity.get("axe").animate((EntityLivingBase) argEntity, This, data);
+                        BendsPack.animate(This, "player", "axe");
+                    } else {
+                        aEntity.get("attack").animate((EntityLivingBase) argEntity, This, data);
+                    }
+                }
+            }
+            This.updateModelRenderers(data);
+            data.updatedThisFrame = true;
+            accessor.setRightArmPose(EnumArmPose.EMPTY);
+            if (!This.isRenderedInGui()) {
+                data.syncModelInfo(This);
+            }
+        }
+        if (!data.isInitialized()) {
+            data.initModelPose();
+        }
+    }
+
+    /**
+     * @author HowardZHY
+     * @reason Fix
+     */
+    @Overwrite(remap = false)
+    public boolean shouldPerformGuardingAnimation(EntityPlayer player) {
+        if (player.getHeldItem() != null) {
+            Item item = player.getHeldItem().getItem();
+            return item.getItemUseAction(player.getHeldItem()) == EnumAction.BLOCK;
+        } else {
+            return false;
+        }
+    }
+}

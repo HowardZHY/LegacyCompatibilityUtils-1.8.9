@@ -1,4 +1,4 @@
-package space.libs.mixins.mods.mobends;
+package space.libs.mixins.mods.mobends.test;
 
 import net.minecraft.client.entity.AbstractClientPlayer;
 import org.spongepowered.asm.mixin.Mixin;
