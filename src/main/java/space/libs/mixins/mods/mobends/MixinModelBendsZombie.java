@@ -119,7 +119,7 @@ public abstract class MixinModelBendsZombie extends ModelBiped {
             aEntity.get("stand").animate(entity, this, data);
             BendsPack.animate(This, "zombie", "stand");
         } else {
-            aEntity.get( "walk").animate(entity, this, data);
+            aEntity.get("walk").animate(entity, this, data);
             BendsPack.animate(This, "zombie", "walk");
         }
     }

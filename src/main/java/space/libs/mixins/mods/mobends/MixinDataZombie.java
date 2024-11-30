@@ -36,8 +36,8 @@ public class MixinDataZombie implements IDataZombie {
         this.finish(This.rightLeg);
         this.finish(This.leftForeArm);
         this.finish(This.rightForeArm);
-        this.finish(This.leftForeLeg)
-        ; this.finish(This.rightForeLeg);
+        this.finish(This.leftForeLeg);
+        this.finish(This.rightForeLeg);
     }
 
     public void finish(ModelRendererBends bends) {
