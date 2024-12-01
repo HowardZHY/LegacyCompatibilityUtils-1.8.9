@@ -17,6 +17,10 @@ import org.spongepowered.asm.mixin.Overwrite;
 @Mixin(value = Animation_Walk.class, remap = false)
 public abstract class MixinZombieAnimationWalk extends Animation {
 
+    /**
+     * @author HowardZHY
+     * @reason Try Fix
+     */
     @Dynamic
     @Override
     @Overwrite

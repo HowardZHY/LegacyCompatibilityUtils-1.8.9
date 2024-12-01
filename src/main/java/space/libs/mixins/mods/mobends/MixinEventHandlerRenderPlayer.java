@@ -2,10 +2,7 @@ package space.libs.mixins.mods.mobends;
 
 import net.gobbob.mobends.event.EventHandler_RenderPlayer;
 import net.minecraftforge.client.event.RenderLivingEvent;
-import org.spongepowered.asm.mixin.Dynamic;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Pseudo;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 

@@ -9,6 +9,7 @@
   "client": [
     "di.MixinDIClientProxy",
     "ichun.MixinThreadGetPatrons",
+    "mobends.MixinClientProxy",
     "mobends.MixinDataZombie",
     "mobends.MixinEventHandlerRenderPlayer",
     "mobends.MixinModelBendsZombie",

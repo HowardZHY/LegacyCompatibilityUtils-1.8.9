@@ -25,7 +25,7 @@ public class MixinDataZombie implements IDataZombie {
 
     public void initModelPose() {
         Data_Zombie This = (Data_Zombie) (Object) this;
-        if(This.body == null) return;
+        if (This.body == null) return;
         this.setInitialized(true);
         this.finish(This.head);
         this.finish(This.headwear);
