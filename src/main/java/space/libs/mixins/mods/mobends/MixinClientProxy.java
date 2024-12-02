@@ -18,6 +18,10 @@ import org.spongepowered.asm.mixin.Pseudo;
 @Mixin(value = ClientProxy.class, remap = false)
 public class MixinClientProxy {
 
+    /**
+     * @author HowardZHY
+     * @reason Try Fix
+     */
     @Overwrite
     public void init(Configuration config) {
         AnimatedEntity.register(config);

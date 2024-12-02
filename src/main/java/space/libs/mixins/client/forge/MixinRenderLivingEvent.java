@@ -37,7 +37,7 @@ public abstract class MixinRenderLivingEvent<T extends EntityLivingBase> {
     @Shadow
     public double z;
 
-    public EntityLivingBase getPartialRenderTick() {
+    public EntityLivingBase getEntity() {
         return entity;
     }
 
