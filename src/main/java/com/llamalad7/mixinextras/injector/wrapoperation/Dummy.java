@@ -25,7 +25,7 @@ public class Dummy {
             removeClassFromClasspath(Launch.classLoader, "com.llamalad7.mixinextras.injector.wrapoperation.WrapOperationInjector");
             fixMixinClasspathOrder();
             Launch.classLoader.loadClass("com.llamalad7.mixinextras.injector.wrapoperation.WrapOperationInjector");
-            CompatLibCore.LOGGER.info(WrapOperationInjector.Dummy());
+            //CompatLibCore.LOGGER.info(WrapOperationInjector.Dummy());
             //Launch.classLoader.addClassLoaderExclusion("com.llamalad7.mixinextras.injector.wrapoperation.WrapOperationInjector");
         } catch (Throwable t) {
             CompatLibCore.LOGGER.error(t);
