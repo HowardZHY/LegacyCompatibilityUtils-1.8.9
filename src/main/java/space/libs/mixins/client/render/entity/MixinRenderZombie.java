@@ -22,7 +22,9 @@ public abstract class MixinRenderZombie extends MixinRenderBiped<EntityZombie> {
     public void doRender(EntityZombie entity, double x, double y, double z, float entityYaw, float partialTicks) {}
 
     @Shadow
-    protected abstract ResourceLocation getEntityTexture(EntityZombie entity);
+    protected ResourceLocation getEntityTexture(EntityZombie entity) {
+        throw new AbstractMethodError();
+    }
 
     /** doRender */
     public void func_180579_a(EntityZombie entity, double x, double y, double z, float entityYaw, float partialTicks) {

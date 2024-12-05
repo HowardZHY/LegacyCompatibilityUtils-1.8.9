@@ -1,6 +1,7 @@
 package space.libs.mixins.client.render;
 
 import net.minecraft.client.model.TexturedQuad;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.WorldRenderer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,4 +18,7 @@ public abstract class MixinTexturedQuad {
         this.draw(buffer, scale);
     }
 
+    public void func_178765_a(BufferBuilder buffer, float scale) {
+        this.draw(buffer, scale);
+    }
 }

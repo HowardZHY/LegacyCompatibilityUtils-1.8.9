@@ -22,7 +22,9 @@ public abstract class MixinRenderPlayer extends RendererLivingEntity<AbstractCli
     }
 
     @Shadow
-    public abstract ModelPlayer getMainModel();
+    public ModelPlayer getMainModel() {
+        throw new AbstractMethodError();
+    }
 
     @Shadow
     public void doRender(AbstractClientPlayer entity, double x, double y, double z, float entityYaw, float partialTicks) {}
@@ -35,11 +37,11 @@ public abstract class MixinRenderPlayer extends RendererLivingEntity<AbstractCli
 
     /** getMainModel */
     public ModelPlayer func_177136_g() {
-        return (ModelPlayer) this.mainModel;
+        return this.getMainModel();
     }
 
     public ModelBase func_177087_b() {
-        return this.mainModel;
+        return this.getMainModel();
     }
 
     /** doRender */
