@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
 @Mixin(RenderMinecartMobSpawner.class)
-public class MixinRenderMinecartMobSpawner {
+public abstract class MixinRenderMinecartMobSpawner {
 
     @Shadow
     protected void func_180560_a(EntityMinecartMobSpawner minecart, float partialTicks, IBlockState state) {}

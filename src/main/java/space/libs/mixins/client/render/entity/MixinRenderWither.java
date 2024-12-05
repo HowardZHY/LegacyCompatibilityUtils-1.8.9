@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
 @Mixin(RenderWither.class)
-public class MixinRenderWither {
+public abstract class MixinRenderWither {
 
     @Shadow
     public void doRender(EntityWither entity, double x, double y, double z, float entityYaw, float partialTicks) {}

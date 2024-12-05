@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
 @Mixin(RenderSlime.class)
-public class MixinRenderSlime {
+public abstract class MixinRenderSlime {
 
     @Shadow
     public void doRender(EntitySlime entity, double x, double y, double z, float entityYaw, float partialTicks) {}

@@ -8,11 +8,12 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("all")
 @Mixin(RenderXPOrb.class)
-public class MixinRenderXPOrb {
-    @Shadow
-    private static final ResourceLocation experienceOrbTextures = new ResourceLocation("textures/entity/experience_orb.png");
+public abstract class MixinRenderXPOrb {
 
-    public ResourceLocation func_180555_a(EntityXPOrb var1) {
-        return experienceOrbTextures;
+    @Shadow
+    protected abstract ResourceLocation getEntityTexture(EntityXPOrb entity);
+
+    public ResourceLocation func_180555_a(EntityXPOrb xpOrb) {
+        return this.getEntityTexture(xpOrb);
     }
 }

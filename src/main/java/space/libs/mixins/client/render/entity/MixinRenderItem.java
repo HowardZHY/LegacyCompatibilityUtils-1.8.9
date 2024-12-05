@@ -15,7 +15,7 @@ import space.libs.util.cursedmixinextensions.annotations.Public;
 
 @SuppressWarnings("all")
 @Mixin(RenderItem.class)
-public class MixinRenderItem {
+public abstract class MixinRenderItem {
 
     @Shadow
     private @Final ItemModelMesher itemModelMesher;

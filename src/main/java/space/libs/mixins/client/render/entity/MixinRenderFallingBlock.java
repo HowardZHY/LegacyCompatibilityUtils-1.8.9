@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
 @Mixin(RenderFallingBlock.class)
-public class MixinRenderFallingBlock {
+public abstract class MixinRenderFallingBlock {
     @Shadow
     public void doRender(EntityFallingBlock entity, double x, double y, double z, float entityYaw, float partialTicks) {}
 

@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
 @Mixin(RenderDragon.class)
-public class MixinRenderDragon {
+public abstract class MixinRenderDragon {
 
     @Shadow
     protected void rotateCorpse(EntityDragon e, float p_77043_2_, float p_77043_3_, float partialTicks) {}

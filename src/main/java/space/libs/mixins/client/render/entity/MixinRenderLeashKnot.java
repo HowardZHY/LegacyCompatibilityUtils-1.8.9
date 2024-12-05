@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
 @Mixin(RenderLeashKnot.class)
-public class MixinRenderLeashKnot {
+public abstract class MixinRenderLeashKnot {
 
     @Shadow
     public void doRender(EntityLeashKnot entity, double x, double y, double z, float entityYaw, float partialTicks) {}

@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
 @Mixin(RenderItemFrame.class)
-public class MixinRenderItemFrame {
+public abstract class MixinRenderItemFrame {
 
     @Shadow
     protected void renderName(EntityItemFrame entity, double x, double y, double z) {}

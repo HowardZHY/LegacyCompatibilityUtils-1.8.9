@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
 @Mixin(RenderIronGolem.class)
-public class MixinRenderIronGolem {
+public abstract class MixinRenderIronGolem {
 
     @Shadow
     protected void rotateCorpse(EntityIronGolem e, float p_77043_2_, float p_77043_3_, float partialTicks) {}
