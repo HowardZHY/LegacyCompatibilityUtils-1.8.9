@@ -6,10 +6,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(TileEntityBrewingStand.class)
-public class MixinTileEntityBrewingStand implements IUpdatePlayerListBox {
+public abstract class MixinTileEntityBrewingStand implements IUpdatePlayerListBox {
 
-    @Override
     @Shadow
-    public void update() {}
+    public abstract void update();
 
 }

@@ -14,11 +14,10 @@ import java.util.List;
 
 @SuppressWarnings("all")
 @Mixin(TileEntityHopper.class)
-public class MixinTileEntityHopper implements IUpdatePlayerListBox {
+public abstract class MixinTileEntityHopper implements IUpdatePlayerListBox {
 
-    @Override
     @Shadow
-    public void update() {}
+    public abstract void update();
 
     @Public
     private static EntityItem func_145897_a(World worldIn, double p_145897_1_, double p_145897_3_, double p_145897_5_) {
