@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(LayerBipedArmor.class)
 public abstract class MixinLayerBipedArmor extends MixinLayerArmorBase<ModelBiped> {
 
-    @Override
     @Shadow
     protected void setModelPartVisible(ModelBiped model, int armorSlot) {}
 

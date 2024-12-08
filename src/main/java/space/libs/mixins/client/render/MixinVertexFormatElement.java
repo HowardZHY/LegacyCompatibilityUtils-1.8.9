@@ -45,8 +45,7 @@ public class MixinVertexFormatElement implements IVertexFormatElement {
      * @reason 1.8.0
      */
     @Overwrite
-    public int hashCode()
-    {
+    public int hashCode() {
         int i = this.type.hashCode();
         i = 31 * i + this.usage.hashCode();
         i = 31 * i + this.index;

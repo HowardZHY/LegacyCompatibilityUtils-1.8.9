@@ -19,39 +19,35 @@ import com.google.common.collect.Maps;
  */
 @SuppressWarnings("all")
 public interface IPerspectiveState extends IModelState {
+
     /**
      * @return the additional state that needs to be applied for each part when in given perspective type.
      */
     public IModelState forPerspective(TransformType type);
 
-    public static class Impl implements IPerspectiveState
-    {
+    public static class Impl implements IPerspectiveState {
+
         private final IModelState parent;
         private final ImmutableMap<TransformType, IModelState> states;
 
-        public Impl(IModelState parent, ImmutableMap<TransformType, IModelState> states)
-        {
+        public Impl(IModelState parent, ImmutableMap<TransformType, IModelState> states) {
             this.parent = parent;
             this.states = states;
         }
 
-        public Impl(IModelState parent, ItemCameraTransforms transforms)
-        {
+        public Impl(IModelState parent, ItemCameraTransforms transforms) {
             this(parent, getMap(transforms));
         }
 
-        private static ImmutableMap<TransformType, IModelState> getMap(ItemCameraTransforms transforms)
-        {
+        private static ImmutableMap<TransformType, IModelState> getMap(ItemCameraTransforms transforms) {
             Map<TransformType, IModelState> map = Maps.newHashMap();
-            for(TransformType type : TransformType.values())
-            {
+            for(TransformType type : TransformType.values()) {
                 map.put(type, transforms.getTransform(type));
             }
             return Maps.immutableEnumMap(map);
         }
 
-        public TRSRTransformation apply(IModelPart part)
-        {
+        public TRSRTransformation apply(IModelPart part) {
             Optional<? extends IModelPart> optionalPart = Optional.fromNullable(part);
             if (this.apply(optionalPart).isPresent()) {
                 return this.apply(optionalPart).get();
@@ -60,21 +56,18 @@ public interface IPerspectiveState extends IModelState {
             return null;
         }
 
-        @Override
         public Optional<TRSRTransformation> apply(Optional<? extends IModelPart> part) {
             return parent.apply(part);
         }
 
-        public IModelState forPerspective(TransformType type)
-        {
+        public IModelState forPerspective(TransformType type) {
             IModelState state = states.get(type);
             if(state == null) state = TRSRTransformation.identity();
             return state;
         }
 
         @Override
-        public String toString()
-        {
+        public String toString() {
             return Objects.toStringHelper(this.getClass()).add("parent", parent).add("states", states).toString();
         }
     }

@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(IModelState.class)
 public interface MixinIModelState extends Function<IModelPart, TRSRTransformation> {
+
     @Override
     TRSRTransformation apply(IModelPart part);
 }

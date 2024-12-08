@@ -35,8 +35,7 @@ public abstract class MixinItemLayerModelBakedModel implements IPerspectiveAware
     }
 
     @Override
-    public Pair<? extends IFlexibleBakedModel, javax.vecmath.Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType)
-    {
+    public Pair<? extends IFlexibleBakedModel, javax.vecmath.Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
         TRSRTransformation tr = transforms.get(cameraTransformType);
         javax.vecmath.Matrix4f mat = null;
         if (tr != null && tr != TRSRTransformation.identity()) mat = TRSRTransformation.blockCornerToCenter(tr).getMatrix();

@@ -33,8 +33,7 @@ public abstract class MixinFMLModContainer implements ModContainer {
      */
     @Overwrite
     @Override
-    public String getModId()
-    {
+    public String getModId() {
         String modid = (String)descriptor.get("modid");
         if (modid == null) {
             modid = (String)descriptor.get("value");

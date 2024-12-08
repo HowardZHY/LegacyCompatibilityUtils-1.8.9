@@ -6,10 +6,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(MusicTicker.class)
-public class MixinMusicTicker implements IUpdatePlayerListBox {
+public abstract class MixinMusicTicker implements IUpdatePlayerListBox {
 
-    @Override
     @Shadow
-    public void update() {}
+    public abstract void update();
 
 }

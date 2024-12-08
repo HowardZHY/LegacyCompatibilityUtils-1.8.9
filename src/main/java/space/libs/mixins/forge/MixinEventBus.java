@@ -12,16 +12,14 @@ import java.lang.reflect.Method;
 @Mixin(value = EventBus.class, remap = false)
 public abstract class MixinEventBus implements IEventBus {
 
-    @Override
     @Shadow
     public void register(Object target) {}
 
-    @Override
     @Shadow
     public void unregister(Object object) {}
 
     @Redirect(method = "register(Ljava/lang/Object;)V", at = @At(value = "INVOKE", target = "Ljava/lang/reflect/Method;isAnnotationPresent(Ljava/lang/Class;)Z"))
-    public boolean redirect(Method real, Class c) {
+    public boolean redirect(Method real, Class<?> c) {
         return (real.isAnnotationPresent(net.minecraftforge.fml.common.eventhandler.SubscribeEvent.class) ||
             real.isAnnotationPresent(net.minecraftforge.eventbus.api.SubscribeEvent.class));
     }

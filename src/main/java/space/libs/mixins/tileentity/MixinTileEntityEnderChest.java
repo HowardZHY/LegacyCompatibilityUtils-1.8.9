@@ -6,10 +6,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(TileEntityEnderChest.class)
-public class MixinTileEntityEnderChest implements IUpdatePlayerListBox {
+public abstract class MixinTileEntityEnderChest implements IUpdatePlayerListBox {
 
     @Shadow
-    @Override
-    public void update() {}
+    public abstract void update();
 
 }
