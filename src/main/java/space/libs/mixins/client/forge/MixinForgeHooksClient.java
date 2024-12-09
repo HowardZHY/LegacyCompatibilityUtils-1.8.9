@@ -49,64 +49,55 @@ public class MixinForgeHooksClient implements IForgeHooksClient {
     private static void preDraw(VertexFormatElement.EnumUsage attrType, VertexFormatElement element, int stride, ByteBuffer buffer) {
         IVertexFormatElement accessor = (IVertexFormatElement) element;
         buffer.position(accessor.func_177373_a());
-        switch(attrType) {
-            case POSITION:
-                glVertexPointer(element.getElementCount(), element.getType().getGlConstant(), stride, buffer);
-                glEnableClientState(GL_VERTEX_ARRAY);
-                break;
-            case NORMAL:
-                if(element.getElementCount() != 3)
-                {
-                    throw new IllegalArgumentException("Normal attribute should have the size 3: " + element);
-                }
-                glNormalPointer(element.getType().getGlConstant(), stride, buffer);
-                glEnableClientState(GL_NORMAL_ARRAY);
-                break;
-            case COLOR:
-                glColorPointer(element.getElementCount(), element.getType().getGlConstant(), stride, buffer);
-                glEnableClientState(GL_COLOR_ARRAY);
-                break;
-            case UV:
-                OpenGlHelper.setClientActiveTexture(OpenGlHelper.defaultTexUnit + element.getIndex());
-                glTexCoordPointer(element.getElementCount(), element.getType().getGlConstant(), stride, buffer);
-                glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-                OpenGlHelper.setClientActiveTexture(OpenGlHelper.defaultTexUnit);
-                break;
-            case PADDING:
-                break;
-            case GENERIC:
-                glEnableVertexAttribArray(element.getIndex());
-                glVertexAttribPointer(element.getIndex(), element.getElementCount(), element.getType().getGlConstant(), false, stride, buffer);
-            default:
-                FMLLog.severe("Unimplemented vanilla attribute upload: %s", attrType.getDisplayName());
+        final int o = attrType.ordinal();
+        if (o == 0) {
+            glVertexPointer(element.getElementCount(), element.getType().getGlConstant(), stride, buffer);
+            glEnableClientState(GL_VERTEX_ARRAY);
+        } else if (o == 1) {
+            if(element.getElementCount() != 3) {
+                throw new IllegalArgumentException("Normal attribute should have the size 3: " + element);
+            }
+            glNormalPointer(element.getType().getGlConstant(), stride, buffer);
+            glEnableClientState(GL_NORMAL_ARRAY);
+        } else if (o == 2) {
+            glColorPointer(element.getElementCount(), element.getType().getGlConstant(), stride, buffer);
+            glEnableClientState(GL_COLOR_ARRAY);
+        } else if (o == 3) {
+            OpenGlHelper.setClientActiveTexture(OpenGlHelper.defaultTexUnit + element.getIndex());
+            glTexCoordPointer(element.getElementCount(), element.getType().getGlConstant(), stride, buffer);
+            glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+            OpenGlHelper.setClientActiveTexture(OpenGlHelper.defaultTexUnit);
+        } else if (o == 6) {
+            return;
+        } else if (o == 7) {
+            glEnableVertexAttribArray(element.getIndex());
+            glVertexAttribPointer(element.getIndex(), element.getElementCount(), element.getType().getGlConstant(), false, stride, buffer);
+        } else {
+            FMLLog.severe("Unimplemented vanilla attribute upload: " + attrType.getDisplayName());
         }
     }
 
     @Public
     private static void postDraw(VertexFormatElement.EnumUsage attrType, VertexFormatElement element, int stride, ByteBuffer buffer) {
-        switch(attrType) {
-            case POSITION:
-                glDisableClientState(GL_VERTEX_ARRAY);
-                break;
-            case NORMAL:
-                glDisableClientState(GL_NORMAL_ARRAY);
-                break;
-            case COLOR:
-                glDisableClientState(GL_COLOR_ARRAY);
-                // is this really needed?
-                GlStateManager.resetColor();
-                break;
-            case UV:
-                OpenGlHelper.setClientActiveTexture(OpenGlHelper.defaultTexUnit + element.getIndex());
-                glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-                OpenGlHelper.setClientActiveTexture(OpenGlHelper.defaultTexUnit);
-                break;
-            case PADDING:
-                break;
-            case GENERIC:
-                glDisableVertexAttribArray(element.getIndex());
-            default:
-                FMLLog.severe("Unimplemented vanilla attribute upload: %s", attrType.getDisplayName());
+        final int o = attrType.ordinal();
+        if (o == 0) {
+            glDisableClientState(GL_VERTEX_ARRAY);
+        } else if (o == 1) {
+            glDisableClientState(GL_NORMAL_ARRAY);
+        } else if (o == 2) {
+            glDisableClientState(GL_COLOR_ARRAY);
+            // is this really needed?
+            GlStateManager.resetColor();
+        } else if (o == 3) {
+            OpenGlHelper.setClientActiveTexture(OpenGlHelper.defaultTexUnit + element.getIndex());
+            glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+            OpenGlHelper.setClientActiveTexture(OpenGlHelper.defaultTexUnit);
+        } else if (o == 6) {
+            return;
+        } else if (o == 7) {
+            glDisableVertexAttribArray(element.getIndex());
+        } else {
+            FMLLog.severe("Unimplemented vanilla attribute upload: " + attrType.getDisplayName());
         }
     }
 

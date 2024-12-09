@@ -33,19 +33,19 @@ public class MixinAttributes {
                 n = fill;
             }
             final int o = e.getType().ordinal();
-            if (o == 1) {
+            if (o == 0) {
                 buf.put(normalize ? (byte) (n.floatValue() / (Byte.MAX_VALUE - 1)) : n.byteValue());
-            } else if (o == 2) {
+            } else if (o == 1) {
                 buf.put(normalize ? (byte) (n.floatValue() / ((byte) -1)) : n.byteValue());
-            } else if (o == 3) {
+            } else if (o == 2) {
                 buf.putShort(normalize ? (short)(n.floatValue() / (Short.MAX_VALUE - 1)) : n.shortValue());
-            } else if (o == 4) {
+            } else if (o == 3) {
                 buf.putShort(normalize ? (short)(n.floatValue() / ((short) -1)) : n.shortValue());
-            } else if (o == 5) {
+            } else if (o == 4) {
                 buf.putInt(normalize ? (int)(n.doubleValue() / (Integer.MAX_VALUE - 1)) : n.intValue());
-            } else if (o == 6) {
+            } else if (o == 5) {
                 buf.putInt(normalize ? (int)(n.doubleValue() / - 1) : n.intValue());
-            } else if (o == 7) {
+            } else if (o == 6) {
                 buf.putFloat(n.floatValue());
             } else {
                 CompatLibCore.LOGGER.error("Unknown VertexFormatElement EnumType:" + o);
