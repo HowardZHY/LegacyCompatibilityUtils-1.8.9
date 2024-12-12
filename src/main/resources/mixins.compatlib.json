@@ -41,6 +41,7 @@
     "client.forge.MixinModelLoaderWeightedRandomModel",
     "client.forge.MixinModelStateComposition",
     "client.forge.MixinOBJModelOBJState",
+    "client.forge.MixinRenderingRegistry",
     "client.forge.MixinRenderLivingEvent",
     "client.forge.MixinRenderPlayerEvent",
     "client.forge.MixinTRSRTransformation",
