@@ -24,7 +24,7 @@ public abstract class MixinWorld {
     @Shadow
     public abstract DifficultyInstance getDifficultyForLocation(net.minecraft.util.BlockPos pos);
 
-    private Vec3Pool field_82741_K = new Vec3Pool(300, 2000);
+    public Vec3Pool field_82741_K = new Vec3Pool(300, 2000);
 
     public Vec3Pool func_82732_R() {
         return this.field_82741_K;
