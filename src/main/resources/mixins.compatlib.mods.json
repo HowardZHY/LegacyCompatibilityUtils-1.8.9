@@ -9,18 +9,15 @@
   "client": [
     "di.MixinDIClientProxy",
     "ichun.MixinThreadGetPatrons",
+    "mobends.MixinBendsLogger",
     "mobends.MixinClientProxy",
     "mobends.MixinDataZombie",
-    "mobends.MixinEntityData",
     "mobends.MixinEventHandlerDataUpdate",
     "mobends.MixinEventHandlerRenderPlayer",
     "mobends.MixinModelBendsZombie",
     "mobends.MixinModelRendererBends",
-    "mobends.MixinRendererBendsPlayer",
     "mobends.MixinSmoothVector3f",
     "mobends.MixinZombieAnimationWalk",
-    "mobends.test.MixinLayerBendsElytra",
-    "mobends.test.MixinLayerBendsHeldItem",
     "mpm.MixinRenderEvent"
   ],
   "mixins": [

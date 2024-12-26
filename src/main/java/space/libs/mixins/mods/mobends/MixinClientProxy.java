@@ -30,6 +30,5 @@ public class MixinClientProxy {
         FMLCommonHandler.instance().bus().register(new EventHandler_DataUpdate());
         FMLCommonHandler.instance().bus().register(new EventHandler_Keyboard());
         MinecraftForge.EVENT_BUS.register(new EventHandler_RenderPlayer());
-        MinecraftForge.EVENT_BUS.register(new EventHandler_DataUpdate());
     }
 }
