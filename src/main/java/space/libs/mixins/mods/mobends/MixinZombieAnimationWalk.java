@@ -9,12 +9,12 @@ import net.gobbob.mobends.data.EntityData;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
-import org.apache.logging.log4j.LogManager;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Pseudo;
 
-//@SuppressWarnings("unused")
+@Pseudo
 @Mixin(value = Animation_Walk.class, remap = false)
 public abstract class MixinZombieAnimationWalk extends Animation {
 

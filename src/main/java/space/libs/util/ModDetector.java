@@ -1,10 +1,8 @@
 package space.libs.util;
 
-import com.google.common.base.Strings;
 import space.libs.core.CompatLibCore;
 
 import java.lang.reflect.Field;
-import java.util.Objects;
 
 @SuppressWarnings("all")
 public class ModDetector {
