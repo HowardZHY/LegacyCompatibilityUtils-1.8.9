@@ -6,6 +6,10 @@ import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.entity.EntityLivingBase;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import space.libs.util.mods.MoBendsUtils;
 
 @SuppressWarnings("unused")
 @Mixin(RendererLivingEntity.class)
@@ -27,5 +31,12 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
 
     public boolean func_110813_b(EntityLivingBase targetEntity) {
         return this.canRenderName(targetEntity);
+    }
+
+    @Inject(method = "doRender(Lnet/minecraft/entity/EntityLivingBase;DDDFF)V", at = @At("HEAD"), cancellable = true)
+    private void RenderLivingEvent(T entity, double x, double y, double z, float entityYaw, float partialTicks, CallbackInfo callbackInfo) {
+        if (MoBendsUtils.RenderLivingEvent((RendererLivingEntity<?>) (Object) this, entity, x, y, z, entityYaw, partialTicks)) {
+            callbackInfo.cancel();
+        }
     }
 }
