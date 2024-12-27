@@ -15,7 +15,6 @@ import org.apache.logging.log4j.LogManager;
 import org.lwjgl.util.vector.Vector3f;
 import org.spongepowered.asm.mixin.*;
 import space.libs.event.GuiScreenEventHandler;
-import space.libs.util.mods.IDataZombie;
 
 @SuppressWarnings("all")
 @Pseudo
@@ -40,7 +39,7 @@ public abstract class MixinModelBendsZombie extends ModelBiped {
 
     /**
      * @author HowardZHY
-     * @reason Try Fix
+     * @reason Optimize?
      */
     @Dynamic
     @Overwrite(remap = false)
@@ -105,21 +104,7 @@ public abstract class MixinModelBendsZombie extends ModelBiped {
             This.renderRotation.update(data.ticksPerFrame);
             data.updatedThisFrame = true;
         }
-        IDataZombie idz = (IDataZombie) data;
-        if (!idz.isInitialized()) {
-            if (data.motion.x == 0.0f & data.motion.z == 0.0f) {
-                aEntity.get("stand").animate(zombie, this, data);
-                BendsPack.animate(This, "zombie", "stand");
-            } else {
-                LogManager.getLogger().info("Walking: " + data.currentWalkingState);
-                aEntity.get("walk").animate(zombie, this, data);
-                BendsPack.animate(This, "zombie", "walk");
-            }
-            data.syncModelInfo(This);
-            idz.initModelPose();
-        } else {
-            data.syncModelInfo(This);
-        }
+        data.syncModelInfo(This);
     }
 
     public boolean isRenderedInGui() {
