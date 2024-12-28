@@ -8,7 +8,7 @@
 
 This is done by re-add removed classes and srg methods/fields.
 
-Requires [MixinBooter](https://github.com/CleanroomMC/MixinBooter) version 9.2+.
+Requires [MixinBooter](https://github.com/CleanroomMC/MixinBooter) version 9.4.
 
 This mod contains following libs:
 
@@ -24,15 +24,11 @@ If anyone is interested at making another runtime deobf remapper, feel free to o
 
 Submit an issue if you met incompatibilities.
 
-# Known Not Working
-
-### [BlockSteps](https://www.curseforge.com/minecraft/mc-mods/blocksteps)
+### If you try to use [BlockSteps](https://www.curseforge.com/minecraft/mc-mods/blocksteps):
 
 Disable use VBOs in Video Settings if you use this mod, otherwise blocks won't show.
 
-### [Mo' Bends](https://www.curseforge.com/minecraft/mc-mods/mo-bends)
-
-1.8 Players & Zombies Actions won't show, Unknown reason, use the 1.9 version
+# Known Not Working
 
 ### [Gender & Age Mod](https://www.curseforge.com/minecraft/mc-mods/gender)
 
