@@ -16,7 +16,7 @@ import space.libs.util.cursedmixinextensions.annotations.Public;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
 @SuppressWarnings("all")
-@Mixin(ItemTransformVec3f.class)
+@Mixin(value = ItemTransformVec3f.class, priority = 100)
 public class MixinItemTransformVec3f implements Function<IModelPart, TRSRTransformation> {
 
     @Shadow

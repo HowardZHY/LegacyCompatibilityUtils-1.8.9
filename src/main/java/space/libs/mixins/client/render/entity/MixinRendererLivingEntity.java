@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import space.libs.util.mods.MoBendsUtils;
 
 @SuppressWarnings("unused")
-@Mixin(RendererLivingEntity.class)
+@Mixin(value = RendererLivingEntity.class, priority = 100)
 public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> extends Render<T> {
 
     public MixinRendererLivingEntity(RenderManager renderManager) {

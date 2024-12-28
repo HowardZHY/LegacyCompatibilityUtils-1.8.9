@@ -19,7 +19,7 @@ import space.libs.util.cursedmixinextensions.annotations.Public;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
 @SuppressWarnings("unused")
-@Mixin(KeyBinding.class)
+@Mixin(value = KeyBinding.class, priority = 100)
 public abstract class MixinKeyBinding implements IKeyBinding {
 
     @SuppressWarnings("all")
@@ -30,7 +30,8 @@ public abstract class MixinKeyBinding implements IKeyBinding {
     @Shadow
     public abstract int getKeyCode();
 
-    @Shadow private int keyCode;
+    @Shadow
+    private int keyCode;
 
     @ShadowConstructor
     public void KeyBinding(String description, int keyCode, String category) {}
