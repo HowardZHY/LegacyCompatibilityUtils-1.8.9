@@ -13,13 +13,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import space.libs.interfaces.IVertexFormatElement;
 import space.libs.interfaces.IWorldRenderer;
+import space.libs.interfaces.IWorldRendererState;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
+import java.nio.*;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -255,8 +254,6 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         }
         this.rawIntBuffer.clear();
         this.rawIntBuffer.put(i);
-
-        this.field_179020_c = this.field_179008_i;
         return this.getVertexState();
     }
 
@@ -454,9 +451,16 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         this.field_179009_s += p_181670_1_ / 4;
     }
 
+    @Inject(method = "getVertexState", at = @At(value = "RETURN"))
+    public void getVertexState(CallbackInfoReturnable<WorldRenderer.State> cir) {
+        IWorldRendererState accessor = (IWorldRendererState) cir.getReturnValue();
+        accessor.setRawBufferIndex(this.field_179008_i);
+    }
+
     @Inject(method = "setVertexState", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/client/renderer/WorldRenderer$State;getVertexCount()I"))
     public void setVertexState(WorldRenderer.State state, CallbackInfo ci) {
-        this.field_179008_i = this.func_179015_b();
+        IWorldRendererState accessor = (IWorldRendererState) state;
+        this.field_179008_i = accessor.func_179015_b();
     }
 
     @Inject(method = "reset", at = @At("HEAD"))
@@ -483,16 +487,6 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         this.LegacyPOSITIONCOLORF = false;
         this.LegacyPOSITIONCOLORI = false;
         this.LegacyNORMAL = false;
-    }
-
-    /* State members */
-
-    /** stateRawBufferIndex */
-    public int field_179020_c;
-
-    /** getRawBufferIndex */
-    public int func_179015_b() {
-        return this.field_179020_c;
     }
 
 }
