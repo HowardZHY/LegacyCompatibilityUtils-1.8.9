@@ -1,33 +1,51 @@
 package space.libs.mixins.client.render;
 
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
+import net.minecraftforge.client.ForgeHooksClient;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import space.libs.core.CompatLibCore;
+import space.libs.util.cursedmixinextensions.annotations.Public;
 
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 
 @SuppressWarnings("all")
-@Mixin(VertexFormatElement.EnumUsage.class)
+@Mixin(value = VertexFormatElement.EnumUsage.class, remap = false)
 public abstract class MixinVertexFormatElementEnumUsage {
+
+    @Public
+    private static Method PreDraw;
+
+    @Public
+    private static Method PostDraw;
 
     public void preDraw(VertexFormatElement element, int stride, ByteBuffer buffer) {
         try {
-            Class<?> clazz = Class.forName("net.minecraftforge.client.ForgeHooksClient");
-            Method method = clazz.getDeclaredMethod("preDraw", VertexFormatElement.EnumUsage.class, VertexFormatElement.class, int.class, ByteBuffer.class);
-            method.invoke(null, (VertexFormatElement.EnumUsage) (Object) this, element, stride, buffer);
+            PreDraw.invoke(null, (VertexFormatElement.EnumUsage) (Object) this, element, stride, buffer);
         } catch (Exception e) {
-            System.out.println("[ERROR] Failed to get old preDraw from ForgeHooksClient.");
+            CompatLibCore.LOGGER.error("Failed to invoke old preDraw: " + e);
         }
     }
 
     public void postDraw(VertexFormatElement element, int stride, ByteBuffer buffer) {
         try {
-            Class<?> clazz = Class.forName("net.minecraftforge.client.ForgeHooksClient");
-            Method method = clazz.getDeclaredMethod("postDraw", VertexFormatElement.EnumUsage.class, VertexFormatElement.class, int.class, ByteBuffer.class);
-            method.invoke(null, (VertexFormatElement.EnumUsage) (Object) this, element, stride, buffer);
+            PostDraw.invoke(null, (VertexFormatElement.EnumUsage) (Object) this, element, stride, buffer);
         } catch (Exception e) {
-            System.out.println("[ERROR] Failed to get old postDraw from ForgeHooksClient.");
+            CompatLibCore.LOGGER.error("Failed to invoke old postDraw: " + e);
         }
     }
 
+    @Inject(method = "<clinit>", at = @At("RETURN"))
+    private static void clinit(CallbackInfo ci) {
+        try {
+            Class<?> clazz = ForgeHooksClient.class;
+            PreDraw = clazz.getDeclaredMethod("preDraw", VertexFormatElement.EnumUsage.class, VertexFormatElement.class, int.class, ByteBuffer.class);
+            PostDraw = clazz.getDeclaredMethod("postDraw", VertexFormatElement.EnumUsage.class, VertexFormatElement.class, int.class, ByteBuffer.class);
+        } catch (Exception e) {
+            CompatLibCore.LOGGER.error("Failed to get old preDraw/postDraw from ForgeHooksClient: " + e);
+        }
+    }
 }
