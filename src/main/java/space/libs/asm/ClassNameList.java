@@ -26,6 +26,7 @@ public class ClassNameList {
         "ch.qos.logback",
         "club.sk1er.patcher",
         "co.skyclient",
+        "com.jcraft",
         "com.llamalad7",
         "com.mojang",
         "com.mumfrey.liteloader",
@@ -51,8 +52,10 @@ public class ClassNameList {
         "it.unimi",
         "java",
         "javax",
+        "javaassist",
         "joptsimple",
         "junit",
+        "me.jellysquid.mods.phosphor",
         "moe.nea",
         "net.md_5.specialsource",
         "net.minecraft",
@@ -68,9 +71,11 @@ public class ClassNameList {
         "org.slf4j",
         "org.spongepowered",
         "org.yaml",
+        "paulscode.sound",
         "scala",
         "space.libs",
         "sun.misc",
+        "tv.twitch",
         "watson.cli",
         "zone.rong",
         "kotlin",
@@ -86,8 +91,7 @@ public class ClassNameList {
         "mixinbooter",
         "mixinextras",
         "optifine",
-        "shadersmod",
-        "twitch"
+        "shadersmod"
     };
 
     /** Mod packages that requires additional transforms */
