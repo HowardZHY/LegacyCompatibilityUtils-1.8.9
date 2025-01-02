@@ -6,7 +6,7 @@ package space.libs.mixins.client;
 
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.IntHashMap;
-import net.minecraftforge.client.settings.IKeyConflictContext;
+import net.minecraftforge.client.settings.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
@@ -37,14 +37,12 @@ public abstract class MixinKeyBinding implements IKeyBinding {
     public void KeyBinding(String description, int keyCode, String category) {}
 
     @NewConstructor
-    public void KeyBinding(String description, IKeyConflictContext keyConflictContext, int keyCode, String category)
-    {
+    public void KeyBinding(String description, IKeyConflictContext keyConflictContext, int keyCode, String category) {
         this.KeyBinding(description, keyConflictContext, net.minecraftforge.client.settings.KeyModifier.NONE, keyCode, category);
     }
 
     @NewConstructor
-    public void KeyBinding(String description, net.minecraftforge.client.settings.IKeyConflictContext keyConflictContext, net.minecraftforge.client.settings.KeyModifier keyModifier, int keyCode, String category)
-    {
+    public void KeyBinding(String description, net.minecraftforge.client.settings.IKeyConflictContext keyConflictContext, net.minecraftforge.client.settings.KeyModifier keyModifier, int keyCode, String category) {
         this.KeyBinding(description, keyCode, category);
         this.keyConflictContext = keyConflictContext;
         this.keyModifier = keyModifier;
@@ -62,21 +60,18 @@ public abstract class MixinKeyBinding implements IKeyBinding {
 
     private boolean allowsKeyModifiers = false;
 
-    public void setAllowsKeyModifiers()
-    {
+    public void setAllowsKeyModifiers() {
         this.allowsKeyModifiers = true;
     }
 
     /**
      * Checks that the key conflict context and modifier are active, and that the keyCode matches this binding.
      */
-    public boolean isActiveAndMatches(int keyCode)
-    {
+    public boolean isActiveAndMatches(int keyCode) {
         return keyCode == this.getKeyCode() && getKeyConflictContext().isActive() && (!allowsKeyModifiers || getKeyModifier().isActive());
     }
 
-    public void setKeyConflictContext(net.minecraftforge.client.settings.IKeyConflictContext keyConflictContext)
-    {
+    public void setKeyConflictContext(net.minecraftforge.client.settings.IKeyConflictContext keyConflictContext) {
         this.keyConflictContext = keyConflictContext;
     }
 
@@ -90,33 +85,24 @@ public abstract class MixinKeyBinding implements IKeyBinding {
         return keyModifierDefault;
     }
 
-    public net.minecraftforge.client.settings.KeyModifier getKeyModifier()
-    {
-        if (allowsKeyModifiers)
-        {
+    public net.minecraftforge.client.settings.KeyModifier getKeyModifier() {
+        if (allowsKeyModifiers) {
             return keyModifier;
-        }
-        else
-        {
+        } else {
             return net.minecraftforge.client.settings.KeyModifier.NONE;
         }
     }
 
-    public void setKeyModifier(net.minecraftforge.client.settings.KeyModifier keyModifier)
-    {
+    public void setKeyModifier(net.minecraftforge.client.settings.KeyModifier keyModifier) {
         hashmap.removeKey((KeyBinding) (Object) this);
         this.keyModifier = keyModifier;
         hashmap.addKey(keyCode, (KeyBinding) (Object) this);
     }
 
-    public boolean conflicts(KeyBinding other)
-    {
+    public boolean conflicts(KeyBinding other) {
         IKeyBinding accessor = (IKeyBinding) other;
-
-        if (getKeyConflictContext().conflicts(accessor.getKeyConflictContext()) || accessor.getKeyConflictContext().conflicts(getKeyConflictContext()))
-        {
-            if (!allowsKeyModifiers || !accessor.allowsKeyModifiers() || getKeyModifier() == accessor.getKeyModifier())
-            {
+        if (getKeyConflictContext().conflicts(accessor.getKeyConflictContext()) || accessor.getKeyConflictContext().conflicts(getKeyConflictContext())) {
+            if (!allowsKeyModifiers || !accessor.allowsKeyModifiers() || getKeyModifier() == accessor.getKeyModifier()) {
                 return getKeyCode() == other.getKeyCode();
             }
         }
