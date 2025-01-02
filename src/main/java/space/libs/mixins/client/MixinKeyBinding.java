@@ -7,6 +7,7 @@ package space.libs.mixins.client;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.IntHashMap;
 import net.minecraftforge.client.settings.*;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,9 +24,10 @@ import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 public abstract class MixinKeyBinding implements IKeyBinding {
 
     @SuppressWarnings("all")
+    @Final
     @Mutable
     @Shadow
-    private static IntHashMap<KeyBinding> hash = new IntHashMap();
+    private static IntHashMap<KeyBinding> hash;
 
     @Shadow
     public abstract int getKeyCode();
