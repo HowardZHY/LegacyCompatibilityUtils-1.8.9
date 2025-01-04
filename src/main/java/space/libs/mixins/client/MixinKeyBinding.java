@@ -30,26 +30,34 @@ public abstract class MixinKeyBinding implements IKeyBinding {
     private static IntHashMap<KeyBinding> hash;
 
     @Shadow
+    private int keyCode;
+
+    @Shadow
     public abstract int getKeyCode();
 
     @Shadow
-    private int keyCode;
+    public abstract boolean isPressed();
 
     @ShadowConstructor
     public void KeyBinding(String description, int keyCode, String category) {}
 
     @NewConstructor
-    public void KeyBinding(String description, IKeyConflictContext keyConflictContext, int keyCode, String category) {
-        this.KeyBinding(description, keyConflictContext, net.minecraftforge.client.settings.KeyModifier.NONE, keyCode, category);
+    public void KeyBinding(String description, int keyCode) {
+        this.KeyBinding(description, keyCode, "key.categories.gameplay");
     }
 
     @NewConstructor
-    public void KeyBinding(String description, net.minecraftforge.client.settings.IKeyConflictContext keyConflictContext, net.minecraftforge.client.settings.KeyModifier keyModifier, int keyCode, String category) {
+    public void KeyBinding(String description, IKeyConflictContext keyConflictContext, int keyCode, String category) {
+        this.KeyBinding(description, keyConflictContext, KeyModifier.NONE, keyCode, category);
+    }
+
+    @NewConstructor
+    public void KeyBinding(String description, IKeyConflictContext keyConflictContext, KeyModifier keyModifier, int keyCode, String category) {
         this.KeyBinding(description, keyCode, category);
         this.keyConflictContext = keyConflictContext;
         this.keyModifier = keyModifier;
         this.keyModifierDefault = keyModifier;
-        if (keyModifier != net.minecraftforge.client.settings.KeyModifier.NONE) {
+        if (keyModifier != KeyModifier.NONE) {
             setAllowsKeyModifiers();
         }
     }
@@ -121,5 +129,9 @@ public abstract class MixinKeyBinding implements IKeyBinding {
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void setHash(CallbackInfo ci) {
         hashmap = new net.minecraftforge.client.settings.KeyBindingMap();
+    }
+
+    public boolean func_74509_c() {
+        return this.isPressed();
     }
 }
