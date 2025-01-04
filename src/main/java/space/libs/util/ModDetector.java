@@ -4,31 +4,39 @@ import space.libs.core.CompatLibCore;
 
 import java.lang.reflect.Field;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unused")
 public class ModDetector {
 
+    public static boolean initialized = false;
+
     public static boolean hasSpACore = false;
+
+    public static boolean hasCivCraft = false;
 
     public static int hasMobends = 0;
 
     public static String mobends = "";
 
+    public static ModDetector INSTANCE;
+
     public ModDetector() {
-        if (hasSpACore) {
+        if (initialized) {
             return;
         }
-        this.getSpACore();
+        INSTANCE = this;
+        hasSpACore = getCoreMod("net.specialattack.forge.core.asm.SpACorePlugin", true);
+        hasCivCraft = getCoreMod("alexiil.mods.civ.coremod.LoadPlugin", true);
+        initialized = true;
     }
 
-    public static void getSpACore() {
+    public static boolean getCoreMod(String name, boolean init) {
         try {
-            Class<?> c = Class.forName("net.specialattack.forge.core.asm.SpACorePlugin");
+            Class<?> c = Class.forName(name, init, INSTANCE.getClass().getClassLoader());
         } catch (Exception ignored) {
-            CompatLibCore.LOGGER.info("SpACore Not Found.");
-            return;
+            CompatLibCore.LOGGER.info("Coremod " + name + " Not Found.");
+            return false;
         }
-        CompatLibCore.LOGGER.info("Found SpACore, load ASM Transformers of it.");
-        hasSpACore = true;
+        return true;
     }
 
     public static String getMoBendsVersion() {
