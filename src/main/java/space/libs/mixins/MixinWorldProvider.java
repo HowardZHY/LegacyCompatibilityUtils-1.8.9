@@ -9,6 +9,9 @@ import org.spongepowered.asm.mixin.Shadow;
 public abstract class MixinWorldProvider {
 
     @Shadow
+    protected int dimensionId;
+
+    @Shadow
     public boolean getHasNoSky() {
         throw new AbstractMethodError();
     }
@@ -18,4 +21,8 @@ public abstract class MixinWorldProvider {
         return !this.getHasNoSky();
     }
 
+    /** Forge 1.9+ */
+    public int getDimension() {
+        return this.dimensionId;
+    }
 }
