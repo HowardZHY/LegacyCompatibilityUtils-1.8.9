@@ -1,5 +1,6 @@
 package space.libs.core;
 
+import net.minecraftforge.fml.common.Loader;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import space.libs.util.ModDetector;
@@ -22,8 +23,12 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.contains("mobends")) {
+        if (mixinClassName.contains("Camera")) {
+            return Loader.isModLoaded("CameraStudio");
+        } else if (mixinClassName.contains("mobends")) {
             return !(ModDetector.getMoBendsVersion().startsWith("0.22"));
+        } else if (mixinClassName.contains("ichun")) {
+            return Loader.isModLoaded("iChunUtil");
         }
         return true;
     }

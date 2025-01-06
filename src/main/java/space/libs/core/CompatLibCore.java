@@ -67,9 +67,13 @@ public class CompatLibCore implements IFMLLoadingPlugin {
             transformersList.add("net.specialattack.forge.core.asm.SpACoreHookTransformer");
         }
 
-        if (detector.hasCivCraft) {
-            LOGGER.info("Found CivCraft, load ASM Transformers of it.");
-            transformersList.add("alexiil.mods.civ.coremod.CivCraftTransformer");
+        if (detector.hasAlexIILLib) {
+            LOGGER.info("Found AlexIILLib, load ASM Transformers of it.");
+            transformersList.add("alexiil.mods.lib.coremod.ClassTransformer");
+            if (detector.hasCivCraft) {
+                LOGGER.info("Found CivCraft, load ASM Transformers of it.");
+                transformersList.add("alexiil.mods.civ.coremod.CivCraftTransformer");
+            }
         }
 
         String[] transformers = new String[transformersList.size()];

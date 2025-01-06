@@ -11,6 +11,8 @@ public class ModDetector {
 
     public static boolean hasSpACore = false;
 
+    public static boolean hasAlexIILLib = false;
+
     public static boolean hasCivCraft = false;
 
     public static int hasMobends = 0;
@@ -25,6 +27,7 @@ public class ModDetector {
         }
         INSTANCE = this;
         hasSpACore = getCoreMod("net.specialattack.forge.core.asm.SpACorePlugin", true);
+        hasAlexIILLib = getCoreMod("alexiil.mods.lib.coremod", true);
         hasCivCraft = getCoreMod("alexiil.mods.civ.coremod.LoadPlugin", true);
         initialized = true;
     }
