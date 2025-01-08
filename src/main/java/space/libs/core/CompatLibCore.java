@@ -29,7 +29,7 @@ public class CompatLibCore implements IFMLLoadingPlugin {
     public static Dummy DUMMY;
 
     public CompatLibCore() {
-        Launch.classLoader.registerTransformer("space.libs.asm.LiteLoaderObfTransformer");
+        Launch.classLoader.registerTransformer("space.libs.asm.LiteLoaderTransformer");
         Launch.classLoader.registerTransformer("space.libs.asm.WrapOperationInjectorTransformer");
     }
 
@@ -54,7 +54,6 @@ public class CompatLibCore implements IFMLLoadingPlugin {
         ArrayList<String> transformersList = new ArrayList<>();
         ModDetector detector = new ModDetector();
         //transformersList.add("space.libs.asm.WrapOperationInjectorTransformer");
-        //transformersList.add("space.libs.asm.LiteLoaderObfTransformer");
         transformersList.add("space.libs.asm.LiteLoaderVersionTransformer");
         transformersList.add("space.libs.asm.RemapTransformer");
         transformersList.add("space.libs.asm.ReplaceTransformer");
