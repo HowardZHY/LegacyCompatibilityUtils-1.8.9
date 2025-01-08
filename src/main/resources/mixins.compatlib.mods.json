@@ -2,20 +2,13 @@
   "required": true,
   "minVersion": "0.7",
   "package": "space.libs.mixins.mods",
-  "refmap": "mixins.compatlib.mods.refmap.json",
+  "refmap": "mixins.compatlib.refmap.json",
   "plugin": "space.libs.core.CompatLibLateMixinPlugin",
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",
   "client": [
     "di.MixinDIClientProxy",
     "ichun.MixinThreadGetPatrons",
-    "mobends.MixinBendsLogger",
-    "mobends.MixinClientProxy",
-    "mobends.MixinEventHandlerDataUpdate",
-    "mobends.MixinEventHandlerRenderPlayer",
-    "mobends.MixinModelRendererBends",
-    "mobends.MixinSmoothVector3f",
-    "mobends.MixinZombieAnimationWalk",
     "mpm.MixinRenderEvent"
   ],
   "mixins": [
