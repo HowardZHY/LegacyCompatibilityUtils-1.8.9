@@ -54,7 +54,6 @@ public class CompatLibCore implements IFMLLoadingPlugin {
         ArrayList<String> transformersList = new ArrayList<>();
         ModDetector detector = new ModDetector();
         //transformersList.add("space.libs.asm.WrapOperationInjectorTransformer");
-        transformersList.add("space.libs.asm.LiteLoaderVersionTransformer");
         transformersList.add("space.libs.asm.RemapTransformer");
         transformersList.add("space.libs.asm.ReplaceTransformer");
         transformersList.add("space.libs.asm.FMLTransformer");
@@ -64,15 +63,6 @@ public class CompatLibCore implements IFMLLoadingPlugin {
             LOGGER.info("Found SpACore, load ASM Transformers of it.");
             transformersList.add("net.specialattack.forge.core.asm.SpACoreModTransformer");
             transformersList.add("net.specialattack.forge.core.asm.SpACoreHookTransformer");
-        }
-
-        if (detector.hasAlexIILLib) {
-            LOGGER.info("Found AlexIILLib, load ASM Transformers of it.");
-            transformersList.add("alexiil.mods.lib.coremod.ClassTransformer");
-            if (detector.hasCivCraft) {
-                LOGGER.info("Found CivCraft, load ASM Transformers of it.");
-                transformersList.add("alexiil.mods.civ.coremod.CivCraftTransformer");
-            }
         }
 
         String[] transformers = new String[transformersList.size()];
