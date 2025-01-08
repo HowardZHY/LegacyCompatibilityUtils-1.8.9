@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.logging.Level;
 
+@SuppressWarnings("all")
 @Pseudo
 @Mixin(targets = "sushen.oaiei", remap = false)
 public abstract class MixinCameraStudioLogger {

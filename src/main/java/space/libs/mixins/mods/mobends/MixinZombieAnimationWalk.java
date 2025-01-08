@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Pseudo;
 
+@SuppressWarnings("all")
 @Pseudo
 @Mixin(value = Animation_Walk.class, remap = false)
 public abstract class MixinZombieAnimationWalk extends Animation {

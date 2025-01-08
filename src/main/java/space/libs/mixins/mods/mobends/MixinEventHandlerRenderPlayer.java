@@ -1,7 +1,6 @@
 package space.libs.mixins.mods.mobends;
 
 import net.gobbob.mobends.event.EventHandler_RenderPlayer;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
@@ -11,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@SuppressWarnings("all")
 @Pseudo
 @Mixin(EventHandler_RenderPlayer.class)
 public class MixinEventHandlerRenderPlayer {
