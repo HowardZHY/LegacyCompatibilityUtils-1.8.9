@@ -40,4 +40,4 @@ Coremods using APIs with FML Core breaking changes
 
 ### TMI (Official 1.8 Forge Version)
 
-The Only 1.8 Forge Mod in Totally Notch Code
+One of the 1.8 Forge Mods that's in Totally Notch Code, lazy to make reflections
