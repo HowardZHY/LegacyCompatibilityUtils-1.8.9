@@ -60,6 +60,9 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
                 mixins.add("mobends.MixinSmoothVector3f");
                 mixins.add("mobends.MixinZombieAnimationWalk");
             }
+            if (ModDetector.hasCivCraft) {
+                mixins.add("civ.MixinGuiTechTree");
+            }
         }
         return mixins;
     }
