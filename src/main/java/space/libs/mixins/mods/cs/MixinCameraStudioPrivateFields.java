@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
+@SuppressWarnings("all")
 @Pseudo
 @Mixin(targets = "sushen.ioaea", remap = false)
 public abstract class MixinCameraStudioPrivateFields {

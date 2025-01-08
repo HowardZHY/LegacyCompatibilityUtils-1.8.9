@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import space.libs.core.CompatLibDebug;
 
+@SuppressWarnings("all")
 @Pseudo
 @Mixin(value = BendsLogger.class, remap = false)
 public class MixinBendsLogger {
