@@ -104,8 +104,8 @@ dependencies {
     }*/
     //compile will make your library available only in this dev environment
     compileOnly("curse.maven:mo-bends-231347:2272295")
-    // compileOnly("curse.maven:mo-bends-231347:2330799")
     compileOnly("curse.maven:more-player-models-221939:2284120")
+    compileOnly("curse.maven:alexiillib-229301:2233177")
     compileOnly("com.mumfrey:liteloader:1.8.9-SNAPSHOT")
     compileOnly("net.md-5:SpecialSource:1.7.4") {
         exclude module: 'asm-debug-all'

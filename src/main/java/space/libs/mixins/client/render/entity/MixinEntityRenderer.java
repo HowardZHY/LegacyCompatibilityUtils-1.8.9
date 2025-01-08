@@ -2,11 +2,10 @@ package space.libs.mixins.client.render.entity;
 
 import net.minecraft.client.renderer.EntityRenderer;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 
 @SuppressWarnings("unused")
-@Mixin(EntityRenderer.class)
+@Mixin(value = EntityRenderer.class, remap = false)
 public abstract class MixinEntityRenderer {
 
     /** 1.7.10 Unused */
@@ -18,11 +17,12 @@ public abstract class MixinEntityRenderer {
 
     public float prevCamRoll = 0.0F;
 
-    @Shadow
-    public void updateCameraAndRender(float partialTicks, long nanoTime) {}
+    @Dynamic
+    @Shadow(aliases = "updateCameraAndRender")
+    public void func_181560_a(float partialTicks, long nanoTime) {}
 
     public void func_78480_b(float partialTicks) {
-        this.updateCameraAndRender(partialTicks, System.nanoTime());
+        this.func_181560_a(partialTicks, System.nanoTime());
     }
 
 }

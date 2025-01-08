@@ -186,6 +186,7 @@
     "MixinBlockVine",
     "MixinClassInheritanceMultiMap",
     "MixinCommandTestForBlock",
+    "MixinContainerPlayer",
     "MixinEnchantment",
     "MixinEnumFacingAxis",
     "MixinEnumFacingPlane",
