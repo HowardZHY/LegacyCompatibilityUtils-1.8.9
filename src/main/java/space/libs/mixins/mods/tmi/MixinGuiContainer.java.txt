@@ -16,12 +16,16 @@ public abstract class MixinGuiContainer extends GuiScreen {
 
     @Shadow
     public int guiLeft;
+
     @Shadow
     public int guiTop;
+
     @Shadow
     public Container inventorySlots;
+
     @Shadow
     protected int xSize;
+
     @Shadow
     protected int ySize;
 
@@ -35,7 +39,6 @@ public abstract class MixinGuiContainer extends GuiScreen {
         TMI.instance.controller.onMouseEvent();
         super.handleMouseInput();
     }
-
 
     @Inject( method = "drawScreen", at = @At( "HEAD" ) )
     public void drawScreen(int mouseX, int mouseY, float partialTicks, CallbackInfo ci ) {
@@ -54,17 +57,19 @@ public abstract class MixinGuiContainer extends GuiScreen {
         target = "Lnet/minecraft/client/gui/inventory/GuiContainer;getSlotAtPosition(II)Lnet/minecraft/inventory/Slot;",
         shift = At.Shift.AFTER)}, cancellable = true)
     public void MouseClicked(int mouseX, int mouseY, int mouseButton, CallbackInfo ci) {
-        if (!TMI.instance.controller.onClick(mouseX, mouseY, mouseButton, guiTop, guiLeft, this.inventorySlots))
+        if (!TMI.instance.controller.onClick(mouseX, mouseY, mouseButton, guiTop, guiLeft, this.inventorySlots)) {
             ci.cancel();
+        }
     }
 
-    @Inject( method = "keyTyped", at = @At("HEAD"), cancellable = true )
+    @Inject(method = "keyTyped", at = @At("HEAD"), cancellable = true )
     public void keyTyped(char typedChar, int keyCode, CallbackInfo ci) {
-        if (!TMI.instance.controller.onKeypress(typedChar, keyCode))
+        if (!TMI.instance.controller.onKeypress(typedChar, keyCode)) {
             ci.cancel();
+        }
     }
 
-    @Inject( method = "onGuiClosed", at = @At("HEAD") )
+    @Inject(method = "onGuiClosed", at = @At("HEAD") )
     public void onGuiClosed(CallbackInfo ci) {
         TMI.instance.controller.onClose();
     }
