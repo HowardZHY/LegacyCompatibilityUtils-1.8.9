@@ -2,8 +2,6 @@ package space.libs.util;
 
 import space.libs.core.CompatLibCore;
 
-import java.lang.reflect.Field;
-
 public class ModDetector {
 
     public static boolean initialized = false;

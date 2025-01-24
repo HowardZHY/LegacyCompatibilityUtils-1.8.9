@@ -107,6 +107,7 @@ dependencies {
     compileOnly("curse.maven:more-player-models-221939:2284120")
     compileOnly("curse.maven:alexiillib-229301:2233177")
     compileOnly("curse.maven:civcraft-228061:2233156")
+    compileOnly("curse.maven:gog-skybox-266068:2411441")
     compileOnly("com.mumfrey:liteloader:1.8.9-SNAPSHOT")
     compileOnly("net.md-5:SpecialSource:1.7.4") {
         exclude module: 'asm-debug-all'
