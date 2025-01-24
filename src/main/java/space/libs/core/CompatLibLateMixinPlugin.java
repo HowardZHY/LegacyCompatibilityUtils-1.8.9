@@ -27,9 +27,7 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.contains("mobends")) {
-            return !(ModDetector.getMoBendsVersion().startsWith("0.22"));
-        } else if (mixinClassName.contains("ichun")) {
+        if (mixinClassName.contains("ichun")) {
             return Loader.isModLoaded("iChunUtil");
         }
         return true;
@@ -45,6 +43,7 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
         List<String> mixins = new ArrayList<>();
         if (SIDE == MixinEnvironment.Side.CLIENT) {
             if (Loader.isModLoaded("CameraStudio")) {
+                CompatLibCore.LOGGER.info("Adding CameraStudio Fixes.");
                 mixins.add("cs.MixinCameraStudioLoader");
                 mixins.add("cs.MixinCameraStudioLogger");
                 mixins.add("cs.MixinCameraStudioPrivateFields");
@@ -52,6 +51,7 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
                 mixins.add("cs.MixinCameraStudioRenderCameraFOV");
             }
             if (Loader.isModLoaded("mobends")) {
+                CompatLibCore.LOGGER.info("Adding MoBends Fixes.");
                 mixins.add("mobends.MixinBendsLogger");
                 mixins.add("mobends.MixinClientProxy");
                 mixins.add("mobends.MixinEventHandlerDataUpdate");
@@ -61,6 +61,7 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
                 mixins.add("mobends.MixinZombieAnimationWalk");
             }
             if (ModDetector.hasCivCraft) {
+                CompatLibCore.LOGGER.info("Adding CivCraft Fix.");
                 mixins.add("civ.MixinGuiTechTree");
             }
         }

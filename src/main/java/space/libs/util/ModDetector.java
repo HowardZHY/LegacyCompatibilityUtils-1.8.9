@@ -4,7 +4,6 @@ import space.libs.core.CompatLibCore;
 
 import java.lang.reflect.Field;
 
-@SuppressWarnings("unused")
 public class ModDetector {
 
     public static boolean initialized = false;
@@ -32,6 +31,7 @@ public class ModDetector {
         initialized = true;
     }
 
+    @SuppressWarnings("unused")
     public static boolean getCoreMod(String name, boolean init) {
         try {
             Class<?> c = Class.forName(name, init, INSTANCE.getClass().getClassLoader());
@@ -40,23 +40,6 @@ public class ModDetector {
             return false;
         }
         return true;
-    }
-
-    public static String getMoBendsVersion() {
-        if (hasMobends == 0) {
-            try {
-                Class<?> c = Class.forName("net.gobbob.mobends.MoBends");
-                Field versionField = c.getField("VERSION");
-                mobends = (String) versionField.get(null);
-            } catch (Exception ignored) {
-                CompatLibCore.LOGGER.info("MoBends Version not found.");
-                hasMobends = 1;
-                return "";
-            }
-            hasMobends = 2;
-            CompatLibCore.LOGGER.info("MoBends Version: " + mobends);
-        }
-        return mobends;
     }
 
 }
