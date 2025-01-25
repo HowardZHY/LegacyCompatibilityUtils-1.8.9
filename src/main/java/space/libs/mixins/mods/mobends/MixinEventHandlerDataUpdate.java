@@ -32,7 +32,7 @@ public abstract class MixinEventHandlerDataUpdate {
      * @reason Try Fix
      */
     @Inject(method = "onClientTick", at = @At("HEAD"), cancellable = true)
-    public void onClientTick(TickEvent.ClientTickEvent event, CallbackInfo ci) {
+    private void OnClientTick(TickEvent.ClientTickEvent event, CallbackInfo ci) {
         if (event.phase == TickEvent.Phase.START) {
             this.ClientTick(event);
         }

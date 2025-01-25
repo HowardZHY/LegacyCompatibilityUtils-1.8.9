@@ -51,6 +51,7 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
                 mixins.add("cs.MixinCameraStudioRenderCameraFOV");
             }
             if (Loader.isModLoaded("mobends")) {
+                ModDetector.hasMobends = true;
                 CompatLibCore.LOGGER.info("Adding MoBends Fixes.");
                 mixins.add("mobends.MixinBendsLogger");
                 mixins.add("mobends.MixinClientProxy");
@@ -59,6 +60,11 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
                 mixins.add("mobends.MixinModelRendererBends");
                 mixins.add("mobends.MixinSmoothVector3f");
                 mixins.add("mobends.MixinZombieAnimationWalk");
+            }
+            if (Loader.isModLoaded("gogskybox")) {
+                ModDetector.hasSkybox = true;
+                CompatLibCore.LOGGER.info("Adding GoGSkybox Fixes.");
+                mixins.add("skybox.MixinGoGSkybox");
             }
             if (ModDetector.hasCivCraft) {
                 CompatLibCore.LOGGER.info("Adding CivCraft Fix.");

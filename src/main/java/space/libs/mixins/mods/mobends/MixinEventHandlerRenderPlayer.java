@@ -20,7 +20,7 @@ public class MixinEventHandlerRenderPlayer {
 
     @Dynamic
     @Inject(method = "onPlayerRender", at = @At("HEAD"), remap = false, cancellable = true)
-    public void onPlayerRender(RenderLivingEvent.Pre<?> event, CallbackInfo ci) {
+    private void OnPlayerRender(RenderLivingEvent.Pre<?> event, CallbackInfo ci) {
         ci.cancel();
     }
 
