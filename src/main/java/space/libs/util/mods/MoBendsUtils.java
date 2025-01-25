@@ -15,7 +15,7 @@ public abstract class MoBendsUtils {
         if (Minecraft.getMinecraft().theWorld == null) {
             return false;
         }
-        if (ModDetector.hasMobends == 2 && entity instanceof EntityPlayer) {
+        if (ModDetector.mobends() && entity instanceof EntityPlayer) {
             if (renderer instanceof RenderBendsPlayer) {
                 return false;
             }

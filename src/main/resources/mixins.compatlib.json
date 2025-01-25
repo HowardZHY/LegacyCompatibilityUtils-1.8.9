@@ -46,6 +46,7 @@
     "client.forge.MixinRenderingRegistry",
     "client.forge.MixinRenderLivingEvent",
     "client.forge.MixinRenderPlayerEvent",
+    "client.forge.MixinRenderWorldLastEvent",
     "client.forge.MixinTRSRTransformation",
     "client.interfaces.MixinIModel",
     "client.interfaces.MixinIModelState",

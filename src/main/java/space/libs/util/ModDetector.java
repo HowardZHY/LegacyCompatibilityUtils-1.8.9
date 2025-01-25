@@ -12,9 +12,9 @@ public class ModDetector {
 
     public static boolean hasCivCraft = false;
 
-    public static int hasMobends = 0;
+    public static boolean hasMobends = false;
 
-    public static String mobends = "";
+    public static boolean hasSkybox = false;
 
     public static ModDetector INSTANCE;
 
@@ -40,4 +40,11 @@ public class ModDetector {
         return true;
     }
 
+    public static boolean mobends() {
+        return hasMobends;
+    }
+
+    public static boolean skybox() {
+        return hasSkybox;
+    }
 }
