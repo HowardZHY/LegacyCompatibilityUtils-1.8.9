@@ -3,7 +3,6 @@ package space.libs.util.mods;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import space.libs.core.CompatLibDebug;
 import vazkii.skybox.ModEventHandler;
 
 public class SkyboxEventHandler {
@@ -22,7 +21,6 @@ public class SkyboxEventHandler {
 
     @SubscribeEvent
     public void OnRender(RenderWorldLastEvent event) {
-        CompatLibDebug.LOGGER.info("OnRender");
         ModEventHandler.onRender(event);
     }
 }
