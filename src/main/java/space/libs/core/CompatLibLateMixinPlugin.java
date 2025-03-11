@@ -61,6 +61,10 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
                 mixins.add("mobends.MixinSmoothVector3f");
                 mixins.add("mobends.MixinZombieAnimationWalk");
             }
+            if (Loader.isModLoaded("mobdictionary")) {
+                CompatLibCore.LOGGER.info("Adding MobDictionary fixes");
+                mixins.add("mobdic.MixinMDClientProxy");
+            }
             if (Loader.isModLoaded("gogskybox")) {
                 ModDetector.hasSkybox = true;
                 CompatLibCore.LOGGER.info("Adding GoGSkybox Fixes.");

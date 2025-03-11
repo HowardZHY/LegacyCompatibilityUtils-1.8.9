@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import vazkii.skybox.GoGSkybox;
 import vazkii.skybox.ModEventHandler;
 
+@SuppressWarnings("all")
 @Pseudo
 @Mixin(value = GoGSkybox.class, remap = false)
 public class MixinGoGSkybox {
