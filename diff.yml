@@ -361,7 +361,7 @@ net/minecraftforge/fml/client/GuiIngameModOptions:
 net/minecraft/client/renderer/block/model/ItemTransformVec3f$Deserializer:
   - error: func_178359_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/ItemTransformVec3f; - Method was removed
   - error: func_178358_a(Lcom/google/gson/JsonObject;Ljava/lang/String;Ljavax/vecmath/Vector3f;)Ljavax/vecmath/Vector3f; - Method was removed
-    #NOT PLANNED - NOT PUBLIC
+    #DONE
 net/minecraft/client/audio/ITickableSound:
   - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
     #DONE
@@ -476,13 +476,13 @@ net/minecraft/network/play/client/C13PacketPlayerAbilities:
     #DONE
 net/minecraft/network/play/server/S44PacketWorldBorder:
   - error: func_179787_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
-
+    #DONE
 net/minecraft/network/play/client/C08PacketPlayerBlockPlacement:
   - error: func_180769_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
     #DONE
 net/minecraftforge/fml/common/event/FMLModIdMappingEvent:
   - error: <init>(Ljava/util/Map;Ljava/util/Map;)V - Method was removed
-    #NOT PLANNED
+    #DONE
 net/minecraft/client/renderer/entity/layers/LayerHeldItemWitch:
   - error: func_177143_a(Lnet/minecraft/entity/monster/EntityWitch;FFFFFFF)V - Method was removed
     #DONE
@@ -809,6 +809,7 @@ net/minecraft/client/renderer/block/model/ModelBlockDefinition$Deserializer:
     #DONE
 net/minecraft/network/play/client/C07PacketPlayerDigging:
   - error: func_180763_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
+    #DONE
 net/minecraft/tileentity/TileEntityBrewingStand:
   - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
     #DONE
@@ -1024,6 +1025,7 @@ net/minecraft/client/shader/Shader:
     #DONE
 net/minecraft/network/play/server/S05PacketSpawnPosition:
   - error: func_180752_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
+    #DONE
 net/minecraft/client/renderer/GlStateManager$Viewport:
   - error: Class no longer exists
     #NOT PLANNED
