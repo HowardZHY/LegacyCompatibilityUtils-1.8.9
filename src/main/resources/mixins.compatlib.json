@@ -26,6 +26,7 @@
     "client.forge.MixinAttributes",
     "client.forge.MixinB3DLoaderB3DState",
     "client.forge.MixinClientChatReceivedEvent",
+    "client.forge.MixinConfigChangedEvent",
     "client.forge.MixinDrawScreenEvent",
     "client.forge.MixinForgeHooksClient",
     "client.forge.MixinGuiIngameForge",
