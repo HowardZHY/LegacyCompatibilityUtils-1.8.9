@@ -482,7 +482,7 @@ net/minecraft/network/play/client/C08PacketPlayerBlockPlacement:
     #DONE
 net/minecraftforge/fml/common/event/FMLModIdMappingEvent:
   - error: <init>(Ljava/util/Map;Ljava/util/Map;)V - Method was removed
-    #DONE
+    #DONE WITH ASM - TOO EARLY
 net/minecraft/client/renderer/entity/layers/LayerHeldItemWitch:
   - error: func_177143_a(Lnet/minecraft/entity/monster/EntityWitch;FFFFFFF)V - Method was removed
     #DONE
