@@ -32,7 +32,8 @@ public abstract class MixinTessellator implements ITessellator {
     /** draw */
     public int func_78381_a() {
         this.draw();
-        return 0; // Incorrect
+        return 0;
+        // return this.worldRenderer.getBufferSize() * 4; TODO?
     }
 
     /** getBuffer */

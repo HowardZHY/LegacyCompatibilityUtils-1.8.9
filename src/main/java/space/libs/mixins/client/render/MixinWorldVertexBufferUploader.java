@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
 @Mixin(WorldVertexBufferUploader.class)
-public class MixinWorldVertexBufferUploader {
+public abstract class MixinWorldVertexBufferUploader {
 
     @Shadow
     public void draw(WorldRenderer p_181679_1_) {}

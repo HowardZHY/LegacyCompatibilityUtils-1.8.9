@@ -54,7 +54,6 @@ public class CompatLibCore implements IFMLLoadingPlugin {
         ModDetector detector = new ModDetector();
         transformersList.add("space.libs.asm.RemapTransformer");
         transformersList.add("space.libs.asm.ReplaceTransformer");
-        transformersList.add("space.libs.asm.FMLTransformer");
         transformersList.add("space.libs.asm.LegacyObfTransformer");
 
         if (detector.hasSpACore) {
