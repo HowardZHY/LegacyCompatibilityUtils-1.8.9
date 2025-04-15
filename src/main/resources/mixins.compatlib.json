@@ -205,6 +205,7 @@
     "MixinVec3i",
     "MixinWorld",
     "MixinWorldProvider",
+    "entity.MixinDataWatcher",
     "entity.MixinEntity",
     "entity.MixinEntityAIAvoidEntity",
     "entity.MixinEntityList",
