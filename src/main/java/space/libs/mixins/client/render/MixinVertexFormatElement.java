@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import space.libs.interfaces.IVertexFormatElement;
 
 @SuppressWarnings("unused")
-@Mixin(value = VertexFormatElement.class, priority = 400)
+@Mixin(value = VertexFormatElement.class, priority = 100)
 public class MixinVertexFormatElement implements IVertexFormatElement {
 
     @Shadow

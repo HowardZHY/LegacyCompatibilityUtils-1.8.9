@@ -13,7 +13,7 @@ import space.libs.util.cursedmixinextensions.annotations.ShadowSuperConstructor;
 
 import java.lang.reflect.Method;
 
-@Mixin(value = ASMEventHandler.class, remap = false)
+@Mixin(value = ASMEventHandler.class, priority = 100, remap = false)
 public abstract class MixinASMEventHandler {
 
     @Shadow

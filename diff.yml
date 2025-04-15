@@ -467,7 +467,7 @@ net/minecraft/client/renderer/WorldRenderer$State:
   - error: func_179015_b()I - Method was removed
   - error: field_179020_c:I - Field was removed
   - error: field_179017_d:I - Field was removed
-    #DONE EXCEPT INIT
+    #DONE
 net/minecraft/client/audio/SoundManager$SoundSystemStarterThread:
   - error: <init>(Lnet/minecraft/client/audio/SoundManager;Ljava/lang/Object;)V - Method was removed
     #INVALID - PRIVATE

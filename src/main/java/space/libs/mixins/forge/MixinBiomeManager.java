@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import space.libs.util.cursedmixinextensions.annotations.Public;
 
 @SuppressWarnings("all")
-@Mixin(value = BiomeManager.class, remap = false)
+@Mixin(value = BiomeManager.class, priority = 2020, remap = false)
 public class MixinBiomeManager {
 
     @Public

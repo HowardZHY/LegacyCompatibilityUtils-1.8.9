@@ -5,7 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import java.util.*;
 
 @SuppressWarnings("unused")
-public class ForgeUtils {
+public abstract class ForgeUtils {
 
     public static Map<ResourceLocation, Integer[]> convertMapKeys(Map<?, Integer[]> originalMap) {
         Map<ResourceLocation, Integer[]> convertedMap = new HashMap<>();

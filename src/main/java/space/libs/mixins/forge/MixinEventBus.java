@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.lang.reflect.Method;
 
-@Mixin(value = EventBus.class, remap = false)
+@Mixin(value = EventBus.class, priority = 100, remap = false)
 public abstract class MixinEventBus implements IEventBus {
 
     @Shadow

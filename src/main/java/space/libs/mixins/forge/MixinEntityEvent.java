@@ -6,22 +6,17 @@ package space.libs.mixins.forge;
 
 import net.minecraft.entity.Entity;
 import net.minecraftforge.event.entity.EntityEvent;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 
 @SuppressWarnings("unused")
 @Mixin(value = EntityEvent.class, remap = false)
-public class MixinEntityEvent {
+public abstract class MixinEntityEvent {
 
     @Final
-    @Mutable
     @Shadow
     public Entity entity;
 
-    public Entity getEntity()
-    {
+    public Entity getEntity() {
         return entity;
     }
 }

@@ -2,8 +2,6 @@ package space.libs.mixins.client.render;
 
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -16,7 +14,7 @@ import space.libs.interfaces.IVertexFormatElement;
 import java.util.List;
 
 @SuppressWarnings("unused")
-@Mixin(VertexFormat.class)
+@Mixin(value = VertexFormat.class, priority = 2020)
 public abstract class MixinVertexFormat {
 
     @Shadow

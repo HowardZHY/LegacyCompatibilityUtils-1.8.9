@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 
 @SuppressWarnings("all")
-@Mixin(value = VertexFormatElement.EnumUsage.class, remap = false)
+@Mixin(value = VertexFormatElement.EnumUsage.class, priority = 2020, remap = false)
 public abstract class MixinVertexFormatElementEnumUsage {
 
     @Public
