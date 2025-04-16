@@ -32,7 +32,7 @@ public class ClassTransformers implements IClassTransformer {
         }
         if (name.equals("com.mumfrey.liteloader.core.runtime.Obf")) {
             ClassReader cr = new ClassReader(bytes);
-            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
+            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
             ClassVisitor cv = new LiteLoaderObfVisitor(cw);
             cr.accept(cv, 0);
             return cw.toByteArray();
@@ -46,14 +46,14 @@ public class ClassTransformers implements IClassTransformer {
         }
         if (name.equals("net.minecraftforge.fml.client.event.ConfigChangedEvent")) {
             ClassReader cr = new ClassReader(bytes);
-            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
+            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
             ClassVisitor cv = new ConfigChangedEventVisitor(cw);
             cr.accept(cv, 0);
             return cw.toByteArray();
         }
         if (name.equals("net.minecraftforge.fml.common.event.FMLModIdMappingEvent")) {
             ClassReader cr = new ClassReader(bytes);
-            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
+            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
             ClassVisitor cv = new FMLModIdMappingEventVisitor(cw);
             cr.accept(cv, 0);
             return cw.toByteArray();
