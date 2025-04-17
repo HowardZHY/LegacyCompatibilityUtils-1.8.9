@@ -18,11 +18,14 @@ public class ModDetector {
 
     public static ModDetector INSTANCE;
 
-    public ModDetector() {
+    public ModDetector() {}
+
+    @SuppressWarnings("all")
+    public static void init() {
         if (initialized) {
             return;
         }
-        INSTANCE = this;
+        INSTANCE = new ModDetector();
         hasSpACore = getCoreMod("net.specialattack.forge.core.asm.SpACorePlugin", true);
         hasAlexIILLib = getCoreMod("alexiil.mods.lib.coremod.LoadPlugin", true);
         hasCivCraft = getCoreMod("alexiil.mods.civ.coremod.LoadPlugin", true);

@@ -1,7 +1,6 @@
 package space.libs.mixins.client.render;
 
 import net.minecraft.client.renderer.texture.TextureUtil;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;

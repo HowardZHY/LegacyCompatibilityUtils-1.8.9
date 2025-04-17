@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unused")
 @IFMLLoadingPlugin.TransformerExclusions({"space.libs.core", "space.libs.util.cursedmixinextensions", "space.libs.asm"})
 @IFMLLoadingPlugin.SortingIndex(Integer.MIN_VALUE + 2)
 public class CompatLibCore implements IFMLLoadingPlugin {
@@ -36,8 +36,10 @@ public class CompatLibCore implements IFMLLoadingPlugin {
         //DUMMY = new Dummy();
         MixinBootstrap.init();
         org.spongepowered.asm.mixin.Mixins.addConfiguration("mixins.compatlib.json");
+        LOGGER.info("Initializing CompatLib Core Class...");
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String[] getASMTransformerClass() {
         try {
@@ -51,12 +53,12 @@ public class CompatLibCore implements IFMLLoadingPlugin {
             LOGGER.error(e);
         }
         ArrayList<String> transformersList = new ArrayList<>();
-        ModDetector detector = new ModDetector();
+        ModDetector.init();
         transformersList.add("space.libs.asm.RemapTransformer");
         transformersList.add("space.libs.asm.ReplaceTransformer");
         transformersList.add("space.libs.asm.LegacyObfTransformer");
 
-        if (detector.hasSpACore) {
+        if (ModDetector.hasSpACore) {
             LOGGER.info("Found SpACore, load ASM Transformers of it.");
             transformersList.add("net.specialattack.forge.core.asm.SpACoreModTransformer");
             transformersList.add("net.specialattack.forge.core.asm.SpACoreHookTransformer");
