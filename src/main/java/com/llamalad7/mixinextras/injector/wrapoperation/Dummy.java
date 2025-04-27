@@ -27,9 +27,9 @@ public class Dummy {
             Launch.classLoader.loadClass("com.llamalad7.mixinextras.injector.wrapoperation.WrapOperationInjector");
             //CompatLibCore.LOGGER.info(WrapOperationInjector.Dummy());
             //Launch.classLoader.addClassLoaderExclusion("com.llamalad7.mixinextras.injector.wrapoperation.WrapOperationInjector");
-        } catch (Throwable t) {
-            CompatLibCore.LOGGER.error(t);
-            t.printStackTrace();
+        } catch (Exception e) {
+            CompatLibCore.LOGGER.error(e);
+            e.printStackTrace();
         }
     }
 

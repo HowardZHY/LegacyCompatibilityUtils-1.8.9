@@ -1,4 +1,4 @@
-package space.libs.mixins;
+package space.libs.mixins.block;
 
 import net.minecraft.block.BlockVine;
 import net.minecraft.util.EnumFacing;

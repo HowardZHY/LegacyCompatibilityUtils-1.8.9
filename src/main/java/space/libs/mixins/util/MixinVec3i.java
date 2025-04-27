@@ -1,4 +1,4 @@
-package space.libs.mixins;
+package space.libs.mixins.util;
 
 import net.minecraft.util.Vec3i;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,4 +1,4 @@
-package space.libs.mixins;
+package space.libs.mixins.util;
 
 import net.minecraft.block.properties.PropertyBool;
 import org.spongepowered.asm.mixin.Mixin;
