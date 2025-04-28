@@ -336,7 +336,7 @@ net/minecraftforge/fml/common/registry/FMLControlledNamespacedRegistry:
   - error: internalAvailabilityMap:Ljava/util/BitSet; - Field was removed
   - error: persistentSubstitutions:Lcom/google/common/collect/BiMap; - Field was made final
   - error: activeSubstitutions:Lcom/google/common/collect/BiMap; - Field was made final
-    #TODO?
+    #DONE EXCEPT PRIVATE FIELDS
 net/minecraft/tileentity/TileEntityFurnace:
   - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
     #DONE

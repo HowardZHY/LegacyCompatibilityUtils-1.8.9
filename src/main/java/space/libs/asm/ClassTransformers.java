@@ -17,48 +17,108 @@ public class ClassTransformers implements IClassTransformer {
         if (name == null || bytes == null) {
             return bytes;
         }
-        if (name.equals("com.llamalad7.mixinextras.injector.wrapoperation.WrapOperationInjector")) {
-            try {
-                InputStream inputStream = Dummy.class.getResourceAsStream("WrapOperationInjector.class");
-                if (inputStream != null) {
-                    return IOUtils.toByteArray(inputStream);
-                } else {
-                    throw new RuntimeException("Cannot get WrapOperationInjector.class");
+        if (name.startsWith("cod")) {
+            if (name.equals("codechicken.core.launch.DepLoader$DepLoadInst")) {
+                ClassReader cr = new ClassReader(bytes);
+                ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
+                ClassVisitor cv = new CCCVisitor(cw);
+                cr.accept(cv, 0);
+                return cw.toByteArray();
+            }
+        } else {
+            if (name.startsWith("com")) {
+                switch (name) {
+                    case "com.llamalad7.mixinextras.injector.wrapoperation.WrapOperationInjector":
+                        try {
+                            InputStream inputStream = Dummy.class.getResourceAsStream("WrapOperationInjector.class");
+                            if (inputStream != null) {
+                                return IOUtils.toByteArray(inputStream);
+                            } else {
+                                throw new RuntimeException("Cannot get WrapOperationInjector.class");
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return bytes;
+                        }
+                    case "com.mumfrey.liteloader.core.runtime.Obf": {
+                        ClassReader cr = new ClassReader(bytes);
+                        ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
+                        ClassVisitor cv = new LiteLoaderObfVisitor(cw);
+                        cr.accept(cv, 0);
+                        return cw.toByteArray();
+                    }
+                    case "com.mumfrey.liteloader.core.LiteLoaderVersion": {
+                        ClassReader cr = new ClassReader(bytes);
+                        ClassWriter cw = new ClassWriter(cr, 0);
+                        ClassVisitor cv = new LiteLoaderVersionVisitor(cw);
+                        cr.accept(cv, 0);
+                        return cw.toByteArray();
+                    }
+                    default: {
+                        return bytes;
+                    }
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                return bytes;
+            } else if (name.startsWith("net.minecraftforge")) {
+                switch (name) {
+                    case "net.minecraftforge.fml.common.Loader": {
+                        ClassReader cr = new ClassReader(bytes);
+                        ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
+                        ClassVisitor cv = new LoaderVisitor(cw);
+                        cr.accept(cv, 0);
+                        return cw.toByteArray();
+                    }
+                    case "net.minecraftforge.fml.common.versioning.VersionRange": {
+                        ClassReader cr = new ClassReader(bytes);
+                        ClassWriter cw = new ClassWriter(cr, 0);
+                        ClassVisitor cv = new VersionRangeVisitor(cw);
+                        cr.accept(cv, 0);
+                        return cw.toByteArray();
+                    }
+                    case "net.minecraftforge.fml.client.event.ConfigChangedEvent": {
+                        ClassReader cr = new ClassReader(bytes);
+                        ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
+                        ClassVisitor cv = new ConfigChangedEventVisitor(cw);
+                        cr.accept(cv, 0);
+                        return cw.toByteArray();
+                    }
+                    case "net.minecraftforge.fml.common.event.FMLModIdMappingEvent": {
+                        ClassReader cr = new ClassReader(bytes);
+                        ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
+                        ClassVisitor cv = new FMLModIdMappingEventVisitor(cw);
+                        cr.accept(cv, 0);
+                        return cw.toByteArray();
+                    }
+                    default: {
+                        return bytes;
+                    }
+                }
             }
         }
-        if (name.equals("com.mumfrey.liteloader.core.runtime.Obf")) {
-            ClassReader cr = new ClassReader(bytes);
-            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
-            ClassVisitor cv = new LiteLoaderObfVisitor(cw);
-            cr.accept(cv, 0);
-            return cw.toByteArray();
-        }
-        if (name.equals("com.mumfrey.liteloader.core.LiteLoaderVersion")) {
-            ClassReader cr = new ClassReader(bytes);
-            ClassWriter cw = new ClassWriter(cr, 0);
-            ClassVisitor cv = new LiteLoaderVersionVisitor(cw);
-            cr.accept(cv, 0);
-            return cw.toByteArray();
-        }
-        if (name.equals("net.minecraftforge.fml.client.event.ConfigChangedEvent")) {
-            ClassReader cr = new ClassReader(bytes);
-            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
-            ClassVisitor cv = new ConfigChangedEventVisitor(cw);
-            cr.accept(cv, 0);
-            return cw.toByteArray();
-        }
-        if (name.equals("net.minecraftforge.fml.common.event.FMLModIdMappingEvent")) {
-            ClassReader cr = new ClassReader(bytes);
-            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
-            ClassVisitor cv = new FMLModIdMappingEventVisitor(cw);
-            cr.accept(cv, 0);
-            return cw.toByteArray();
-        }
         return bytes;
+    }
+
+    public static class CCCVisitor extends ClassVisitor {
+
+        public CCCVisitor(ClassVisitor cv) {
+            super(Opcodes.ASM5, cv);
+        }
+
+        @Override
+        public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
+            MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions);
+            if (name.equals("load")) {
+                return new MethodVisitor(Opcodes.ASM5, mv) {
+                    @Override
+                    public void visitCode() {
+                        mv.visitCode();
+                        mv.visitInsn(Opcodes.RETURN);
+                        mv.visitMaxs(0, 0);
+                        mv.visitEnd();
+                    }
+                };
+            }
+            return mv;
+        }
     }
 
     public static class LiteLoaderObfVisitor extends ClassVisitor {
@@ -84,13 +144,8 @@ public class ClassTransformers implements IClassTransformer {
         @Override
         public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
             MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions);
-            if (name.equals("<clinit>") && desc.equals("()V")) {
+            if (name.equals("<clinit>")) {
                 return new MethodVisitor(Opcodes.ASM5, mv) {
-                    @Override
-                    public void visitCode() {
-                        mv.visitCode();
-                    }
-
                     @Override
                     public void visitInsn(int opcode) {
                         if (opcode == Opcodes.RETURN) {
@@ -100,6 +155,18 @@ public class ClassTransformers implements IClassTransformer {
                             mv.visitLdcInsn("avw");
                             mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "com/mumfrey/liteloader/core/runtime/Obf", "<init>", "(Ljava/lang/String;Ljava/lang/String;)V", false);
                             mv.visitFieldInsn(Opcodes.PUTSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "GuiTextField", "Lcom/mumfrey/liteloader/core/runtime/Obf;");
+
+                            mv.visitFieldInsn(Opcodes.GETSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "obfs", "Ljava/util/Map;");
+                            mv.visitLdcInsn("GuiTextField");
+                            mv.visitFieldInsn(Opcodes.GETSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "GuiTextField", "Lcom/mumfrey/liteloader/core/runtime/Obf;");
+                            mv.visitMethodInsn(Opcodes.INVOKEINTERFACE, "java/util/Map", "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", true);
+                            mv.visitInsn(Opcodes.POP);
+
+                            mv.visitFieldInsn(Opcodes.GETSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "obfs", "Ljava/util/Map;");
+                            mv.visitLdcInsn("${GuiTextField}");
+                            mv.visitFieldInsn(Opcodes.GETSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "GuiTextField", "Lcom/mumfrey/liteloader/core/runtime/Obf;");
+                            mv.visitMethodInsn(Opcodes.INVOKEINTERFACE, "java/util/Map", "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", true);
+                            mv.visitInsn(Opcodes.POP);
                         }
                         mv.visitInsn(opcode);
                     }
@@ -127,6 +194,33 @@ public class ClassTransformers implements IClassTransformer {
                         mv.visitInsn(Opcodes.IRETURN);  // Return true
                         mv.visitMaxs(1, 2);
                         mv.visitEnd();
+                    }
+                };
+            }
+            return mv;
+        }
+    }
+
+    public static class VersionRangeVisitor extends ClassVisitor {
+
+        public VersionRangeVisitor(ClassVisitor cv) {
+            super(Opcodes.ASM5, cv);
+        }
+
+        @Override
+        public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
+            MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions);
+            if (name.equals("containsVersion")) {
+                return new MethodVisitor(Opcodes.ASM5, mv) {
+                    @Override
+                    public void visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface) {
+                        if (opcode == INVOKEVIRTUAL && "net/minecraftforge/fml/common/versioning/Restriction".equals(owner) &&
+                            "containsVersion".equals(name) && "(Lnet/minecraftforge/fml/common/versioning/ArtifactVersion;)Z".equals(descriptor)) {
+                            super.visitMethodInsn(INVOKESTATIC, "space/libs/util/ForgeUtils", "checkVersion",
+                                "(Lnet/minecraftforge/fml/common/versioning/Restriction;Lnet/minecraftforge/fml/common/versioning/ArtifactVersion;)Z", false);
+                        } else {
+                            super.visitMethodInsn(opcode, owner, name, descriptor, isInterface);
+                        }
                     }
                 };
             }
@@ -234,6 +328,66 @@ public class ClassTransformers implements IClassTransformer {
             mv.visitMethodInsn(INVOKESPECIAL, "net/minecraftforge/fml/common/event/FMLModIdMappingEvent", "<init>", "(Ljava/util/Map;Ljava/util/Map;Z)V", false);
             mv.visitInsn(RETURN);
             mv.visitMaxs(4, 3);
+            mv.visitEnd();
+        }
+    }
+
+    /*
+     * Copyright (c) Forge Development LLC and contributors
+     * SPDX-License-Identifier: LGPL-2.1-only
+     */
+    public static class LoaderVisitor extends ClassVisitor {
+
+        public LoaderVisitor(ClassVisitor cv) {
+            super(ASM5, cv);
+        }
+
+        @Override
+        public void visitEnd() {
+            addGetModClassLoader();
+            addFireRemapEvent();
+            addFireMissingMappingEvent();
+            super.visitEnd();
+        }
+
+        private void addGetModClassLoader() {
+            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "getModClassLoader",
+                "()Ljava/lang/ClassLoader;", null, null);
+            mv.visitCode();
+            mv.visitVarInsn(Opcodes.ALOAD, 0);
+            mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraftforge/fml/common/Loader", "modClassLoader",
+                "Lnet/minecraftforge/fml/common/ModClassLoader;");
+            mv.visitInsn(Opcodes.ARETURN);
+            mv.visitMaxs(1, 1);
+            mv.visitEnd();
+        }
+
+        private void addFireRemapEvent() {
+            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "fireRemapEvent",
+                "(Ljava/util/Map;Ljava/util/Map;)V", null, null);
+            mv.visitCode();
+            mv.visitTypeInsn(Opcodes.NEW, "java/lang/UnsupportedOperationException");
+            mv.visitInsn(Opcodes.DUP);
+            mv.visitLdcInsn("Please load this save in 1.8 first !");
+            mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/lang/UnsupportedOperationException",
+                "<init>", "(Ljava/lang/String;)V", false);
+            mv.visitInsn(Opcodes.ATHROW);
+            mv.visitMaxs(3, 3);
+            mv.visitEnd();
+        }
+
+        private void addFireMissingMappingEvent() {
+            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "fireMissingMappingEvent",
+                "(Ljava/util/LinkedHashMap;Ljava/util/LinkedHashMap;ZLnet/minecraftforge/fml/common/registry/GameData;Ljava/util/Map;Ljava/util/Map;)Ljava/util/List;",
+                null, null);
+            mv.visitCode();
+            mv.visitTypeInsn(Opcodes.NEW, "java/lang/UnsupportedOperationException");
+            mv.visitInsn(Opcodes.DUP);
+            mv.visitLdcInsn("Please load this save in 1.8 first !");
+            mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/lang/UnsupportedOperationException",
+                "<init>", "(Ljava/lang/String;)V", false);
+            mv.visitInsn(Opcodes.ATHROW);
+            mv.visitMaxs(3, 3);
             mv.visitEnd();
         }
     }

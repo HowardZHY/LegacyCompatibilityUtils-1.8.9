@@ -57,15 +57,21 @@ public abstract class MixinASMEventHandler {
      */
     @Overwrite
     public void invoke(Event event) {
-        if (GETCONTEXT) ThreadContext.put("mod", owner == null ? "" : owner.getName());
+        if (GETCONTEXT) {
+            ThreadContext.put("mod", owner == null ? "" : owner.getName());
+        }
         if (handler != null) {
             if (!event.isCancelable() || !event.isCanceled()) {
                 handler.invoke(event);
-                if (GETCONTEXT) ThreadContext.remove("mod");
+                if (GETCONTEXT) {
+                    ThreadContext.remove("mod");
+                }
                 return;
             } else if (subInfo != null && subInfo.receiveCanceled()) {
                 handler.invoke(event);
-                if (GETCONTEXT) ThreadContext.remove("mod");
+                if (GETCONTEXT) {
+                    ThreadContext.remove("mod");
+                }
                 return;
             } else if (newSubInfo != null && newSubInfo.receiveCanceled()) {
                 handler.invoke(event);

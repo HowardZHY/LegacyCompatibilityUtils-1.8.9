@@ -1,6 +1,8 @@
 package space.libs.util;
 
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.versioning.ArtifactVersion;
+import net.minecraftforge.fml.common.versioning.Restriction;
 
 import java.util.*;
 
@@ -20,5 +22,12 @@ public abstract class ForgeUtils {
             }
         }
         return convertedMap;
+    }
+
+    public static boolean checkVersion(Restriction restriction, ArtifactVersion version) {
+        if (version.getVersionString().contains("1.8")) {
+            return true;
+        }
+        return restriction.containsVersion(version);
     }
 }

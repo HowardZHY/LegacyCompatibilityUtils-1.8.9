@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(value = GuiScreenEvent.class, remap = false)
-public class MixinGUIScreenEvent {
+public class MixinGuiScreenEvent {
     @Final
     @Mutable
     @Shadow

@@ -6,7 +6,7 @@ import net.minecraft.launchwrapper.LaunchClassLoader;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.spongepowered.asm.launch.MixinBootstrap;
+import org.spongepowered.asm.mixin.Mixins;
 import space.libs.util.ModDetector;
 
 import java.lang.reflect.Field;
@@ -34,14 +34,13 @@ public class CompatLibCore implements IFMLLoadingPlugin {
 
     static {
         //DUMMY = new Dummy();
-        MixinBootstrap.init();
-        org.spongepowered.asm.mixin.Mixins.addConfiguration("mixins.compatlib.json");
         LOGGER.info("Initializing CompatLib Core Class...");
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public String[] getASMTransformerClass() {
+        Mixins.addConfiguration("mixins.compatlib.json");
         try {
             Field f = LaunchClassLoader.class.getDeclaredField("transformerExceptions");
             f.setAccessible(true);

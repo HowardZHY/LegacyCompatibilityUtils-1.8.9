@@ -2,31 +2,23 @@ package space.libs.mixins.nbt;
 
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
+import net.minecraft.nbt.INBTBase;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ReportedException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import net.minecraft.nbt.INBTBase;
 import space.libs.util.cursedmixinextensions.annotations.Public;
 
 import java.io.DataInput;
 import java.io.IOException;
 import java.util.Map;
 
-@SuppressWarnings("all")
-@Mixin(NBTTagCompound.class)
+@Mixin(value = NBTTagCompound.class, priority = 50)
 public class MixinNBTTagCompound extends MixinNBTBase implements INBTBase {
 
     @Shadow
-    private Map<String, NBTBase>  tagMap;
-
-    @Final
-    @Public
-    private static Logger field_150301_b = LogManager.getLogger();
+    private Map<String, NBTBase> tagMap;
 
     /** load */
     public void func_74735_a(DataInput input, int depth) {
