@@ -32,12 +32,12 @@ Disable use VBOs in Video Settings if you use this mod, otherwise blocks won't s
 
 ### [Gender & Age Mod](https://www.curseforge.com/minecraft/mc-mods/gender)
 
-Notch Code ASM
+Coremods using some ASM, or accessing APIs with FML Core breaking changes.
 
-### NEI and other mods using ChickenBones' Core as well
+### [Elemental Witches](https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/wip-mods/2199940-1-7-10-1-8-v0-0-7-elemental-witches-mod-server)
 
-Coremods using APIs with FML Core breaking changes
+Duplicate Potion Effect Registry, uncertain cause.
 
 ### TMI (Official 1.8 Forge Version)
 
-One of the 1.8 Forge Mods that's in Totally Notch Code, lazy to make reflections
+One of the 1.8 Forge Mods that's in Totally Notch Code, lazy to make reflections.
