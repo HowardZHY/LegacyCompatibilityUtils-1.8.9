@@ -92,7 +92,7 @@ public class ModDetector {
                                     asm.transformers.remove(key);
                                 }
                             }
-                            CompatLibCore.LOGGER.info("Removed unneeded transform from NEI.");
+                            CompatLibCore.LOGGER.info("Removed invalid transforms from NEI.");
                         }
                     }
                 }

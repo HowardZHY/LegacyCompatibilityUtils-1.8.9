@@ -18,7 +18,6 @@ public class CustomRemappingAdapter extends RemappingClassAdapter {
 
     public static CustomRemappingAdapter INSTANCE;
 
-
     public static String LEGACY_MAPPINGS = "legacydeobf.srg";
 
     public CustomRemappingAdapter(ClassVisitor cv) {

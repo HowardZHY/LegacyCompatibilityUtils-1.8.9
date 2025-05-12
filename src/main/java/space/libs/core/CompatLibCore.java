@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.Mixins;
 import space.libs.util.ModDetector;
 
 import java.lang.reflect.Field;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
@@ -21,10 +20,6 @@ import java.util.Set;
 public class CompatLibCore implements IFMLLoadingPlugin {
 
     public static final Logger LOGGER = LogManager.getLogger("CompatLibCore");
-
-    public static final Path CONFIG_DIR = Launch.minecraftHome.toPath().resolve("config");
-
-    public static final Path MOD_DIRECTORY = Launch.minecraftHome.toPath().resolve("mods");
 
     public static Dummy DUMMY;
 

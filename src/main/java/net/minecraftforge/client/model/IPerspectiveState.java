@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformT
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import space.libs.CompatLib;
 
 /**
  * IModelState that can change depending on the perspective.
@@ -52,7 +53,7 @@ public interface IPerspectiveState extends IModelState {
             if (this.apply(optionalPart).isPresent()) {
                 return this.apply(optionalPart).get();
             }
-            System.out.println("[WARN] IModelState apply not Present ?");
+            CompatLib.LOGGER.warn("IModelState apply not Present ?");
             return null;
         }
 
