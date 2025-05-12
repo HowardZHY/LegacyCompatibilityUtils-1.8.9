@@ -321,17 +321,14 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
         if (Strings.isNullOrEmpty(superName)) {
             return;
         }
-
         String[] parents = new String[interfaces.length + 1];
         parents[0] = superName;
         System.arraycopy(interfaces, 0, parents, 1, interfaces.length);
-
         for (String parent : parents) {
             if (!this.fields.containsKey(parent)) {
                 loadSuperMaps(parent);
             }
         }
-
         Map<String, String> fields = Maps.newHashMap();
         Map<String, String> methods = Maps.newHashMap();
 
@@ -346,20 +343,18 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
                 methods.putAll(m);
             }
         }
-
         fields.putAll(this.rawFields.row(name));
         methods.putAll(this.rawMethods.row(name));
-
         this.fields.put(name, ImmutableMap.copyOf(fields));
         this.methods.put(name, ImmutableMap.copyOf(methods));
     }
 
+    @SuppressWarnings("all")
     public String getStaticFieldType(String oldType, String oldName, String newType, String newName) {
         String type = getFieldType(oldType, oldName);
         if (oldType.equals(newType)) {
             return type;
         }
-
         Map<String, String> newClassMap = this.fieldDescriptions.get(newType);
         if (newClassMap == null) {
             newClassMap = Maps.newHashMap();
@@ -372,13 +367,14 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
     private enum MappingType {
 
         PACKAGE("PK"), CLASS("CL"), FIELD("FD"), METHOD("MD");
-        private final String identifier;
-
-        private MappingType(String identifier) {
-            this.identifier = identifier;
-        }
 
         private static final ImmutableMap<String, MappingType> LOOKUP;
+
+        private final String identifier;
+
+        MappingType(String identifier) {
+            this.identifier = identifier;
+        }
 
         static {
             ImmutableMap.Builder<String, MappingType> builder = ImmutableMap.builder();
@@ -388,11 +384,9 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
             LOOKUP = builder.build();
         }
 
-
         public static MappingType of(String identifier) {
             return LOOKUP.get(identifier);
         }
-
     }
 
     private class RemappingAdapter extends RemappingClassAdapter {
@@ -406,7 +400,6 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
             if (interfaces == null) {
                 interfaces = ArrayUtils.EMPTY_STRING_ARRAY;
             }
-
             createSuperMaps(name, superName, interfaces);
             super.visit(version, access, name, signature, superName, interfaces);
         }
@@ -426,7 +419,6 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
                             newDesc = this.remapper.mapDesc(replDesc);
                         }
                     }
-
                     if (this.mv != null) {
                         this.mv.visitFieldInsn(opcode, type, fieldName, newDesc);
                     }
