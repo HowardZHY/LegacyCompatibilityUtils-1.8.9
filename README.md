@@ -24,6 +24,10 @@ If anyone is interested at making another runtime deobf remapper, feel free to o
 
 Submit an issue if you met incompatibilities.
 
+### If you try to use [CodeChickenCore](https://www.curseforge.com/minecraft/mc-mods/codechickencore)
+
+Make sure rename CompatLib's file like `aCompatLib.jar`, that mod must be loaded after CompatLib otherwise would crash.
+
 ### If you try to use [BlockSteps](https://www.curseforge.com/minecraft/mc-mods/blocksteps):
 
 Disable use VBOs in Video Settings if you use this mod, otherwise blocks won't show.
