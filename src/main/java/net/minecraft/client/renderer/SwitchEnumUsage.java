@@ -10,20 +10,9 @@ public final class SwitchEnumUsage {
     static {
         try {
             field_178959_a[VertexFormatElement.EnumUsage.POSITION.ordinal()] = 1;
-        } catch (NoSuchFieldError ignored) {
-        }
-        try {
             field_178959_a[VertexFormatElement.EnumUsage.COLOR.ordinal()] = 2;
-        } catch (NoSuchFieldError ignored) {
-        }
-        try {
             field_178959_a[VertexFormatElement.EnumUsage.UV.ordinal()] = 3;
-        } catch (NoSuchFieldError ignored) {
-        }
-        try {
             field_178959_a[VertexFormatElement.EnumUsage.NORMAL.ordinal()] = 4;
-        } catch (NoSuchFieldError ignored) {
-        }
+        } catch (NoSuchFieldError ignored) {}
     }
-
 }

@@ -9,7 +9,6 @@ import zone.rong.mixinbooter.MixinLoader;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("all")
 @MixinLoader
 public class CompatLibLateMixin implements ILateMixinLoader {
 

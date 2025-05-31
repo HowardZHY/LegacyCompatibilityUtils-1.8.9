@@ -58,38 +58,40 @@ public class ClassTransformers implements IClassTransformer {
                         return bytes;
                     }
                 }
-            } else if (name.startsWith("net.minecraftforge")) {
-                switch (name) {
-                    case "net.minecraftforge.fml.common.Loader": {
-                        ClassReader cr = new ClassReader(bytes);
-                        ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
-                        ClassVisitor cv = new LoaderVisitor(cw);
-                        cr.accept(cv, 0);
-                        return cw.toByteArray();
-                    }
-                    case "net.minecraftforge.fml.common.versioning.VersionRange": {
-                        ClassReader cr = new ClassReader(bytes);
-                        ClassWriter cw = new ClassWriter(cr, 0);
-                        ClassVisitor cv = new VersionRangeVisitor(cw);
-                        cr.accept(cv, 0);
-                        return cw.toByteArray();
-                    }
-                    case "net.minecraftforge.fml.client.event.ConfigChangedEvent": {
-                        ClassReader cr = new ClassReader(bytes);
-                        ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
-                        ClassVisitor cv = new ConfigChangedEventVisitor(cw);
-                        cr.accept(cv, 0);
-                        return cw.toByteArray();
-                    }
-                    case "net.minecraftforge.fml.common.event.FMLModIdMappingEvent": {
-                        ClassReader cr = new ClassReader(bytes);
-                        ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
-                        ClassVisitor cv = new FMLModIdMappingEventVisitor(cw);
-                        cr.accept(cv, 0);
-                        return cw.toByteArray();
-                    }
-                    default: {
-                        return bytes;
+            } else if (name.startsWith("net")) {
+                if (name.startsWith("net.minecraftfor")) {
+                    switch (name) {
+                        case "net.minecraftforge.fml.common.Loader": {
+                            ClassReader cr = new ClassReader(bytes);
+                            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
+                            ClassVisitor cv = new LoaderVisitor(cw);
+                            cr.accept(cv, 0);
+                            return cw.toByteArray();
+                        }
+                        case "net.minecraftforge.fml.common.versioning.VersionRange": {
+                            ClassReader cr = new ClassReader(bytes);
+                            ClassWriter cw = new ClassWriter(cr, 0);
+                            ClassVisitor cv = new VersionRangeVisitor(cw);
+                            cr.accept(cv, 0);
+                            return cw.toByteArray();
+                        }
+                        case "net.minecraftforge.fml.client.event.ConfigChangedEvent": {
+                            ClassReader cr = new ClassReader(bytes);
+                            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
+                            ClassVisitor cv = new ConfigChangedEventVisitor(cw);
+                            cr.accept(cv, 0);
+                            return cw.toByteArray();
+                        }
+                        case "net.minecraftforge.fml.common.event.FMLModIdMappingEvent": {
+                            ClassReader cr = new ClassReader(bytes);
+                            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
+                            ClassVisitor cv = new FMLModIdMappingEventVisitor(cw);
+                            cr.accept(cv, 0);
+                            return cw.toByteArray();
+                        }
+                        default: {
+                            return bytes;
+                        }
                     }
                 }
             }

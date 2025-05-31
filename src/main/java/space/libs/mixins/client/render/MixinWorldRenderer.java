@@ -2,6 +2,7 @@ package space.libs.mixins.client.render;
 
 import net.minecraft.client.renderer.SwitchEnumUsage;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.WorldRenderer2;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.client.util.QuadComparator;
@@ -12,6 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import space.libs.interfaces.IVertexFormatElement;
@@ -432,8 +434,16 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         this.field_178995_f = v;
     }
 
-    public WorldRenderer getRenderer() {
-        return (WorldRenderer) (Object) this;
+    public int getVertexFormatIndex() {
+        return vertexFormatIndex;
+    }
+
+    public VertexFormatElement getVertexFormatElement() {
+        return vertexFormatElement;
+    }
+
+    public void setVertexFormatElement(VertexFormatElement vertexFormatElement) {
+        this.vertexFormatElement = vertexFormatElement;
     }
 
     @Inject(method = "<init>", at = @At("RETURN"))
@@ -489,4 +499,9 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         this.LegacyNORMAL = false;
     }
 
+    @SuppressWarnings("all")
+    @Redirect(method = "func_181662_b", at = @At(value = "FIELD", target = "*:[I", ordinal = 0), remap = false)
+    public int[] pos() {
+        return WorldRenderer2.field_181661_a;
+    }
 }

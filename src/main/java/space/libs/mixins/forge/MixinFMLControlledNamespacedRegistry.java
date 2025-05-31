@@ -7,14 +7,18 @@ import net.minecraftforge.fml.common.registry.ExistingSubstitutionException;
 import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import space.libs.CompatLib;
+import space.libs.interfaces.IFMLControlledNamespacedRegistry;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
-import java.util.*;
+import java.util.BitSet;
+import java.util.Map;
+import java.util.Set;
 
 @SuppressWarnings("unused")
 @Mixin(value = FMLControlledNamespacedRegistry.class, remap = false)
-public class MixinFMLControlledNamespacedRegistry<K, I> extends RegistryNamespacedDefaultedByKey<K, Object> {
+public class MixinFMLControlledNamespacedRegistry<K, I> extends RegistryNamespacedDefaultedByKey<K, Object> implements IFMLControlledNamespacedRegistry {
 
     public MixinFMLControlledNamespacedRegistry(K defaultValueKeyIn) {
         super(defaultValueKeyIn);
@@ -52,7 +56,7 @@ public class MixinFMLControlledNamespacedRegistry<K, I> extends RegistryNamespac
     }
 
     @Shadow
-    private Object getRaw(ResourceLocation name) {
+    private I getRaw(ResourceLocation name) {
         throw new AbstractMethodError();
     }
 
@@ -69,8 +73,8 @@ public class MixinFMLControlledNamespacedRegistry<K, I> extends RegistryNamespac
     @Shadow
     void addAlias(ResourceLocation from, ResourceLocation to) {}
 
-    @Shadow
-    private void addObjectRaw(int id, ResourceLocation name, I thing) {}
+    @Shadow(prefix = "original$")
+    private void original$addObjectRaw(int id, ResourceLocation name, Object thing) {}
 
     @Shadow
     Object activateSubstitution(ResourceLocation nameToReplace) {
@@ -201,10 +205,10 @@ public class MixinFMLControlledNamespacedRegistry<K, I> extends RegistryNamespac
             throw new NullPointerException();
         }
         if (name instanceof ResourceLocation) {
-            this.addObjectRaw(id, (ResourceLocation) name, thing);
+            this.original$addObjectRaw(id, (ResourceLocation) name, thing);
             return;
         }
-        this.addObjectRaw(id, new ResourceLocation(name.toString()), thing);
+        this.original$addObjectRaw(id, new ResourceLocation(name.toString()), thing);
     }
 
     public void activateSubstitution(String nameToReplace) {
@@ -213,5 +217,16 @@ public class MixinFMLControlledNamespacedRegistry<K, I> extends RegistryNamespac
 
     public void addSubstitutionAlias(String modId, String nameToReplace, Object toReplace) throws ExistingSubstitutionException {
         this.addSubstitutionAlias(modId, new ResourceLocation(nameToReplace), toReplace);
+    }
+
+    public void AddObjectRaw(int id, ResourceLocation name, Object thing) {
+        if (thing == null) {
+            throw new NullPointerException();
+        }
+        if (name == null) {
+            CompatLib.LOGGER.warn("Object" + thing + " with ID " + id + "has null name?");
+            return;
+        }
+        this.original$addObjectRaw(id, name, thing);
     }
 }
