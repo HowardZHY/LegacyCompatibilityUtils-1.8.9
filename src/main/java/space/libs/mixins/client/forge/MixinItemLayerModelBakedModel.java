@@ -16,6 +16,9 @@ import net.minecraftforge.client.model.ItemLayerModel;
 import net.minecraftforge.client.model.TRSRTransformation;
 import org.apache.commons.lang3.tuple.Pair;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
@@ -34,11 +37,20 @@ public abstract class MixinItemLayerModelBakedModel implements IPerspectiveAware
         this.transforms = transforms;
     }
 
+    @Inject(method = "<init>", at = @At("RETURN"))
+    public void init(ImmutableList<BakedQuad> quads, TextureAtlasSprite particle, VertexFormat format, CallbackInfo ci) {
+        if (this.transforms == null) {
+            this.transforms = ImmutableMap.of();
+        }
+    }
+
     @Override
     public Pair<? extends IFlexibleBakedModel, javax.vecmath.Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
         TRSRTransformation tr = transforms.get(cameraTransformType);
         javax.vecmath.Matrix4f mat = null;
-        if (tr != null && tr != TRSRTransformation.identity()) mat = TRSRTransformation.blockCornerToCenter(tr).getMatrix();
-        return Pair.of(this, mat);
+        if (tr != null && tr != TRSRTransformation.identity()) {
+            mat = TRSRTransformation.blockCornerToCenter(tr).getMatrix();
+        }
+        return Pair.of((IFlexibleBakedModel) this, mat);
     }
 }
