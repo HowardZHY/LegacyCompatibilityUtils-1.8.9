@@ -7,7 +7,6 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import org.spongepowered.asm.mixin.Mixin;
-import space.libs.mixins.worldgen.MixinWorldGenAbstractTree;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 

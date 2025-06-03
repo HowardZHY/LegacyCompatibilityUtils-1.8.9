@@ -6,7 +6,6 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenBigTree;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import space.libs.mixins.worldgen.MixinWorldGenAbstractTree;
 
 @SuppressWarnings("unused")
 @Mixin(WorldGenBigTree.class)

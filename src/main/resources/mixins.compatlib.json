@@ -334,6 +334,7 @@
     "worldgen.MixinWorldGenerator",
     "worldgen.MixinWorldGenHugeTrees",
     "worldgen.MixinWorldGenMegaJungle",
+    "worldgen.MixinWorldGenShrub",
     "worldgen.MixinWorldGenSwamp",
     "worldgen.MixinWorldGenTrees"
   ]

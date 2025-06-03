@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unused")
 @Mixin(WorldGenShrub.class)
 public class MixinWorldGenShrub extends MixinWorldGenTrees {
 

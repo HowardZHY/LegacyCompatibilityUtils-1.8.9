@@ -4,7 +4,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 import org.spongepowered.asm.mixin.Mixin;
-import space.libs.mixins.worldgen.MixinWorldGenAbstractTree;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
