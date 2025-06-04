@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import space.libs.util.MappedName;
 
 @SideOnly(Side.CLIENT)
 public interface IWorldRenderer {
@@ -13,10 +14,10 @@ public interface IWorldRenderer {
         return (IWorldRenderer) instance;
     }
 
-    /** setVertexFormat */
+    @MappedName("setVertexFormat")
     void func_178967_a(VertexFormat format);
 
-    /** finishDrawing */
+    @MappedName("finishDrawing")
     int func_178977_d();
 
     int getVertexFormatIndex();

@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import org.spongepowered.asm.mixin.*;
 import space.libs.interfaces.IWorldRendererState;
+import space.libs.util.MappedName;
 import space.libs.util.cursedmixinextensions.annotations.*;
 
 @SuppressWarnings("all")
@@ -37,13 +38,13 @@ public abstract class MixinWorldRendererState implements IWorldRendererState {
         this.field_179017_d = p_i46274_4_;
     }
 
-    /** stateRawBufferIndex */
+    @MappedName("stateRawBufferIndex")
     public int field_179020_c;
 
-    /** stateVertexCount */
+    @MappedName("stateVertexCount")
     public int field_179017_d;
 
-    /** getRawBufferIndex */
+    @MappedName("getRawBufferIndex")
     public int func_179015_b() {
         return this.field_179020_c;
     }

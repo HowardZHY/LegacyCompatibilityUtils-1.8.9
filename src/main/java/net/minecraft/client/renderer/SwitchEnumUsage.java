@@ -1,11 +1,12 @@
 package net.minecraft.client.renderer;
 
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
+import space.libs.util.MappedName;
 
 public final class SwitchEnumUsage {
 
-    /** VALUES */
-    public static final int[] field_178959_a = new int[VertexFormatElement.EnumUsage.values().length];
+    @MappedName("VALUES")
+    public static final int[] field_178959_a = new int[8];
 
     static {
         try {

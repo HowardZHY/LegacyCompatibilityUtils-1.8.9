@@ -1,10 +1,12 @@
 package net.minecraft.client.renderer;
 
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
+import space.libs.util.MappedName;
 
 @SuppressWarnings("unused")
-public final class WorldRenderer2 {
+public final class WorldRenderer_2 {
 
+    @MappedName("VALUES")
     public static final int[] field_181661_a = new int[8];
 
     public static int[] a = new int[8];

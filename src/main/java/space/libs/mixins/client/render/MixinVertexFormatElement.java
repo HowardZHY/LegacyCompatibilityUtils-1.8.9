@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import space.libs.interfaces.IVertexFormatElement;
+import space.libs.util.MappedName;
 
 @SuppressWarnings("unused")
 @Mixin(value = VertexFormatElement.class, priority = 100)
@@ -25,17 +26,17 @@ public class MixinVertexFormatElement implements IVertexFormatElement {
     @Shadow
     private int elementCount;
 
-    /** offset */
+    @MappedName("offset")
     private int field_177376_f = 0;
 
-    /** setOffset */
     @Override
+    @MappedName("setOffset")
     public void func_177371_a(int p_177371_1_) {
         this.field_177376_f = p_177371_1_;
     }
 
-    /** getOffset */
     @Override
+    @MappedName("getOffset")
     public int func_177373_a() {
         return this.field_177376_f;
     }

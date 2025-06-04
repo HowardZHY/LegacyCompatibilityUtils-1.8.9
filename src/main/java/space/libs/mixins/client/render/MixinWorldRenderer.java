@@ -2,23 +2,20 @@ package space.libs.mixins.client.render;
 
 import net.minecraft.client.renderer.SwitchEnumUsage;
 import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.WorldRenderer2;
+import net.minecraft.client.renderer.WorldRenderer_2;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.client.util.QuadComparator;
 
 import org.apache.logging.log4j.LogManager;
-import org.spongepowered.asm.mixin.Dynamic;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import space.libs.interfaces.IVertexFormatElement;
 import space.libs.interfaces.IWorldRenderer;
 import space.libs.interfaces.IWorldRendererState;
+import space.libs.util.MappedName;
 
 import java.nio.*;
 import java.util.List;
@@ -83,7 +80,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
 
     @Shadow public abstract int getBufferSize();
 
-    @Shadow public abstract void growBuffer(int p_181670_1_);
+    @Shadow public abstract void growBuffer(int amount);
 
     @Shadow public abstract void reset();
 
@@ -106,44 +103,44 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
 
     public float Normal1, Normal2, Normal3;
 
-    /** textureU */
+    @MappedName("textureU")
     public double field_178998_e;
 
-    /** textureV */
+    @MappedName("textureV")
     public double field_178995_f;
 
-    /** brightness */
+    @MappedName("brightness")
     public int field_178996_g;
 
-    /** normal */
+    @MappedName("normal")
     public int field_179003_o;
 
-    /** color */
+    @MappedName("color")
     public int field_179007_h;
 
-    /** rawBufferIndex */
+    @MappedName("rawBufferIndex")
     public int field_179008_i;
 
-    /** bufferSize */
+    @MappedName("bufferSize")
     public int field_179009_s;
 
-    /** byteIndex */
+    @MappedName("byteIndex")
     public int field_179012_p;
 
-    /** setColorOpaque */
+    @MappedName("setColorOpaque")
     public void func_78913_a(int red, int green, int blue) {
         this.ColorR = red; this.ColorG = green; this.ColorB = blue; this.ColorA = 255;
         this.func_178961_b(red, green, blue, 255);
     }
 
-    /** setColorRGBA_F */
+    @MappedName("setColorRGBA_F")
     public void func_178960_a(float red, float green, float blue, float alpha) {
         this.LegacyPOSITIONCOLORF = true;
         this.ColorRF = red; this.ColorGF = green; this.ColorBF = blue; this.ColorAF = alpha;
         this.func_178961_b((int)(red * 255.0F), (int)(green * 255.0F), (int)(blue * 255.0F), (int)(alpha * 255.0F));
     }
 
-    /** setColorRGBA */
+    @MappedName("setColorRGBA")
     public void func_178961_b(int red, int green, int blue, int alpha) {
         this.LegacyPOSITIONCOLORI = true;
         this.ColorR = red; this.ColorG = green; this.ColorB = blue; this.ColorA = alpha;
@@ -191,7 +188,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         }
     }
 
-    /** setBrightness */
+    @MappedName("setBrightness")
     public void func_178963_b(int i) {
         if (!this.vertexFormat.hasUvOffset(1)) {
             if (!this.vertexFormat.hasUvOffset(0)) {
@@ -203,7 +200,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         this.field_178996_g = i;
     }
 
-    /** startDrawing */
+    @MappedName("startDrawing")
     public void func_178964_a(int mode) {
         if (this.isDrawing) {
             throw new IllegalStateException("Already building!");
@@ -217,37 +214,37 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         }
     }
 
-    /** setVertexFormat */
+    @MappedName("setVertexFormat")
     public void func_178967_a(VertexFormat format) {
         this.vertexFormat = new VertexFormat(format);
     }
 
-    /** startDrawingQuads */
+    @MappedName("startDrawingQuads")
     public void func_178970_b() {
         this.func_178964_a(7);
     }
 
-    /** getVertexState */
-    @SuppressWarnings("all")
-    public WorldRenderer.State func_178971_a(float p_178971_1_, float p_178971_2_, float p_178971_3_) {
+    @MappedName("getVertexState")
+    public WorldRenderer.State func_178971_a(float x, float y, float z) {
         int[] i = new int[this.field_179008_i];
-        PriorityQueue queue = new PriorityQueue(
+        PriorityQueue<Integer> queue = new PriorityQueue<>(
             this.field_179008_i,
             new QuadComparator(
                 this.rawFloatBuffer,
-                (float) ((double) p_178971_1_ + this.xOffset),
-                (float) ((double) p_178971_2_ + this.yOffset),
-                (float) ((double) p_178971_3_ + this.zOffset),
-                this.vertexFormat.getNextOffset() / 4)
+                (float) ((double) x + this.xOffset),
+                (float) ((double) y + this.yOffset),
+                (float) ((double) z + this.zOffset),
+                this.vertexFormat.getNextOffset() / 4
+            )
         );
         int nextOffset = this.vertexFormat.getNextOffset();
         int quadStep = this.vertexFormat.getNextOffset() / 4 * 4;
         int j;
         for (j = 0; j < this.field_179008_i; j += nextOffset) {
-            queue.add(Integer.valueOf(j));
+            queue.add(j);
         }
         for (j = 0; !queue.isEmpty(); j += nextOffset) {
-            int k = ((Integer)queue.remove()).intValue();
+            int k = queue.remove();
             int indexQuad;
 
             for (indexQuad = 0; indexQuad < nextOffset; ++indexQuad) {
@@ -259,16 +256,16 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         return this.getVertexState();
     }
 
-    /** setColorRGBA_I */
-    public void func_178974_a(int i, int a) {
-        int r = i >> 16 & 255;
-        int g = i >> 8 & 255;
-        int b = i & 255;
+    @MappedName("setColorRGBA_I ")
+    public void func_178974_a(int rgb, int a) {
+        int r = rgb >> 16 & 255;
+        int g = rgb >> 8 & 255;
+        int b = rgb & 255;
         this.ColorR = r; this.ColorG = g; this.ColorB = b; this.ColorA = a;
         this.func_178961_b(r, g, b, a);
     }
 
-    /** putNormal */
+    @MappedName("putNormal")
     public void func_178975_e(float x, float y, float z) {
         byte b1 = (byte)((int)(x * 127.0F));
         byte b2 = (byte)((int)(y * 127.0F));
@@ -282,24 +279,24 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         this.rawIntBuffer.put(j + i * 3, this.field_179003_o);
     }
 
-    /** getByteIndex */
+    @MappedName("getByteIndex")
     public int func_178976_e() {
         return this.field_179012_p;
     }
 
-    /** finishDrawing */
+    @MappedName("finishDrawing")
     public int func_178977_d() {
         this.finishDrawing();
         this.field_179012_p = this.getBufferSize() * 4;
         return this.field_179012_p;
     }
 
-    /** setNormal */
-    public void func_178980_d(float f1, float f2, float f3) {
+    @MappedName("setNormal")
+    public void func_178980_d(float x, float y, float z) {
         this.LegacyNORMAL = true;
-        this.Normal1 = f1;
-        this.Normal2 = f2;
-        this.Normal3 = f3;
+        this.Normal1 = x;
+        this.Normal2 = y;
+        this.Normal3 = z;
         if (this.LegacyPOSITION) {
             return;
         }
@@ -309,24 +306,23 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
             this.vertexFormat.addElement(element);
             this.vertexFormat.addElement(new VertexFormatElement(0, VertexFormatElement.EnumType.UBYTE, VertexFormatElement.EnumUsage.PADDING, 1));
         }
-
-        byte b1 = (byte)((int)(f1 * 127.0F));
-        byte b2 = (byte)((int)(f2 * 127.0F));
-        byte b3 = (byte)((int)(f3 * 127.0F));
+        byte b1 = (byte)((int)(x * 127.0F));
+        byte b2 = (byte)((int)(y * 127.0F));
+        byte b3 = (byte)((int)(z * 127.0F));
         this.field_179003_o = b1 & 255 | (b2 & 255) << 8 | (b3 & 255) << 16;
     }
 
-    /** setColorOpaque_B */
+    @MappedName("setColorOpaque_B")
     public void func_178982_a(byte r, byte g, byte b) {
         this.func_78913_a(r & 255, g & 255, b & 255);
     }
 
-    /** growBuffer */
-    public void func_178983_e(int i) {
-        this.growBuffer(i);
+    @MappedName("growBuffer")
+    public void func_178983_e(int amount) {
+        this.growBuffer(amount);
     }
 
-    /** addVertex */
+    @MappedName("addVertex")
     public void func_178984_b(double x, double y, double z) {
 
         if (this.LegacyPOSITIONCOLORF) {
@@ -391,12 +387,13 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         ++this.vertexCount;
     }
 
-    /** addVertexWithUV
+    /**
      * Set the VertexFormat to prevent NPE
      * Original Code
      * this.func_178992_a(u, v);
      * this.func_178984_b(x, y, z);
      * */
+    @MappedName("addVertexWithUV")
     public void func_178985_a(double x, double y, double z, double u, double v) {
         if (this.LegacyNORMAL) {
             VertexFormat format = new VertexFormat(POSITION_TEX_NORMAL);
@@ -411,20 +408,20 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         this.pos(x, y, z).tex(u, v).endVertex();
     }
 
-    /** setColorOpaque_F */
+    @MappedName("setColorOpaque_F")
     public void func_178986_b(float r, float g, float b) {
         this.func_78913_a((int)(r * 255.0F), (int)(g * 255.0F), (int)(b * 255.0F));
     }
 
-    /** setColorOpaque_I */
-    public void func_178991_c(int var1) {
-        int r = var1 >> 16 & 255;
-        int g = var1 >> 8 & 255;
-        int b = var1 & 255;
+    @MappedName("setColorOpaque_I")
+    public void func_178991_c(int rgb) {
+        int r = rgb >> 16 & 255;
+        int g = rgb >> 8 & 255;
+        int b = rgb & 255;
         this.func_78913_a(r, g, b);
     }
 
-    /** setTextureUV */
+    @MappedName("setTextureUV")
     public void func_178992_a(double u, double v) {
         if (!this.vertexFormat.hasUvOffset(0) && !this.vertexFormat.hasUvOffset(1)) {
             VertexFormatElement element = new VertexFormatElement(0, VertexFormatElement.EnumType.FLOAT, VertexFormatElement.EnumUsage.UV, 2);
@@ -442,8 +439,8 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         return vertexFormatElement;
     }
 
-    public void setVertexFormatElement(VertexFormatElement vertexFormatElement) {
-        this.vertexFormatElement = vertexFormatElement;
+    public void setVertexFormatElement(VertexFormatElement element) {
+        this.vertexFormatElement = element;
     }
 
     @Inject(method = "<init>", at = @At("RETURN"))
@@ -455,10 +452,13 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         this.LegacyNORMAL = false;
     }
 
-    @Dynamic
-    @Inject(method = "func_181670_b", at = @At(value = "INVOKE_ASSIGN", target = "Lorg/apache/logging/log4j/Logger;warn(Ljava/lang/String;)V"), remap = false)
-    public void growBuffer(int p_181670_1_, CallbackInfo ci) {
-        this.field_179009_s += p_181670_1_ / 4;
+    @Inject(method = "growBuffer", at = @At(
+        value = "INVOKE",
+        target = "Lnet/minecraft/client/renderer/GLAllocation;createDirectByteBuffer(I)Ljava/nio/ByteBuffer;",
+        shift = At.Shift.BEFORE
+    ))
+    public void growBuffer(int amount, CallbackInfo ci) {
+        this.field_179009_s += amount / 4;
     }
 
     @Inject(method = "getVertexState", at = @At(value = "RETURN"))
@@ -480,8 +480,10 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
 
     @Inject(method = "putPosition", at = @At("HEAD"))
     public void putPosition(double x, double y, double z, CallbackInfo ci) {
-        if (this.field_179008_i >= this.getBufferSize() - this.vertexFormat.getNextOffset()) {
-            this.growBuffer(2097152);
+        if (LegacyPOSITION || LegacyNORMAL) {
+            if (this.field_179008_i >= this.getBufferSize() - this.vertexFormat.getNextOffset()) {
+                this.growBuffer(2097152);
+            }
         }
     }
 
@@ -499,9 +501,9 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         this.LegacyNORMAL = false;
     }
 
-    @SuppressWarnings("all")
+    @Dynamic
     @Redirect(method = "func_181662_b", at = @At(value = "FIELD", target = "*:[I", ordinal = 0), remap = false)
     public int[] pos() {
-        return WorldRenderer2.field_181661_a;
+        return WorldRenderer_2.field_181661_a;
     }
 }
