@@ -36,7 +36,7 @@ public class VertexBuffer extends WorldRenderer {
     }
 
     /** tex */
-    public net.minecraft.client.renderer.VertexBuffer func_181673_a (double u, double v) {
+    public net.minecraft.client.renderer.VertexBuffer func_181673_a(double u, double v) {
         return (VertexBuffer) this.tex(u, v);
     }
 
