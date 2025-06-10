@@ -14,8 +14,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 
-public class ExtensionPoint<T>
-{
+@SuppressWarnings("unused")
+public class ExtensionPoint<T> {
+
     public static final ExtensionPoint<BiFunction<Minecraft, Screen, Screen>> CONFIGGUIFACTORY = new ExtensionPoint<>();
 
     public static final ExtensionPoint<Pair<Supplier<String>, BiPredicate<String, Boolean>>> DISPLAYTEST = new ExtensionPoint<>();

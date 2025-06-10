@@ -2,12 +2,14 @@
  * Copyright (c) Forge Development LLC and contributors
  * SPDX-License-Identifier: LGPL-2.1-only
  */
+
 package net.minecraftforge.fml.common;
 
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.lang.annotation.*;
 
+@SuppressWarnings("unused")
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface EventBusSubscriber {

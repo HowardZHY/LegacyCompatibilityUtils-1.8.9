@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import org.spongepowered.asm.mixin.Mixin;
 
-@SuppressWarnings("all")
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
 
@@ -16,10 +15,10 @@ public abstract class MixinMinecraft {
         float var8 = 0.00390625F;
         WorldRenderer renderer = Tessellator.getInstance().getWorldRenderer();
         renderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        renderer.pos((double) (width + 0), (double) (height + stdTextureHeight), 0.0D).tex((double) ((float) (width2 + 0) * var7), (double) ((float) (height2 + stdTextureHeight) * var8)).endVertex();
-        renderer.pos((double) (width + stdTextureWidth), (double) (height + stdTextureHeight), 0.0D).tex((double) ((float) (width2 + stdTextureWidth) * var7), (double) ((float) (height2 + stdTextureHeight) * var8)).endVertex();
-        renderer.pos((double) (width + stdTextureWidth), (double) (height + 0), 0.0D).tex((double) ((float) (width2 + stdTextureWidth) * var7), (double) ((float) (height2 + 0) * var8)).endVertex();
-        renderer.pos((double) (width + 0), (double) (height + 0), 0.0D).tex((double) ((float) (width2 + 0) * var7), (double) ((float) (height2 + 0) * var8)).endVertex();
+        renderer.pos(width, height + stdTextureHeight, 0.0D).tex((float) (width2) * var7, (float) (height2 + stdTextureHeight) * var8).endVertex();
+        renderer.pos(width + stdTextureWidth, height + stdTextureHeight, 0.0D).tex((float) (width2 + stdTextureWidth) * var7, (float) (height2 + stdTextureHeight) * var8).endVertex();
+        renderer.pos(width + stdTextureWidth, height, 0.0D).tex((float) (width2 + stdTextureWidth) * var7, (float) (height2) * var8).endVertex();
+        renderer.pos(width, height, 0.0D).tex((float) (width2) * var7, (float) (height2) * var8).endVertex();
         Tessellator.getInstance().draw();
     }
 }
