@@ -202,6 +202,7 @@
     "entity.MixinDataWatcher",
     "entity.MixinEntity",
     "entity.MixinEntityAIAvoidEntity",
+    "entity.MixinEntityAITasks",
     "entity.MixinEntityList",
     "entity.MixinEntityLiving",
     "entity.MixinEntityLivingBase",
