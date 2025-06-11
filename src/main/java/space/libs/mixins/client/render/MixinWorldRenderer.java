@@ -431,14 +431,22 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         this.field_178995_f = v;
     }
 
+    @Override
+    public boolean hasDrawing() {
+        return isDrawing;
+    }
+
+    @Override
     public int getVertexFormatIndex() {
         return vertexFormatIndex;
     }
 
+    @Override
     public VertexFormatElement getVertexFormatElement() {
         return vertexFormatElement;
     }
 
+    @Override
     public void setVertexFormatElement(VertexFormatElement element) {
         this.vertexFormatElement = element;
     }

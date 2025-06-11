@@ -20,6 +20,9 @@ public interface IWorldRenderer {
     @MappedName("finishDrawing")
     int func_178977_d();
 
+    @SuppressWarnings("unused")
+    boolean hasDrawing();
+
     int getVertexFormatIndex();
 
     VertexFormatElement getVertexFormatElement();

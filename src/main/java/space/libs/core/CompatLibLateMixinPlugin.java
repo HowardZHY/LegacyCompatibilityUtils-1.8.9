@@ -42,6 +42,10 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
     public List<String> getMixins() {
         List<String> mixins = new ArrayList<>();
         if (SIDE == MixinEnvironment.Side.CLIENT) {
+            if (ModDetector.hasNEI) {
+                CompatLibCore.LOGGER.info("Adding NEI Fix.");
+                mixins.add("nei.MixinSpawnerRenderer");
+            }
             if (Loader.isModLoaded("CameraStudio")) {
                 CompatLibCore.LOGGER.info("Adding CameraStudio Fixes.");
                 mixins.add("cs.MixinCameraStudioLoader");
@@ -62,12 +66,12 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
                 mixins.add("mobends.MixinZombieAnimationWalk");
             }
             if (Loader.isModLoaded("mobdictionary")) {
-                CompatLibCore.LOGGER.info("Adding MobDictionary fixes");
+                CompatLibCore.LOGGER.info("Adding MobDictionary Fix.");
                 mixins.add("mobdic.MixinMDClientProxy");
             }
             if (Loader.isModLoaded("gogskybox")) {
                 ModDetector.hasSkybox = true;
-                CompatLibCore.LOGGER.info("Adding GoGSkybox Fixes.");
+                CompatLibCore.LOGGER.info("Adding GoGSkybox Fix.");
                 mixins.add("skybox.MixinGoGSkybox");
             }
             if (ModDetector.hasCivCraft) {

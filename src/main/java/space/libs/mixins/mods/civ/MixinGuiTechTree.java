@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) AlexIIL
+ * GPL-2.0 License
+ */
 package space.libs.mixins.mods.civ;
 
 import alexiil.mods.civ.api.tech.TechTree.*;
