@@ -13,6 +13,7 @@
     "mpm.MixinRenderEvent"
   ],
   "mixins": [
-    "ichun.MixinModVersionChecker"
+    "ichun.MixinModVersionChecker",
+    "mochickens.MixinFileManager"
   ]
 }
