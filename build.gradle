@@ -111,6 +111,7 @@ dependencies {
     compileOnly("curse.maven:alexiillib-229301:2233177")
     compileOnly("curse.maven:civcraft-228061:2233156")
     compileOnly("curse.maven:gog-skybox-266068:2411441")
+    compileOnly("curse.maven:thaumcraft-223628:2287496")
     compileOnly("codechicken:NotEnoughItems:1.8-1.0.5.104:dev")
     compileOnly("codechicken:CodeChickenLib:1.8-1.1.2.139:dev")
     compileOnly("com.mumfrey:liteloader:1.8.9-SNAPSHOT")

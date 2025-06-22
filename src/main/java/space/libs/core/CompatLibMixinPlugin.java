@@ -1,5 +1,6 @@
 package space.libs.core;
 
+import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import space.libs.util.ModDetector;
@@ -9,6 +10,8 @@ import java.util.List;
 import java.util.Set;
 
 public class CompatLibMixinPlugin implements IMixinConfigPlugin {
+
+    public static final MixinEnvironment.Side SIDE = MixinEnvironment.getCurrentEnvironment().getSide();
 
     @Override
     public void onLoad(String mixinPackage) {

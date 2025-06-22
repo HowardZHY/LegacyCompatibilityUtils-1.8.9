@@ -9,6 +9,7 @@ import space.libs.core.CompatLibCore;
 import space.libs.util.mods.ObfCompat;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.*;
 
 public class ModDetector {
@@ -28,6 +29,8 @@ public class ModDetector {
     public static boolean hasNEI = false;
 
     public static boolean hasSkybox = false;
+
+    public static boolean hasTC5 = false;
 
     public static ModDetector INSTANCE;
 
@@ -64,6 +67,18 @@ public class ModDetector {
 
     public static boolean skybox() {
         return hasSkybox;
+    }
+
+    public static void EarlyLoadTC5() {
+        try {
+            Class<?> c = Class.forName("thaumcraft.loader.ThaumcraftLoader");
+            Method m = c.getDeclaredMethod("load");
+            m.invoke(null);
+        } catch (ClassNotFoundException not) {
+            CompatLibCore.LOGGER.info("TC5 Not found.");
+            return;
+        } catch (ReflectiveOperationException ignored) {}
+        hasTC5 = true;
     }
 
     public static void FixCoremods() {

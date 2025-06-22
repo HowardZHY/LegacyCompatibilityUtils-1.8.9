@@ -13,8 +13,6 @@ import java.util.Set;
 
 public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
 
-    public static final MixinEnvironment.Side SIDE = MixinEnvironment.getCurrentEnvironment().getSide();
-
     @Override
     public void onLoad(String s) {
 
@@ -41,7 +39,7 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
     @Override
     public List<String> getMixins() {
         List<String> mixins = new ArrayList<>();
-        if (SIDE == MixinEnvironment.Side.CLIENT) {
+        if (CompatLibMixinPlugin.SIDE == MixinEnvironment.Side.CLIENT) {
             if (ModDetector.hasNEI) {
                 CompatLibCore.LOGGER.info("Adding NEI Fix.");
                 mixins.add("nei.MixinSpawnerRenderer");
@@ -78,6 +76,10 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
                 CompatLibCore.LOGGER.info("Adding CivCraft Fix.");
                 mixins.add("civ.MixinGuiTechTree");
             }
+        }
+        if (ModDetector.hasTC5) {
+            CompatLibCore.LOGGER.info("Adding TC5 Fix.");
+            mixins.add("tc5.MixinItemResearchNotes");
         }
         return mixins;
     }

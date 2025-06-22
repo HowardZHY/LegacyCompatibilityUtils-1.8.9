@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Dummy;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.apache.commons.io.IOUtils;
 import org.objectweb.asm.*;
+import space.libs.core.CompatLibCore;
 
 import java.io.InputStream;
 
@@ -17,14 +18,13 @@ public class ClassTransformers implements IClassTransformer {
         if (name == null || bytes == null) {
             return bytes;
         }
-        if (name.startsWith("cod")) {
-            if (name.equals("codechicken.core.launch.DepLoader$DepLoadInst")) {
-                ClassReader cr = new ClassReader(bytes);
-                ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
-                ClassVisitor cv = new CCCVisitor(cw);
-                cr.accept(cv, 0);
-                return cw.toByteArray();
-            }
+        if (name.endsWith("$DepLoadInst")) {
+            CompatLibCore.LOGGER.info("Detected Legacy DepLoader: " + name);
+            ClassReader cr = new ClassReader(bytes);
+            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
+            ClassVisitor cv = new DepLoadInstVisitor(cw);
+            cr.accept(cv, 0);
+            return cw.toByteArray();
         } else {
             if (name.startsWith("com")) {
                 switch (name) {
@@ -99,23 +99,28 @@ public class ClassTransformers implements IClassTransformer {
         return bytes;
     }
 
-    public static class CCCVisitor extends ClassVisitor {
+    public static class DepLoadInstVisitor extends ClassVisitor {
 
-        public CCCVisitor(ClassVisitor cv) {
+        public DepLoadInstVisitor(ClassVisitor cv) {
             super(Opcodes.ASM5, cv);
         }
 
         @Override
         public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
             MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions);
-            if (name.equals("load")) {
+            if (name.equals("searchCoreMod")) {
                 return new MethodVisitor(Opcodes.ASM5, mv) {
                     @Override
-                    public void visitCode() {
-                        mv.visitCode();
-                        mv.visitInsn(Opcodes.RETURN);
-                        mv.visitMaxs(0, 0);
-                        mv.visitEnd();
+                    public void visitLdcInsn(Object cst) {
+                        String s = cst.toString();
+                        if (s.equals("loadedCoremods")) {
+                            super.visitLdcInsn("ignoredModFiles");
+                            return;
+                        } else if (s.equals("reparsedCoremods")) {
+                            super.visitLdcInsn("candidateModFiles");
+                            return;
+                        }
+                        super.visitLdcInsn(cst);
                     }
                 };
             }
@@ -131,7 +136,6 @@ public class ClassTransformers implements IClassTransformer {
 
         @Override
         public void visitEnd() {
-            // Add the field
             FieldVisitor fv = cv.visitField(ACC_PUBLIC | Opcodes.ACC_STATIC | Opcodes.ACC_FINAL,
                 "GuiTextField",
                 "Lcom/mumfrey/liteloader/core/runtime/Obf;",
@@ -192,8 +196,8 @@ public class ClassTransformers implements IClassTransformer {
                     @Override
                     public void visitCode() {
                         mv.visitCode();
-                        mv.visitInsn(Opcodes.ICONST_1); // Push true onto the stack
-                        mv.visitInsn(Opcodes.IRETURN);  // Return true
+                        mv.visitInsn(Opcodes.ICONST_1);
+                        mv.visitInsn(Opcodes.IRETURN);
                         mv.visitMaxs(1, 2);
                         mv.visitEnd();
                     }
