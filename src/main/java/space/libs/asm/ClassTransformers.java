@@ -26,7 +26,14 @@ public class ClassTransformers implements IClassTransformer {
             cr.accept(cv, 0);
             return cw.toByteArray();
         } else {
-            if (name.startsWith("com")) {
+            if (name.equals("cc.polyfrost.oneconfig.internal.config.core.ConfigCore")) {
+                CompatLibCore.LOGGER.info("Try Optimize OneConfig-v0 Saving...");
+                ClassReader cr = new ClassReader(bytes);
+                ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_FRAMES);
+                ClassVisitor cv = new ConfigCoreVisitor(cw);
+                cr.accept(cv, 0);
+                return cw.toByteArray();
+            } else if (name.startsWith("com")) {
                 switch (name) {
                     case "com.llamalad7.mixinextras.injector.wrapoperation.WrapOperationInjector":
                         try {
@@ -97,6 +104,38 @@ public class ClassTransformers implements IClassTransformer {
             }
         }
         return bytes;
+    }
+
+    public static class ConfigCoreVisitor extends ClassVisitor {
+
+        public ConfigCoreVisitor(ClassVisitor cv) {
+            super(Opcodes.ASM5, cv);
+        }
+
+        @Override
+        public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
+            MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions);
+            if (name.equals("<clinit>")) {
+                return new MethodVisitor(Opcodes.ASM5, mv) {
+                    @Override
+                    public void visitCode() {
+                        super.visitCode();
+                        visitTypeInsn(Opcodes.NEW, "java/util/ArrayList");
+                        visitInsn(Opcodes.DUP);
+                        visitMethodInsn(Opcodes.INVOKESPECIAL, "java/util/ArrayList", "<init>", "()V", false);
+                        visitFieldInsn(Opcodes.PUTSTATIC, "cc/polyfrost/oneconfig/internal/config/core/ConfigCore", "mods", "Ljava/util/List;");
+                        visitTypeInsn(Opcodes.NEW, "java/util/HashMap");
+                        visitInsn(Opcodes.DUP);
+                        visitMethodInsn(Opcodes.INVOKESPECIAL, "java/util/HashMap", "<init>", "()V", false);
+                        visitFieldInsn(Opcodes.PUTSTATIC, "cc/polyfrost/oneconfig/internal/config/core/ConfigCore", "subMods", "Ljava/util/HashMap;");
+                        visitInsn(Opcodes.RETURN);
+                        visitMaxs(2, 0);
+                        visitEnd();
+                    }
+                };
+            }
+            return mv;
+        }
     }
 
     public static class DepLoadInstVisitor extends ClassVisitor {
