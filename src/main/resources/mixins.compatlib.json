@@ -203,6 +203,7 @@
     "entity.MixinEntity",
     "entity.MixinEntityAIAvoidEntity",
     "entity.MixinEntityAITasks",
+    "entity.MixinEntityFishHook",
     "entity.MixinEntityList",
     "entity.MixinEntityLiving",
     "entity.MixinEntityLivingBase",
