@@ -89,19 +89,13 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
     @Shadow public abstract void endVertex();
 
     /** Flags to mark legacy behavior */
-    public boolean LegacyPOSITION;
+    public boolean LegacyPOSITION, LegacyCOLORF, LegacyCOLORI, LegacyNORMAL, LegacyLITMAP;
 
-    public boolean LegacyPOSITIONCOLORF;
+    public int[] Colors;
 
-    public boolean LegacyPOSITIONCOLORI;
+    public float[] ColorsF;
 
-    public boolean LegacyNORMAL;
-
-    public int ColorR, ColorG, ColorB, ColorA;
-
-    public float ColorRF, ColorGF, ColorBF, ColorAF;
-
-    public float Normal1, Normal2, Normal3;
+    public float[] Normals;
 
     @MappedName("textureU")
     public double field_178998_e;
@@ -129,49 +123,32 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
 
     @MappedName("setColorOpaque")
     public void func_78913_a(int red, int green, int blue) {
-        this.ColorR = red; this.ColorG = green; this.ColorB = blue; this.ColorA = 255;
         this.func_178961_b(red, green, blue, 255);
     }
 
     @MappedName("setColorRGBA_F")
     public void func_178960_a(float red, float green, float blue, float alpha) {
-        this.LegacyPOSITIONCOLORF = true;
-        this.ColorRF = red; this.ColorGF = green; this.ColorBF = blue; this.ColorAF = alpha;
+        this.LegacyCOLORF = true;
+        this.ColorsF = new float[]{red, green, blue, alpha};
         this.func_178961_b((int)(red * 255.0F), (int)(green * 255.0F), (int)(blue * 255.0F), (int)(alpha * 255.0F));
     }
 
     @MappedName("setColorRGBA")
     public void func_178961_b(int red, int green, int blue, int alpha) {
-        this.LegacyPOSITIONCOLORI = true;
-        this.ColorR = red; this.ColorG = green; this.ColorB = blue; this.ColorA = alpha;
+        this.LegacyCOLORI = true;
+        this.Colors = new int[]{red, green, blue, alpha};
+        for (int i = 0; i < 4; i++) {
+            if (Colors[i] > 255) {
+                Colors[i] = 255;
+            } else if (Colors[i] < 0) {
+                Colors[i] = 0;
+            }
+        }
+        red = this.Colors[0]; green = this.Colors[1]; blue = this.Colors[2]; alpha = this.Colors[3];
         if (this.LegacyPOSITION) {
             return;
         }
         if (!this.noColor) {
-            if (red > 255) {
-                red = 255;
-            }
-            if (green > 255) {
-                green = 255;
-            }
-            if (blue > 255) {
-                blue = 255;
-            }
-            if (alpha > 255) {
-                alpha = 255;
-            }
-            if (red < 0) {
-                red = 0;
-            }
-            if (green < 0) {
-                green = 0;
-            }
-            if (blue < 0) {
-                blue = 0;
-            }
-            if (alpha < 0) {
-                alpha = 0;
-            }
             VertexFormat format = new VertexFormat(POSITION_COLOR);
             this.vertexFormat = format;
             this.vertexFormatElement = format.getElement(this.vertexFormatIndex);
@@ -189,7 +166,8 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
     }
 
     @MappedName("setBrightness")
-    public void func_178963_b(int i) {
+    public void func_178963_b(int bright) {
+        this.LegacyLITMAP = true;
         if (!this.vertexFormat.hasUvOffset(1)) {
             if (!this.vertexFormat.hasUvOffset(0)) {
                 this.vertexFormat.addElement(new VertexFormatElement(0, VertexFormatElement.EnumType.FLOAT, VertexFormatElement.EnumUsage.UV, 2));
@@ -197,7 +175,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
             VertexFormatElement element = new VertexFormatElement(1, VertexFormatElement.EnumType.SHORT, VertexFormatElement.EnumUsage.UV, 2);
             this.vertexFormat.addElement(element);
         }
-        this.field_178996_g = i;
+        this.field_178996_g = bright;
     }
 
     @MappedName("startDrawing")
@@ -261,7 +239,6 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         int r = rgb >> 16 & 255;
         int g = rgb >> 8 & 255;
         int b = rgb & 255;
-        this.ColorR = r; this.ColorG = g; this.ColorB = b; this.ColorA = a;
         this.func_178961_b(r, g, b, a);
     }
 
@@ -294,9 +271,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
     @MappedName("setNormal")
     public void func_178980_d(float x, float y, float z) {
         this.LegacyNORMAL = true;
-        this.Normal1 = x;
-        this.Normal2 = y;
-        this.Normal3 = z;
+        this.Normals = new float[]{x, y, z};
         if (this.LegacyPOSITION) {
             return;
         }
@@ -325,23 +300,26 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
     @MappedName("addVertex")
     public void func_178984_b(double x, double y, double z) {
 
-        if (this.LegacyPOSITIONCOLORF) {
+        if (this.LegacyCOLORI) {
             VertexFormat format = new VertexFormat(POSITION_COLOR);
             this.vertexFormat = format;
             this.vertexFormatElement = format.getElement(this.vertexFormatIndex);
-            this.pos(x, y, z).color(this.ColorRF, this.ColorGF, this.ColorBF, this.ColorAF).endVertex();
-            return;
-        }
-
-        if (this.LegacyPOSITIONCOLORI) {
-            VertexFormat format = new VertexFormat(POSITION_COLOR);
-            this.vertexFormat = format;
-            this.vertexFormatElement = format.getElement(this.vertexFormatIndex);
-            this.pos(x, y, z).color(this.ColorR, this.ColorG, this.ColorB, this.ColorA).endVertex();
+            if (this.LegacyCOLORF) {
+                this.pos(x, y, z).color(this.ColorsF[0], this.ColorsF[1], this.ColorsF[2], this.ColorsF[3]).endVertex();
+            } else {
+                this.pos(x, y, z).color(this.Colors[0], this.Colors[1], this.Colors[2], this.Colors[3]).endVertex();
+            }
             return;
         }
 
         if (this.LegacyPOSITION) {
+            if (this.LegacyNORMAL) {
+                VertexFormat format = new VertexFormat(POSITION_NORMAL);
+                this.vertexFormat = format;
+                this.vertexFormatElement = format.getElement(this.vertexFormatIndex);
+                this.pos(x, y, z).normal(this.Normals[0], this.Normals[1], this.Normals[2]).endVertex();
+                return;
+            }
             VertexFormat format = new VertexFormat(POSITION);
             this.vertexFormat = format;
             this.vertexFormatElement = format.getElement(this.vertexFormatIndex);
@@ -399,7 +377,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
             VertexFormat format = new VertexFormat(POSITION_TEX_NORMAL);
             this.vertexFormat = format;
             this.vertexFormatElement = format.getElement(this.vertexFormatIndex);
-            this.pos(x, y, z).tex(u, v).normal(Normal1, Normal2, Normal3).endVertex();
+            this.pos(x, y, z).tex(u, v).normal(Normals[0], Normals[1], Normals[2]).endVertex();
             return;
         }
         VertexFormat format = new VertexFormat(POSITION_TEX);
@@ -451,13 +429,18 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         this.vertexFormatElement = element;
     }
 
+    public void ClearFlags() {
+        this.LegacyPOSITION = false;
+        this.LegacyCOLORF = false;
+        this.LegacyCOLORI = false;
+        this.LegacyNORMAL = false;
+        this.LegacyLITMAP = false;
+    }
+
     @Inject(method = "<init>", at = @At("RETURN"))
     public void initBufferSize(int bufferSizeIn, CallbackInfo ci) {
         this.field_179009_s = bufferSizeIn;
-        this.LegacyPOSITION = false;
-        this.LegacyPOSITIONCOLORF = false;
-        this.LegacyPOSITIONCOLORI = false;
-        this.LegacyNORMAL = false;
+        this.ClearFlags();
     }
 
     @Inject(method = "growBuffer", at = @At(
@@ -488,7 +471,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
 
     @Inject(method = "putPosition", at = @At("HEAD"))
     public void putPosition(double x, double y, double z, CallbackInfo ci) {
-        if (LegacyPOSITION || LegacyNORMAL) {
+        if (LegacyPOSITION) {
             if (this.field_179008_i >= this.getBufferSize() - this.vertexFormat.getNextOffset()) {
                 this.growBuffer(2097152);
             }
@@ -500,13 +483,9 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         this.field_179008_i += vertexData.length;
     }
 
-    /** Reset Flags */
     @Inject(method = "finishDrawing", at = @At("HEAD"))
     public void finishDrawing(CallbackInfo ci) {
-        this.LegacyPOSITION = false;
-        this.LegacyPOSITIONCOLORF = false;
-        this.LegacyPOSITIONCOLORI = false;
-        this.LegacyNORMAL = false;
+        this.ClearFlags();
     }
 
     @Dynamic
