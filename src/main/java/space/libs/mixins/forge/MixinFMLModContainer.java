@@ -17,7 +17,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Map;
 
-@SuppressWarnings("all")
 @Mixin(value = FMLModContainer.class, priority = 100, remap = false)
 public abstract class MixinFMLModContainer implements ModContainer {
 
@@ -41,6 +40,7 @@ public abstract class MixinFMLModContainer implements ModContainer {
         return modid;
     }
 
+    @SuppressWarnings("all")
     @Inject(method = "bindMetadata", at = @At("TAIL"))
     public void bindMetadata(MetadataCollection collection, CallbackInfo ci) {
         String mcVersionString = (String)descriptor.get("acceptedMinecraftVersions");
