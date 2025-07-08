@@ -7,7 +7,6 @@ package space.libs.util.client;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraftforge.fml.client.GuiScrollingList;
-import space.libs.util.client.GuiIngameModOptions;
 
 public class GuiModOptionList extends GuiScrollingList {
 
