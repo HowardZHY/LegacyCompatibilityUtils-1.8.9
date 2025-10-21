@@ -17,9 +17,9 @@ public class MixinBendsLogger {
     @Inject(method = "log", at = @At("HEAD"), cancellable = true)
     private static void log(String argText, BendsLogger argType, CallbackInfo ci) {
         if (argType == BendsLogger.DEBUG && CompatLibDebug.DEBUG) {
-            LogManager.getLogger().info(argText);
+            LogManager.getLogger("MO'BENDS").info(argText);
         } else if (argType != BendsLogger.DEBUG) {
-            LogManager.getLogger().info(argText);
+            LogManager.getLogger("MO'BENDS").info(argText);
         }
         ci.cancel();
     }

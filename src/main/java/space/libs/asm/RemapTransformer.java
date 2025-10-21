@@ -245,7 +245,7 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
             } else {
                 try {
                     if (fields.get(name + ":null") != null) {
-                        if (CompatLibDebug.DEBUG && (!owner.contains("/") || owner.contains("net"))) {
+                        if (CompatLibDebug.DEBUG_REMAP && (!owner.contains("/") || owner.contains("net"))) {
                             LogManager.getLogger().info("Try map field without desc " + owner + "." + name + " to " + fields.get(name + ":null"));
                         }
                         return fields.get(name + ":null");

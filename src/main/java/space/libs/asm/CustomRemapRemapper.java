@@ -54,7 +54,7 @@ public class CustomRemapRemapper extends Remapper {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public static boolean DEBUG_REMAPPING = CompatLibDebug.DEBUG;
+    public static boolean DEBUG_REMAPPING = CompatLibDebug.DEBUG_REMAP;
 
     public CustomRemapRemapper() {
         classNameBiMap = ImmutableBiMap.of();
