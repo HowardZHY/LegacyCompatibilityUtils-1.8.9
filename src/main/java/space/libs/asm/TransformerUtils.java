@@ -1,0 +1,19 @@
+package space.libs.asm;
+
+import org.objectweb.asm.*;
+
+public class TransformerUtils {
+
+    public static byte[] transform(byte[] bytes, int writerFlags, Class<? extends ClassVisitor> visitor, int acceptFlags) {
+        try {
+            ClassReader cr = new ClassReader(bytes);
+            ClassWriter cw = new ClassWriter(cr, writerFlags);
+            ClassVisitor cv = visitor.getDeclaredConstructor(ClassVisitor.class).newInstance(cw);
+            cr.accept(cv, acceptFlags);
+            return cw.toByteArray();
+        } catch (ReflectiveOperationException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+}

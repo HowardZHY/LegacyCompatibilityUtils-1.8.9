@@ -26,7 +26,6 @@ package space.libs.asm;
 
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.*;
-import org.objectweb.asm.commons.RemappingClassAdapter;
 
 @SuppressWarnings("all")
 public class LegacyObfTransformer implements IClassTransformer {
@@ -39,8 +38,7 @@ public class LegacyObfTransformer implements IClassTransformer {
         if (ClassNameList.StartsWithBlacklist(name) || ClassNameList.ContainsBlacklist(name)) {
             ClassReader reader = new ClassReader(bytes);
             ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_MAXS);
-            RemappingClassAdapter remapAdapter = new CustomRemappingAdapter(writer);
-            reader.accept(remapAdapter, ClassReader.EXPAND_FRAMES);
+            reader.accept(new CustomRemappingAdapter(writer), ClassReader.EXPAND_FRAMES);
             return writer.toByteArray();
         }
         return bytes;

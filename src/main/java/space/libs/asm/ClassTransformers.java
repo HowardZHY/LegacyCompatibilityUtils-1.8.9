@@ -20,19 +20,11 @@ public class ClassTransformers implements IClassTransformer {
         }
         if (name.endsWith("$DepLoadInst")) {
             CompatLibCore.LOGGER.info("Detected Legacy DepLoader: " + name);
-            ClassReader cr = new ClassReader(bytes);
-            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
-            ClassVisitor cv = new DepLoadInstVisitor(cw);
-            cr.accept(cv, 0);
-            return cw.toByteArray();
+            return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, DepLoadInstVisitor.class, 0);
         } else {
             if (name.equals("cc.polyfrost.oneconfig.internal.config.core.ConfigCore")) {
                 CompatLibCore.LOGGER.info("Try Optimize OneConfig-v0 Saving...");
-                ClassReader cr = new ClassReader(bytes);
-                ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_FRAMES);
-                ClassVisitor cv = new ConfigCoreVisitor(cw);
-                cr.accept(cv, 0);
-                return cw.toByteArray();
+                return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_FRAMES, ConfigCoreVisitor.class, 0);
             } else if (name.startsWith("com")) {
                 switch (name) {
                     case "com.llamalad7.mixinextras.injector.wrapoperation.WrapOperationInjector":
@@ -48,18 +40,10 @@ public class ClassTransformers implements IClassTransformer {
                             return bytes;
                         }
                     case "com.mumfrey.liteloader.core.runtime.Obf": {
-                        ClassReader cr = new ClassReader(bytes);
-                        ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
-                        ClassVisitor cv = new LiteLoaderObfVisitor(cw);
-                        cr.accept(cv, 0);
-                        return cw.toByteArray();
+                        return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, LiteLoaderObfVisitor.class, 0);
                     }
                     case "com.mumfrey.liteloader.core.LiteLoaderVersion": {
-                        ClassReader cr = new ClassReader(bytes);
-                        ClassWriter cw = new ClassWriter(cr, 0);
-                        ClassVisitor cv = new LiteLoaderVersionVisitor(cw);
-                        cr.accept(cv, 0);
-                        return cw.toByteArray();
+                        return TransformerUtils.transform(bytes, 0, LiteLoaderVersionVisitor.class, 0);
                     }
                     default: {
                         return bytes;
@@ -69,32 +53,16 @@ public class ClassTransformers implements IClassTransformer {
                 if (name.startsWith("net.minecraftfor")) {
                     switch (name) {
                         case "net.minecraftforge.fml.common.Loader": {
-                            ClassReader cr = new ClassReader(bytes);
-                            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
-                            ClassVisitor cv = new LoaderVisitor(cw);
-                            cr.accept(cv, 0);
-                            return cw.toByteArray();
+                            return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, LoaderVisitor.class, 0);
                         }
                         case "net.minecraftforge.fml.common.versioning.VersionRange": {
-                            ClassReader cr = new ClassReader(bytes);
-                            ClassWriter cw = new ClassWriter(cr, 0);
-                            ClassVisitor cv = new VersionRangeVisitor(cw);
-                            cr.accept(cv, 0);
-                            return cw.toByteArray();
+                            return TransformerUtils.transform(bytes, 0, VersionRangeVisitor.class, 0);
                         }
                         case "net.minecraftforge.fml.client.event.ConfigChangedEvent": {
-                            ClassReader cr = new ClassReader(bytes);
-                            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
-                            ClassVisitor cv = new ConfigChangedEventVisitor(cw);
-                            cr.accept(cv, 0);
-                            return cw.toByteArray();
+                            return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, ConfigChangedEventVisitor.class, 0);
                         }
                         case "net.minecraftforge.fml.common.event.FMLModIdMappingEvent": {
-                            ClassReader cr = new ClassReader(bytes);
-                            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
-                            ClassVisitor cv = new FMLModIdMappingEventVisitor(cw);
-                            cr.accept(cv, 0);
-                            return cw.toByteArray();
+                            return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, FMLModIdMappingEventVisitor.class, 0);
                         }
                         default: {
                             return bytes;
