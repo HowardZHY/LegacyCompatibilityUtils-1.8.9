@@ -149,7 +149,7 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
         if (name == null || bytes == null) {
             return bytes;
         }
-        if (ClassNameList.Startswith(name)) {
+        if (ClassNameList.StartsWith(name)) {
             return bytes;
         }
         if (ClassNameList.Contains(name)) {

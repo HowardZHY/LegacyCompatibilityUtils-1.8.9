@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 public class ClassNameList {
 
-    public static boolean Startswith(String name) {
+    public static boolean StartsWith(String name) {
         return Arrays.stream(ClassNameList.WHITELIST).anyMatch(name::startsWith);
     }
 
-    public static boolean StartswithBlacklist(String name) {
+    public static boolean StartsWithBlacklist(String name) {
         return Arrays.stream(ClassNameList.BLACKLIST).anyMatch(name::startsWith);
     }
 

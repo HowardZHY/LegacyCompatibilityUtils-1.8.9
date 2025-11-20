@@ -36,7 +36,7 @@ public class LegacyObfTransformer implements IClassTransformer {
         if (name == null || bytes == null) {
             return bytes;
         }
-        if (ClassNameList.StartswithBlacklist(name) || ClassNameList.ContainsBlacklist(name)) {
+        if (ClassNameList.StartsWithBlacklist(name) || ClassNameList.ContainsBlacklist(name)) {
             ClassReader reader = new ClassReader(bytes);
             ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_MAXS);
             RemappingClassAdapter remapAdapter = new CustomRemappingAdapter(writer);
