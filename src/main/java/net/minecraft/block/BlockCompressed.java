@@ -17,8 +17,7 @@ public class BlockCompressed extends Block {
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
 
-    public BlockCompressed(Material material, MapColor color)
-    {
+    public BlockCompressed(Material material, MapColor color) {
         super(material, color);
         this.field_150202_a = color;
         this.setCreativeTab(CreativeTabs.tabBlock);

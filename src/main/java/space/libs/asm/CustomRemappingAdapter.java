@@ -10,9 +10,7 @@
 package space.libs.asm;
 
 import org.objectweb.asm.*;
-import org.objectweb.asm.commons.Remapper;
-import org.objectweb.asm.commons.RemappingClassAdapter;
-import org.objectweb.asm.commons.RemappingMethodAdapter;
+import org.objectweb.asm.commons.*;
 
 public class CustomRemappingAdapter extends RemappingClassAdapter {
 

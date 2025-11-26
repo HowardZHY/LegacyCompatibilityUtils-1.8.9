@@ -7,13 +7,13 @@
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "chame.MixinChamModel",
-    "di.MixinDIClientProxy",
-    "ichun.MixinThreadGetPatrons",
-    "mpm.MixinRenderEvent"
+    "fixes.chame.MixinChamModel",
+    "qol.di.MixinDIClientProxy",
+    "qol.ichun.MixinThreadGetPatrons",
+    "qol.mpm.MixinRenderEvent",
+    "qol.of.MixinModelAdapterBoat"
   ],
   "mixins": [
-    "ichun.MixinModVersionChecker",
-    "mochickens.MixinFileManager"
+    "qol.ichun.MixinModVersionChecker"
   ]
 }

@@ -28,10 +28,7 @@ import space.libs.core.CompatLibDebug;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static com.google.common.io.Resources.getResource;
 

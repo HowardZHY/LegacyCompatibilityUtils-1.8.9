@@ -42,44 +42,48 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
         if (CompatLibMixinPlugin.SIDE == MixinEnvironment.Side.CLIENT) {
             if (ModDetector.hasNEI) {
                 CompatLibCore.LOGGER.info("Adding NEI Fix.");
-                mixins.add("nei.MixinSpawnerRenderer");
+                mixins.add("legacy.nei.MixinSpawnerRenderer");
             }
             if (Loader.isModLoaded("CameraStudio")) {
                 CompatLibCore.LOGGER.info("Adding CameraStudio Fixes.");
-                mixins.add("cs.MixinCameraStudioLoader");
-                mixins.add("cs.MixinCameraStudioLogger");
-                mixins.add("cs.MixinCameraStudioPrivateFields");
-                mixins.add("cs.MixinCameraStudioRenderCamera");
-                mixins.add("cs.MixinCameraStudioRenderCameraFOV");
+                mixins.add("legacy.cs.MixinCameraStudioLoader");
+                mixins.add("legacy.cs.MixinCameraStudioLogger");
+                mixins.add("legacy.cs.MixinCameraStudioPrivateFields");
+                mixins.add("legacy.cs.MixinCameraStudioRenderCamera");
+                mixins.add("legacy.cs.MixinCameraStudioRenderCameraFOV");
+            }
+            if (Loader.isModLoaded("mobdictionary")) {
+                CompatLibCore.LOGGER.info("Adding MobDictionary Fix.");
+                mixins.add("legacy.mobdic.MixinMDClientProxy");
             }
             if (Loader.isModLoaded("mobends")) {
                 ModDetector.hasMobends = true;
                 CompatLibCore.LOGGER.info("Adding MoBends Fixes.");
-                mixins.add("mobends.MixinBendsLogger");
-                mixins.add("mobends.MixinClientProxy");
-                mixins.add("mobends.MixinEventHandlerDataUpdate");
-                mixins.add("mobends.MixinEventHandlerRenderPlayer");
-                mixins.add("mobends.MixinModelRendererBends");
-                mixins.add("mobends.MixinSmoothVector3f");
-                mixins.add("mobends.MixinZombieAnimationWalk");
-            }
-            if (Loader.isModLoaded("mobdictionary")) {
-                CompatLibCore.LOGGER.info("Adding MobDictionary Fix.");
-                mixins.add("mobdic.MixinMDClientProxy");
+                mixins.add("legacy.mobends.MixinBendsLogger");
+                mixins.add("legacy.mobends.MixinClientProxy");
+                mixins.add("legacy.mobends.MixinEventHandlerDataUpdate");
+                mixins.add("legacy.mobends.MixinEventHandlerRenderPlayer");
+                mixins.add("legacy.mobends.MixinModelRendererBends");
+                mixins.add("legacy.mobends.MixinSmoothVector3f");
+                mixins.add("legacy.mobends.MixinZombieAnimationWalk");
             }
             if (Loader.isModLoaded("gogskybox")) {
                 ModDetector.hasSkybox = true;
                 CompatLibCore.LOGGER.info("Adding GoGSkybox Fix.");
-                mixins.add("skybox.MixinGoGSkybox");
+                mixins.add("fixes.skybox.MixinGoGSkybox");
             }
             if (ModDetector.hasCivCraft) {
                 CompatLibCore.LOGGER.info("Adding CivCraft Fix.");
-                mixins.add("civ.MixinGuiTechTree");
+                mixins.add("legacy.civ.MixinGuiTechTree");
             }
         }
         if (ModDetector.hasTC5) {
             CompatLibCore.LOGGER.info("Adding TC5 Fix.");
-            mixins.add("tc5.MixinItemResearchNotes");
+            mixins.add("legacy.tc5.MixinItemResearchNotes");
+        }
+        if (Loader.isModLoaded("mochickens")) {
+            CompatLibCore.LOGGER.info("Adding Mo Chickens Fix.");
+            mixins.add("legacy.mochickens.MixinFileManager");
         }
         return mixins;
     }

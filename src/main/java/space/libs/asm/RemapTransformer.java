@@ -24,32 +24,18 @@
  */
 package space.libs.asm;
 
-import static com.google.common.io.Resources.getResource;
-import static com.google.common.io.Resources.readLines;
+import static com.google.common.io.Resources.*;
 
-import com.google.common.base.Charsets;
-import com.google.common.base.Strings;
-import com.google.common.base.Throwables;
-import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableTable;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
+import com.google.common.base.*;
+import com.google.common.collect.*;
 import com.google.common.io.LineProcessor;
 import net.minecraft.launchwrapper.IClassNameTransformer;
 import net.minecraft.launchwrapper.IClassTransformer;
 import net.minecraft.launchwrapper.Launch;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.*;
 import org.apache.logging.log4j.LogManager;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.commons.Remapper;
-import org.objectweb.asm.commons.RemappingClassAdapter;
-import org.objectweb.asm.commons.RemappingMethodAdapter;
+import org.objectweb.asm.*;
+import org.objectweb.asm.commons.*;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
 import space.libs.core.CompatLibDebug;
