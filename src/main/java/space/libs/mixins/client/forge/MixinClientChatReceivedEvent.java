@@ -31,7 +31,7 @@ public class MixinClientChatReceivedEvent {
 
     public void setMessage(ITextComponent message)
     {
-        this.message = (IChatComponent) message;
+        this.message = message;
     }
 
     public ChatType getType() {

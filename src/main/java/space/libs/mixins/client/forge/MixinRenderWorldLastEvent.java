@@ -10,9 +10,9 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
+@SuppressWarnings("unused")
 @Mixin(value = RenderWorldLastEvent.class, remap = false)
 public class MixinRenderWorldLastEvent {
-
 
     @Shadow
     public @Final RenderGlobal context;

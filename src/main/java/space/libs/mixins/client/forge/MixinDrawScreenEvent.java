@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.*;
 @Pseudo
 @Mixin(value = GuiScreenEvent.DrawScreenEvent.class, remap = false)
 public class MixinDrawScreenEvent extends GuiScreenEvent {
+
     @Final
     @Mutable
     @Shadow

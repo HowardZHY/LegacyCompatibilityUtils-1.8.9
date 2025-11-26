@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("all")
-@Mixin(value = ModelLoader.UVLock.class,remap = false)
+@Mixin(value = ModelLoader.UVLock.class, remap = false)
 public abstract class MixinModelLoaderUVLock implements Function<IModelPart, TRSRTransformation> {
 
     @Shadow

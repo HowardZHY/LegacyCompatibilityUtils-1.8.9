@@ -29,19 +29,18 @@ public class MixinGuiScrollingList {
     @Shadow(remap = false)
     protected @Final int left;
 
-    public void overlayBackground(int top, int height, int alpha1, int alpha2)
-    {
+    public void overlayBackground(int top, int height, int alpha1, int alpha2) {
         Tessellator tess = Tessellator.getInstance();
-        WorldRenderer worldr = tess.getWorldRenderer();
+        WorldRenderer renderer = tess.getWorldRenderer();
         this.client.renderEngine.bindTexture(Gui.optionsBackground);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         float scale = 32.0F;
         double startUV = (screenWidth / scale) / screenWidth * (left);
-        worldr.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-        worldr.pos(left, height, 0.0D).tex(startUV, height / scale).color(0x40, 0x40, 0x40, alpha2).endVertex();
-        worldr.pos(left+listWidth+8, height, 0.0D).tex((left+listWidth+8) / scale, height / scale).color(0x40, 0x40, 0x40, alpha2).endVertex();
-        worldr.pos(left+listWidth+8, top,    0.0D).tex((left+listWidth+8) / scale, top / scale   ).color(0x40, 0x40, 0x40, alpha1).endVertex();
-        worldr.pos(left, top,    0.0D).tex(startUV, top / scale   ).color(0x40, 0x40, 0x40, alpha1).endVertex();
+        renderer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
+        renderer.pos(left, height, 0.0D).tex(startUV, height / scale).color(0x40, 0x40, 0x40, alpha2).endVertex();
+        renderer.pos(left+listWidth+8, height, 0.0D).tex((left+listWidth+8) / scale, height / scale).color(0x40, 0x40, 0x40, alpha2).endVertex();
+        renderer.pos(left+listWidth+8, top,    0.0D).tex((left+listWidth+8) / scale, top / scale   ).color(0x40, 0x40, 0x40, alpha1).endVertex();
+        renderer.pos(left, top,    0.0D).tex(startUV, top / scale   ).color(0x40, 0x40, 0x40, alpha1).endVertex();
         tess.draw();
     }
 }
