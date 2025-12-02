@@ -1,7 +1,6 @@
 package space.libs.core;
 
 import net.minecraftforge.fml.relauncher.IFMLCallHook;
-import space.libs.util.ModDetector;
 
 import java.util.Map;
 
@@ -9,9 +8,7 @@ import java.util.Map;
 public class CompatLibSetupHook implements IFMLCallHook {
 
     @Override
-    public void injectData(Map<String, Object> data) {
-        ModDetector.EarlyLoadTC5();
-    }
+    public void injectData(Map<String, Object> data) {}
 
     @Override
     public Void call() throws Exception {

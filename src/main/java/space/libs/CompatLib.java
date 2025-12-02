@@ -3,9 +3,6 @@ package space.libs;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import org.apache.logging.log4j.Logger;
-import space.libs.event.GuiScreenEventHandler;
-import space.libs.util.ModDetector;
-import space.libs.util.mods.SkyboxEventHandler;
 
 @SuppressWarnings("all")
 @Mod(
@@ -30,14 +27,5 @@ public class CompatLib {
     }
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
-        if (FMLCommonHandler.instance().getSide().isClient()) {
-            if (ModDetector.mobends()) {
-                FMLCommonHandler.instance().bus().register(new GuiScreenEventHandler());
-            }
-            if (ModDetector.skybox()) {
-                FMLCommonHandler.instance().bus().register(new SkyboxEventHandler());
-            }
-        }
-    }
+    public void init(FMLInitializationEvent event) {}
 }

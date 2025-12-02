@@ -1,12 +1,8 @@
 package space.libs.asm;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Dummy;
 import net.minecraft.launchwrapper.IClassTransformer;
-import org.apache.commons.io.IOUtils;
 import org.objectweb.asm.*;
 import space.libs.core.CompatLibCore;
-
-import java.io.InputStream;
 
 import static org.objectweb.asm.Opcodes.*;
 
@@ -27,18 +23,6 @@ public class ClassTransformers implements IClassTransformer {
                 return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_FRAMES, ConfigCoreVisitor.class, 0);
             } else if (name.startsWith("com")) {
                 switch (name) {
-                    case "com.llamalad7.mixinextras.injector.wrapoperation.WrapOperationInjector":
-                        try {
-                            InputStream inputStream = Dummy.class.getResourceAsStream("WrapOperationInjector.class");
-                            if (inputStream != null) {
-                                return IOUtils.toByteArray(inputStream);
-                            } else {
-                                throw new RuntimeException("Cannot get WrapOperationInjector.class");
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            return bytes;
-                        }
                     case "com.mumfrey.liteloader.core.runtime.Obf": {
                         return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, LiteLoaderObfVisitor.class, 0);
                     }
@@ -52,17 +36,8 @@ public class ClassTransformers implements IClassTransformer {
             } else if (name.startsWith("net")) {
                 if (name.startsWith("net.minecraftfor")) {
                     switch (name) {
-                        case "net.minecraftforge.fml.common.Loader": {
-                            return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, LoaderVisitor.class, 0);
-                        }
                         case "net.minecraftforge.fml.common.versioning.VersionRange": {
                             return TransformerUtils.transform(bytes, 0, VersionRangeVisitor.class, 0);
-                        }
-                        case "net.minecraftforge.fml.client.event.ConfigChangedEvent": {
-                            return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, ConfigChangedEventVisitor.class, 0);
-                        }
-                        case "net.minecraftforge.fml.common.event.FMLModIdMappingEvent": {
-                            return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, FMLModIdMappingEventVisitor.class, 0);
                         }
                         default: {
                             return bytes;
@@ -238,170 +213,6 @@ public class ClassTransformers implements IClassTransformer {
                 };
             }
             return mv;
-        }
-    }
-
-    /*
-     * Copyright (c) Forge Development LLC and contributors
-     * SPDX-License-Identifier: LGPL-2.1-only
-     */
-    public static class ConfigChangedEventVisitor extends ClassVisitor {
-
-        public ConfigChangedEventVisitor(ClassVisitor cv) {
-            super(Opcodes.ASM5, cv);
-        }
-
-        @Override
-        public void visitEnd() {
-            addGetModID();
-            addIsWorldRunning();
-            addIsRequiresMcRestart();
-            addGetConfigID();
-            super.visitEnd();
-        }
-
-        private void addGetModID() {
-            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "getModID", "()Ljava/lang/String;", null, null);
-            mv.visitCode();
-            mv.visitVarInsn(Opcodes.ALOAD, 0);
-            mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraftforge/fml/client/event/ConfigChangedEvent", "modID", "Ljava/lang/String;");
-            mv.visitInsn(Opcodes.ARETURN);
-            mv.visitMaxs(0, 0);
-            mv.visitEnd();
-        }
-
-        private void addIsWorldRunning() {
-            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "isWorldRunning", "()Z", null, null);
-            mv.visitCode();
-            mv.visitVarInsn(Opcodes.ALOAD, 0);
-            mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraftforge/fml/client/event/ConfigChangedEvent", "isWorldRunning", "Z");
-            mv.visitInsn(Opcodes.IRETURN);
-            mv.visitMaxs(0, 0);
-            mv.visitEnd();
-        }
-
-        private void addIsRequiresMcRestart() {
-            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "isRequiresMcRestart", "()Z", null, null);
-            mv.visitCode();
-            mv.visitVarInsn(Opcodes.ALOAD, 0);
-            mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraftforge/fml/client/event/ConfigChangedEvent", "requiresMcRestart", "Z");
-            mv.visitInsn(Opcodes.IRETURN);
-            mv.visitMaxs(0, 0);
-            mv.visitEnd();
-        }
-
-        private void addGetConfigID() {
-            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "getConfigID", "()Ljava/lang/String;", null, null);
-            mv.visitCode();
-            mv.visitVarInsn(Opcodes.ALOAD, 0);
-            mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraftforge/fml/client/event/ConfigChangedEvent", "configID", "Ljava/lang/String;");
-            mv.visitInsn(Opcodes.ARETURN);
-            mv.visitMaxs(0, 0);
-            mv.visitEnd();
-        }
-    }
-
-    /*
-     * Copyright (c) Forge Development LLC and contributors
-     * SPDX-License-Identifier: LGPL-2.1-only
-     */
-    public static class FMLModIdMappingEventVisitor extends ClassVisitor {
-
-        public FMLModIdMappingEventVisitor(ClassVisitor cv) {
-            super(Opcodes.ASM5, cv);
-        }
-
-        @Override
-        public void visitEnd() {
-            addNewConstructor();
-            super.visitEnd();
-        }
-
-        private void addNewConstructor() {
-            MethodVisitor mv = cv.visitMethod(ACC_PUBLIC, "<init>", "(Ljava/util/Map;Ljava/util/Map;)V", null, null);
-            mv.visitCode();
-            mv.visitVarInsn(ALOAD, 0);
-            mv.visitVarInsn(ALOAD, 1);
-            mv.visitMethodInsn(
-                INVOKESTATIC,
-                "space/libs/util/ForgeUtils",
-                "convertMapKeys",
-                "(Ljava/util/Map;)Ljava/util/Map;",
-                false
-            );
-            mv.visitVarInsn(ALOAD, 2);
-            mv.visitMethodInsn(
-                INVOKESTATIC,
-                "space/libs/util/ForgeUtils",
-                "convertMapKeys",
-                "(Ljava/util/Map;)Ljava/util/Map;",
-                false
-            );
-            mv.visitInsn(ICONST_0);
-            mv.visitMethodInsn(INVOKESPECIAL, "net/minecraftforge/fml/common/event/FMLModIdMappingEvent", "<init>", "(Ljava/util/Map;Ljava/util/Map;Z)V", false);
-            mv.visitInsn(RETURN);
-            mv.visitMaxs(4, 3);
-            mv.visitEnd();
-        }
-    }
-
-    /*
-     * Copyright (c) Forge Development LLC and contributors
-     * SPDX-License-Identifier: LGPL-2.1-only
-     */
-    public static class LoaderVisitor extends ClassVisitor {
-
-        public LoaderVisitor(ClassVisitor cv) {
-            super(ASM5, cv);
-        }
-
-        @Override
-        public void visitEnd() {
-            addGetModClassLoader();
-            addFireRemapEvent();
-            addFireMissingMappingEvent();
-            super.visitEnd();
-        }
-
-        private void addGetModClassLoader() {
-            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "getModClassLoader",
-                "()Ljava/lang/ClassLoader;", null, null);
-            mv.visitCode();
-            mv.visitVarInsn(Opcodes.ALOAD, 0);
-            mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraftforge/fml/common/Loader", "modClassLoader",
-                "Lnet/minecraftforge/fml/common/ModClassLoader;");
-            mv.visitInsn(Opcodes.ARETURN);
-            mv.visitMaxs(1, 1);
-            mv.visitEnd();
-        }
-
-        private void addFireRemapEvent() {
-            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "fireRemapEvent",
-                "(Ljava/util/Map;Ljava/util/Map;)V", null, null);
-            mv.visitCode();
-            mv.visitTypeInsn(Opcodes.NEW, "java/lang/UnsupportedOperationException");
-            mv.visitInsn(Opcodes.DUP);
-            mv.visitLdcInsn("Please load this save in 1.8 first !");
-            mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/lang/UnsupportedOperationException",
-                "<init>", "(Ljava/lang/String;)V", false);
-            mv.visitInsn(Opcodes.ATHROW);
-            mv.visitMaxs(3, 3);
-            mv.visitEnd();
-        }
-
-        private void addFireMissingMappingEvent() {
-            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "fireMissingMappingEvent",
-                "(Ljava/util/LinkedHashMap;Ljava/util/LinkedHashMap;ZLnet/minecraftforge/fml/common/registry/GameData;Ljava/util/Map;Ljava/util/Map;)Ljava/util/List;",
-                null, null);
-            mv.visitCode();
-            mv.visitTypeInsn(Opcodes.NEW, "java/lang/UnsupportedOperationException");
-            mv.visitInsn(Opcodes.DUP);
-            mv.visitLdcInsn("Please load this save in 1.8 first !");
-            mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/lang/UnsupportedOperationException",
-                "<init>", "(Ljava/lang/String;)V", false);
-            mv.visitInsn(Opcodes.ATHROW);
-            mv.visitMaxs(3, 3);
-            mv.visitEnd();
         }
     }
 }

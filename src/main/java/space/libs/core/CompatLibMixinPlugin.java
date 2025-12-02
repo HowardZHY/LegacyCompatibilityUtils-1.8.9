@@ -3,7 +3,6 @@ package space.libs.core;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
-import space.libs.util.ModDetector;
 import space.libs.util.cursedmixinextensions.CursedMixinExtensions;
 
 import java.util.List;
@@ -15,7 +14,7 @@ public class CompatLibMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public void onLoad(String mixinPackage) {
-        ModDetector.FixCoremods();
+
     }
 
     @Override

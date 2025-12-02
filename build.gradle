@@ -106,23 +106,7 @@ dependencies {
         exclude module: 'log4j-core'
     }*/
     //compile will make your library available only in this dev environment
-    compileOnly("curse.maven:mo-bends-231347:2272295")
-    compileOnly("curse.maven:more-player-models-221939:2284120")
-    compileOnly("curse.maven:alexiillib-229301:2233177")
-    compileOnly("curse.maven:civcraft-228061:2233156")
-    compileOnly("curse.maven:gog-skybox-266068:2411441")
-    compileOnly("curse.maven:thaumcraft-223628:2287496")
-    compileOnly("codechicken:NotEnoughItems:1.8-1.0.5.104:dev")
-    compileOnly("codechicken:CodeChickenLib:1.8-1.1.2.139:dev")
     compileOnly("com.mumfrey:liteloader:1.8.9-SNAPSHOT")
-    compileOnly("net.md-5:SpecialSource:1.7.4") {
-        exclude module: 'asm-debug-all'
-        exclude module: 'guava'
-        exclude module: 'jopt-simple'
-        exclude module: 'lombok'
-        exclude module: 'opencsv'
-    }
-    shade('net.jodah:typetools:0.6.3')
     implementation 'zone.rong:mixinbooter:9.4'
     //compile "org.spongepowered:mixin:0.7.11-SNAPSHOT"
     //compile shade('com.electronwill.night-config:core:3.6.3')
