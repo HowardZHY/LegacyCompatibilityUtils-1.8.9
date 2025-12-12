@@ -107,6 +107,15 @@ dependencies {
     }*/
     //compile will make your library available only in this dev environment
     compileOnly("com.mumfrey:liteloader:1.8.9-SNAPSHOT")
+    shade('net.fabricmc:fabric-loader:0.18.2')
+    shade('net.fabricmc:tiny-remapper:0.11.2')
+    shade('net.fabricmc:class-tweaker:0.2')
+    shade('net.fabricmc:mapping-io:0.7.1')
+    shade('org.ow2.asm:asm:9.9')
+    shade('org.ow2.asm:asm-analysis:9.9')
+    shade('org.ow2.asm:asm-commons:9.9')
+    shade('org.ow2.asm:asm-tree:9.9')
+    shade('org.ow2.asm:asm-util:9.9')
     implementation 'zone.rong:mixinbooter:9.4'
     //compile "org.spongepowered:mixin:0.7.11-SNAPSHOT"
     //compile shade('com.electronwill.night-config:core:3.6.3')
@@ -140,6 +149,9 @@ shadowJar {
         //exclude(dependency("com.google.code.gson:gson:2.8.6"))
     }
     configurations = [project.configurations.shade]
+    exclude 'META-INF/versions/**'
+    exclude './module-info.class'
+    relocate 'org.objectweb.asm', 'org.spongepowered.asm.lib'
     duplicatesStrategy DuplicatesStrategy.EXCLUDE //prevent duplicates
     classifier "" //prevent creation of unshadowed jar
 }
@@ -148,12 +160,12 @@ jar {
     manifest {
         attributes([
             "FMLAT": "compatlib_at.cfg",
-            "FMLCorePlugin": "space.libs.core.CompatLibCore",
+            //"FMLCorePlugin": "net.fabricmc.loader.impl.fml.FabricLoaderTweaker",
             "FMLCorePluginContainsFMLMod": "true",
             "ForceLoadAsMod": "true",
-            //"TweakClass": "space.libs.core.CompatLibTweaker",
-            //"TweakOrder": "-1000",
-            "MixinConfigs": "mixins.compatlib.json",
+            "TweakClass": "net.fabricmc.loader.impl.fml.FabricLoaderTweaker",
+            "TweakOrder": "-1000",
+            "MixinConfigs": "mixins.fabricloader.json",
             "Manifest-Version": 1.0
         ])
     }
@@ -162,7 +174,7 @@ jar {
 mixin {
     disableRefMapWarning = true
     defaultObfuscationEnv searge
-    add sourceSets.main, "mixins.compatlib.refmap.json"
+    add sourceSets.main, "mixins.fabricloader.refmap.json"
 }
 
 reobf {
@@ -177,7 +189,7 @@ sourceSets {
         compileClasspath += main.compileClasspath
     }
     main {
-        ext.refMap = "mixins.compatlib.refmap.json"
+        ext.refMap = "mixins.fabricloader.refmap.json"
         compileClasspath += dummy.output
     }
 }
