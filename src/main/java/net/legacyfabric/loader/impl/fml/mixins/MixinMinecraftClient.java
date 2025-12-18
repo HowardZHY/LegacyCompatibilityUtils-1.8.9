@@ -1,4 +1,4 @@
-package net.fabricmc.loader.impl.fml.mixins;
+package net.legacyfabric.loader.impl.fml.mixins;
 
 import net.fabricmc.loader.impl.game.minecraft.Hooks;
 import net.minecraft.client.Minecraft;
@@ -21,8 +21,13 @@ public class MixinMinecraftClient {
     @Shadow(aliases = "field_71412_D")
     public @Final File mcDataDir;
 
+    @Shadow(aliases = "func_71410_x")
+    public static Minecraft getMinecraft() {
+        throw new AbstractMethodError();
+    }
+
     @Inject(method = "startGame", at = @At("HEAD"))
     private void startGame(CallbackInfo ci) {
-        Hooks.startClient(mcDataDir, FMLClientHandler.instance().getClient());
+        Hooks.startClient(mcDataDir, getMinecraft());
     }
 }

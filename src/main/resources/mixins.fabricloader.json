@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.7",
-  "package": "net.fabricmc.loader.impl.fml.mixins",
+  "package": "net.legacyfabric.loader.impl.fml.mixins",
   "refmap": "mixins.fabricloader.refmap.json",
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",

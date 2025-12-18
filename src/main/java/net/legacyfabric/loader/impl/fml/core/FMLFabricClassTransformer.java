@@ -1,4 +1,4 @@
-package net.fabricmc.loader.impl.fml;
+package net.legacyfabric.loader.impl.fml.core;
 
 import net.fabricmc.loader.impl.game.minecraft.launchwrapper.FabricClassTransformer;
 import net.minecraft.launchwrapper.IClassTransformer;

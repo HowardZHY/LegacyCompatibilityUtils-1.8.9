@@ -1,4 +1,4 @@
-package net.fabricmc.loader.impl.fml;
+package net.legacyfabric.loader.impl.fml.core;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.impl.game.LibClassifier;
