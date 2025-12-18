@@ -1,43 +1,17 @@
-# LegacyCompatibilityUtils
+# FabricLoaderWrapper
 
-[Here for 1.7.10 Version with 1.7.2 Mod Compat](https://github.com/HowardZHY/LegacyCompatibilityUtils-1.7.10)
+Proof of concept of https://github.com/FabricMC/fabric-loader as a LaunchWrapper Forge mod.
 
-## The Most Cursed 1.8.9 Forge Mod
+## Usage & Limitations
 
-(CompatLib in short) Made many 1.8.0 Forge and LiteLoader Mods working on 1.8.9 (except some coremods like with `@MCVersion("1.8")` ).
+Fabric Loader on LaunchWrapper couldn't load with intermediary mappings, so Legacy Fabric mods couldn't be loaded.
 
-This is done by re-add removed classes and srg methods/fields.
+If you have some other way to remap mods feel free to contact me.
 
-Requires [MixinBooter](https://github.com/CleanroomMC/MixinBooter) version 9.4.
+Requires Mixin fork with relocated ASM like UniMix. Just put in mods folder. Servers requires extra config to locate the vanilla server jar.
 
-This mod contains following libs:
+## Known Incompatibilities
 
-A Relocated https://github.com/FabricCompatibilityLayers/CursedMixinExtensions
+1.8+: https://github.com/CleanroomMC/MixinBooter Shades invalid relocated ASM, must delete `org\spongepowered\asm\lib` from its jar.
 
-1.10.2 MinecraftForge KeyBinding API
-
-https://github.com/jhalterman/typetools
-
-# Notice
-
-If anyone is interested at making another runtime deobf remapper, feel free to open topic in Discussion.
-
-Submit an issue if you met incompatibilities.
-
-### If you try to use [CodeChickenCore](https://www.curseforge.com/minecraft/mc-mods/codechickencore)
-
-Make sure rename CompatLib's file like `aCompatLib.jar`, that mod must be loaded after CompatLib otherwise would crash.
-
-### If you try to use [BlockSteps](https://www.curseforge.com/minecraft/mc-mods/blocksteps):
-
-Disable use VBOs in Video Settings if you use this mod, otherwise blocks won't show.
-
-# Known Not Working
-
-### [Gender & Age Mod](https://www.curseforge.com/minecraft/mc-mods/gender)
-
-Coremods using some ASM, or accessing APIs with FML Core breaking changes.
-
-### TMI (Official 1.8 Forge Version)
-
-One of the 1.8 Forge Mods that's in Totally Notch Code, lazy to make reflections.
+1.7.10: https://github.com/TheWeatherPony/Partial-Modification-Loader Causes duplicated PML Mods.

@@ -1,9 +1,9 @@
 [
 {
-  "modid": "compatlib",
-  "name": "CompatLib",
-  "description": "Compatibility Layer that makes some 1.8 Forge and LiteLoader mods working on 1.8.9",
-  "version": "1.8.9",
+  "modid": "fabricloader",
+  "name": "Fabric Loader Wrapper",
+  "description": "Proof of concept of Fabric Loader as a LaunchWrapper Forge mod.",
+  "version": "0.18.4",
   "url": "github.com/HowardZHY",
   "authorList": ["HowardZHY"],
   "dependencies": []

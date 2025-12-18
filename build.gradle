@@ -42,8 +42,8 @@ idea {
 }
 
 version = "1.8.9"
-group = "com128.kzf"
-archivesBaseName = "CompatLib" //name of the output jar
+group = "net.legacyfabric"
+archivesBaseName = "FabricLoaderWrapper" //name of the output jar
 
 sourceCompatibility = targetCompatibility = 1.8 //using java 8
 compileJava.options.encoding = "UTF-8"
@@ -53,7 +53,7 @@ minecraft {
     runDir = "run"
     mappings = "stable_22" //mappings for 1.8.9
     makeObfSourceJar = false //disable creation of sources jar
-    clientJvmArgs += ["-Dfml.coreMods.load=space.libs.core.CompatLibCore"]
+    //clientJvmArgs += [""]
 }
 
 configurations {
@@ -107,7 +107,8 @@ dependencies {
     }*/
     //compile will make your library available only in this dev environment
     compileOnly("com.mumfrey:liteloader:1.8.9-SNAPSHOT")
-    shade('net.fabricmc:fabric-loader:0.18.2')
+    compileOnly("net.minecraftforge:forge:1.6.4-9.11.1.1345:universal@jar")
+    shade('net.fabricmc:fabric-loader:0.18.4')
     shade('net.fabricmc:tiny-remapper:0.11.2')
     shade('net.fabricmc:class-tweaker:0.2')
     shade('net.fabricmc:mapping-io:0.7.1')
@@ -160,10 +161,10 @@ jar {
     manifest {
         attributes([
             "FMLAT": "compatlib_at.cfg",
-            //"FMLCorePlugin": "net.fabricmc.loader.impl.fml.FabricLoaderTweaker",
+            //"FMLCorePlugin": "net.legacyfabric.loader.impl.fml.core.FabricLoaderCore",
             "FMLCorePluginContainsFMLMod": "true",
             "ForceLoadAsMod": "true",
-            "TweakClass": "net.fabricmc.loader.impl.fml.FabricLoaderTweaker",
+            "TweakClass": "net.legacyfabric.loader.impl.fml.core.FabricLoaderTweaker",
             "TweakOrder": "-1000",
             "MixinConfigs": "mixins.fabricloader.json",
             "Manifest-Version": 1.0

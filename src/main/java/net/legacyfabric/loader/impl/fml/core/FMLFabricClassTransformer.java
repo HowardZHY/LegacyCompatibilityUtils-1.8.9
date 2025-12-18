@@ -1,4 +1,4 @@
-package net.fabricmc.loader.impl.fml;
+package net.legacyfabric.loader.impl.fml.core;
 
 import net.fabricmc.loader.impl.game.minecraft.launchwrapper.FabricClassTransformer;
 import net.minecraft.launchwrapper.IClassTransformer;
@@ -11,7 +11,7 @@ public class FMLFabricClassTransformer extends FabricClassTransformer implements
             return bytes;
         } else {
             if (name.startsWith("$w")) {
-                return bytes;
+                return bytes; // Ignore $wrappers
             }
             return super.transform(name, transformedName, bytes);
         }

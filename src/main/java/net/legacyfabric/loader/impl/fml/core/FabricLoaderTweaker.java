@@ -1,4 +1,4 @@
-package net.fabricmc.loader.impl.fml;
+package net.legacyfabric.loader.impl.fml.core;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
@@ -12,9 +12,6 @@ import net.fabricmc.loader.impl.util.SystemProperties;
 import net.fabricmc.loader.impl.util.log.Log;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
-import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
-import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
-import net.minecraftforge.fml.relauncher.Side;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.spongepowered.asm.mixin.Mixins;
@@ -26,36 +23,32 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @SuppressWarnings("unused")
-@IFMLLoadingPlugin.SortingIndex(-1001)
-public class FabricLoaderTweaker extends FabricTweaker implements IFMLLoadingPlugin {
+public class FabricLoaderTweaker extends FabricTweaker {
+
+    public static FabricLoaderTweaker instance;
 
     private LaunchClassLoader launchclassloader;
 
     private final List<Path> classpath = new ArrayList<>();
 
-    public FabricLoaderTweaker() {}
+    public FabricLoaderTweaker() {
+        instance = this;
+    }
 
     static {
-        System.setProperty("fabric.gameJarPath", "./minecraft_server.1.8.9.jar");
-        System.setProperty("fabric.gameVersion", "1.8.9");
-        System.setProperty("fabric.loader.useCompatibilityClassLoader", "true");
+        LoadingUtils.init();
     }
 
     @Override
     public EnvType getEnvironmentType() {
-        if (FMLLaunchHandler.side() == Side.CLIENT) {
-            return EnvType.CLIENT;
-        } else {
-            return EnvType.SERVER;
-        }
+        return LoadingUtils.ENVIRONMENT;
     }
 
     @Override
     public String getLaunchTarget() {
-        if (FMLLaunchHandler.side() == Side.CLIENT) {
+        if (getEnvironmentType() == EnvType.CLIENT) {
             return "net.minecraft.client.main.Main";
         } else {
             return "net.minecraft.server.MinecraftServer";
@@ -70,6 +63,7 @@ public class FabricLoaderTweaker extends FabricTweaker implements IFMLLoadingPlu
         launchClassLoader.addClassLoaderExclusion("net.fabricmc.loader");
         launchClassLoader.addClassLoaderExclusion("net.fabricmc.api");
         launchClassLoader.addTransformerExclusion("net.fabricmc.loader.impl");
+        launchClassLoader.addTransformerExclusion("net.legacyfabric.loader.impl.fml.core");
         try {
             Field f = FabricTweaker.class.getDeclaredField("launchClassLoader");
             f.setAccessible(true);
@@ -129,27 +123,4 @@ public class FabricLoaderTweaker extends FabricTweaker implements IFMLLoadingPlu
         return classpath;
     }
 
-    @Override
-    public String[] getASMTransformerClass() {
-        injectIntoClassLoader(Launch.classLoader);
-        return new String[0];
-    }
-
-    @Override
-    public String getModContainerClass() {
-        return null;
-    }
-
-    @Override
-    public String getSetupClass() {
-        return null;
-    }
-
-    @Override
-    public void injectData(Map<String, Object> data) {}
-
-    @Override
-    public String getAccessTransformerClass() {
-        return null;
-    }
 }
