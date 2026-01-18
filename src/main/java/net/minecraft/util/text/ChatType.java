@@ -8,6 +8,7 @@ public enum ChatType {
 
     GAME_INFO((byte)2);
 
+    @SuppressWarnings("NonFinalFieldInEnum")
     public byte id;
 
     ChatType(byte p_i47429_3_) {
@@ -20,8 +21,9 @@ public enum ChatType {
 
     public static ChatType byId(byte b) {
         for (ChatType ct : values()) {
-            if (b == ct.id)
+            if (b == ct.id) {
                 return ct;
+            }
         }
         return CHAT;
     }

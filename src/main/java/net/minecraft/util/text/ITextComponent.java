@@ -10,17 +10,20 @@ public interface ITextComponent extends IChatComponent {
 
     Style func_150256_b();
 
-    ITextComponent func_150258_a(String paramString);
+    ITextComponent func_150258_a(String text);
 
-    ITextComponent func_150257_a(ITextComponent paramITextComponent);
+    ITextComponent func_150257_a(ITextComponent component);
 
     /** func_150261_e() */
+    @Override
     String getUnformattedTextForChat();
 
     /** func_150260_c() */
+    @Override
     String getUnformattedText();
 
     /** func_150254_d */
+    @Override
     String getFormattedText();
 
     List<ITextComponent> func_150253_a();

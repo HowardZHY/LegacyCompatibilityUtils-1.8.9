@@ -9,6 +9,7 @@
   "client": [
     "client.MixinClientWorld",
     "client.MixinClientWorldProvider",
+    "client.MixinEntityPlayerSP",
     "client.MixinGameSettings",
     "client.MixinGuiIngame",
     "client.MixinGuiPlayerTabOverlayPlayerComparator",

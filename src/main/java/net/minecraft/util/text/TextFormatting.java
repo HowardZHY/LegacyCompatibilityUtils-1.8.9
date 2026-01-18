@@ -1,6 +1,9 @@
 package net.minecraft.util.text;
 
 import com.google.common.collect.Lists;
+import net.minecraft.util.EnumChatFormatting;
+import space.libs.util.MappedName;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -9,7 +12,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "UnnecessaryUnicodeEscape"})
 public enum TextFormatting {
     BLACK("BLACK", '0', 0, 0),
     DARK_BLUE("DARK_BLUE", '1', 1, 170),
@@ -32,16 +35,12 @@ public enum TextFormatting {
     STRIKETHROUGH("STRIKETHROUGH", 'm', true),
     UNDERLINE("UNDERLINE", 'n', true),
     ITALIC("ITALIC", 'o', true),
-    RESET("RESET", 'r', -1, (Integer)null);
+    RESET("RESET", 'r', -1, null);
 
-    /** NAME_MAPPING */
-    public static final Map<String, TextFormatting> field_96331_x = Arrays.stream(values()).collect(Collectors.toMap((p_199746_0_) -> {
-        return func_175745_c(p_199746_0_.name);
-    }, (p_199747_0_) -> {
-        return p_199747_0_;
-    }));
+    @MappedName("NAME_MAPPING")
+    public static final Map<String, TextFormatting> field_96331_x = Arrays.stream(values()).collect(Collectors.toMap((p_199746_0_) -> func_175745_c(p_199746_0_.name), (p_199747_0_) -> p_199747_0_));
 
-    /** FORMATTING_CODE_PATTERN */
+    @MappedName("FORMATTING_CODE_PATTERN")
     public static final Pattern field_96330_y = Pattern.compile("(?i)\u00a7[0-9A-FK-OR]");
 
     private final String name;
@@ -56,7 +55,7 @@ public enum TextFormatting {
 
     private final Integer color;
 
-    /** lowercaseAlpha */
+    @MappedName("lowercaseAlpha")
     private static String func_175745_c(String string) {
         return string.toLowerCase(Locale.ROOT).replaceAll("[^a-z]", "");
     }
@@ -66,7 +65,7 @@ public enum TextFormatting {
     }
 
     TextFormatting(String formattingName, char formattingCodeIn, boolean fancyStylingIn) {
-        this(formattingName, formattingCodeIn, fancyStylingIn, -1, (Integer)null);
+        this(formattingName, formattingCodeIn, fancyStylingIn, -1, null);
     }
 
     TextFormatting(String formattingName, char formattingCodeIn, boolean fancyStylingIn, int index, Integer colorCode) {
@@ -78,27 +77,27 @@ public enum TextFormatting {
         this.controlString = "\u00a7" + formattingCodeIn;
     }
 
-    /** getColorIndex */
+    @MappedName("getColorIndex")
     public int func_175746_b() {
         return this.colorIndex;
     }
 
-    /** isFancyStyling */
+    @MappedName("isFancyStyling")
     public boolean func_96301_b() {
         return this.fancyStyling;
     }
 
-    /** isColor */
+    @MappedName("isColor")
     public boolean func_96302_c() {
         return !this.fancyStyling && this != RESET;
     }
 
-    /** getColor */
+    @MappedName("getColor")
     public Integer func_211163_e() {
         return this.color;
     }
 
-    /** getFriendlyName */
+    @MappedName("getFriendlyName")
     public String func_96297_d() {
         return this.name().toLowerCase(Locale.ROOT);
     }
@@ -107,55 +106,75 @@ public enum TextFormatting {
         return this.controlString;
     }
 
-    /** getTextWithoutFormattingCodes */
+    @MappedName("getTextWithoutFormattingCodes")
     public static String func_110646_a(String text) {
         return text == null ? null : field_96330_y.matcher(text).replaceAll("");
     }
 
-    /** getValueByName */
+    @MappedName("getValueByName ")
     public static TextFormatting func_96300_b(String friendlyName) {
         return friendlyName == null ? null : field_96331_x.get(func_175745_c(friendlyName));
     }
 
-
-    /** romColorIndex */
+    @MappedName("fromColorIndex")
     public static TextFormatting func_175744_a(int index) {
         if (index < 0) {
             return RESET;
         } else {
-            for(TextFormatting textformatting : values()) {
+            for (TextFormatting textformatting : values()) {
                 if (textformatting.func_175746_b() == index) {
                     return textformatting;
                 }
             }
-
             return null;
         }
     }
 
-    /** fromFormattingCode */
+    @MappedName("fromFormattingCode")
     public static TextFormatting func_211165_a(char formattingCodeIn) {
         char c0 = Character.toString(formattingCodeIn).toLowerCase(Locale.ROOT).charAt(0);
-
-        for(TextFormatting textformatting : values()) {
+        for (TextFormatting textformatting : values()) {
             if (textformatting.formattingCode == c0) {
                 return textformatting;
             }
         }
-
         return null;
     }
 
-    /** getValidValues */
+    @MappedName("getValidValues")
     public static Collection<String> func_96296_a(boolean getColor, boolean getFancyStyling) {
         List<String> list = Lists.newArrayList();
-
-        for(TextFormatting textformatting : values()) {
+        for (TextFormatting textformatting : values()) {
             if ((!textformatting.func_96302_c() || getColor) && (!textformatting.func_96301_b() || getFancyStyling)) {
                 list.add(textformatting.func_96297_d());
             }
         }
-
         return list;
+    }
+
+    public static TextFormatting from(EnumChatFormatting format) {
+        if (format != null) {
+            int index = format.ordinal();
+            if (index > 20) {
+                return RESET;
+            } else {
+                return func_175744_a(index);
+            }
+        } else {
+            return RED;
+        }
+    }
+
+    public static EnumChatFormatting toOriginal(TextFormatting format) {
+        if (format != null) {
+            int index = format.ordinal();
+            if (index > 20) {
+                return EnumChatFormatting.RESET;
+            } else {
+                return EnumChatFormatting.func_175744_a(index);
+            }
+        } else {
+            return EnumChatFormatting.RED;
+        }
     }
 }

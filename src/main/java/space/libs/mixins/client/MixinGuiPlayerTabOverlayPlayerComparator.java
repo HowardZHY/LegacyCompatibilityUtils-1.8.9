@@ -9,9 +9,9 @@ import org.spongepowered.asm.mixin.Shadow;
 public abstract class MixinGuiPlayerTabOverlayPlayerComparator {
 
     @Shadow
-    public abstract int compare(NetworkPlayerInfo p_compare_1_, NetworkPlayerInfo p_compare_2_);
+    public abstract int compare(NetworkPlayerInfo info1, NetworkPlayerInfo info2);
 
-    public int func_178952_a(NetworkPlayerInfo p_compare_1_, NetworkPlayerInfo p_compare_2_) {
-        return this.compare(p_compare_1_, p_compare_2_);
+    public int func_178952_a(NetworkPlayerInfo info1, NetworkPlayerInfo info2) {
+        return this.compare(info1, info2);
     }
 }

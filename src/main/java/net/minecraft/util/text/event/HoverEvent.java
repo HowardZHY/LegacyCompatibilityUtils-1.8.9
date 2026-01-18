@@ -1,19 +1,22 @@
 package net.minecraft.util.text.event;
 
 import com.google.common.collect.Maps;
+import net.minecraft.util.text.*;
 import java.util.Map;
-import net.minecraft.util.text.ITextComponent;
 
-public class HoverEvent {
-    private final HoverEvent.Action field_150704_a;
-    private final ITextComponent field_150703_b;
+public class HoverEvent extends net.minecraft.event.HoverEvent {
 
-    public HoverEvent(HoverEvent.Action p_i45158_1_, ITextComponent p_i45158_2_) {
-        this.field_150704_a = p_i45158_1_;
-        this.field_150703_b = p_i45158_2_;
+    public Action field_150704_a;
+
+    public ITextComponent field_150703_b;
+
+    public HoverEvent(Action action, ITextComponent component) {
+        super(toOriginal(action), component);
+        this.field_150704_a = action;
+        this.field_150703_b = component;
     }
 
-    public HoverEvent.Action func_150701_a() {
+    public Action func_150701_a() {
         return this.field_150704_a;
     }
 
@@ -21,50 +24,53 @@ public class HoverEvent {
         return this.field_150703_b;
     }
 
-    public boolean equals(Object p_equals_1_) {
-        if(this == p_equals_1_) {
-            return true;
-        } else if(p_equals_1_ != null && this.getClass() == p_equals_1_.getClass()) {
-            HoverEvent hoverevent = (HoverEvent)p_equals_1_;
-            if(this.field_150704_a != hoverevent.field_150704_a) {
-                return false;
-            } else {
-                if(this.field_150703_b != null) {
-                    if(!this.field_150703_b.equals(hoverevent.field_150703_b)) {
-                        return false;
-                    }
-                } else if(hoverevent.field_150703_b != null) {
-                    return false;
-                }
-
-                return true;
-            }
+    public static HoverEvent from(net.minecraft.event.HoverEvent event) {
+        if (event instanceof HoverEvent) {
+            return (HoverEvent) event;
         } else {
-            return false;
+            if (event != null) {
+                return new HoverEvent(Action.values()[event.getAction().ordinal()], (ITextComponent) event.getValue());
+            }
+            return new HoverEvent(Action.SHOW_TEXT, new TextComponentString("Null HoverEvent"));
         }
     }
 
+    public static net.minecraft.event.HoverEvent.Action toOriginal(HoverEvent.Action action) {
+        if (action == null) {
+            return net.minecraft.event.HoverEvent.Action.SHOW_TEXT;
+        } else {
+            return net.minecraft.event.HoverEvent.Action.getValueByCanonicalName(action.func_150685_b());
+        }
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        return super.equals(object);
+    }
+
+    @Override
     public String toString() {
-        return "HoverEvent{action=" + this.field_150704_a + ", value=\'" + this.field_150703_b + '\'' + '}';
+        return super.toString();
     }
 
+    @Override
     public int hashCode() {
-        int i = this.field_150704_a.hashCode();
-        i = 31 * i + (this.field_150703_b != null?this.field_150703_b.hashCode():0);
-        return i;
+        return super.hashCode();
     }
 
-    public static enum Action {
+    public enum Action {
         SHOW_TEXT("show_text", true),
         SHOW_ACHIEVEMENT("show_achievement", true),
         SHOW_ITEM("show_item", true),
         SHOW_ENTITY("show_entity", true);
 
-        private static final Map<String, HoverEvent.Action> field_150690_d = Maps.<String, HoverEvent.Action>newHashMap();
-        private final boolean field_150691_e;
-        private final String field_150688_f;
+        public static final Map<String, Action> field_150690_d = Maps.newHashMap();
 
-        private Action(String p_i45157_3_, boolean p_i45157_4_) {
+        public final boolean field_150691_e;
+
+        public final String field_150688_f;
+
+        Action(String p_i45157_3_, boolean p_i45157_4_) {
             this.field_150688_f = p_i45157_3_;
             this.field_150691_e = p_i45157_4_;
         }
@@ -77,15 +83,14 @@ public class HoverEvent {
             return this.field_150688_f;
         }
 
-        public static HoverEvent.Action func_150684_a(String p_150684_0_) {
-            return (HoverEvent.Action)field_150690_d.get(p_150684_0_);
+        public static Action func_150684_a(String p_150684_0_) {
+            return field_150690_d.get(p_150684_0_);
         }
 
         static {
-            for(HoverEvent.Action hoverevent$action : values()) {
-                field_150690_d.put(hoverevent$action.func_150685_b(), hoverevent$action);
+            for (HoverEvent.Action action : values()) {
+                field_150690_d.put(action.func_150685_b(), action);
             }
-
         }
     }
 }

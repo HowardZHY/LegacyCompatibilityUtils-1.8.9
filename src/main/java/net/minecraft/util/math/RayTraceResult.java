@@ -6,6 +6,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MovingObjectPosition;
 
 public class RayTraceResult extends MovingObjectPosition {
+
     public RayTraceResult(Vec3d hitVecIn, EnumFacing facing, BlockPos blockPosIn) {
         super(hitVecIn, facing, blockPosIn);
     }

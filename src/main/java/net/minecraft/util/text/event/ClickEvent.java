@@ -1,70 +1,82 @@
 package net.minecraft.util.text.event;
 
 import com.google.common.collect.Maps;
+
 import java.util.Map;
 
-public class ClickEvent {
-    private final ClickEvent.Action field_150671_a;
-    private final String field_150670_b;
+public class ClickEvent extends net.minecraft.event.ClickEvent {
 
-    public ClickEvent(ClickEvent.Action p_i45156_1_, String p_i45156_2_) {
-        this.field_150671_a = p_i45156_1_;
-        this.field_150670_b = p_i45156_2_;
+    public Action field_150671_a;
+
+    public String field_150670_b;
+
+    public ClickEvent(Action action, String value) {
+        super(toOriginal(action), value);
+        this.field_150671_a = action;
+        this.field_150670_b = value;
     }
 
-    public ClickEvent.Action func_150669_a() {
+    public Action func_150669_a() {
         return this.field_150671_a;
     }
 
-    public String func_150668_b() {
+    @Override
+    public String getValue() {
         return this.field_150670_b;
     }
 
-    public boolean equals(Object p_equals_1_) {
-        if(this == p_equals_1_) {
-            return true;
-        } else if(p_equals_1_ != null && this.getClass() == p_equals_1_.getClass()) {
-            ClickEvent clickevent = (ClickEvent)p_equals_1_;
-            if(this.field_150671_a != clickevent.field_150671_a) {
-                return false;
-            } else {
-                if(this.field_150670_b != null) {
-                    if(!this.field_150670_b.equals(clickevent.field_150670_b)) {
-                        return false;
-                    }
-                } else if(clickevent.field_150670_b != null) {
-                    return false;
-                }
-
-                return true;
-            }
+    public static ClickEvent from(net.minecraft.event.ClickEvent event) {
+        if (event instanceof ClickEvent) {
+            return (ClickEvent) event;
         } else {
-            return false;
+            if (event != null && event.getAction() != null) {
+                if (event.getAction() == net.minecraft.event.ClickEvent.Action.TWITCH_USER_INFO) {
+                    return new ClickEvent(Action.SUGGEST_COMMAND, "Unsupported Twitch Info");
+                } else {
+                    return new ClickEvent(Action.func_150672_a(event.getAction().getCanonicalName()), event.getValue());
+                }
+            }
+            return new ClickEvent(Action.SUGGEST_COMMAND, "Null ClickEvent");
         }
     }
 
+    public static net.minecraft.event.ClickEvent.Action toOriginal(Action action) {
+        if (action == null) {
+            return net.minecraft.event.ClickEvent.Action.SUGGEST_COMMAND;
+        } else {
+            return net.minecraft.event.ClickEvent.Action.getValueByCanonicalName(action.func_150673_b());
+        }
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        return super.equals(object);
+    }
+
+    @Override
     public String toString() {
-        return "ClickEvent{action=" + this.field_150671_a + ", value=\'" + this.field_150670_b + '\'' + '}';
+        return super.toString();
     }
 
+    @Override
     public int hashCode() {
-        int i = this.field_150671_a.hashCode();
-        i = 31 * i + (this.field_150670_b != null?this.field_150670_b.hashCode():0);
-        return i;
+        return super.hashCode();
     }
 
-    public static enum Action {
+    public enum Action {
         OPEN_URL("open_url", true),
         OPEN_FILE("open_file", false),
         RUN_COMMAND("run_command", true),
         SUGGEST_COMMAND("suggest_command", true),
         CHANGE_PAGE("change_page", true);
 
-        private static final Map<String, ClickEvent.Action> field_150679_e = Maps.<String, ClickEvent.Action>newHashMap();
-        private final boolean field_150676_f;
-        private final String field_150677_g;
+        public static final Map<String, Action> field_150679_e = Maps.newHashMap();
 
-        private Action(String p_i45155_3_, boolean p_i45155_4_) {
+        public final boolean field_150676_f;
+
+        public final String field_150677_g;
+
+        Action(String p_i45155_3_, boolean p_i45155_4_) {
             this.field_150677_g = p_i45155_3_;
             this.field_150676_f = p_i45155_4_;
         }
@@ -77,15 +89,14 @@ public class ClickEvent {
             return this.field_150677_g;
         }
 
-        public static ClickEvent.Action func_150672_a(String p_150672_0_) {
-            return (ClickEvent.Action)field_150679_e.get(p_150672_0_);
+        public static Action func_150672_a(String name) {
+            return field_150679_e.get(name);
         }
 
         static {
-            for(ClickEvent.Action clickevent$action : values()) {
-                field_150679_e.put(clickevent$action.func_150673_b(), clickevent$action);
+            for (Action action : values()) {
+                field_150679_e.put(action.func_150673_b(), action);
             }
-
         }
     }
 }

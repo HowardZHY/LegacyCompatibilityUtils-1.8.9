@@ -5,11 +5,12 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import org.spongepowered.asm.mixin.Mixin;
+import space.libs.util.MappedName;
 
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
 
-    /** scaledTessellator */
+    @MappedName("scaledTessellator")
     public void func_71392_a(int width, int height, int width2, int height2, int stdTextureWidth, int stdTextureHeight) {
         float var7 = 0.00390625F;
         float var8 = 0.00390625F;

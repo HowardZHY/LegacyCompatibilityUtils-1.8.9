@@ -4,10 +4,13 @@ import com.google.common.collect.Sets;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import space.libs.util.MappedName;
 
 import java.util.Set;
 
@@ -53,13 +56,16 @@ public abstract class MixinEntity {
     @Shadow
     public abstract boolean isRiding();
 
-    /** teleportDirection */
+    @Shadow
+    public void addChatMessage(IChatComponent component) {}
+
+    @MappedName("teleportDirection")
     public int field_82152_aq;
 
-    /** tags */
+    @MappedName(value = "tags", since = "1.9")
     public Set<String> field_184236_aF = Sets.newHashSet();
 
-    /** setInPortal */
+    @MappedName("setInPortal")
     public void func_70063_aa() {
         if (this.timeUntilPortal > 0) {
             this.timeUntilPortal = this.getPortalCooldown();
@@ -83,12 +89,16 @@ public abstract class MixinEntity {
         }
     }
 
-    /** getTeleportDirection */
+    @MappedName("getTeleportDirection")
     public int func_82148_at() {
         return this.field_82152_aq;
     }
 
-    /** getBoundingBox */
+    public void func_145747_a(ITextComponent component) {
+        this.addChatMessage(component);
+    }
+
+    @MappedName(value = "getBoundingBox", since = "1.9")
     public net.minecraft.util.math.AxisAlignedBB func_174813_aQ() {
         return new net.minecraft.util.math.AxisAlignedBB (
             this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.minZ,
@@ -96,17 +106,17 @@ public abstract class MixinEntity {
         );
     }
 
-    /** getPosition */
+    @MappedName(value = "getPosition", since = "1.9")
     public net.minecraft.util.math.BlockPos func_180425_c() {
         return new net.minecraft.util.math.BlockPos(this.posX, this.posY + 0.5D, this.posZ);
     }
 
-    /** removeTag */
+    @MappedName(value = "removeTag", since = "1.9")
     public boolean func_184197_b(String p_184197_1_) {
         return this.field_184236_aF.remove(p_184197_1_);
     }
 
-    /** addTag */
+    @MappedName(value = "addTag", since = "1.9")
     public boolean func_184211_a(String p_184211_1_) {
         if (this.field_184236_aF.size() >= 1024)
             return false;
@@ -114,7 +124,7 @@ public abstract class MixinEntity {
         return true;
     }
 
-    /** getTags */
+    @MappedName(value = "getTags", since = "1.9")
     public Set<String> func_184216_O() {
         return this.field_184236_aF;
     }
