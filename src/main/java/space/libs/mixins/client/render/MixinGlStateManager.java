@@ -20,12 +20,12 @@ public abstract class MixinGlStateManager {
     public static void tryBlendFuncSeparate(int srcFactor, int dstFactor, int srcFactorAlpha, int dstFactorAlpha) {}
 
     @Public
-    private int func_187397_v(int p_187397_0_) {
+    private static int func_187397_v(int p_187397_0_) {
         return GL11.glGetInteger(p_187397_0_);
     }
 
     @Public
-    private void func_187398_d(int p_187398_0_) {
+    private static void func_187398_d(int p_187398_0_) {
         GL14.glBlendEquation(p_187398_0_);
     }
 
