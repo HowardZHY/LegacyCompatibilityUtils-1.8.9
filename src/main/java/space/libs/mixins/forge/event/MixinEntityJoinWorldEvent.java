@@ -2,7 +2,7 @@
  * Copyright (c) Forge Development LLC and contributors
  * SPDX-License-Identifier: LGPL-2.1-only
  */
-package space.libs.mixins.forge;
+package space.libs.mixins.forge.event;
 
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;

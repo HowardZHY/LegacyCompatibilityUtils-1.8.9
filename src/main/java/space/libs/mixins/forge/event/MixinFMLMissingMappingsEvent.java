@@ -1,4 +1,4 @@
-package space.libs.mixins.forge;
+package space.libs.mixins.forge.event;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;

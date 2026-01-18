@@ -1,4 +1,4 @@
-package space.libs.mixins.client.forge;
+package space.libs.mixins.client.forge.event;
 
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraftforge.client.event.RenderPlayerEvent;

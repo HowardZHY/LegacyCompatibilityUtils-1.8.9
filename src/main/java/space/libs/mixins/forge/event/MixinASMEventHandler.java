@@ -1,4 +1,4 @@
-package space.libs.mixins.forge;
+package space.libs.mixins.forge.event;
 
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.eventhandler.ASMEventHandler;
