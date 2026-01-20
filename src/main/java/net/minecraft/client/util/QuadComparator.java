@@ -23,31 +23,31 @@ public class QuadComparator implements Comparator<Object> {
         this.field_178079_e = p_i46247_5_;
     }
 
-    public int a(Integer p_compare_1_, Integer p_compare_2_) {
-        float var3 = this.field_147627_d.get(p_compare_1_) - this.field_147630_a;
-        float var4 = this.field_147627_d.get(p_compare_1_ + 1) - this.field_147628_b;
-        float var5 = this.field_147627_d.get(p_compare_1_ + 2) - this.field_147629_c;
-        float var6 = this.field_147627_d.get(p_compare_1_ + this.field_178079_e) - this.field_147630_a;
-        float var7 = this.field_147627_d.get(p_compare_1_ + this.field_178079_e + 1) - this.field_147628_b;
-        float var8 = this.field_147627_d.get(p_compare_1_ + this.field_178079_e + 2) - this.field_147629_c;
-        float var9 = this.field_147627_d.get(p_compare_1_ + this.field_178079_e * 2) - this.field_147630_a;
-        float var10 = this.field_147627_d.get(p_compare_1_ + this.field_178079_e * 2 + 1) - this.field_147628_b;
-        float var11 = this.field_147627_d.get(p_compare_1_ + this.field_178079_e * 2 + 2) - this.field_147629_c;
-        float var12 = this.field_147627_d.get(p_compare_1_ + this.field_178079_e * 3) - this.field_147630_a;
-        float var13 = this.field_147627_d.get(p_compare_1_ + this.field_178079_e * 3 + 1) - this.field_147628_b;
-        float var14 = this.field_147627_d.get(p_compare_1_ + this.field_178079_e * 3 + 2) - this.field_147629_c;
-        float var15 = this.field_147627_d.get(p_compare_2_) - this.field_147630_a;
-        float var16 = this.field_147627_d.get(p_compare_2_ + 1) - this.field_147628_b;
-        float var17 = this.field_147627_d.get(p_compare_2_ + 2) - this.field_147629_c;
-        float var18 = this.field_147627_d.get(p_compare_2_ + this.field_178079_e) - this.field_147630_a;
-        float var19 = this.field_147627_d.get(p_compare_2_ + this.field_178079_e + 1) - this.field_147628_b;
-        float var20 = this.field_147627_d.get(p_compare_2_ + this.field_178079_e + 2) - this.field_147629_c;
-        float var21 = this.field_147627_d.get(p_compare_2_ + this.field_178079_e * 2) - this.field_147630_a;
-        float var22 = this.field_147627_d.get(p_compare_2_ + this.field_178079_e * 2 + 1) - this.field_147628_b;
-        float var23 = this.field_147627_d.get(p_compare_2_ + this.field_178079_e * 2 + 2) - this.field_147629_c;
-        float var24 = this.field_147627_d.get(p_compare_2_ + this.field_178079_e * 3) - this.field_147630_a;
-        float var25 = this.field_147627_d.get(p_compare_2_ + this.field_178079_e * 3 + 1) - this.field_147628_b;
-        float var26 = this.field_147627_d.get(p_compare_2_ + this.field_178079_e * 3 + 2) - this.field_147629_c;
+    public int a(Integer compare1, Integer compare2) {
+        float var3 = this.field_147627_d.get(compare1) - this.field_147630_a;
+        float var4 = this.field_147627_d.get(compare1 + 1) - this.field_147628_b;
+        float var5 = this.field_147627_d.get(compare1 + 2) - this.field_147629_c;
+        float var6 = this.field_147627_d.get(compare1 + this.field_178079_e) - this.field_147630_a;
+        float var7 = this.field_147627_d.get(compare1 + this.field_178079_e + 1) - this.field_147628_b;
+        float var8 = this.field_147627_d.get(compare1 + this.field_178079_e + 2) - this.field_147629_c;
+        float var9 = this.field_147627_d.get(compare1 + this.field_178079_e * 2) - this.field_147630_a;
+        float var10 = this.field_147627_d.get(compare1 + this.field_178079_e * 2 + 1) - this.field_147628_b;
+        float var11 = this.field_147627_d.get(compare1 + this.field_178079_e * 2 + 2) - this.field_147629_c;
+        float var12 = this.field_147627_d.get(compare1 + this.field_178079_e * 3) - this.field_147630_a;
+        float var13 = this.field_147627_d.get(compare1 + this.field_178079_e * 3 + 1) - this.field_147628_b;
+        float var14 = this.field_147627_d.get(compare1 + this.field_178079_e * 3 + 2) - this.field_147629_c;
+        float var15 = this.field_147627_d.get(compare2) - this.field_147630_a;
+        float var16 = this.field_147627_d.get(compare2 + 1) - this.field_147628_b;
+        float var17 = this.field_147627_d.get(compare2 + 2) - this.field_147629_c;
+        float var18 = this.field_147627_d.get(compare2 + this.field_178079_e) - this.field_147630_a;
+        float var19 = this.field_147627_d.get(compare2 + this.field_178079_e + 1) - this.field_147628_b;
+        float var20 = this.field_147627_d.get(compare2 + this.field_178079_e + 2) - this.field_147629_c;
+        float var21 = this.field_147627_d.get(compare2 + this.field_178079_e * 2) - this.field_147630_a;
+        float var22 = this.field_147627_d.get(compare2 + this.field_178079_e * 2 + 1) - this.field_147628_b;
+        float var23 = this.field_147627_d.get(compare2 + this.field_178079_e * 2 + 2) - this.field_147629_c;
+        float var24 = this.field_147627_d.get(compare2 + this.field_178079_e * 3) - this.field_147630_a;
+        float var25 = this.field_147627_d.get(compare2 + this.field_178079_e * 3 + 1) - this.field_147628_b;
+        float var26 = this.field_147627_d.get(compare2 + this.field_178079_e * 3 + 2) - this.field_147629_c;
         float var27 = (var3 + var6 + var9 + var12) * 0.25F;
         float var28 = (var4 + var7 + var10 + var13) * 0.25F;
         float var29 = (var5 + var8 + var11 + var14) * 0.25F;
@@ -59,8 +59,8 @@ public class QuadComparator implements Comparator<Object> {
         return Float.compare(var34, var33);
     }
 
-    public int compare(Object p_compare_1_, Object p_compare_2_) {
-        return this.a((Integer) p_compare_1_, (Integer) p_compare_2_);
+    public int compare(Object compare1, Object compare2) {
+        return this.a((Integer) compare1, (Integer) compare2);
     }
 
 }

@@ -463,8 +463,9 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
 
     @Inject(method = "growBuffer", at = @At(
         value = "INVOKE",
-        target = "Lnet/minecraft/client/renderer/GLAllocation;createDirectByteBuffer(I)Ljava/nio/ByteBuffer;",
-        shift = At.Shift.BEFORE
+        target = "Ljava/nio/IntBuffer;position()I",
+        ordinal = 1,
+        shift = At.Shift.AFTER
     ))
     public void growBuffer(int amount, CallbackInfo ci) {
         this.field_179009_s += amount / 4;
