@@ -9,6 +9,7 @@ import space.libs.util.cursedmixinextensions.CursedMixinExtensions;
 import java.util.List;
 import java.util.Set;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class CompatLibMixinPlugin implements IMixinConfigPlugin {
 
     public static final MixinEnvironment.Side SIDE = MixinEnvironment.getCurrentEnvironment().getSide();
@@ -25,6 +26,9 @@ public class CompatLibMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if ("space.libs.mixins.client.render.MixinWorldRendererVanilla".equals(mixinClassName)) {
+            return !ModDetector.getCoreMod("meldexun.nothirium.mc.asm.NothiriumPlugin", false);
+        }
         return true;
     }
 

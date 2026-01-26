@@ -97,6 +97,7 @@
     "client.render.MixinVertexFormatElement",
     "client.render.MixinVertexFormatElementEnumUsage",
     "client.render.MixinWorldRenderer",
+    "client.render.MixinWorldRendererVanilla",
     "client.render.MixinWorldRendererState",
     "client.render.MixinWorldVertexBufferUploader",
     "client.render.entity.MixinArmorStandRenderer",

@@ -32,7 +32,7 @@ public abstract class MixinVertexFormat {
         this.addElement(element);
     }
 
-    @Inject(method = "addElement", at = @At(target = "Ljava/util/List;add(Ljava/lang/Object;)Z", value = "INVOKE_ASSIGN", ordinal = 1, shift = At.Shift.AFTER))
+    @Inject(method = "addElement", at = @At(target = "Ljava/util/List;add(Ljava/lang/Object;)Z", value = "INVOKE", ordinal = 1, shift = At.Shift.AFTER))
     public void addElement(VertexFormatElement element, CallbackInfoReturnable<VertexFormat> cir) {
         IVertexFormatElement accessor = (IVertexFormatElement) element;
         accessor.func_177371_a(this.nextOffset);

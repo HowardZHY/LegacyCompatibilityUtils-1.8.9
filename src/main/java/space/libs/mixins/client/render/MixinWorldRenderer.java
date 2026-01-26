@@ -2,7 +2,6 @@ package space.libs.mixins.client.render;
 
 import net.minecraft.client.renderer.SwitchEnumUsage;
 import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.WorldRenderer_2;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.client.util.QuadComparator;
@@ -31,7 +30,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
     @Shadow
     private boolean isDrawing;
 
-    /** 1.8's needsUpdate */
+    @MappedName(value = "needsUpdate", until = "1.8")
     @Shadow
     private boolean noColor;
 
@@ -507,9 +506,4 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
         this.ClearFlags();
     }
 
-    @Dynamic
-    @Redirect(method = "func_181662_b", at = @At(value = "FIELD", target = "*:[I", ordinal = 0), remap = false)
-    public int[] pos() {
-        return WorldRenderer_2.field_181661_a;
-    }
 }

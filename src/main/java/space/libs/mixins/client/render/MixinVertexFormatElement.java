@@ -31,8 +31,8 @@ public class MixinVertexFormatElement implements IVertexFormatElement {
 
     @Override
     @MappedName("setOffset")
-    public void func_177371_a(int p_177371_1_) {
-        this.field_177376_f = p_177371_1_;
+    public void func_177371_a(int offset) {
+        this.field_177376_f = offset;
     }
 
     @Override
