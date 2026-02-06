@@ -27,18 +27,19 @@ package space.libs.asm;
 import static com.google.common.io.Resources.*;
 
 import com.google.common.base.*;
-import com.google.common.collect.*;
+import com.google.common.collect.ImmutableBiMap;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableTable;
+import com.google.common.collect.Maps;
 import com.google.common.io.LineProcessor;
 import net.minecraft.launchwrapper.IClassNameTransformer;
 import net.minecraft.launchwrapper.IClassTransformer;
 import net.minecraft.launchwrapper.Launch;
-import org.apache.commons.lang3.*;
-import org.apache.logging.log4j.LogManager;
+import org.apache.commons.lang3.StringUtils;
 import org.objectweb.asm.*;
 import org.objectweb.asm.commons.*;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
-import space.libs.core.CompatLibDebug;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,22 +47,12 @@ import java.util.Map;
 import java.util.Set;
 
 @SuppressWarnings("all")
-public class RemapTransformer extends Remapper implements IClassTransformer, IClassNameTransformer {
+public class RemapTransformer extends BaseRemapper implements IClassTransformer, IClassNameTransformer {
 
     public static String DEFAULT_MAPPINGS = "compatlib.srg";
 
-    private final ImmutableBiMap<String, String> classes;
     private final ImmutableTable<String, String, String> rawFields;
     private final ImmutableTable<String, String, String> rawMethods;
-
-    private final Map<String, Map<String, String>> fields;
-    private final Map<String, Map<String, String>> methods;
-
-    private final Set<String> failedFields = Sets.newHashSet();
-    private final Set<String> failedMethods = Sets.newHashSet();
-
-    private final Map<String, Map<String, String>> fieldDescriptions = Maps.newHashMap();
-
     public RemapTransformer() throws Exception {
 
         URL mappings = getResource(DEFAULT_MAPPINGS);
@@ -122,12 +113,18 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
             }
         });
 
-        this.classes = classes.build();
+        ImmutableBiMap<String, String> classMap = classes.build();
         this.rawFields = fields.build();
         this.rawMethods = methods.build();
-
-        this.fields = Maps.newHashMapWithExpectedSize(this.rawFields.size());
-        this.methods = Maps.newHashMapWithExpectedSize(this.rawMethods.size());
+        rawFieldMaps = Maps.newHashMapWithExpectedSize(this.rawFields.size());
+        rawMethodMaps = Maps.newHashMapWithExpectedSize(this.rawMethods.size());
+        for (String owner : this.rawFields.rowKeySet()) {
+            rawFieldMaps.put(owner, ImmutableMap.copyOf(this.rawFields.row(owner)));
+        }
+        for (String owner : this.rawMethods.rowKeySet()) {
+            rawMethodMaps.put(owner, ImmutableMap.copyOf(this.rawMethods.row(owner)));
+        }
+        finalizeMappings(classMap);
     }
 
     @Override
@@ -187,102 +184,11 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
 
     @Override
     public String map(String className) {
-        if (this.classes == null) {
-            return className;
-        }
-        String name = this.classes.get(className);
-        if (name != null) {
-            return name;
-        }
-        // We may have no name for the inner class directly, but it should be still part of the outer class
-        int innerClassPos = className.lastIndexOf('$');
-        if (innerClassPos >= 0) {
-            return map(className.substring(0, innerClassPos)) + className.substring(innerClassPos);
-        }
-        return className; // Unknown class
+        return super.map(className);
     }
 
     public String unmap(String className) {
-        if (this.classes == null) {
-            return className;
-        }
-        String name = this.classes.inverse().get(className);
-        if (name != null) {
-            return name;
-        }
-        // We may have no name for the inner class directly, but it should be still part of the outer class
-        int innerClassPos = className.lastIndexOf('$');
-        if (innerClassPos >= 0) {
-            return unmap(className.substring(0, innerClassPos)) + className.substring(innerClassPos);
-        }
-        return className; // Unknown class
-    }
-
-    @Override
-    public String mapFieldName(String owner, String fieldName, String desc) {
-        if (this.classes == null) {
-            return fieldName;
-        }
-        Map<String, String> fields = getFieldMap(owner);
-        if (fields != null) {
-            String name = fields.get(fieldName + ':' + desc);
-            if (name != null) {
-                return name;
-            } else {
-                try {
-                    if (fields.get(name + ":null") != null) {
-                        if (CompatLibDebug.DEBUG_REMAP && (!owner.contains("/") || owner.contains("net"))) {
-                            LogManager.getLogger().info("Try map field without desc " + owner + "." + name + " to " + fields.get(name + ":null"));
-                        }
-                        return fields.get(name + ":null");
-                    }
-                } catch (NullPointerException ignored) {}
-            }
-        }
-        return fieldName;
-    }
-
-    private Map<String, String> getFieldMap(String owner) {
-        Map<String, String> result = this.fields.get(owner);
-        if (result != null) {
-            return result;
-        }
-        if (!this.failedFields.contains(owner)) {
-            loadSuperMaps(owner);
-            if (!this.fields.containsKey(owner)) {
-                this.failedFields.add(owner);
-            }
-        }
-        return this.fields.get(owner);
-    }
-
-    @Override
-    public String mapMethodName(String owner, String methodName, String desc) {
-        if (this.classes == null) {
-            return methodName;
-        }
-        Map<String, String> methods = getMethodMap(owner);
-        if (methods != null) {
-            String name = methods.get(methodName + desc);
-            if (name != null) {
-                return name;
-            }
-        }
-        return methodName;
-    }
-
-    private Map<String, String> getMethodMap(String owner) {
-        Map<String, String> result = this.methods.get(owner);
-        if (result != null) {
-            return result;
-        }
-        if (!this.failedMethods.contains(owner)) {
-            loadSuperMaps(owner);
-            if (!this.methods.containsKey(owner)) {
-                this.failedMethods.add(owner);
-            }
-        }
-        return this.methods.get(owner);
+        return super.unmap(className);
     }
 
     @Override
@@ -295,44 +201,18 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
         return unmap(typeName.replace('.', '/')).replace('/', '.');
     }
 
-    private void loadSuperMaps(String name) {
-        byte[] bytes = getBytes(name);
-        if (bytes != null) {
-            ClassReader reader = new ClassReader(bytes);
-            createSuperMaps(name, reader.getSuperName(), reader.getInterfaces());
-        }
+    public void createSuperMaps(String name, String superName, String[] interfaces) {
+        mergeSuperMaps(name, superName, interfaces);
     }
 
-    public void createSuperMaps(String name, String superName, String[] interfaces) {
-        if (Strings.isNullOrEmpty(superName)) {
-            return;
+    @Override
+    protected ParentInfo getParentInfo(String name) {
+        byte[] bytes = getBytes(name);
+        if (bytes == null) {
+            return null;
         }
-        String[] parents = new String[interfaces.length + 1];
-        parents[0] = superName;
-        System.arraycopy(interfaces, 0, parents, 1, interfaces.length);
-        for (String parent : parents) {
-            if (!this.fields.containsKey(parent)) {
-                loadSuperMaps(parent);
-            }
-        }
-        Map<String, String> fields = Maps.newHashMap();
-        Map<String, String> methods = Maps.newHashMap();
-
-        Map<String, String> m;
-        for (String parent : parents) {
-            m = this.fields.get(parent);
-            if (m != null) {
-                fields.putAll(m);
-            }
-            m = this.methods.get(parent);
-            if (m != null) {
-                methods.putAll(m);
-            }
-        }
-        fields.putAll(this.rawFields.row(name));
-        methods.putAll(this.rawMethods.row(name));
-        this.fields.put(name, ImmutableMap.copyOf(fields));
-        this.methods.put(name, ImmutableMap.copyOf(methods));
+        ClassReader reader = new ClassReader(bytes);
+        return new ParentInfo(reader.getSuperName(), reader.getInterfaces());
     }
 
     @SuppressWarnings("all")

@@ -14,38 +14,24 @@ import com.google.common.collect.*;
 import com.google.common.collect.ImmutableBiMap.Builder;
 import com.google.common.io.CharSource;
 import com.google.common.io.Resources;
-import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 import net.minecraftforge.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
 import net.minecraftforge.fml.common.patcher.ClassPatchManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.commons.Remapper;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
 import space.libs.core.CompatLibDebug;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 import static com.google.common.io.Resources.getResource;
 
 @SuppressWarnings("all")
-public class CustomRemapRemapper extends Remapper {
-
-    public BiMap<String, String> classNameBiMap;
-
-    public BiMap<String, String> reverseClassMap;
-
-    private Map<String,Map<String,String>> rawFieldMaps;
-
-    private Map<String,Map<String,String>> rawMethodMaps;
-
-    public Map<String,Map<String,String>> fieldNameMaps;
-
-    public Map<String,Map<String,String>> methodNameMaps;
+public class CustomRemapRemapper extends BaseRemapper {
 
     private LaunchClassLoader classLoader;
 
@@ -88,13 +74,10 @@ public class CustomRemapRemapper extends Remapper {
                     parseField(parts);
                 }
             }
-            classNameBiMap = builder.build();
-            reverseClassMap = classNameBiMap.inverse();
+            finalizeMappings(builder.build());
         } catch (Exception e) {
             LOGGER.error("An error occurred loading the custom map data" + e);
         }
-        methodNameMaps = Maps.newHashMapWithExpectedSize(rawMethodMaps.size());
-        fieldNameMaps = Maps.newHashMapWithExpectedSize(rawFieldMaps.size());
     }
 
     public boolean isRemappedClass(String className) {
@@ -115,12 +98,6 @@ public class CustomRemapRemapper extends Remapper {
         rawFieldMaps.get(cl).put(oldName + ":" + getFieldType(cl, oldName), newName);
         rawFieldMaps.get(cl).put(oldName + ":null", newName);
     }
-
-    private Map<String,Map<String,String>> fieldDescriptions = Maps.newHashMap();
-
-    private Set<String> negativeCacheMethods = Sets.newHashSet();
-
-    private Set<String> negativeCacheFields = Sets.newHashSet();
 
     public String getRealName(String name) {
         if (Strings.isNullOrEmpty(name)) {
@@ -147,14 +124,6 @@ public class CustomRemapRemapper extends Remapper {
         String mappedName = FMLDeobfuscatingRemapper.INSTANCE.map(name);
         String legacyName = this.unmap(mappedName);
         return legacyName;
-    }
-
-    private static byte[] getBytes(String name) {
-        try {
-            return Launch.classLoader.getClassBytes(name);
-        } catch (IOException e) {
-            throw Throwables.propagate(e);
-        }
     }
 
     private String getFieldType(String owner, String name) {
@@ -210,89 +179,24 @@ public class CustomRemapRemapper extends Remapper {
         Map<String, String> fieldMap = getFieldMap(owner);
         if (fieldMap != null && fieldMap.containsKey(name + ":" + desc)) {
             return fieldMap.get(name + ":" + desc);
-        } else {
-            try {
-                if (fieldMap.get(name + ":null") != null) {
-                    if (DEBUG_REMAPPING && (!owner.contains("/") || owner.contains("net"))) {
-                        LOGGER.info("Try map field without desc " + owner + "." + name + " to " + fieldMap.get(name + ":null"));
-                    }
-                    return fieldMap.get(name + ":null");
-                }
-            } catch (NullPointerException ignored) {
-                if (DEBUG_REMAPPING) {
-                    LOGGER.error("NPE when mapping field name: " + owner + "." + name + ":" + desc);
-                }
-            }
-            return name;
         }
+        try {
+            if (fieldMap.get(name + ":null") != null) {
+                if (DEBUG_REMAPPING && (!owner.contains("/") || owner.contains("net"))) {
+                    LOGGER.info("Try map field without desc " + owner + "." + name + " to " + fieldMap.get(name + ":null"));
+                }
+                return fieldMap.get(name + ":null");
+            }
+        } catch (NullPointerException ignored) {
+            if (DEBUG_REMAPPING) {
+                LOGGER.error("NPE when mapping field name: " + owner + "." + name + ":" + desc);
+            }
+        }
+        return name;
     }
 
     @Override
-    public String map(String typeName) {
-        if (classNameBiMap == null || classNameBiMap.isEmpty()) {
-            return typeName;
-        }
-        if (classNameBiMap.containsKey(typeName)) {
-            return classNameBiMap.get(typeName);
-        }
-        int dollarIdx = typeName.lastIndexOf('$');
-        if (dollarIdx > -1) {
-            return map(typeName.substring(0, dollarIdx)) + "$" + typeName.substring(dollarIdx + 1);
-        }
-        return typeName;
-    }
-
-    public String unmap(String typeName) {
-        if (classNameBiMap == null || classNameBiMap.isEmpty()) {
-            return typeName;
-        }
-        if (classNameBiMap.containsValue(typeName)) {
-            return classNameBiMap.inverse().get(typeName);
-        }
-        int dollarIdx = typeName.lastIndexOf('$');
-        if (dollarIdx > -1) {
-            return unmap(typeName.substring(0, dollarIdx)) + "$" + typeName.substring(dollarIdx + 1);
-        }
-        return typeName;
-    }
-
-    @Override
-    public String mapMethodName(String owner, String name, String desc) {
-        if (classNameBiMap == null || classNameBiMap.isEmpty()) {
-            return name;
-        }
-        Map<String, String> methodMap = getMethodMap(owner);
-        String methodDescriptor = name+desc;
-        return methodMap != null && methodMap.containsKey(methodDescriptor) ? methodMap.get(methodDescriptor) : name;
-    }
-
-    public Map<String,String> getFieldMap(String className) {
-        if (!fieldNameMaps.containsKey(className) && !negativeCacheFields.contains(className)) {
-            findAndMergeSuperMaps(className);
-            if (!fieldNameMaps.containsKey(className)) {
-                negativeCacheFields.add(className);
-            }
-            if (DEBUG_REMAPPING && !className.startsWith("java")) {
-                LOGGER.info("Field map for " + className + " : " + fieldNameMaps.get(className));
-            }
-        }
-        return fieldNameMaps.get(className);
-    }
-
-    public Map<String,String> getMethodMap(String className) {
-        if (!methodNameMaps.containsKey(className) && !negativeCacheMethods.contains(className)) {
-            findAndMergeSuperMaps(className);
-            if (!methodNameMaps.containsKey(className)) {
-                negativeCacheMethods.add(className);
-            }
-            if (DEBUG_REMAPPING && !className.startsWith("java")) {
-                // LOGGER.info("Method map for " + className + " : " + methodNameMaps.get(className));
-            }
-        }
-        return methodNameMaps.get(className);
-    }
-
-    private void findAndMergeSuperMaps(String name) {
+    protected ParentInfo getParentInfo(String name) {
         try {
             String superName = null;
             String[] interfaces = new String[0];
@@ -309,55 +213,11 @@ public class CustomRemapRemapper extends Remapper {
             if (DEBUG_REMAPPING && (!Strings.isNullOrEmpty(name)) && (!Strings.isNullOrEmpty(superName)) && !name.startsWith("java")) {
                 LOGGER.info("Try finding super map for " + name + " to " + superName);
             }
-            mergeSuperMaps(name, getLegacyName(superName), legacyInterfaces);
+            return new ParentInfo(getLegacyName(superName), legacyInterfaces);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Error computing parent info for " + name, e);
+            return null;
         }
-    }
-
-    public void mergeSuperMaps(String name, String superName, String[] interfaces) {
-        if (classNameBiMap == null || classNameBiMap.isEmpty()) {
-            return;
-        }
-        if (Strings.isNullOrEmpty(superName)) {
-            return;
-        }
-        if (DEBUG_REMAPPING && (!name.startsWith("java") || !superName.startsWith("java"))) {
-            LOGGER.info("Computing super maps for " + name + " & " + superName);
-            for (String itf : interfaces) {
-                LOGGER.info("Interfaces: " + itf);
-            }
-        }
-        List<String> allParents = ImmutableList.<String>builder().add(superName).addAll(Arrays.asList(interfaces)).build();
-        // generate maps for all parent objects
-        for (String parentThing : allParents) {
-            if (!methodNameMaps.containsKey(parentThing)) {
-                findAndMergeSuperMaps(parentThing);
-            }
-        }
-        Map<String, String> methodMap = Maps.<String,String>newHashMap();
-        Map<String, String> fieldMap = Maps.<String,String>newHashMap();
-        for (String parentThing : allParents) {
-            if (methodNameMaps.containsKey(parentThing)) {
-                methodMap.putAll(methodNameMaps.get(parentThing));
-            }
-            if (fieldNameMaps.containsKey(parentThing)) {
-                fieldMap.putAll(fieldNameMaps.get(parentThing));
-            }
-        }
-        if (rawMethodMaps.containsKey(name)) {
-            methodMap.putAll(rawMethodMaps.get(name));
-        }
-        if (rawFieldMaps.containsKey(name)) {
-            fieldMap.putAll(rawFieldMaps.get(name));
-        }
-        methodNameMaps.put(name, ImmutableMap.copyOf(methodMap));
-        fieldNameMaps.put(name, ImmutableMap.copyOf(fieldMap));
-        //LOGGER.info("Field Maps of " + name + ": " + fieldMap);
-    }
-
-    public Set<String> getObfedClasses() {
-        return ImmutableSet.copyOf(classNameBiMap.keySet());
     }
 
     /*public String getStaticFieldType(String oldType, String oldName, String newType, String newName) {
