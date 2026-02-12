@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package space.libs.asm;
+package space.libs.asm.remap;
 
 import static com.google.common.io.Resources.*;
 
@@ -30,7 +30,6 @@ import com.google.common.base.*;
 import com.google.common.collect.*;
 import com.google.common.io.LineProcessor;
 import net.minecraft.launchwrapper.IClassNameTransformer;
-import net.minecraft.launchwrapper.IClassTransformer;
 import net.minecraft.launchwrapper.Launch;
 import org.apache.commons.lang3.*;
 import org.apache.logging.log4j.LogManager;
@@ -46,7 +45,7 @@ import java.util.Map;
 import java.util.Set;
 
 @SuppressWarnings("all")
-public class RemapTransformer extends Remapper implements IClassTransformer, IClassNameTransformer {
+public class DefaultRemapRemapper extends Remapper implements IClassNameTransformer {
 
     public static String DEFAULT_MAPPINGS = "compatlib.srg";
 
@@ -62,90 +61,65 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
 
     private final Map<String, Map<String, String>> fieldDescriptions = Maps.newHashMap();
 
-    public RemapTransformer() throws Exception {
-
+    public DefaultRemapRemapper() {
         URL mappings = getResource(DEFAULT_MAPPINGS);
-
         final ImmutableBiMap.Builder<String, String> classes = ImmutableBiMap.builder();
         final ImmutableTable.Builder<String, String, String> fields = ImmutableTable.builder();
         final ImmutableTable.Builder<String, String, String> methods = ImmutableTable.builder();
-
-        readLines(mappings, Charsets.UTF_8, new LineProcessor<Void>() {
-
-            @Override
-            public boolean processLine(String line) throws IOException {
-                if ((line = line.trim()).isEmpty()) {
+        try {
+            readLines(mappings, Charsets.UTF_8, new LineProcessor<Void>() {
+                @Override
+                public boolean processLine(String line) throws IOException {
+                    if ((line = line.trim()).isEmpty()) {
+                        return true;
+                    }
+                    String[] parts = StringUtils.split(line, ' ');
+                    if (parts.length < 3) {
+                        System.out.println("Invalid mapping line: " + line);
+                        return true;
+                    }
+                    MappingType type = MappingType.of(parts[0]);
+                    if (type == null) {
+                        System.out.println("Invalid mapping type: " + line);
+                        return true;
+                    }
+                    String[] source;
+                    String[] dest;
+                    switch (type) {
+                        case CLASS:
+                            classes.put(parts[1], parts[2]);
+                            break;
+                        case FIELD:
+                            source = getSignature(parts[1]);
+                            dest = getSignature(parts[2]);
+                            String fieldType = getFieldType(source[0], source[1]);
+                            fields.put(source[0], source[1] + ':' + fieldType, dest[1]);
+                            if (fieldType != null) {
+                                fields.put(source[0], source[1] + ":null", dest[1]);
+                            }
+                            break;
+                        case METHOD:
+                            source = getSignature(parts[1]);
+                            dest = getSignature(parts[3]);
+                            methods.put(source[0], source[1] + parts[2], dest[1]);
+                            break;
+                        default:
+                    }
                     return true;
                 }
-
-                String[] parts = StringUtils.split(line, ' ');
-                if (parts.length < 3) {
-                    System.out.println("Invalid mapping line: " + line);
-                    return true;
+                @Override
+                public Void getResult() {
+                    return null;
                 }
-
-                MappingType type = MappingType.of(parts[0]);
-                if (type == null) {
-                    System.out.println("Invalid mapping type: " + line);
-                    return true;
-                }
-
-                String[] source;
-                String[] dest;
-                switch (type) {
-                    case CLASS:
-                        classes.put(parts[1], parts[2]);
-                        break;
-                    case FIELD:
-                        source = getSignature(parts[1]);
-                        dest = getSignature(parts[2]);
-                        String fieldType = getFieldType(source[0], source[1]);
-                        fields.put(source[0], source[1] + ':' + fieldType, dest[1]);
-                        if (fieldType != null) {
-                            fields.put(source[0], source[1] + ":null", dest[1]);
-                        }
-                        break;
-                    case METHOD:
-                        source = getSignature(parts[1]);
-                        dest = getSignature(parts[3]);
-                        methods.put(source[0], source[1] + parts[2], dest[1]);
-                        break;
-                    default:
-                }
-
-                return true;
-            }
-
-            @Override
-            public Void getResult() {
-                return null;
-            }
-        });
-
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.classes = classes.build();
         this.rawFields = fields.build();
         this.rawMethods = methods.build();
-
         this.fields = Maps.newHashMapWithExpectedSize(this.rawFields.size());
         this.methods = Maps.newHashMapWithExpectedSize(this.rawMethods.size());
-    }
-
-    @Override
-    public byte[] transform(String name, String transformedName, byte[] bytes) {
-        if (name == null || bytes == null) {
-            return bytes;
-        }
-        if (ClassNameList.StartsWith(name)) {
-            return bytes;
-        }
-        if (ClassNameList.Contains(name)) {
-            return bytes;
-        }
-
-        ClassReader reader = new ClassReader(bytes);
-        ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-        reader.accept(new RemappingAdapter(writer), ClassReader.EXPAND_FRAMES);
-        return writer.toByteArray();
     }
 
     private static String[] getSignature(String in) {
@@ -375,10 +349,13 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
         }
     }
 
-    private class RemappingAdapter extends RemappingClassAdapter {
+    public static class RemappingAdapter extends RemappingClassAdapter {
 
-        public RemappingAdapter(ClassVisitor cv) {
-            super(cv, RemapTransformer.this);
+        public static DefaultRemapRemapper INSTANCE;
+
+        public RemappingAdapter(ClassVisitor cv, DefaultRemapRemapper instace) {
+            super(cv, instace);
+            INSTANCE = instace;
         }
 
         @Override
@@ -386,7 +363,7 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
             if (interfaces == null) {
                 interfaces = ArrayUtils.EMPTY_STRING_ARRAY;
             }
-            createSuperMaps(name, superName, interfaces);
+            INSTANCE.createSuperMaps(name, superName, interfaces);
             super.visit(version, access, name, signature, superName, interfaces);
         }
 
@@ -400,7 +377,7 @@ public class RemapTransformer extends Remapper implements IClassTransformer, ICl
                     String fieldName = this.remapper.mapFieldName(owner, name, desc);
                     String newDesc = this.remapper.mapDesc(desc);
                     if ((opcode == Opcodes.GETSTATIC) && type.startsWith("net/minecraft/") && newDesc.startsWith("Lnet/minecraft/")) {
-                        String replDesc = getStaticFieldType(owner, name, type, fieldName);
+                        String replDesc = INSTANCE.getStaticFieldType(owner, name, type, fieldName);
                         if (replDesc != null) {
                             newDesc = this.remapper.mapDesc(replDesc);
                         }

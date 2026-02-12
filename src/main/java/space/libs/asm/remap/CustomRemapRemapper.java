@@ -7,7 +7,7 @@
  * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
  */
 
-package space.libs.asm;
+package space.libs.asm.remap;
 
 import com.google.common.base.*;
 import com.google.common.collect.*;

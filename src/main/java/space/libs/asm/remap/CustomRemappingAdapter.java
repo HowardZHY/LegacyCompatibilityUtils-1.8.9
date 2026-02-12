@@ -7,7 +7,7 @@
  * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
  */
 
-package space.libs.asm;
+package space.libs.asm.remap;
 
 import org.objectweb.asm.*;
 import org.objectweb.asm.commons.*;

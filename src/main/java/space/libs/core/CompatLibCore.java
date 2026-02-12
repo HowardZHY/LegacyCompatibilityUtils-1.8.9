@@ -29,6 +29,7 @@ public class CompatLibCore implements IFMLLoadingPlugin {
 
     static {
         //DUMMY = new Dummy();
+        CompatLibCoreConfig.init();
         LOGGER.info("Initializing CompatLib Core Class...");
     }
 
@@ -48,7 +49,7 @@ public class CompatLibCore implements IFMLLoadingPlugin {
         }
         ArrayList<String> transformersList = new ArrayList<>();
         ModDetector.init();
-        transformersList.add("space.libs.asm.RemapTransformer");
+        transformersList.add("space.libs.asm.DefaultCompatTransformer");
         transformersList.add("space.libs.asm.ReplaceTransformer");
         transformersList.add("space.libs.asm.LegacyObfTransformer");
 

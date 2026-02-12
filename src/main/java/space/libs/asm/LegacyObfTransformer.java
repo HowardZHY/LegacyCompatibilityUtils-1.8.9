@@ -26,6 +26,7 @@ package space.libs.asm;
 
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.*;
+import space.libs.asm.remap.CustomRemappingAdapter;
 
 @SuppressWarnings("all")
 public class LegacyObfTransformer implements IClassTransformer {
