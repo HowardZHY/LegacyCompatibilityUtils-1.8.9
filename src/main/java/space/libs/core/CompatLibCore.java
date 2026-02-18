@@ -65,7 +65,7 @@ public class CompatLibCore implements IFMLLoadingPlugin {
 
     @Override
     public String getModContainerClass() {
-        return null;
+        return "space.libs.core.CompatLibCoreContainer";
     }
 
     @Override

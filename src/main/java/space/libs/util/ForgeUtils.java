@@ -1,6 +1,7 @@
 package space.libs.util;
 
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.versioning.ArtifactVersion;
 import net.minecraftforge.fml.common.versioning.Restriction;
 
@@ -29,5 +30,14 @@ public abstract class ForgeUtils {
             return true;
         }
         return restriction.containsVersion(version);
+    }
+
+    public static ModMetadata createModData(String modID, String name, String version, String author) {
+        ModMetadata data = new ModMetadata();
+        data.modId = modID;
+        data.name = name;
+        data.version = version;
+        data.authorList.add(author);
+        return data;
     }
 }
