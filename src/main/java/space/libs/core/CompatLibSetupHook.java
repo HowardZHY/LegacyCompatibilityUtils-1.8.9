@@ -17,7 +17,9 @@ public class CompatLibSetupHook implements IFMLCallHook {
     @Override
     public Void call() throws Exception {
         CompatLibCore.LOGGER.info("Mods calling setup hooks...");
-        addDummyMods();
+        if (CompatLibCoreConfig.DummyModID) {
+            addDummyMods();
+        }
         return null;
     }
 

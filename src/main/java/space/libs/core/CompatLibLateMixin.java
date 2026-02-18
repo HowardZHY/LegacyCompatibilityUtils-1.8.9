@@ -25,11 +25,6 @@ public class CompatLibLateMixin implements ILateMixinLoader {
         return mixins;
     }
 
-    @Override
-    public boolean shouldMixinConfigQueue(String mixinConfig) {
-        return true;
-    }
-
     public static void loadModTransformers() {
         if (ModDetector.hasAlexIILLib) {
             CompatLibCore.LOGGER.info("Found AlexIILLib, load ASM Transformers of it.");
