@@ -16,24 +16,30 @@ public abstract class MixinFluidClient implements IFluid {
 
     public TextureAtlasSprite flowingIcon;
 
+    public Fluid This() {
+        return (Fluid) (Object) this;
+    }
+
     public Fluid setStillIcon(TextureAtlasSprite stillIcon) {
         this.stillIcon = stillIcon;
-        return (Fluid) (Object) this;
+        return This();
     }
 
     public Fluid setFlowingIcon(TextureAtlasSprite flowingIcon) {
         this.flowingIcon = flowingIcon;
-        return (Fluid) (Object) this;
+        return This();
     }
 
     public Fluid setIcons(TextureAtlasSprite stillIcon, TextureAtlasSprite flowingIcon) {
-        IFluid accessor = (IFluid) this.setStillIcon(stillIcon);
-        return accessor.setFlowingIcon(flowingIcon);
+        this.setStillIcon(stillIcon);
+        this.setFlowingIcon(flowingIcon);
+        return This();
     }
 
     public Fluid setIcons(TextureAtlasSprite commonIcon) {
-        IFluid accessor = (IFluid) this.setStillIcon(commonIcon);
-        return accessor.setFlowingIcon(commonIcon);
+        this.setStillIcon(commonIcon);
+        this.setFlowingIcon(commonIcon);
+        return This();
     }
 
     public TextureAtlasSprite getIcon() {

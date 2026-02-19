@@ -195,6 +195,7 @@
     "MixinTeleporter",
     "MixinWorld",
     "MixinWorldProvider",
+    "block.MixinBlock",
     "block.MixinBlockBrewingStand",
     "block.MixinBlockChest",
     "block.MixinBlockCompressedPowered",

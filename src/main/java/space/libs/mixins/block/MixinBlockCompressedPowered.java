@@ -11,7 +11,7 @@ import space.libs.util.cursedmixinextensions.annotations.ShadowSuperConstructor;
 @SuppressWarnings("unused")
 @Mixin(BlockCompressedPowered.class)
 @ChangeSuperClass(BlockCompressed.class)
-public class MixinBlockCompressedPowered {
+public class MixinBlockCompressedPowered extends MixinBlock {
 
     @ShadowSuperConstructor
     public void BlockCompressed(MapColor color) {}

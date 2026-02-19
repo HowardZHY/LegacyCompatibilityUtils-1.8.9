@@ -8,6 +8,7 @@
   "compatibilityLevel": "JAVA_8",
   "client": [
     "fixes.chame.MixinChamModel",
+    "fixes.tbc.MixinItemCustomArmor",
     "qol.di.MixinDIClientProxy",
     "qol.ichun.MixinThreadGetPatrons",
     "qol.mpm.MixinRenderEvent",

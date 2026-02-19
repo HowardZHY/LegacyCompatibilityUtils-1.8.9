@@ -7,6 +7,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import space.libs.util.MappedName;
 
 @SuppressWarnings("unused")
 @Mixin(BlockLever.class)
@@ -19,7 +20,7 @@ public abstract class MixinBlockLever extends Block {
     @Shadow
     public abstract boolean canPlaceBlockAt(World worldIn, BlockPos pos);
 
-    /** checkForDrop */
+    @MappedName("checkForDrop")
     public boolean func_176356_e(World worldIn, BlockPos pos) {
         if (canPlaceBlockAt(worldIn, pos)) {
             return true;

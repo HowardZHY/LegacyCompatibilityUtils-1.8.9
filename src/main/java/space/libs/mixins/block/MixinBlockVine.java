@@ -7,7 +7,7 @@ import space.libs.util.cursedmixinextensions.annotations.Public;
 
 @SuppressWarnings("all")
 @Mixin(BlockVine.class)
-public class MixinBlockVine {
+public abstract class MixinBlockVine extends MixinBlock {
 
     @Public
     private static int field_176272_Q = func_176270_b(EnumFacing.SOUTH);
