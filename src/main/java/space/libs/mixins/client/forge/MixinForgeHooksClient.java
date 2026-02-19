@@ -8,6 +8,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -16,13 +17,15 @@ import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.fml.common.FMLLog;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import space.libs.interfaces.IForgeHooksClient;
 import space.libs.interfaces.IVertexFormatElement;
+import space.libs.util.client.ClientUtils;
 import space.libs.util.cursedmixinextensions.annotations.Public;
 
-import javax.vecmath.Matrix4f;
-import javax.vecmath.Vector3d;
-import javax.vecmath.Vector4f;
+import javax.vecmath.*;
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -34,6 +37,11 @@ public class MixinForgeHooksClient implements IForgeHooksClient {
 
     @Public
     private static EnumWorldBlockLayer renderLayer = EnumWorldBlockLayer.SOLID;
+
+    @Inject(method = "onTextureStitchedPre", at = @At("RETURN"), remap = false)
+    private static void onTextureStitchedPre(TextureMap map, CallbackInfo ci) {
+        ClientUtils.onTextureStitchedPre(map);
+    }
 
     @Shadow(prefix = "original$", remap = false)
     public static ModelBiped original$getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int slotID, ModelBiped _default) {

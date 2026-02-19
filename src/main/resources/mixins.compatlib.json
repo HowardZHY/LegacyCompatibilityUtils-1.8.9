@@ -231,6 +231,7 @@
     "forge.MixinExistingSubstitutionException",
     "forge.MixinFluid",
     "forge.MixinFluidRegistry",
+    "forge.MixinFluidStack",
     "forge.MixinFMLControlledNamespacedRegistry",
     "forge.MixinFMLHandshakeMessageRegistryData",
     "forge.MixinFMLModContainer",
