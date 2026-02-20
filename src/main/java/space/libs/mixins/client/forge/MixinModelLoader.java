@@ -2,17 +2,16 @@ package space.libs.mixins.client.forge;
 
 import net.minecraftforge.client.model.ModelLoader;
 import org.apache.logging.log4j.Logger;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.*;
 
-@Mixin(ModelLoader.class)
+@SuppressWarnings("unused")
+@Mixin(value = ModelLoader.class, priority = 900, remap = false)
 public class MixinModelLoader {
 
     @Redirect(
         method = "onPostBakeEvent",
-        at = @At(value = "INVOKE", target = "Lorg/apache/logging/log4j/Logger;error(Ljava/lang/String;Ljava/lang/Throwable;)V"),
-        remap = false
+        at = @At(value = "INVOKE", target = "Lorg/apache/logging/log4j/Logger;error(Ljava/lang/String;Ljava/lang/Throwable;)V")
     )
     public void onPostBakeEvent(Logger instance, String msg, Throwable t) {
         instance.warn(msg + ": " + t.getMessage());

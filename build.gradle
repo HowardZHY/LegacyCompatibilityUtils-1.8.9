@@ -82,6 +82,7 @@ repositories {
 task LiteLoader {
     def jarUrl = new URL('https://jenkins.liteloader.com/view/1.8.9/job/LiteLoader%201.8.9/lastSuccessfulBuild/artifact/build/libs/liteloader-1.8.9-SNAPSHOT.jar')
     def jarFile = new File('libs/liteloader-1.8.9-SNAPSHOT.jar')
+    if (jarFile.exists()) return
     try {
         jarUrl.withInputStream { inputStream ->
             jarFile.withOutputStream { outputStream ->

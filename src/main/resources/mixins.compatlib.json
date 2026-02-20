@@ -79,6 +79,7 @@
     "client.render.MixinModelBlockDefinitionDeserializer",
     "client.render.MixinModelBlockDeserializer",
     "client.render.MixinModelBox",
+    "client.render.MixinModelFluidBakedFluid",
     "client.render.MixinModelRotation",
     "client.render.MixinRenderChunk",
     "client.render.MixinRenderGlobal",
