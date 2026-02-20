@@ -14,19 +14,19 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("unused")
-@Mixin(GuiScrollingList.class)
+@Mixin(value = GuiScrollingList.class, remap = false)
 public class MixinGuiScrollingList {
 
-    @Shadow(remap = false)
+    @Shadow
     private @Final Minecraft client;
 
-    @Shadow(remap = false)
+    @Shadow
     protected @Final int listWidth;
 
-    @Shadow(remap = false)
+    @Shadow
     protected @Final int screenWidth;
 
-    @Shadow(remap = false)
+    @Shadow
     protected @Final int left;
 
     public void overlayBackground(int top, int height, int alpha1, int alpha2) {
