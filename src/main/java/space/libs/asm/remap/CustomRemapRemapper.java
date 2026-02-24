@@ -21,13 +21,10 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
 
-import java.net.URL;
 import java.util.*;
 
-import static com.google.common.io.Resources.getResource;
-
 @SuppressWarnings("all")
-public class CustomRemapRemapper extends BaseRemapper {
+public class CustomRemapRemapper extends RemapperBase {
 
     public BiMap<String, String> classNameBiMap;
 
@@ -44,20 +41,19 @@ public class CustomRemapRemapper extends BaseRemapper {
     private LaunchClassLoader classLoader;
 
     public CustomRemapRemapper(String name) {
-        super();
-        classNameBiMap = ImmutableBiMap.of();
-        reverseClassMap = ImmutableBiMap.of();
-        this.setup((LaunchClassLoader) this.getClass().getClassLoader(), name);
+        super(name);
+        this.classNameBiMap = ImmutableBiMap.of();
+        this.reverseClassMap = ImmutableBiMap.of();
+        this.setup();
     }
 
-    public void setup(LaunchClassLoader classLoader, String deobfFileName) {
-        this.classLoader = classLoader;
+    public void setup() {
+        this.classLoader = (LaunchClassLoader) this.getClass().getClassLoader();
         try {
-            URL mappings = getResource(deobfFileName);
-            CharSource srgSource = Resources.asCharSource(mappings, Charsets.UTF_8);
+            CharSource srgSource = Resources.asCharSource(this.mappings, Charsets.UTF_8);
             List<String> srgList = srgSource.readLines();
-            rawMethodMaps = Maps.newHashMap();
-            rawFieldMaps = Maps.newHashMap();
+            this.rawMethodMaps = Maps.newHashMap();
+            this.rawFieldMaps = Maps.newHashMap();
             Builder<String, String> builder = ImmutableBiMap.<String,String>builder();
             Splitter splitter = Splitter.on(CharMatcher.anyOf(": ")).omitEmptyStrings().trimResults();
             for (String line : srgList) {
@@ -73,13 +69,13 @@ public class CustomRemapRemapper extends BaseRemapper {
                     parseField(parts);
                 }
             }
-            classNameBiMap = builder.build();
-            reverseClassMap = classNameBiMap.inverse();
+            this.classNameBiMap = builder.build();
+            this.reverseClassMap = classNameBiMap.inverse();
         } catch (Exception e) {
             LOGGER.error("An error occurred loading the custom map data" + e);
         }
-        methodNameMaps = Maps.newHashMapWithExpectedSize(rawMethodMaps.size());
-        fieldNameMaps = Maps.newHashMapWithExpectedSize(rawFieldMaps.size());
+        this.fieldNameMaps = Maps.newHashMapWithExpectedSize(rawFieldMaps.size());
+        this.methodNameMaps = Maps.newHashMapWithExpectedSize(rawMethodMaps.size());
     }
 
     public boolean isRemappedClass(String className) {
@@ -114,7 +110,7 @@ public class CustomRemapRemapper extends BaseRemapper {
         }
         String mappedName = this.map(name);
         String realName = FMLDeobfuscatingRemapper.INSTANCE.unmap(mappedName);
-        if (DEBUG_REMAPPING && (name != realName)) {
+        if (DEBUG_REMAPPING && (!name.equals(realName))) {
             LOGGER.info("Get " + name + "'s unmapped name " + realName + " from " + mappedName);
         }
         return realName;
@@ -128,8 +124,7 @@ public class CustomRemapRemapper extends BaseRemapper {
             return name; // Not mapped
         }
         String mappedName = FMLDeobfuscatingRemapper.INSTANCE.map(name);
-        String legacyName = this.unmap(mappedName);
-        return legacyName;
+        return this.unmap(mappedName);
     }
 
     protected String getFieldType(String owner, String name) {
@@ -146,7 +141,7 @@ public class CustomRemapRemapper extends BaseRemapper {
                 ClassNode classNode = new ClassNode();
                 cr.accept(classNode, ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
                 Map<String,String> resMap = Maps.newHashMap();
-                for (FieldNode fieldNode : (List<FieldNode>) classNode.fields) {
+                for (FieldNode fieldNode : classNode.fields) {
                     resMap.put(fieldNode.name, fieldNode.desc);
                 }
                 fieldDescriptions.put(owner, resMap);
@@ -260,9 +255,9 @@ public class CustomRemapRemapper extends BaseRemapper {
             if (!methodNameMaps.containsKey(className)) {
                 negativeCacheMethods.add(className);
             }
-            if (DEBUG_REMAPPING && !className.startsWith("java")) {
-                // LOGGER.info("Method map for " + className + " : " + methodNameMaps.get(className));
-            }
+            /* if (DEBUG_REMAPPING && !className.startsWith("java")) {
+                LOGGER.info("Method map for " + className + " : " + methodNameMaps.get(className));
+            } */
         }
         return methodNameMaps.get(className);
     }

@@ -36,15 +36,13 @@ import org.objectweb.asm.*;
 import org.objectweb.asm.commons.*;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
-import space.libs.core.CompatLibDebug;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Map;
 import java.util.Set;
 
-@SuppressWarnings("all")
-public class DefaultRemapRemapper extends BaseRemapper implements IClassNameTransformer {
+@SuppressWarnings("UnstableApiUsage")
+public class DefaultRemapRemapper extends RemapperBase implements IClassNameTransformer {
 
     public static String DEFAULT_MAPPINGS = "compatlib.srg";
 
@@ -55,67 +53,23 @@ public class DefaultRemapRemapper extends BaseRemapper implements IClassNameTran
     private final Map<String, Map<String, String>> fields;
     private final Map<String, Map<String, String>> methods;
 
+    final ImmutableBiMap.Builder<String, String> classesIn = ImmutableBiMap.builder();
+    final ImmutableTable.Builder<String, String, String> fieldsIn = ImmutableTable.builder();
+    final ImmutableTable.Builder<String, String, String> methodsIn = ImmutableTable.builder();
+
     private final Set<String> failedFields = Sets.newHashSet();
     private final Set<String> failedMethods = Sets.newHashSet();
 
     public DefaultRemapRemapper() {
-        super();
-        URL mappings = getResource(DEFAULT_MAPPINGS);
-        final ImmutableBiMap.Builder<String, String> classes = ImmutableBiMap.builder();
-        final ImmutableTable.Builder<String, String, String> fields = ImmutableTable.builder();
-        final ImmutableTable.Builder<String, String, String> methods = ImmutableTable.builder();
+        super(DEFAULT_MAPPINGS);
         try {
-            readLines(mappings, Charsets.UTF_8, new LineProcessor<Void>() {
-                @Override
-                public boolean processLine(String line) throws IOException {
-                    if ((line = line.trim()).isEmpty()) {
-                        return true;
-                    }
-                    String[] parts = StringUtils.split(line, ' ');
-                    if (parts.length < 3) {
-                        System.out.println("Invalid mapping line: " + line);
-                        return true;
-                    }
-                    MappingType type = MappingType.of(parts[0]);
-                    if (type == null) {
-                        System.out.println("Invalid mapping type: " + line);
-                        return true;
-                    }
-                    String[] source;
-                    String[] dest;
-                    switch (type) {
-                        case CLASS:
-                            classes.put(parts[1], parts[2]);
-                            break;
-                        case FIELD:
-                            source = getSignature(parts[1]);
-                            dest = getSignature(parts[2]);
-                            String fieldType = getFieldType(source[0], source[1]);
-                            fields.put(source[0], source[1] + ':' + fieldType, dest[1]);
-                            if (fieldType != null) {
-                                fields.put(source[0], source[1] + ":null", dest[1]);
-                            }
-                            break;
-                        case METHOD:
-                            source = getSignature(parts[1]);
-                            dest = getSignature(parts[3]);
-                            methods.put(source[0], source[1] + parts[2], dest[1]);
-                            break;
-                        default:
-                    }
-                    return true;
-                }
-                @Override
-                public Void getResult() {
-                    return null;
-                }
-            });
+            readLines(mappings, Charsets.UTF_8, new MappingLineProcessor());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.classes = classes.build();
-        this.rawFields = fields.build();
-        this.rawMethods = methods.build();
+        this.classes = classesIn.build();
+        this.rawFields = fieldsIn.build();
+        this.rawMethods = methodsIn.build();
         this.fields = Maps.newHashMapWithExpectedSize(this.rawFields.size());
         this.methods = Maps.newHashMapWithExpectedSize(this.rawMethods.size());
     }
@@ -195,7 +149,7 @@ public class DefaultRemapRemapper extends BaseRemapper implements IClassNameTran
             } else {
                 try {
                     if (fields.get(name + ":null") != null) {
-                        if (CompatLibDebug.DEBUG_REMAP && (!owner.contains("/") || owner.contains("net"))) {
+                        if (DEBUG_REMAPPING && (!owner.contains("/") || owner.contains("net"))) {
                             LOGGER.info("Try map field without desc " + owner + "." + name + " to " + fields.get(name + ":null"));
                         }
                         return fields.get(name + ":null");
@@ -299,31 +253,6 @@ public class DefaultRemapRemapper extends BaseRemapper implements IClassNameTran
         this.methods.put(name, ImmutableMap.copyOf(methods));
     }
 
-    private enum MappingType {
-
-        PACKAGE("PK"), CLASS("CL"), FIELD("FD"), METHOD("MD");
-
-        private static final ImmutableMap<String, MappingType> LOOKUP;
-
-        private final String identifier;
-
-        MappingType(String identifier) {
-            this.identifier = identifier;
-        }
-
-        static {
-            ImmutableMap.Builder<String, MappingType> builder = ImmutableMap.builder();
-            for (MappingType type : MappingType.values()) {
-                builder.put(type.identifier + ':', type);
-            }
-            LOOKUP = builder.build();
-        }
-
-        public static MappingType of(String identifier) {
-            return LOOKUP.get(identifier);
-        }
-    }
-
     public static class RemappingAdapter extends RemappingClassAdapter {
 
         public static DefaultRemapRemapper INSTANCE;
@@ -336,7 +265,7 @@ public class DefaultRemapRemapper extends BaseRemapper implements IClassNameTran
         @Override
         public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
             if (interfaces == null) {
-                interfaces = ArrayUtils.EMPTY_STRING_ARRAY;
+                interfaces = new String[0];
             }
             INSTANCE.createSuperMaps(name, superName, interfaces);
             super.visit(version, access, name, signature, superName, interfaces);
@@ -365,4 +294,52 @@ public class DefaultRemapRemapper extends BaseRemapper implements IClassNameTran
         }
     }
 
+    public class MappingLineProcessor implements LineProcessor<Void> {
+
+        @SuppressWarnings("all")
+        @Override
+        public boolean processLine(String line) {
+            if ((line = line.trim()).isEmpty()) {
+                return true;
+            }
+            String[] parts = StringUtils.split(line, ' ');
+            if (parts.length < 3) {
+                LOGGER.error("Invalid mapping line: " + line);
+                return true;
+            }
+            MappingType type = MappingType.of(parts[0]);
+            if (type == null) {
+                LOGGER.error("Invalid mapping type: " + line);
+                return true;
+            }
+            String[] source;
+            String[] dest;
+            switch (type) {
+                case CLASS:
+                    classesIn.put(parts[1], parts[2]);
+                    break;
+                case FIELD:
+                    source = getSignature(parts[1]);
+                    dest = getSignature(parts[2]);
+                    String fieldType = getFieldType(source[0], source[1]);
+                    fieldsIn.put(source[0], source[1] + ':' + fieldType, dest[1]);
+                    if (fieldType != null) {
+                        fieldsIn.put(source[0], source[1] + ":null", dest[1]);
+                    }
+                    break;
+                case METHOD:
+                    source = getSignature(parts[1]);
+                    dest = getSignature(parts[3]);
+                    methodsIn.put(source[0], source[1] + parts[2], dest[1]);
+                    break;
+                default:
+            }
+            return true;
+        }
+
+        @Override
+        public Void getResult() {
+            return null;
+        }
+    }
 }
