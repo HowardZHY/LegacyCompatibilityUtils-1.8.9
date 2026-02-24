@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package space.libs.asm.remap;
 
 import static com.google.common.io.Resources.*;
@@ -30,9 +31,7 @@ import com.google.common.base.*;
 import com.google.common.collect.*;
 import com.google.common.io.LineProcessor;
 import net.minecraft.launchwrapper.IClassNameTransformer;
-import net.minecraft.launchwrapper.Launch;
 import org.apache.commons.lang3.*;
-import org.apache.logging.log4j.LogManager;
 import org.objectweb.asm.*;
 import org.objectweb.asm.commons.*;
 import org.objectweb.asm.tree.ClassNode;
@@ -45,7 +44,7 @@ import java.util.Map;
 import java.util.Set;
 
 @SuppressWarnings("all")
-public class DefaultRemapRemapper extends Remapper implements IClassNameTransformer {
+public class DefaultRemapRemapper extends BaseRemapper implements IClassNameTransformer {
 
     public static String DEFAULT_MAPPINGS = "compatlib.srg";
 
@@ -59,9 +58,8 @@ public class DefaultRemapRemapper extends Remapper implements IClassNameTransfor
     private final Set<String> failedFields = Sets.newHashSet();
     private final Set<String> failedMethods = Sets.newHashSet();
 
-    private final Map<String, Map<String, String>> fieldDescriptions = Maps.newHashMap();
-
     public DefaultRemapRemapper() {
+        super();
         URL mappings = getResource(DEFAULT_MAPPINGS);
         final ImmutableBiMap.Builder<String, String> classes = ImmutableBiMap.builder();
         final ImmutableTable.Builder<String, String, String> fields = ImmutableTable.builder();
@@ -127,15 +125,7 @@ public class DefaultRemapRemapper extends Remapper implements IClassNameTransfor
         return new String[]{in.substring(0, pos), in.substring(pos + 1)};
     }
 
-    private static byte[] getBytes(String name) {
-        try {
-            return Launch.classLoader.getClassBytes(name);
-        } catch (IOException e) {
-            throw Throwables.propagate(e);
-        }
-    }
-
-    private String getFieldType(String owner, String name) {
+    protected String getFieldType(String owner, String name) {
         Map<String, String> fieldDescriptions = this.fieldDescriptions.get(owner);
         if (fieldDescriptions != null) {
             return fieldDescriptions.get(name);
@@ -206,7 +196,7 @@ public class DefaultRemapRemapper extends Remapper implements IClassNameTransfor
                 try {
                     if (fields.get(name + ":null") != null) {
                         if (CompatLibDebug.DEBUG_REMAP && (!owner.contains("/") || owner.contains("net"))) {
-                            LogManager.getLogger().info("Try map field without desc " + owner + "." + name + " to " + fields.get(name + ":null"));
+                            LOGGER.info("Try map field without desc " + owner + "." + name + " to " + fields.get(name + ":null"));
                         }
                         return fields.get(name + ":null");
                     }
@@ -307,21 +297,6 @@ public class DefaultRemapRemapper extends Remapper implements IClassNameTransfor
         methods.putAll(this.rawMethods.row(name));
         this.fields.put(name, ImmutableMap.copyOf(fields));
         this.methods.put(name, ImmutableMap.copyOf(methods));
-    }
-
-    @SuppressWarnings("all")
-    public String getStaticFieldType(String oldType, String oldName, String newType, String newName) {
-        String type = getFieldType(oldType, oldName);
-        if (oldType.equals(newType)) {
-            return type;
-        }
-        Map<String, String> newClassMap = this.fieldDescriptions.get(newType);
-        if (newClassMap == null) {
-            newClassMap = Maps.newHashMap();
-            this.fieldDescriptions.put(newType, newClassMap);
-        }
-        newClassMap.put(newName, type);
-        return type;
     }
 
     private enum MappingType {

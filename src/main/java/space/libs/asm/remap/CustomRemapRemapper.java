@@ -14,26 +14,20 @@ import com.google.common.collect.*;
 import com.google.common.collect.ImmutableBiMap.Builder;
 import com.google.common.io.CharSource;
 import com.google.common.io.Resources;
-import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 import net.minecraftforge.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
 import net.minecraftforge.fml.common.patcher.ClassPatchManager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.commons.Remapper;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
-import space.libs.core.CompatLibDebug;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
 import static com.google.common.io.Resources.getResource;
 
 @SuppressWarnings("all")
-public class CustomRemapRemapper extends Remapper {
+public class CustomRemapRemapper extends BaseRemapper {
 
     public BiMap<String, String> classNameBiMap;
 
@@ -49,17 +43,8 @@ public class CustomRemapRemapper extends Remapper {
 
     private LaunchClassLoader classLoader;
 
-    public static final Logger LOGGER = LogManager.getLogger();
-
-    public static boolean DEBUG_REMAPPING = CompatLibDebug.DEBUG_REMAP;
-
-    public CustomRemapRemapper() {
-        classNameBiMap = ImmutableBiMap.of();
-        reverseClassMap = ImmutableBiMap.of();
-        //this.setup((LaunchClassLoader) this.getClass().getClassLoader(), DEFAULT_MAPPINGS);
-    }
-
     public CustomRemapRemapper(String name) {
+        super();
         classNameBiMap = ImmutableBiMap.of();
         reverseClassMap = ImmutableBiMap.of();
         this.setup((LaunchClassLoader) this.getClass().getClassLoader(), name);
@@ -116,8 +101,6 @@ public class CustomRemapRemapper extends Remapper {
         rawFieldMaps.get(cl).put(oldName + ":null", newName);
     }
 
-    private Map<String,Map<String,String>> fieldDescriptions = Maps.newHashMap();
-
     private Set<String> negativeCacheMethods = Sets.newHashSet();
 
     private Set<String> negativeCacheFields = Sets.newHashSet();
@@ -149,15 +132,7 @@ public class CustomRemapRemapper extends Remapper {
         return legacyName;
     }
 
-    private static byte[] getBytes(String name) {
-        try {
-            return Launch.classLoader.getClassBytes(name);
-        } catch (IOException e) {
-            throw Throwables.propagate(e);
-        }
-    }
-
-    private String getFieldType(String owner, String name) {
+    protected String getFieldType(String owner, String name) {
         if (fieldDescriptions.containsKey(owner)) {
             return fieldDescriptions.get(owner).get(name);
         }
@@ -359,19 +334,4 @@ public class CustomRemapRemapper extends Remapper {
     public Set<String> getObfedClasses() {
         return ImmutableSet.copyOf(classNameBiMap.keySet());
     }
-
-    /*public String getStaticFieldType(String oldType, String oldName, String newType, String newName) {
-        String fType = getFieldType(oldType, oldName);
-        LOGGER.info("Static Field: " + oldType + "+" + oldName + " & " + newType + "+" + newName + " fT: " + fType);
-        if (oldType.equals(newType)) {
-            return fType;
-        }
-        Map<String,String> newClassMap = fieldDescriptions.get(newType);
-        if (newClassMap == null) {
-            newClassMap = Maps.newHashMap();
-            fieldDescriptions.put(newType, newClassMap);
-        }
-        newClassMap.put(newName, fType);
-        return fType;
-    }*/
 }
