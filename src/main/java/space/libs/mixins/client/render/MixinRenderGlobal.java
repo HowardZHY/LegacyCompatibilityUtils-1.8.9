@@ -10,6 +10,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import space.libs.util.MappedName;
 import space.libs.util.cursedmixinextensions.annotations.Public;
 
 @SuppressWarnings("unused")
@@ -28,23 +29,21 @@ public abstract class MixinRenderGlobal {
     @Shadow
     protected abstract org.lwjgl.util.vector.Vector3f getViewVector(Entity entityIn, double partialTicks);
 
-    /** drawOutlinedBoundingBox */
+    @MappedName("drawOutlinedBoundingBox ")
     @Public
     private static void func_147590_a(AxisAlignedBB boundingBox, int i) {
         drawSelectionBoundingBox(boundingBox);
     }
 
-    /** getViewVector */
+    @MappedName("getViewVector")
     public javax.vecmath.Vector3f func_174962_a(Entity entityIn, double partialTicks) {
         org.lwjgl.util.vector.Vector3f lwjglVec3f = this.getViewVector(entityIn, partialTicks);
         return new javax.vecmath.Vector3f(
-            lwjglVec3f.getX(),
-            lwjglVec3f.getY(),
-            lwjglVec3f.getZ()
+            lwjglVec3f.x, lwjglVec3f.y, lwjglVec3f.z
         );
     }
 
-    /** getRenderChunkOffset */
+    @MappedName("getRenderChunkOffset")
     public RenderChunk func_174973_a(BlockPos playerPos, RenderChunk renderChunkBase, EnumFacing facing) {
         BlockPos blockpos = renderChunkBase.getBlockPosOffset16(facing);
         return MathHelper.abs_int(playerPos.getX() - blockpos.getX()) >

@@ -84,13 +84,13 @@ public abstract class MixinRenderItem {
     }
 
     @Public
-    private static void applyVanillaTransform(ItemTransformVec3f p_175034_1_) {
-        if (p_175034_1_ != ItemTransformVec3f.DEFAULT) {
-            GlStateManager.translate(p_175034_1_.translation.x + field_175055_b, p_175034_1_.translation.y + field_175056_c, p_175034_1_.translation.z + field_175053_d);
-            GlStateManager.rotate(p_175034_1_.rotation.y + field_175051_f, 0.0F, 1.0F, 0.0F);
-            GlStateManager.rotate(p_175034_1_.rotation.x + field_175054_e, 1.0F, 0.0F, 0.0F);
-            GlStateManager.rotate(p_175034_1_.rotation.z + field_175052_g, 0.0F, 0.0F, 1.0F);
-            GlStateManager.scale(p_175034_1_.scale.x + field_175061_h, p_175034_1_.scale.y + field_175062_i, p_175034_1_.scale.z + field_175060_j);
+    private static void applyVanillaTransform(ItemTransformVec3f vec3f) {
+        if (vec3f != ItemTransformVec3f.DEFAULT) {
+            GlStateManager.translate(vec3f.translation.x + field_175055_b, vec3f.translation.y + field_175056_c, vec3f.translation.z + field_175053_d);
+            GlStateManager.rotate(vec3f.rotation.y + field_175051_f, 0.0F, 1.0F, 0.0F);
+            GlStateManager.rotate(vec3f.rotation.x + field_175054_e, 1.0F, 0.0F, 0.0F);
+            GlStateManager.rotate(vec3f.rotation.z + field_175052_g, 0.0F, 0.0F, 1.0F);
+            GlStateManager.scale(vec3f.scale.x + field_175061_h, vec3f.scale.y + field_175062_i, vec3f.scale.z + field_175060_j);
         }
     }
 
