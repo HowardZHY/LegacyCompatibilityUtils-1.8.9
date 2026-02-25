@@ -41,3 +41,7 @@ Coremods using some ASM, or accessing APIs with FML Core breaking changes.
 ### TMI (Official 1.8 Forge Version)
 
 One of the 1.8 Forge Mods that's in Totally Notch Code, lazy to make reflections.
+
+### [Urushibara's Mods](https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/2224400-1-8-1-1-8-2-pre1-urushibaras-small-mods)
+
+Same reason as above.

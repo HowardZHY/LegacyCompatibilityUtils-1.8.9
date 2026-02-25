@@ -19,12 +19,12 @@ public class CustomRemappingAdapter extends RemappingClassAdapter {
     public static String LEGACY_MAPPINGS = "legacydeobf.srg";
 
     public CustomRemappingAdapter(ClassVisitor cv) {
-        super(cv, new CustomRemapRemapper(LEGACY_MAPPINGS));
+        super(cv, new CustomRemapper(LEGACY_MAPPINGS));
         INSTANCE = this;
     }
 
-    public CustomRemapRemapper getRemapper() {
-        return (CustomRemapRemapper) super.remapper;
+    public CustomRemapper getRemapper() {
+        return (CustomRemapper) super.remapper;
     }
 
     @Override
@@ -59,12 +59,12 @@ public class CustomRemappingAdapter extends RemappingClassAdapter {
             if ((opcode == Opcodes.GETSTATIC) && type.startsWith("net/minecraft/") && newDesc.startsWith("Lnet/minecraft/")) {
                 String replDesc = getRemapper().getStaticFieldType(originalOwner, originalName, type, fieldName);
                 if (replDesc != null) {
-                    CustomRemapRemapper.LOGGER.info("Field Desc: " + desc + "&" + newDesc + "&" + replDesc);
+                    CustomRemapper.LOGGER.info("Field Desc: " + desc + "&" + newDesc + "&" + replDesc);
                     newDesc = getRemapper().mapDesc(replDesc);
                 }
             }
-            if (CustomRemapRemapper.DEBUG_REMAPPING && (type.startsWith("net/minecraft") || !type.contains("/"))) {
-                CustomRemapRemapper.LOGGER.info("Remapping Field: " + type + "." + fieldName + ":" + newDesc + " from: " + originalOwner + "." + originalName + ":" + desc);
+            if (CustomRemapper.DEBUG_REMAPPING && (type.startsWith("net/minecraft") || !type.contains("/"))) {
+                CustomRemapper.LOGGER.info("Remapping Field: " + type + "." + fieldName + ":" + newDesc + " from: " + originalOwner + "." + originalName + ":" + desc);
             }*/
             // super.super
             if (mv != null) {
