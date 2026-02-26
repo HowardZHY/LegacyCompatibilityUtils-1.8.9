@@ -12,11 +12,14 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class ModDetector {
 
     public static boolean initialized = false;
 
     public static boolean hasLiteLoader = false;
+
+    public static boolean hasAllTheItems = false;
 
     public static boolean hasSpACore = false;
 
@@ -36,13 +39,14 @@ public class ModDetector {
 
     public ModDetector() {}
 
-    @SuppressWarnings("all")
+    @SuppressWarnings("InstantiationOfUtilityClass")
     public static void init() {
         if (initialized) {
             return;
         }
         INSTANCE = new ModDetector();
         hasLiteLoader = getCoreMod("com.mumfrey.liteloader.launch.LiteLoaderTransformer", false);
+        hasAllTheItems = getCoreMod("net.fybertech.alltheitems.AllTheItems", true);
         hasNEI = getCoreMod("codechicken.nei.asm.NEICorePlugin", true);
         hasSpACore = getCoreMod("net.specialattack.forge.core.asm.SpACorePlugin", true);
         hasAlexIILLib = getCoreMod("alexiil.mods.lib.coremod.LoadPlugin", true);

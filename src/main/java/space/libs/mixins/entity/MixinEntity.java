@@ -54,7 +54,9 @@ public abstract class MixinEntity {
     }
 
     @Shadow
-    public abstract boolean isRiding();
+    public boolean isRiding() {
+        return false;
+    }
 
     @Shadow
     public void addChatMessage(IChatComponent component) {}

@@ -6,7 +6,7 @@ import space.libs.util.ModDetector;
 
 import java.util.Map;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "SpellCheckingInspection"})
 public class CompatLibSetupHook implements IFMLCallHook {
 
     @Override
@@ -17,6 +17,9 @@ public class CompatLibSetupHook implements IFMLCallHook {
     @Override
     public Void call() throws Exception {
         CompatLibCore.LOGGER.info("Mods calling setup hooks...");
+        if (ModDetector.hasAllTheItems) {
+            addModContainer("net.fybertech.alltheitems.DummyMod");
+        }
         if (CompatLibCoreConfig.DummyModID) {
             addDummyMods();
         }
@@ -24,7 +27,11 @@ public class CompatLibSetupHook implements IFMLCallHook {
     }
 
     public static void addDummyMods() {
-        FMLInjectionData.containers.add("bspkrs.bspkrscore.fml.BspkrsCoreDummyContainer");
-        FMLInjectionData.containers.add("com.superdextor.thinkbigcore.ThinkBigCoreDummyContainer");
+        addModContainer("bspkrs.bspkrscore.fml.BspkrsCoreDummyContainer");
+        addModContainer("com.superdextor.thinkbigcore.ThinkBigCoreDummyContainer");
+    }
+
+    public static void addModContainer(String container) {
+        FMLInjectionData.containers.add(container);
     }
 }

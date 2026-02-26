@@ -217,6 +217,7 @@
     "entity.MixinEntityAIAvoidEntity",
     "entity.MixinEntityAITasks",
     "entity.MixinEntityFishHook",
+    "entity.MixinEntityItem",
     "entity.MixinEntityList",
     "entity.MixinEntityLiving",
     "entity.MixinEntityLivingBase",
