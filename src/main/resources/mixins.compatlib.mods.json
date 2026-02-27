@@ -9,6 +9,7 @@
   "client": [
     "fixes.chame.MixinChamModel",
     "fixes.tbc.MixinItemCustomArmor",
+    "legacy.justbps.MixinModelBackpack",
     "qol.di.MixinDIClientProxy",
     "qol.ichun.MixinThreadGetPatrons",
     "qol.mpm.MixinRenderEvent",
