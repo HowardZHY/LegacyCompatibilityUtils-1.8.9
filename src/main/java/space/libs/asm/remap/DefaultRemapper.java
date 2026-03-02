@@ -25,7 +25,15 @@ import java.util.Map;
 
 public class DefaultRemapper extends RemapperBase implements IClassNameTransformer {
 
+    public static String DEFAULT_MAPPINGS = "compatlib.srg";
+
+    public static String LEGACY_MAPPINGS = "legacydeobf.srg";
+
     public final LaunchClassLoader classLoader;
+
+    public DefaultRemapper() {
+        this(DEFAULT_MAPPINGS, false);
+    }
 
     public DefaultRemapper(final String file, final Boolean deobfuscating) {
         super(file, deobfuscating);

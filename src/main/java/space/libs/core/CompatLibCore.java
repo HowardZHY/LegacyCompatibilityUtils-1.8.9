@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 @SuppressWarnings("unused")
-@IFMLLoadingPlugin.TransformerExclusions({"space.libs.core", "space.libs.util.cursedmixinextensions", "space.libs.asm"})
+@IFMLLoadingPlugin.TransformerExclusions({"space.libs.asm", "space.libs.core", "space.libs.util.cursedmixinextensions"})
 @IFMLLoadingPlugin.SortingIndex(Integer.MIN_VALUE + 2)
 public class CompatLibCore implements IFMLLoadingPlugin {
 

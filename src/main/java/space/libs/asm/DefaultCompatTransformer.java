@@ -19,7 +19,7 @@ public class DefaultCompatTransformer implements IClassTransformer {
         }
         ClassReader reader = new ClassReader(bytes);
         ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_MAXS);
-        reader.accept(new DefaultRemappingAdapter(writer, new DefaultRemapper(DefaultRemappingAdapter.DEFAULT_MAPPINGS, false)), ClassReader.EXPAND_FRAMES);
+        reader.accept(new DefaultRemappingAdapter(writer, new DefaultRemapper()), ClassReader.EXPAND_FRAMES);
         return writer.toByteArray();
     }
 }

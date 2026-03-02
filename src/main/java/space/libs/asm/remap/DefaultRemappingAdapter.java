@@ -30,8 +30,6 @@ import org.objectweb.asm.commons.*;
 
 public class DefaultRemappingAdapter extends RemappingClassAdapter {
 
-    public static String DEFAULT_MAPPINGS = "compatlib.srg";
-
     public static DefaultRemapper INSTANCE;
 
     public DefaultRemappingAdapter(ClassVisitor cv, DefaultRemapper instance) {
