@@ -9,17 +9,17 @@
 
 package space.libs.asm.remap;
 
-import com.google.common.base.Charsets;
+import com.google.common.base.*;
 import com.google.common.collect.*;
-import com.google.common.io.LineProcessor;
-import com.google.common.io.Resources;
+import com.google.common.io.*;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.*;
+import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.commons.Remapper;
+import org.objectweb.asm.tree.*;
 import space.libs.core.CompatLibDebug;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.*;
 
@@ -30,7 +30,7 @@ public abstract class RemapperBase extends Remapper {
 
     public static boolean DEBUG_REMAPPING = CompatLibDebug.DEBUG_REMAP;
 
-    public RemapperBase(final String file, final Boolean deobfuscating) {
+    public RemapperBase(final String file, final boolean deobfuscating) {
         this.mappings = Resources.getResource(file);
         this.legacy = deobfuscating;
         this.fieldDescriptions = Maps.newHashMap();
@@ -87,7 +87,33 @@ public abstract class RemapperBase extends Remapper {
         }
     }
 
-    protected abstract String getFieldType(String owner, String name);
+    protected String getFieldType(String owner, String name) {
+        Map<String, String> fields = this.fieldDescriptions.get(owner);
+        if (fields != null) {
+            return fields.get(name);
+        }
+        synchronized (fieldDescriptions) {
+            byte[] classBytes;
+            if (this.legacy) {
+                classBytes = this.getBytes(this.map(owner)); // TODO?
+            } else {
+                classBytes = this.getBytes(owner);
+            }
+            if (classBytes == null) {
+                return null;
+            } else {
+                ClassReader cr = new ClassReader(classBytes);
+                ClassNode classNode = new ClassNode();
+                cr.accept(classNode, ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
+                Map<String, String> results = Maps.newHashMapWithExpectedSize(classNode.fields.size());
+                for (FieldNode fieldNode : classNode.fields) {
+                    results.put(fieldNode.name, fieldNode.desc);
+                }
+                this.fieldDescriptions.put(owner, results);
+                return results.get(name);
+            }
+        }
+    }
 
     public Map<String, String> getFieldMap(String owner) {
         Map<String, String> result = this.fieldsMap.get(owner);
@@ -155,27 +181,26 @@ public abstract class RemapperBase extends Remapper {
     }
 
     @Override
-    public String mapFieldName(String owner, String fieldName, String desc) {
+    public String mapFieldName(String owner, String name, String desc) {
         if (this.noClasses()) {
-            return fieldName;
+            return name;
         }
         Map<String, String> fields = getFieldMap(owner);
         if (fields != null) {
-            String name = fields.get(fieldName + ':' + desc);
-            if (name != null) {
-                return name;
-            } else { //TODO
-                try {
-                    if (fields.get(name + ":null") != null) {
-                        if (DEBUG_REMAPPING && (!owner.contains("/") || owner.contains("net"))) {
-                            LOGGER.info("Try map field without desc " + owner + "." + name + " to " + fields.get(name + ":null"));
-                        }
-                        return fields.get(name + ":null");
+            String mapped = fields.get(name + ':' + desc);
+            if (mapped != null) {
+                return mapped;
+            } else {
+                mapped = fields.get(name + ":null");
+                if (mapped != null) {
+                    if (DEBUG_REMAPPING && (!owner.contains("/") || owner.startsWith("net"))) {
+                        LOGGER.info("Try map field without desc " + owner + "." + name + " to " + mapped);
                     }
-                } catch (NullPointerException ignored) {}
+                    return mapped;
+                }
             }
         }
-        return fieldName;
+        return name;
     }
 
     @Override
@@ -202,7 +227,7 @@ public abstract class RemapperBase extends Remapper {
         if (oldType.equals(newType)) {
             return fType;
         }
-        Map<String,String> newClassMap = this.fieldDescriptions.get(newType);
+        Map<String, String> newClassMap = this.fieldDescriptions.get(newType);
         if (newClassMap == null) {
             newClassMap = Maps.newHashMap();
             this.fieldDescriptions.put(newType, newClassMap);
@@ -211,9 +236,73 @@ public abstract class RemapperBase extends Remapper {
         return fType;
     }
 
-    public void loadSuperMaps(String name) {}
+    public void loadSuperMaps(String name) {
+        byte[] bytes = this.getBytes(name);
+        if (bytes != null) {
+            ClassReader reader = new ClassReader(bytes);
+            this.mergeSuperMaps(name, reader.getSuperName(), reader.getInterfaces());
+        }
+    }
 
-    public void mergeSuperMaps(String name, String superName, String[] interfaces) {}
+    public void mergeSuperMaps(String name, String superName, String[] interfaces) {
+        if (Strings.isNullOrEmpty(superName)) {
+            return;
+        }
+        if (DEBUG_REMAPPING && (!superName.startsWith("java") || !name.startsWith("java"))) {
+            LOGGER.info("Computing super maps for " + name + " & " + superName);
+            LOGGER.info("Interfaces: " + Arrays.toString(interfaces));
+        }
+        String[] parents = new String[interfaces.length + 1];
+        parents[0] = superName;
+        System.arraycopy(interfaces, 0, parents, 1, interfaces.length);
+        for (String parent : parents) {
+            if ((this.legacy && !this.methodsMap.containsKey(parent)) ||
+                (!this.legacy && !this.fieldsMap.containsKey(parent))) {
+                loadSuperMaps(parent);
+            }
+        }
+        Map<String, String> fields = Maps.newHashMap();
+        Map<String, String> methods = Maps.newHashMap();
+        Map<String, String> value;
+        for (String parentThing : parents) {
+            value = this.fieldsMap.get(parentThing);
+            if (value != null) {
+                fields.putAll(value);
+            }
+            value = this.methodsMap.get(parentThing);
+            if (value != null) {
+                methods.putAll(value);
+
+            }
+        }
+        if (this.legacy) {
+            if (rawFieldMaps.containsKey(name)) {
+                fields.putAll(rawFieldMaps.get(name));
+            }
+            if (rawMethodMaps.containsKey(name)) {
+                methods.putAll(rawMethodMaps.get(name));
+            }
+        } else {
+            fields.putAll(this.rawFields.row(name));
+            methods.putAll(this.rawMethods.row(name));
+        }
+        this.fieldsMap.put(name, ImmutableMap.copyOf(fields));
+        this.methodsMap.put(name, ImmutableMap.copyOf(methods));
+    }
+
+    /**
+     * @implNote FabricLauncherBase.getLauncher().getTargetClassLoader().getResourceAsStream(name.replace('.', '/') + ".class");
+     */
+    protected byte[] getBytes(String name) {
+        byte[] bytes = null;
+        try {
+            InputStream is = getClass().getClassLoader().getResourceAsStream(name.replace('.', '/') + ".class");
+            if (is != null) {
+                bytes = ByteStreams.toByteArray(is);
+            }
+        } catch (Throwable ignored) {}
+        return bytes;
+    }
 
     public boolean noClasses() {
         return this.classesBiMap == null || this.classesBiMap.isEmpty();

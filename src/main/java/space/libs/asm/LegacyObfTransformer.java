@@ -39,7 +39,7 @@ public class LegacyObfTransformer implements IClassTransformer {
         if (ClassNameList.StartsWithBlacklist(name) || ClassNameList.ContainsBlacklist(name)) {
             ClassReader reader = new ClassReader(bytes);
             ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_MAXS);
-            reader.accept(new CustomRemappingAdapter(writer), ClassReader.EXPAND_FRAMES);
+            reader.accept(CustomRemappingAdapter.Legacy(writer), ClassReader.EXPAND_FRAMES);
             return writer.toByteArray();
         }
         return bytes;

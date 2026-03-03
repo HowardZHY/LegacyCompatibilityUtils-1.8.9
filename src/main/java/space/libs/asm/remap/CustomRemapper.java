@@ -11,17 +11,14 @@ package space.libs.asm.remap;
 
 import com.google.common.base.*;
 import com.google.common.collect.*;
-import com.google.common.io.CharSource;
-import com.google.common.io.Resources;
+import com.google.common.io.*;
 import net.minecraftforge.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
 import net.minecraftforge.fml.common.patcher.ClassPatchManager;
 import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.FieldNode;
 
 import java.util.*;
 
-@SuppressWarnings({"DataFlowIssue", "UnstableApiUsage"})
+@SuppressWarnings("UnstableApiUsage")
 public class CustomRemapper extends DefaultRemapper {
 
     public CustomRemapper(String name) {
@@ -64,7 +61,7 @@ public class CustomRemapper extends DefaultRemapper {
             rawFieldMaps.put(cl, Maps.newHashMap());
         }
         String typed = getFieldType(cl, oldName);
-        if (!"null".equals(typed)) {
+        if (typed != null) {
             rawFieldMaps.get(cl).put(oldName + ":" + typed, newName);
         }
         rawFieldMaps.get(cl).put(oldName + ":null", newName);
@@ -112,53 +109,6 @@ public class CustomRemapper extends DefaultRemapper {
     }
 
     @Override
-    protected String getFieldType(String owner, String name) {
-        if (fieldDescriptions.containsKey(owner)) {
-            return fieldDescriptions.get(owner).get(name);
-        }
-        synchronized (fieldDescriptions) {
-            byte[] classBytes = this.getBytes(map(owner).replace('/', '.'));
-            if (classBytes == null) {
-                return "null";
-            }
-            ClassReader cr = new ClassReader(classBytes);
-            ClassNode classNode = new ClassNode();
-            cr.accept(classNode, ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
-            Map<String, String> resMap = Maps.newHashMap();
-            for (FieldNode fieldNode : classNode.fields) {
-                resMap.put(fieldNode.name, fieldNode.desc);
-            }
-            fieldDescriptions.put(owner, resMap);
-            return resMap.get(name);
-        }
-    }
-
-    @Override
-    public String mapFieldName(String owner, String name, String desc) {
-        if (this.noClasses()) {
-            return name;
-        }
-        Map<String, String> fields = getFieldMap(owner);
-        if (fields != null && fields.containsKey(name + ":" + desc)) {
-            return fields.get(name + ":" + desc);
-        } else {
-            try {
-                if (fields.get(name + ":null") != null) {
-                    if (DEBUG_REMAPPING && (!owner.contains("/") || owner.contains("net"))) {
-                        LOGGER.info("Try map field without desc " + owner + "." + name + " to " + fields.get(name + ":null"));
-                    }
-                    return fields.get(name + ":null");
-                }
-            } catch (NullPointerException ignored) {
-                if (DEBUG_REMAPPING) {
-                    LOGGER.error("NPE when mapping field name: " + owner + "." + name + ":" + desc);
-                }
-            }
-            return name;
-        }
-    }
-
-    @Override
     public void loadSuperMaps(String name) {
         try {
             String superName = null;
@@ -176,54 +126,14 @@ public class CustomRemapper extends DefaultRemapper {
             if (DEBUG_REMAPPING && (!Strings.isNullOrEmpty(name)) && (!Strings.isNullOrEmpty(superName)) && !name.startsWith("java")) {
                 LOGGER.info("Try finding super map for " + name + " to " + superName);
             }
-            mergeSuperMaps(name, getLegacyName(superName), legacyInterfaces);
+            this.mergeSuperMaps(name, getLegacyName(superName), legacyInterfaces);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @Override
-    public void mergeSuperMaps(String name, String superName, String[] interfaces) {
-        if (this.noClasses()) {
-            return;
-        }
-        if (Strings.isNullOrEmpty(superName)) {
-            return;
-        }
-        if (DEBUG_REMAPPING && (!superName.startsWith("java") || !name.startsWith("java"))) {
-            LOGGER.info("Computing super maps for " + name + " & " + superName);
-            LOGGER.info("Interfaces: " + Arrays.toString(interfaces));
-        }
-        List<String> allParents = ImmutableList.<String>builder().add(superName).addAll(Arrays.asList(interfaces)).build();
-        // generate maps for all parent objects
-        for (String parentThing : allParents) {
-            if (!methodsMap.containsKey(parentThing)) {
-                loadSuperMaps(parentThing);
-            }
-        }
-        Map<String, String> fields = Maps.newHashMap();
-        Map<String, String> methods = Maps.newHashMap();
-        for (String parentThing : allParents) {
-            if (fieldsMap.containsKey(parentThing)) {
-                fields.putAll(fieldsMap.get(parentThing));
-            }
-            if (methodsMap.containsKey(parentThing)) {
-                methods.putAll(methodsMap.get(parentThing));
-            }
-        }
-        if (rawFieldMaps.containsKey(name)) {
-            fields.putAll(rawFieldMaps.get(name));
-        }
-        if (rawMethodMaps.containsKey(name)) {
-            methods.putAll(rawMethodMaps.get(name));
-        }
-        fieldsMap.put(name, ImmutableMap.copyOf(fields));
-        methodsMap.put(name, ImmutableMap.copyOf(methods));
-        //LOGGER.info("Field Maps of " + name + ": " + fields);
-    }
-
     @SuppressWarnings("unused")
     public Set<String> getObfedClasses() {
-        return ImmutableSet.copyOf(classesBiMap.keySet());
+        return ImmutableSet.copyOf(this.classesBiMap.keySet());
     }
 }

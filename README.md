@@ -45,3 +45,7 @@ One of the 1.8 Forge Mods that's in Totally Notch Code, lazy to make reflections
 ### [Urushibara's Mods](https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/2224400-1-8-1-1-8-2-pre1-urushibaras-small-mods)
 
 Same reason as above.
+
+## Other Warn: There are Wikis like that, use as own risk:
+
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/HowardZHY/LegacyCompatibilityUtils-1.8.9)

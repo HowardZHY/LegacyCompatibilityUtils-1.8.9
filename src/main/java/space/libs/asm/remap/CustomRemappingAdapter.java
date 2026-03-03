@@ -14,15 +14,33 @@ import org.objectweb.asm.commons.*;
 
 public class CustomRemappingAdapter extends RemappingClassAdapter {
 
-    public static CustomRemappingAdapter INSTANCE;
+    public static DefaultRemapper[] INSTANCES = new DefaultRemapper[16];
 
-    public CustomRemappingAdapter(ClassVisitor cv) {
-        super(cv, new CustomRemapper(DefaultRemapper.LEGACY_MAPPINGS));
-        INSTANCE = this;
+    public static CustomRemappingAdapter Default(ClassVisitor cv) {
+        return new CustomRemappingAdapter(cv, new DefaultRemapper(), 1);
     }
 
-    public CustomRemapper getRemapper() {
-        return (CustomRemapper) super.remapper;
+    public static CustomRemappingAdapter Legacy(ClassVisitor cv) {
+        return new CustomRemappingAdapter(cv, new CustomRemapper(DefaultRemapper.LEGACY_MAPPINGS), 10);
+    }
+
+    public CustomRemappingAdapter(ClassVisitor cv, DefaultRemapper instance, int id) {
+        super(cv, instance);
+        INSTANCES[id] = instance;
+        this.id = id;
+        this.legacy = id > 9;
+    }
+
+    public final int id;
+
+    public final boolean legacy;
+
+    public DefaultRemapper getRemapper() {
+        return INSTANCES[id];
+    }
+
+    public CustomRemapper getCustomRemapper() {
+        return (CustomRemapper) INSTANCES[10];
     }
 
     @Override
@@ -30,41 +48,50 @@ public class CustomRemappingAdapter extends RemappingClassAdapter {
         if (interfaces == null) {
             interfaces = new String[0];
         }
-        this.getRemapper().mergeSuperMaps(name, superName, interfaces);
+        if (legacy) {
+            this.getCustomRemapper().mergeSuperMaps(name, superName, interfaces);
+        } else {
+            this.getRemapper().mergeSuperMaps(name, superName, interfaces);
+        }
         super.visit(version, access, name, signature, superName, interfaces);
     }
 
     @Override
     protected MethodVisitor createRemappingMethodAdapter(int access, String newDesc, MethodVisitor mv) {
-        return new FixingMethodVisitor(access, newDesc, mv, remapper);
+        return new FixingMethodAdapter(access, newDesc, mv, this);
     }
 
-    public class FixingMethodVisitor extends RemappingMethodAdapter {
+    public static class FixingMethodAdapter extends RemappingMethodAdapter {
 
-        public FixingMethodVisitor(int access, String desc, MethodVisitor mv, Remapper remapper) {
-            super(access, desc, mv, remapper);
+        private final CustomRemappingAdapter instance;
+
+        public FixingMethodAdapter(int access, String desc, MethodVisitor mv, CustomRemappingAdapter instance) {
+            super(access, desc, mv, instance.remapper);
+            this.instance = instance;
         }
 
         @Override
-        public void visitFieldInsn(int opcode, String originalOwner, String originalName, String desc) {
+        public void visitFieldInsn(int opcode, String owner, String name, String desc) {
             // This method solves the problem of a static field reference changing type. In all probability it is a
             // compatible change, however we need to fix up the desc to point at the new type
-            String type = getRemapper().mapType(originalOwner);
-            String fieldName = getRemapper().mapFieldName(originalOwner, originalName, desc);
-            String newDesc = getRemapper().mapDesc(desc);
-            // Not needed anymore?
-            /*
-            if ((opcode == Opcodes.GETSTATIC) && type.startsWith("net/minecraft/") && newDesc.startsWith("Lnet/minecraft/")) {
-                String replDesc = getRemapper().getStaticFieldType(originalOwner, originalName, type, fieldName);
-                if (replDesc != null) {
-                    CustomRemapper.LOGGER.info("Field Desc: " + desc + "&" + newDesc + "&" + replDesc);
-                    newDesc = getRemapper().mapDesc(replDesc);
+            String type;
+            String fieldName;
+            String newDesc;
+            if (instance.legacy) {
+                type = instance.getCustomRemapper().mapType(owner);
+                fieldName = instance.getCustomRemapper().mapFieldName(owner, name, desc);
+                newDesc = instance.getCustomRemapper().mapDesc(desc);
+            } else { // Not needed anymore for legacy?
+                type = instance.getRemapper().mapType(owner);
+                fieldName = instance.getRemapper().mapFieldName(owner, name, desc);
+                newDesc = instance.getRemapper().mapDesc(desc);
+                if ((opcode == Opcodes.GETSTATIC) && type.startsWith("net/minecraft/") && newDesc.startsWith("Lnet/minecraft/")) {
+                    String replDesc = instance.getRemapper().getStaticFieldType(owner, name, type, fieldName);
+                    if (replDesc != null) {
+                        newDesc = instance.getRemapper().mapDesc(replDesc);
+                    }
                 }
             }
-            if (CustomRemapper.DEBUG_REMAPPING && (type.startsWith("net/minecraft") || !type.contains("/"))) {
-                CustomRemapper.LOGGER.info("Remapping Field: " + type + "." + fieldName + ":" + newDesc + " from: " + originalOwner + "." + originalName + ":" + desc);
-            }*/
-            // super.super
             if (mv != null) {
                 mv.visitFieldInsn(opcode, type, fieldName, newDesc);
             }

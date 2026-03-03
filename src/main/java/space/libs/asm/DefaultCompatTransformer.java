@@ -1,10 +1,8 @@
 package space.libs.asm;
 
 import net.minecraft.launchwrapper.IClassTransformer;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
-import space.libs.asm.remap.DefaultRemappingAdapter;
-import space.libs.asm.remap.DefaultRemapper;
+import org.objectweb.asm.*;
+import space.libs.asm.remap.CustomRemappingAdapter;
 
 @SuppressWarnings("all")
 public class DefaultCompatTransformer implements IClassTransformer {
@@ -19,7 +17,7 @@ public class DefaultCompatTransformer implements IClassTransformer {
         }
         ClassReader reader = new ClassReader(bytes);
         ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_MAXS);
-        reader.accept(new DefaultRemappingAdapter(writer, new DefaultRemapper()), ClassReader.EXPAND_FRAMES);
+        reader.accept(CustomRemappingAdapter.Default(writer), ClassReader.EXPAND_FRAMES);
         return writer.toByteArray();
     }
 }
