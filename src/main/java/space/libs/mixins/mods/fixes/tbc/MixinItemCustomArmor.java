@@ -3,17 +3,15 @@ package space.libs.mixins.mods.fixes.tbc;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import space.libs.util.client.ClientUtils;
 
 import java.util.List;
 
-@SuppressWarnings("SpellCheckingInspection")
 @Pseudo
 @Mixin(targets = "com.superdextor.thinkbigcore.items.ItemCustomArmor", remap = false)
 public abstract class MixinItemCustomArmor extends ItemArmor {
@@ -28,30 +26,9 @@ public abstract class MixinItemCustomArmor extends ItemArmor {
     @Shadow
     protected @Final boolean Equipall;
 
-    /**
-     * @author HowardZHY
-     * @reason Fix Crash for substring after I18N
-     */
-    @SideOnly(Side.CLIENT)
-    @Overwrite
-    public void func_77624_a(ItemStack stack, EntityPlayer playerIn, List<String> toolTip, boolean advanced) {
-        if (this.field_77785_bY != null) {
-            EnumChatFormatting prefix;
-            if (Potion.potionTypes[this.field_77785_bY.getPotionID()].isBadEffect()) {
-                prefix = EnumChatFormatting.RED;
-            } else {
-                prefix = EnumChatFormatting.GRAY;
-            }
-            toolTip.add(" ");
-            if (this.Equipall) {
-                toolTip.add("When Full-set Worn:");
-            } else {
-                toolTip.add("When Worn:");
-            }
-            toolTip.add("Effect As: " + prefix + StatCollector.translateToLocal(this.field_77785_bY.getEffectName() + ".postfix")
-                + " " + StatCollector.translateToLocal("potion.potency." + this.field_77785_bY.getAmplifier()));
-        }
-        toolTip.add(" ");
-        toolTip.add(EnumChatFormatting.BLUE + "+" + this.getArmorMaterial().getDamageReductionAmount(this.armorType) + " Defence");
+    @Inject(method = "func_77624_a", at = @At("HEAD"), cancellable = true, remap = false)
+    public void func_77624_a(ItemStack stack, EntityPlayer playerIn, List<String> toolTip, boolean advanced, CallbackInfo ci) {
+        ClientUtils.addEffectTooltip(toolTip, this.field_77785_bY, this, true);
+        ci.cancel();
     }
 }

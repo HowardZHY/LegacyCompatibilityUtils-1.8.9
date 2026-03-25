@@ -8,10 +8,18 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import space.libs.interfaces.IFluid;
+
+import java.util.List;
 
 @SuppressWarnings("unused")
 @SideOnly(Side.CLIENT)
@@ -37,6 +45,44 @@ public abstract class ClientUtils {
                 TextureAtlasSprite flowing = map.registerSprite(fluid.getFlowing());
                 accessor.setStillIcon(flowing);
             }
+        }
+    }
+
+    public static void addEffectTooltip(List<String> toolTip, PotionEffect effect, Item type, boolean all) {
+        boolean isArmor = (type instanceof ItemArmor);
+        if (effect != null) {
+            String subfix = "";
+            EnumChatFormatting prefix;
+            if (Potion.potionTypes[effect.getPotionID()].isBadEffect()) {
+                prefix = EnumChatFormatting.RED;
+            } else {
+                prefix = EnumChatFormatting.GRAY;
+            }
+            if (effect.getAmplifier() > 0) {
+                subfix = " ";
+            }
+            toolTip.add(" ");
+            if (isArmor) {
+                if (all) {
+                    toolTip.add("When Full-set Worn:");
+                } else {
+                    toolTip.add("When Worn:");
+                }
+            } else {
+                toolTip.add(EnumChatFormatting.GRAY + "Bonus When Hit:");
+            }
+            String desc = prefix + StatCollector.translateToLocal(effect.getEffectName() + ".postfix")
+                + " " + StatCollector.translateToLocal("potion.potency." + effect.getAmplifier());
+            if (isArmor) {
+                toolTip.add(desc);
+            } else {
+                toolTip.add(desc + subfix + "(" + Potion.getDurationString(effect) + ")");
+            }
+        }
+        if (isArmor) {
+            ItemArmor armor = (ItemArmor) type;
+            toolTip.add(" ");
+            toolTip.add(EnumChatFormatting.BLUE + "+" + armor.getArmorMaterial().getDamageReductionAmount(armor.armorType) + " Defence");
         }
     }
 

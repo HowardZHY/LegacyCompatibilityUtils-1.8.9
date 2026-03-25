@@ -40,7 +40,10 @@ public class CustomRemappingAdapter extends RemappingClassAdapter {
     }
 
     public CustomRemapper getCustomRemapper() {
-        return (CustomRemapper) INSTANCES[10];
+        if (id < 10) {
+            throw new UnsupportedOperationException();
+        }
+        return (CustomRemapper) INSTANCES[id];
     }
 
     @Override
