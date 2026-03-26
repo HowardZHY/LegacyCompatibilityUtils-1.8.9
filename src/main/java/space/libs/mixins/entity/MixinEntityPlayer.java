@@ -8,11 +8,12 @@ import net.minecraft.util.*;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import space.libs.interfaces.IEntityPlayer;
 import space.libs.util.MappedName;
 
 @SuppressWarnings("unused")
 @Mixin(EntityPlayer.class)
-public abstract class MixinEntityPlayer extends MixinEntityLivingBase {
+public abstract class MixinEntityPlayer extends MixinEntityLivingBase implements IEntityPlayer {
 
     public MixinEntityPlayer(World worldIn) {
         super(worldIn);
@@ -22,7 +23,15 @@ public abstract class MixinEntityPlayer extends MixinEntityLivingBase {
     public InventoryPlayer inventory;
 
     @Shadow
+    private int sleepTimer;
+
+    @Shadow
     public abstract ItemStack getHeldItem();
+
+    @Override
+    public int GetSleepTimer() {
+        return sleepTimer;
+    }
 
     @MappedName("getItemStackFromSlot")
     @Override

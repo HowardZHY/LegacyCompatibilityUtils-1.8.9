@@ -86,6 +86,10 @@ public class CompatLibLateMixinPlugin implements IMixinConfigPlugin {
             CompatLibCore.LOGGER.info("Adding Mo Chickens Fix.");
             mixins.add("legacy.mochickens.MixinFileManager");
         }
+        if (Loader.isModLoaded("vintagecraft")) {
+            CompatLibCore.LOGGER.info("Adding VintageCraft Fix.");
+            mixins.add("legacy.vc.MixinVintageCraft");
+        }
         return mixins;
     }
 
