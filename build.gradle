@@ -1,12 +1,12 @@
 buildscript {
     repositories {
-        maven { setUrl("file://${project.rootDir}/repositories") }
-        maven { url "https://bmclapi2.bangbang93.com/maven" }
+        maven { setUrl("file://${project.rootDir}/repositories/") }
+        maven { url "https://bmclapi2.bangbang93.com/maven/" }
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url 'https://jitpack.io/' }
         //new forge repository
         //maven { url "https://maven.minecraftforge.net" }
-        maven { url 'https://repo.spongepowered.org/maven'}
+        //maven { url 'https://repo.spongepowered.org/maven/'}
     }
     dependencies {
         classpath "net.minecraftforge.gradle:ForgeGradle:2.1-20211118.174922-42"
@@ -62,11 +62,10 @@ configurations {
 }
 
 repositories {
+    maven { url "https://bmclapi2.bangbang93.com/maven/" }
     maven { url 'https://jitpack.io/' }
     maven { url 'https://repo.spongepowered.org/maven/' }
-    maven {
-        url 'https://maven.cleanroommc.com'
-    }
+    maven {url 'https://maven.cleanroommc.com'}
     maven {
         url "https://cursemaven.com"
     }
@@ -107,16 +106,17 @@ dependencies {
         exclude module: 'log4j-core'
     }*/
     //compile will make your library available only in this dev environment
+    implementation 'zone.rong:mixinbooter:9.4'
     compileOnly("curse.maven:mo-bends-231347:2272295")
     compileOnly("curse.maven:more-player-models-221939:2284120")
     compileOnly("curse.maven:alexiillib-229301:2233177")
+    compileOnly("curse.maven:better-loading-screen-229302:2238921")
     compileOnly("curse.maven:civcraft-228061:2233156")
     compileOnly("curse.maven:gog-skybox-266068:2411441")
     compileOnly("curse.maven:thaumcraft-223628:2287496")
     compileOnly("curse.maven:tbc-229106:2309144")
     compileOnly("codechicken:NotEnoughItems:1.8-1.0.5.104:dev")
     compileOnly("codechicken:CodeChickenLib:1.8-1.1.2.139:dev")
-    compileOnly("com.mumfrey:liteloader:1.8.9-SNAPSHOT")
     compileOnly("net.md-5:SpecialSource:1.7.4") {
         exclude module: 'asm-debug-all'
         exclude module: 'guava'
@@ -124,8 +124,8 @@ dependencies {
         exclude module: 'lombok'
         exclude module: 'opencsv'
     }
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
     shade('net.jodah:typetools:0.6.3')
-    implementation 'zone.rong:mixinbooter:9.4'
     //compile "org.spongepowered:mixin:0.7.11-SNAPSHOT"
     //compile shade('com.electronwill.night-config:core:3.6.3')
     //compile shade('com.electronwill.night-config:toml:3.6.3')
