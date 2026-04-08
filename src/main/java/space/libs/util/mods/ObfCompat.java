@@ -3,7 +3,7 @@ package space.libs.util.mods;
 import com.mumfrey.liteloader.core.runtime.Obf;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import space.libs.core.CompatLibCore;
+import space.libs.core.ICoreUtils;
 
 @SideOnly(Side.CLIENT)
 public class ObfCompat extends Obf {
@@ -15,6 +15,6 @@ public class ObfCompat extends Obf {
     }
 
     public static void init() {
-        CompatLibCore.LOGGER.info("Try loading LiteLoader Obf...");
+        ICoreUtils.LOGGER.info("Try loading LiteLoader Obf...");
     }
 }

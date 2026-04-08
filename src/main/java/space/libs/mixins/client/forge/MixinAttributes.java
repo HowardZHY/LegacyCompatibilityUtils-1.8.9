@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraftforge.client.model.Attributes;
 import net.minecraftforge.client.model.TRSRTransformation;
 import org.spongepowered.asm.mixin.Mixin;
-import space.libs.core.CompatLibCore;
+import space.libs.core.ICoreUtils;
 import space.libs.interfaces.IVertexFormatElement;
 import space.libs.util.cursedmixinextensions.annotations.Public;
 
@@ -48,7 +48,7 @@ public class MixinAttributes {
             } else if (o == 6) {
                 buf.putFloat(n.floatValue());
             } else {
-                CompatLibCore.LOGGER.error("Unknown VertexFormatElement EnumType:" + o);
+                ICoreUtils.LOGGER.error("Unknown VertexFormatElement EnumType:" + o);
             }
         }
     }

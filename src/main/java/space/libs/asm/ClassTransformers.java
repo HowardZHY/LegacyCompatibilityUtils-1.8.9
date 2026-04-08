@@ -4,14 +4,14 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Dummy;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.apache.commons.io.IOUtils;
 import org.objectweb.asm.*;
-import space.libs.core.CompatLibCore;
+import space.libs.core.ICoreUtils;
 
 import java.io.InputStream;
 
 import static org.objectweb.asm.Opcodes.*;
 
 @SuppressWarnings("unused")
-public class ClassTransformers implements IClassTransformer {
+public class ClassTransformers implements IClassTransformer, ICoreUtils {
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] bytes) {
@@ -19,11 +19,11 @@ public class ClassTransformers implements IClassTransformer {
             return bytes;
         }
         if (name.endsWith("$DepLoadInst")) {
-            CompatLibCore.LOGGER.info("Detected Legacy DepLoader: " + name);
+            LOGGER.info("Detected Legacy DepLoader: " + name);
             return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, DepLoadInstVisitor.class, 0);
         } else {
             if (name.equals("cc.polyfrost.oneconfig.internal.config.core.ConfigCore")) {
-                CompatLibCore.LOGGER.info("Try Optimize OneConfig-v0 Saving...");
+                LOGGER.info("Try Optimize OneConfig-v0 Saving...");
                 return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_FRAMES, ConfigCoreVisitor.class, 0);
             } else if (name.startsWith("com")) {
                 switch (name) {
@@ -77,26 +77,26 @@ public class ClassTransformers implements IClassTransformer {
     public static class ConfigCoreVisitor extends ClassVisitor {
 
         public ConfigCoreVisitor(ClassVisitor cv) {
-            super(Opcodes.ASM5, cv);
+            super(ASM5, cv);
         }
 
         @Override
         public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
             MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions);
             if (name.equals("<clinit>")) {
-                return new MethodVisitor(Opcodes.ASM5, mv) {
+                return new MethodVisitor(ASM5, mv) {
                     @Override
                     public void visitCode() {
                         super.visitCode();
-                        visitTypeInsn(Opcodes.NEW, "java/util/ArrayList");
-                        visitInsn(Opcodes.DUP);
-                        visitMethodInsn(Opcodes.INVOKESPECIAL, "java/util/ArrayList", "<init>", "()V", false);
-                        visitFieldInsn(Opcodes.PUTSTATIC, "cc/polyfrost/oneconfig/internal/config/core/ConfigCore", "mods", "Ljava/util/List;");
-                        visitTypeInsn(Opcodes.NEW, "java/util/HashMap");
-                        visitInsn(Opcodes.DUP);
-                        visitMethodInsn(Opcodes.INVOKESPECIAL, "java/util/HashMap", "<init>", "()V", false);
-                        visitFieldInsn(Opcodes.PUTSTATIC, "cc/polyfrost/oneconfig/internal/config/core/ConfigCore", "subMods", "Ljava/util/HashMap;");
-                        visitInsn(Opcodes.RETURN);
+                        visitTypeInsn(NEW, "java/util/ArrayList");
+                        visitInsn(DUP);
+                        visitMethodInsn(INVOKESPECIAL, "java/util/ArrayList", "<init>", "()V", false);
+                        visitFieldInsn(PUTSTATIC, "cc/polyfrost/oneconfig/internal/config/core/ConfigCore", "mods", "Ljava/util/List;");
+                        visitTypeInsn(NEW, "java/util/HashMap");
+                        visitInsn(DUP);
+                        visitMethodInsn(INVOKESPECIAL, "java/util/HashMap", "<init>", "()V", false);
+                        visitFieldInsn(PUTSTATIC, "cc/polyfrost/oneconfig/internal/config/core/ConfigCore", "subMods", "Ljava/util/HashMap;");
+                        visitInsn(RETURN);
                         visitMaxs(2, 0);
                         visitEnd();
                     }
@@ -109,14 +109,14 @@ public class ClassTransformers implements IClassTransformer {
     public static class DepLoadInstVisitor extends ClassVisitor {
 
         public DepLoadInstVisitor(ClassVisitor cv) {
-            super(Opcodes.ASM5, cv);
+            super(ASM5, cv);
         }
 
         @Override
         public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
             MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions);
             if (name.equals("searchCoreMod")) {
-                return new MethodVisitor(Opcodes.ASM5, mv) {
+                return new MethodVisitor(ASM5, mv) {
                     @Override
                     public void visitLdcInsn(Object cst) {
                         String s = cst.toString();
@@ -138,12 +138,12 @@ public class ClassTransformers implements IClassTransformer {
     public static class LiteLoaderObfVisitor extends ClassVisitor {
 
         public LiteLoaderObfVisitor(ClassVisitor cv) {
-            super(Opcodes.ASM5, cv);
+            super(ASM5, cv);
         }
 
         @Override
         public void visitEnd() {
-            FieldVisitor fv = cv.visitField(ACC_PUBLIC | Opcodes.ACC_STATIC | Opcodes.ACC_FINAL,
+            FieldVisitor fv = cv.visitField(ACC_PUBLIC | ACC_STATIC | ACC_FINAL,
                 "GuiTextField",
                 "Lcom/mumfrey/liteloader/core/runtime/Obf;",
                 null,
@@ -158,28 +158,28 @@ public class ClassTransformers implements IClassTransformer {
         public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
             MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions);
             if (name.equals("<clinit>")) {
-                return new MethodVisitor(Opcodes.ASM5, mv) {
+                return new MethodVisitor(ASM5, mv) {
                     @Override
                     public void visitInsn(int opcode) {
-                        if (opcode == Opcodes.RETURN) {
-                            mv.visitTypeInsn(Opcodes.NEW, "com/mumfrey/liteloader/core/runtime/Obf");
-                            mv.visitInsn(Opcodes.DUP);
+                        if (opcode == RETURN) {
+                            mv.visitTypeInsn(NEW, "com/mumfrey/liteloader/core/runtime/Obf");
+                            mv.visitInsn(DUP);
                             mv.visitLdcInsn("net.minecraft.client.gui.GuiTextField");
                             mv.visitLdcInsn("avw");
-                            mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "com/mumfrey/liteloader/core/runtime/Obf", "<init>", "(Ljava/lang/String;Ljava/lang/String;)V", false);
-                            mv.visitFieldInsn(Opcodes.PUTSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "GuiTextField", "Lcom/mumfrey/liteloader/core/runtime/Obf;");
+                            mv.visitMethodInsn(INVOKESPECIAL, "com/mumfrey/liteloader/core/runtime/Obf", "<init>", "(Ljava/lang/String;Ljava/lang/String;)V", false);
+                            mv.visitFieldInsn(PUTSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "GuiTextField", "Lcom/mumfrey/liteloader/core/runtime/Obf;");
 
-                            mv.visitFieldInsn(Opcodes.GETSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "obfs", "Ljava/util/Map;");
+                            mv.visitFieldInsn(GETSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "obfs", "Ljava/util/Map;");
                             mv.visitLdcInsn("GuiTextField");
-                            mv.visitFieldInsn(Opcodes.GETSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "GuiTextField", "Lcom/mumfrey/liteloader/core/runtime/Obf;");
-                            mv.visitMethodInsn(Opcodes.INVOKEINTERFACE, "java/util/Map", "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", true);
-                            mv.visitInsn(Opcodes.POP);
+                            mv.visitFieldInsn(GETSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "GuiTextField", "Lcom/mumfrey/liteloader/core/runtime/Obf;");
+                            mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", true);
+                            mv.visitInsn(POP);
 
-                            mv.visitFieldInsn(Opcodes.GETSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "obfs", "Ljava/util/Map;");
+                            mv.visitFieldInsn(GETSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "obfs", "Ljava/util/Map;");
                             mv.visitLdcInsn("${GuiTextField}");
-                            mv.visitFieldInsn(Opcodes.GETSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "GuiTextField", "Lcom/mumfrey/liteloader/core/runtime/Obf;");
-                            mv.visitMethodInsn(Opcodes.INVOKEINTERFACE, "java/util/Map", "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", true);
-                            mv.visitInsn(Opcodes.POP);
+                            mv.visitFieldInsn(GETSTATIC, "com/mumfrey/liteloader/core/runtime/Obf", "GuiTextField", "Lcom/mumfrey/liteloader/core/runtime/Obf;");
+                            mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", true);
+                            mv.visitInsn(POP);
                         }
                         mv.visitInsn(opcode);
                     }
@@ -192,19 +192,19 @@ public class ClassTransformers implements IClassTransformer {
     public static class LiteLoaderVersionVisitor extends ClassVisitor {
 
         public LiteLoaderVersionVisitor(ClassVisitor cv) {
-            super(Opcodes.ASM5, cv);
+            super(ASM5, cv);
         }
 
         @Override
         public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
             MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions);
             if (name.equals("isVersionSupported") && desc.equals("(Ljava/lang/String;)Z")) {
-                return new MethodVisitor(Opcodes.ASM5, mv) {
+                return new MethodVisitor(ASM5, mv) {
                     @Override
                     public void visitCode() {
                         mv.visitCode();
-                        mv.visitInsn(Opcodes.ICONST_1);
-                        mv.visitInsn(Opcodes.IRETURN);
+                        mv.visitInsn(ICONST_1);
+                        mv.visitInsn(IRETURN);
                         mv.visitMaxs(1, 2);
                         mv.visitEnd();
                     }
@@ -217,14 +217,14 @@ public class ClassTransformers implements IClassTransformer {
     public static class VersionRangeVisitor extends ClassVisitor {
 
         public VersionRangeVisitor(ClassVisitor cv) {
-            super(Opcodes.ASM5, cv);
+            super(ASM5, cv);
         }
 
         @Override
         public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
             MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions);
             if (name.equals("containsVersion")) {
-                return new MethodVisitor(Opcodes.ASM5, mv) {
+                return new MethodVisitor(ASM5, mv) {
                     @Override
                     public void visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface) {
                         if (opcode == INVOKEVIRTUAL && "net/minecraftforge/fml/common/versioning/Restriction".equals(owner) &&
@@ -248,7 +248,7 @@ public class ClassTransformers implements IClassTransformer {
     public static class ConfigChangedEventVisitor extends ClassVisitor {
 
         public ConfigChangedEventVisitor(ClassVisitor cv) {
-            super(Opcodes.ASM5, cv);
+            super(ASM5, cv);
         }
 
         @Override
@@ -261,41 +261,41 @@ public class ClassTransformers implements IClassTransformer {
         }
 
         private void addGetModID() {
-            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "getModID", "()Ljava/lang/String;", null, null);
+            MethodVisitor mv = cv.visitMethod(ACC_PUBLIC, "getModID", "()Ljava/lang/String;", null, null);
             mv.visitCode();
-            mv.visitVarInsn(Opcodes.ALOAD, 0);
-            mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraftforge/fml/client/event/ConfigChangedEvent", "modID", "Ljava/lang/String;");
-            mv.visitInsn(Opcodes.ARETURN);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraftforge/fml/client/event/ConfigChangedEvent", "modID", "Ljava/lang/String;");
+            mv.visitInsn(ARETURN);
             mv.visitMaxs(0, 0);
             mv.visitEnd();
         }
 
         private void addIsWorldRunning() {
-            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "isWorldRunning", "()Z", null, null);
+            MethodVisitor mv = cv.visitMethod(ACC_PUBLIC, "isWorldRunning", "()Z", null, null);
             mv.visitCode();
-            mv.visitVarInsn(Opcodes.ALOAD, 0);
-            mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraftforge/fml/client/event/ConfigChangedEvent", "isWorldRunning", "Z");
-            mv.visitInsn(Opcodes.IRETURN);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraftforge/fml/client/event/ConfigChangedEvent", "isWorldRunning", "Z");
+            mv.visitInsn(IRETURN);
             mv.visitMaxs(0, 0);
             mv.visitEnd();
         }
 
         private void addIsRequiresMcRestart() {
-            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "isRequiresMcRestart", "()Z", null, null);
+            MethodVisitor mv = cv.visitMethod(ACC_PUBLIC, "isRequiresMcRestart", "()Z", null, null);
             mv.visitCode();
-            mv.visitVarInsn(Opcodes.ALOAD, 0);
-            mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraftforge/fml/client/event/ConfigChangedEvent", "requiresMcRestart", "Z");
-            mv.visitInsn(Opcodes.IRETURN);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraftforge/fml/client/event/ConfigChangedEvent", "requiresMcRestart", "Z");
+            mv.visitInsn(IRETURN);
             mv.visitMaxs(0, 0);
             mv.visitEnd();
         }
 
         private void addGetConfigID() {
-            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "getConfigID", "()Ljava/lang/String;", null, null);
+            MethodVisitor mv = cv.visitMethod(ACC_PUBLIC, "getConfigID", "()Ljava/lang/String;", null, null);
             mv.visitCode();
-            mv.visitVarInsn(Opcodes.ALOAD, 0);
-            mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraftforge/fml/client/event/ConfigChangedEvent", "configID", "Ljava/lang/String;");
-            mv.visitInsn(Opcodes.ARETURN);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraftforge/fml/client/event/ConfigChangedEvent", "configID", "Ljava/lang/String;");
+            mv.visitInsn(ARETURN);
             mv.visitMaxs(0, 0);
             mv.visitEnd();
         }
@@ -308,7 +308,7 @@ public class ClassTransformers implements IClassTransformer {
     public static class FMLModIdMappingEventVisitor extends ClassVisitor {
 
         public FMLModIdMappingEventVisitor(ClassVisitor cv) {
-            super(Opcodes.ASM5, cv);
+            super(ASM5, cv);
         }
 
         @Override
@@ -364,43 +364,51 @@ public class ClassTransformers implements IClassTransformer {
         }
 
         private void addGetModClassLoader() {
-            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "getModClassLoader",
+            MethodVisitor mv = cv.visitMethod(ACC_PUBLIC, "getModClassLoader",
                 "()Ljava/lang/ClassLoader;", null, null);
             mv.visitCode();
-            mv.visitVarInsn(Opcodes.ALOAD, 0);
-            mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraftforge/fml/common/Loader", "modClassLoader",
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraftforge/fml/common/Loader", "modClassLoader",
                 "Lnet/minecraftforge/fml/common/ModClassLoader;");
-            mv.visitInsn(Opcodes.ARETURN);
+            mv.visitInsn(ARETURN);
             mv.visitMaxs(1, 1);
             mv.visitEnd();
         }
 
         private void addFireRemapEvent() {
-            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "fireRemapEvent",
+            MethodVisitor mv = cv.visitMethod(ACC_PUBLIC, "fireRemapEvent",
                 "(Ljava/util/Map;Ljava/util/Map;)V", null, null);
             mv.visitCode();
-            mv.visitTypeInsn(Opcodes.NEW, "java/lang/UnsupportedOperationException");
-            mv.visitInsn(Opcodes.DUP);
-            mv.visitLdcInsn("Please load this save in 1.8 first !");
-            mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/lang/UnsupportedOperationException",
-                "<init>", "(Ljava/lang/String;)V", false);
-            mv.visitInsn(Opcodes.ATHROW);
-            mv.visitMaxs(3, 3);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitVarInsn(ALOAD, 1);
+            mv.visitMethodInsn(INVOKESTATIC, "space/libs/util/ForgeUtils", "convertMapKeys", "(Ljava/util/Map;)Ljava/util/Map;", false);
+            mv.visitVarInsn(ALOAD, 2);
+            mv.visitMethodInsn(INVOKESTATIC, "space/libs/util/ForgeUtils", "convertMapKeys", "(Ljava/util/Map;)Ljava/util/Map;", false);
+            mv.visitInsn(ICONST_0);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "net/minecraftforge/fml/common/Loader", "fireRemapEvent", "(Ljava/util/Map;Ljava/util/Map;Z)V", false);
+            mv.visitInsn(RETURN);
+            mv.visitMaxs(4, 3);
             mv.visitEnd();
         }
 
         private void addFireMissingMappingEvent() {
-            MethodVisitor mv = cv.visitMethod(Opcodes.ACC_PUBLIC, "fireMissingMappingEvent",
+            MethodVisitor mv = cv.visitMethod(ACC_PUBLIC, "fireMissingMappingEvent",
                 "(Ljava/util/LinkedHashMap;Ljava/util/LinkedHashMap;ZLnet/minecraftforge/fml/common/registry/GameData;Ljava/util/Map;Ljava/util/Map;)Ljava/util/List;",
                 null, null);
             mv.visitCode();
-            mv.visitTypeInsn(Opcodes.NEW, "java/lang/UnsupportedOperationException");
-            mv.visitInsn(Opcodes.DUP);
-            mv.visitLdcInsn("Please load this save in 1.8 first !");
-            mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/lang/UnsupportedOperationException",
-                "<init>", "(Ljava/lang/String;)V", false);
-            mv.visitInsn(Opcodes.ATHROW);
-            mv.visitMaxs(3, 3);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitVarInsn(ALOAD, 1);
+            mv.visitMethodInsn(INVOKESTATIC, "space/libs/util/ForgeUtils", "convertMapKeys", "(Ljava/util/Map;)Ljava/util/Map;", false);
+            mv.visitVarInsn(ALOAD, 2);
+            mv.visitMethodInsn(INVOKESTATIC, "space/libs/util/ForgeUtils", "convertMapKeys", "(Ljava/util/Map;)Ljava/util/Map;", false);
+            mv.visitVarInsn(ILOAD, 3);
+            mv.visitVarInsn(ALOAD, 5);
+            mv.visitMethodInsn(INVOKESTATIC, "space/libs/util/ForgeUtils", "convertMapKeys", "(Ljava/util/Map;)Ljava/util/Map;", false);
+            mv.visitVarInsn(ALOAD, 6);
+            mv.visitMethodInsn(INVOKESTATIC, "space/libs/util/ForgeUtils", "convertMapKeys", "(Ljava/util/Map;)Ljava/util/Map;", false);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "net/minecraftforge/fml/common/Loader", "fireMissingMappingEvent", "(Ljava/util/Map;Ljava/util/Map;ZLjava/util/Map;Ljava/util/Map;)Ljava/util/List;", false);
+            mv.visitInsn(ARETURN);
+            mv.visitMaxs(6, 7);
             mv.visitEnd();
         }
     }

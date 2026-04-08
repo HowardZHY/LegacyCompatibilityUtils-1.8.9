@@ -109,6 +109,7 @@ dependencies {
     implementation 'zone.rong:mixinbooter:9.4'
     compileOnly("curse.maven:mo-bends-231347:2272295")
     compileOnly("curse.maven:more-player-models-221939:2284120")
+    compileOnly("curse.maven:spacore-228922:2267589")
     compileOnly("curse.maven:alexiillib-229301:2233177")
     compileOnly("curse.maven:better-loading-screen-229302:2238921")
     compileOnly("curse.maven:civcraft-228061:2233156")

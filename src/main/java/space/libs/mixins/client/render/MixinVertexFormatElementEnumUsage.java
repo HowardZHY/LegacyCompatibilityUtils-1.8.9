@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import space.libs.core.CompatLibCore;
+import space.libs.core.ICoreUtils;
 import space.libs.util.cursedmixinextensions.annotations.Public;
 
 import java.lang.reflect.Method;
@@ -26,7 +26,7 @@ public abstract class MixinVertexFormatElementEnumUsage {
         try {
             PreDraw.invoke(null, (VertexFormatElement.EnumUsage) (Object) this, element, stride, buffer);
         } catch (Exception e) {
-            CompatLibCore.LOGGER.error("Failed to invoke old preDraw: " + e);
+            ICoreUtils.LOGGER.error("Failed to invoke old preDraw: " + e);
         }
     }
 
@@ -34,7 +34,7 @@ public abstract class MixinVertexFormatElementEnumUsage {
         try {
             PostDraw.invoke(null, (VertexFormatElement.EnumUsage) (Object) this, element, stride, buffer);
         } catch (Exception e) {
-            CompatLibCore.LOGGER.error("Failed to invoke old postDraw: " + e);
+            ICoreUtils.LOGGER.error("Failed to invoke old postDraw: " + e);
         }
     }
 
@@ -45,7 +45,7 @@ public abstract class MixinVertexFormatElementEnumUsage {
             PreDraw = clazz.getDeclaredMethod("preDraw", VertexFormatElement.EnumUsage.class, VertexFormatElement.class, int.class, ByteBuffer.class);
             PostDraw = clazz.getDeclaredMethod("postDraw", VertexFormatElement.EnumUsage.class, VertexFormatElement.class, int.class, ByteBuffer.class);
         } catch (Exception e) {
-            CompatLibCore.LOGGER.error("Failed to get old preDraw/postDraw from ForgeHooksClient: " + e);
+            ICoreUtils.LOGGER.error("Failed to get old preDraw/postDraw from ForgeHooksClient: " + e);
         }
     }
 }

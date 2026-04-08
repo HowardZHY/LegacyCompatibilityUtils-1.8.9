@@ -4,13 +4,12 @@
  */
 package space.libs.util;
 
-import space.libs.core.CompatLibCore;
+import space.libs.core.ICoreUtils;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
+import java.lang.reflect.*;
 
 @SuppressWarnings("all")
-public class UnsafeUtils {
+public class UnsafeUtils implements ICoreUtils {
 
     public static Class<?> TYPE;
 
@@ -29,7 +28,7 @@ public class UnsafeUtils {
                 ctor.setAccessible(true);
                 instance = ctor.newInstance();
             } catch (Exception e) {
-                CompatLibCore.LOGGER.warn("Failed to get Unsafe.");
+                LOGGER.warn("Failed to get Unsafe.");
             }
         }
         if (instance != null) {
@@ -42,7 +41,7 @@ public class UnsafeUtils {
         if (TYPE == null || UNSAFE == null) {
             return;
         }
-        CompatLibCore.LOGGER.warn("Detaching FMLSecurityManager.");
+        LOGGER.warn("Detaching FMLSecurityManager.");
         try {
             Field out = System.class.getDeclaredField("out");
             Field err = System.class.getDeclaredField("err");
@@ -53,10 +52,10 @@ public class UnsafeUtils {
             TYPE.getDeclaredMethod("putObjectVolatile", Object.class, long.class, Object.class)
                 .invoke(UNSAFE, TYPE.getDeclaredMethod("staticFieldBase", Field.class).invoke(UNSAFE, err), offset, null);
         } catch (Exception e) {
-            CompatLibCore.LOGGER.error("Failed to access for FMLSecurityManager removal: " + e);
+            LOGGER.error("Failed to access for FMLSecurityManager removal: " + e);
         }
         if (System.getSecurityManager() != null) {
-            CompatLibCore.LOGGER.warn("Failed to detach FMLSecurityManager.");
+            LOGGER.warn("Failed to detach FMLSecurityManager.");
         }
     }
 }

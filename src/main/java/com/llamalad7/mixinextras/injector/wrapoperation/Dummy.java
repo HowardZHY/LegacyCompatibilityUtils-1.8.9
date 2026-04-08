@@ -2,19 +2,16 @@ package com.llamalad7.mixinextras.injector.wrapoperation;
 
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
-import space.libs.core.CompatLibCore;
+import space.libs.core.ICoreUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SuppressWarnings("all")
-public class Dummy {
+public class Dummy implements ICoreUtils {
 
     public Dummy() {
         //init();
@@ -25,10 +22,10 @@ public class Dummy {
             removeClassFromClasspath(Launch.classLoader, "com.llamalad7.mixinextras.injector.wrapoperation.WrapOperationInjector");
             fixMixinClasspathOrder();
             Launch.classLoader.loadClass("com.llamalad7.mixinextras.injector.wrapoperation.WrapOperationInjector");
-            //CompatLibCore.LOGGER.info(WrapOperationInjector.Dummy());
+            //LOGGER.info(WrapOperationInjector.Dummy());
             //Launch.classLoader.addClassLoaderExclusion("com.llamalad7.mixinextras.injector.wrapoperation.WrapOperationInjector");
         } catch (Exception e) {
-            CompatLibCore.LOGGER.error(e);
+            LOGGER.error(e);
             e.printStackTrace();
         }
     }
@@ -67,7 +64,7 @@ public class Dummy {
             cachedClassesField.setAccessible(true);
             ((Map<String, Class<?>>) cachedClassesField.get(classLoader)).remove(className);
         } catch (Exception e) {
-            CompatLibCore.LOGGER.error(e);
+            LOGGER.error(e);
         }
     }
 }

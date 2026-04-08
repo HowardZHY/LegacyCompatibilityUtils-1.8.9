@@ -1,7 +1,7 @@
 package space.libs.util;
 
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.ModMetadata;
+import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.versioning.ArtifactVersion;
 import net.minecraftforge.fml.common.versioning.Restriction;
 
@@ -10,9 +10,12 @@ import java.util.*;
 @SuppressWarnings("unused")
 public abstract class ForgeUtils {
 
-    public static Map<ResourceLocation, Integer[]> convertMapKeys(Map<?, Integer[]> originalMap) {
-        Map<ResourceLocation, Integer[]> convertedMap = new HashMap<>();
-        for (Map.Entry<?, Integer[]> entry : originalMap.entrySet()) {
+    public static <T> Map<ResourceLocation, T> convertMapKeys(Map<?, T> originalMap) {
+        if (originalMap == null) {
+            return new HashMap<>();
+        }
+        Map<ResourceLocation, T> convertedMap = new HashMap<>();
+        for (Map.Entry<?, T> entry : originalMap.entrySet()) {
             if (entry.getKey() instanceof java.lang.String) {
                 ResourceLocation key = new ResourceLocation((String) entry.getKey());
                 convertedMap.put(key, entry.getValue());

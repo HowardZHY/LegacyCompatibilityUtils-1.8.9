@@ -251,6 +251,7 @@
     "forge.event.MixinEntityJoinWorldEvent",
     "forge.event.MixinEventBus",
     "forge.event.MixinFMLMissingMappingsEvent",
+    "forge.event.MixinFMLModIdMappingEventModRemapping",
     "forge.event.MixinFMLPostInitializationEvent",
     "interfaces.MixinIBlockSource",
     "interfaces.MixinIChatComponent",
