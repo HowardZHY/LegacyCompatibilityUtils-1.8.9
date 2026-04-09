@@ -1,19 +1,22 @@
 package space.libs.util;
 
+import alexiil.mods.load.ProgressDisplayer;
+import alexiil.mods.load.Translation;
 import codechicken.lib.asm.ModularASMTransformer;
 import codechicken.nei.asm.NEITransformer;
 import net.minecraft.launchwrapper.IClassTransformer;
-import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.fml.common.asm.ASMTransformerWrapper;
-import space.libs.core.CompatLibCore;
+import net.specialattack.forge.core.config.ConfigManager;
+import space.libs.core.CompatLibLateCore;
+import space.libs.core.ICoreUtils;
 import space.libs.util.mods.ObfCompat;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import java.io.*;
+import java.lang.reflect.*;
 import java.util.*;
 
 @SuppressWarnings("SpellCheckingInspection")
-public class ModDetector {
+public class ModDetector implements ICoreUtils {
 
     public static boolean initialized = false;
 
@@ -24,6 +27,8 @@ public class ModDetector {
     public static boolean hasSpACore = false;
 
     public static boolean hasAlexIILLib = false;
+
+    public static boolean hasBetterLoadingScreen = false;
 
     public static boolean hasCivCraft = false;
 
@@ -39,7 +44,6 @@ public class ModDetector {
 
     public ModDetector() {}
 
-    @SuppressWarnings("InstantiationOfUtilityClass")
     public static void init() {
         if (initialized) {
             return;
@@ -50,6 +54,7 @@ public class ModDetector {
         hasNEI = getCoreMod("codechicken.nei.asm.NEICorePlugin", true);
         hasSpACore = getCoreMod("net.specialattack.forge.core.asm.SpACorePlugin", true);
         hasAlexIILLib = getCoreMod("alexiil.mods.lib.coremod.LoadPlugin", true);
+        hasBetterLoadingScreen = getCoreMod("alexiil.mods.load.coremod.LoadingScreenLoadPlugin", true);
         hasCivCraft = getCoreMod("alexiil.mods.civ.coremod.LoadPlugin", true);
         initialized = true;
     }
@@ -57,12 +62,16 @@ public class ModDetector {
     @SuppressWarnings("unused")
     public static boolean getCoreMod(String name, boolean init) {
         try {
-            Class<?> c = Class.forName(name, init, INSTANCE.getClass().getClassLoader());
+            Class<?> c = findClass(name, init);
         } catch (Exception ignored) {
-            CompatLibCore.LOGGER.info("Coremod " + name + " Not Found.");
+            LOGGER.info("Coremod " + name + " Not Found.");
             return false;
         }
         return true;
+    }
+
+    public static Class<?> findClass(String name, boolean init) throws ClassNotFoundException {
+        return Class.forName(name, init, INSTANCE.getClass().getClassLoader());
     }
 
     public static boolean mobends() {
@@ -73,13 +82,48 @@ public class ModDetector {
         return hasSkybox;
     }
 
+    public static ArrayList<String> addEarlyTransformers() {
+        ArrayList<String> earlyTransformers = new ArrayList<>();
+        if (ModDetector.hasSpACore) {
+            LOGGER.info("Found SpACore, load ASM Transformers of it.");
+            earlyTransformers.add("net.specialattack.forge.core.asm.SpACoreModTransformer");
+            earlyTransformers.add("net.specialattack.forge.core.asm.SpACoreHookTransformer");
+            classLoader.addTransformerExclusion("net.specialattack.forge.core.asm");
+        }
+        return earlyTransformers;
+    }
+
+    public static void onInjectData(Map<String, Object> data) {
+        File coremodLocation = (File) data.get("coremodLocation");
+        CompatLibLateCore.init(coremodLocation);
+        if (hasBetterLoadingScreen) {
+            try {
+                File location = new File(findClass("alexiil.mods.load.coremod.LoadingScreenLoadPlugin", true).getProtectionDomain().getCodeSource().getLocation().toURI());
+                LOGGER.info("BetterLoadingScreen Location: " + location);
+                Translation.addTranslations(location);
+                ProgressDisplayer.start(location);
+            } catch (Exception e) {
+                LOGGER.error(e);
+            }
+        }
+        if (hasSpACore) {
+            if (data.containsKey("mcLocation")) {
+                try {
+                    ConfigManager.configFolder = new File(((File) data.get("mcLocation")).getCanonicalFile(), "config");
+                } catch (IOException e) {
+                    throw new IllegalStateException("Failed getting Minecraft config directory", e);
+                }
+            }
+        }
+    }
+
     public static void EarlyLoadTC5() {
         try {
             Class<?> c = Class.forName("thaumcraft.loader.ThaumcraftLoader");
             Method m = c.getDeclaredMethod("load");
             m.invoke(null);
         } catch (ClassNotFoundException not) {
-            CompatLibCore.LOGGER.info("TC5 Not found.");
+            LOGGER.info("TC5 Not found.");
             return;
         } catch (ReflectiveOperationException ignored) {}
         hasTC5 = true;
@@ -91,7 +135,7 @@ public class ModDetector {
         }
         if (hasNEI) {
             try {
-                List<IClassTransformer> transformers = Launch.classLoader.getTransformers();
+                List<IClassTransformer> transformers = classLoader.getTransformers();
                 for (IClassTransformer transformer : transformers) {
                     if (transformer instanceof ASMTransformerWrapper.TransformerWrapper) {
                         Field f = ASMTransformerWrapper.TransformerWrapper.class.getDeclaredField("parent");
@@ -111,7 +155,7 @@ public class ModDetector {
                                     asm.transformers.remove(key);
                                 }
                             }
-                            CompatLibCore.LOGGER.info("Removed invalid transforms from NEI.");
+                            LOGGER.info("Removed invalid transforms from NEI.");
                         }
                     }
                 }

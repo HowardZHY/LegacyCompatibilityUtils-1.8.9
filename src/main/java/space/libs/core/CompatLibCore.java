@@ -1,30 +1,23 @@
 package space.libs.core;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Dummy;
-import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Mixins;
 import space.libs.util.ModDetector;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @SuppressWarnings("unused")
 @IFMLLoadingPlugin.TransformerExclusions({"space.libs.asm", "space.libs.core", "space.libs.util.cursedmixinextensions"})
 @IFMLLoadingPlugin.SortingIndex(Integer.MIN_VALUE + 2)
-public class CompatLibCore implements IFMLLoadingPlugin {
-
-    public static final Logger LOGGER = LogManager.getLogger("CompatLibCore");
+public class CompatLibCore implements IFMLLoadingPlugin, ICoreUtils {
 
     public static Dummy DUMMY;
 
     public CompatLibCore() {
-        Launch.classLoader.registerTransformer("space.libs.asm.ClassTransformers");
+        classLoader.registerTransformer("space.libs.asm.ClassTransformers");
     }
 
     static {
@@ -40,10 +33,10 @@ public class CompatLibCore implements IFMLLoadingPlugin {
         try {
             Field f = LaunchClassLoader.class.getDeclaredField("transformerExceptions");
             f.setAccessible(true);
-            Set<String> exs = (Set<String>) f.get(Launch.classLoader);
+            Set<String> exs = (Set<String>) f.get(classLoader);
             exs.remove("com.llamalad7.mixinextras.");
             exs.add("com.llamalad7.mixinextras.wrapper.");
-            f.set(Launch.classLoader, exs);
+            f.set(classLoader, exs);
         } catch (Exception e) {
             LOGGER.error(e);
         }
@@ -52,13 +45,7 @@ public class CompatLibCore implements IFMLLoadingPlugin {
         transformersList.add("space.libs.asm.DefaultCompatTransformer");
         transformersList.add("space.libs.asm.ReplaceTransformer");
         transformersList.add("space.libs.asm.LegacyObfTransformer");
-
-        if (ModDetector.hasSpACore) {
-            LOGGER.info("Found SpACore, load ASM Transformers of it.");
-            transformersList.add("net.specialattack.forge.core.asm.SpACoreModTransformer");
-            transformersList.add("net.specialattack.forge.core.asm.SpACoreHookTransformer");
-        }
-
+        transformersList.addAll(ModDetector.addEarlyTransformers());
         String[] transformers = new String[transformersList.size()];
         return transformersList.toArray(transformers);
     }
@@ -74,7 +61,9 @@ public class CompatLibCore implements IFMLLoadingPlugin {
     }
 
     @Override
-    public void injectData(Map<String, Object> data) {}
+    public void injectData(Map<String, Object> data) {
+        ModDetector.onInjectData(data);
+    }
 
     @Override
     public String getAccessTransformerClass() {
