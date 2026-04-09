@@ -38,6 +38,10 @@ Disable use VBOs in Video Settings if you use this mod, otherwise blocks won't s
 
 Coremods using some ASM, or accessing APIs with FML Core breaking changes.
 
+### [Wallpaper](https://www.curseforge.com/minecraft/mc-mods/wallpaper)
+
+Same as above, but more complex to handle.
+
 ### TMI (Official 1.8 Forge Version)
 
 One of the 1.8 Forge Mods that's in Totally Notch Code, lazy to make reflections.
