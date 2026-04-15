@@ -12,7 +12,7 @@ public class MixinEntityPlayerSP {
 
     @Inject(method = "canCommandSenderUseCommand", at = @At("HEAD"), cancellable = true)
     public void canCommandSenderUseCommand(int permLevel, String commandName, CallbackInfoReturnable<Boolean> cir) {
-        if (Loader.isModLoaded("legacy_gm_switcher") && commandName.equals("gamemode")) {
+        if (Loader.isModLoaded("legacy_gm_switcher") && "gamemode".equals(commandName)) {
             cir.setReturnValue(true);
         }
     }

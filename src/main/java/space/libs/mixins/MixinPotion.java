@@ -49,7 +49,7 @@ public class MixinPotion {
     protected void init(FMLControlledNamespacedRegistry<Potion> instance, int id, ResourceLocation location, Object thing) {
         Potion This = (Potion) (Object) this;
         if (id >= 32) {
-            if (location.getResourceDomain().equals("minecraft")) {
+            if ("minecraft".equals(location.getResourceDomain())) {
                 CompatLib.LOGGER.warn("Old modded potion ID " + id);
                 this.id = id;
                 potionTypes[id] = This;
