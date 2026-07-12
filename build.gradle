@@ -62,22 +62,19 @@ configurations {
 }
 
 repositories {
-    maven { url "https://bmclapi2.bangbang93.com/maven/" }
+    maven { url 'https://bmclapi2.bangbang93.com/maven/' }
     maven { url 'https://jitpack.io/' }
     maven { url 'https://repo.spongepowered.org/maven/' }
-    maven {url 'https://maven.cleanroommc.com'}
-    maven {
-        url "https://cursemaven.com"
-    }
-    maven {
-        url "https://maven.covers1624.net"
-    }
+    maven { url 'https://maven.cleanroommc.com' }
+    maven { url 'https://cursemaven.com' }
     flatDir {
         dirs 'libs'
     }
     mavenCentral()
 }
 
+def cclUrl = new URL('https://maven.covers1624.net/repository/maven-hosted/codechicken/CodeChickenLib/1.8-1.1.2.139/CodeChickenLib-1.8-1.1.2.139-dev.jar')
+def neiUrl = new URL('https://maven.covers1624.net/repository/maven-hosted/codechicken/NotEnoughItems/1.8-1.0.5.104/NotEnoughItems-1.8-1.0.5.104-dev.jar')
 task LiteLoader {
     def jarUrl = new URL('https://jenkins.liteloader.com/view/1.8.9/job/LiteLoader%201.8.9/lastSuccessfulBuild/artifact/build/libs/liteloader-1.8.9-SNAPSHOT.jar')
     def jarFile = new File('libs/liteloader-1.8.9-SNAPSHOT.jar')
@@ -106,7 +103,7 @@ dependencies {
         exclude module: 'log4j-core'
     }*/
     //compile will make your library available only in this dev environment
-    implementation 'zone.rong:mixinbooter:9.4'
+    implementation("zone.rong:mixinbooter:9.4")
     compileOnly("curse.maven:mo-bends-231347:2272295")
     compileOnly("curse.maven:more-player-models-221939:2284120")
     compileOnly("curse.maven:spacore-228922:2267589")
@@ -116,15 +113,6 @@ dependencies {
     compileOnly("curse.maven:gog-skybox-266068:2411441")
     compileOnly("curse.maven:thaumcraft-223628:2287496")
     compileOnly("curse.maven:tbc-229106:2309144")
-    compileOnly("codechicken:NotEnoughItems:1.8-1.0.5.104:dev")
-    compileOnly("codechicken:CodeChickenLib:1.8-1.1.2.139:dev")
-    compileOnly("net.md-5:SpecialSource:1.7.4") {
-        exclude module: 'asm-debug-all'
-        exclude module: 'guava'
-        exclude module: 'jopt-simple'
-        exclude module: 'lombok'
-        exclude module: 'opencsv'
-    }
     compileOnly fileTree(dir: 'libs', include: ['*.jar'])
     shade('net.jodah:typetools:0.6.3')
     //compile "org.spongepowered:mixin:0.7.11-SNAPSHOT"

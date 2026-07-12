@@ -20,7 +20,7 @@ public class VersionRangeVisitor extends ClassVisitor {
                 public void visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface) {
                     if (opcode == INVOKEVIRTUAL && "net/minecraftforge/fml/common/versioning/Restriction".equals(owner) &&
                         "containsVersion".equals(name) && "(Lnet/minecraftforge/fml/common/versioning/ArtifactVersion;)Z".equals(descriptor)) {
-                        super.visitMethodInsn(INVOKESTATIC, "space/libs/util/ForgeUtils", "checkVersion",
+                        super.visitMethodInsn(INVOKESTATIC, "space/libs/util/forge/ForgeUtils", "checkVersion",
                             "(Lnet/minecraftforge/fml/common/versioning/Restriction;Lnet/minecraftforge/fml/common/versioning/ArtifactVersion;)Z", false);
                     } else {
                         super.visitMethodInsn(opcode, owner, name, descriptor, isInterface);
