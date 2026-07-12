@@ -1,4 +1,4 @@
-package space.libs.util;
+package space.libs.util.forge;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.*;

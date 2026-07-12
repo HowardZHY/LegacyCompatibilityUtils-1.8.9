@@ -4,7 +4,7 @@ import com.google.common.eventbus.EventBus;
 import net.minecraftforge.fml.common.DummyModContainer;
 import net.minecraftforge.fml.common.LoadController;
 
-import static space.libs.util.ForgeUtils.createModData;
+import static space.libs.util.forge.ForgeUtils.createModData;
 
 @SuppressWarnings("all")
 public class ThinkBigCoreDummyContainer extends DummyModContainer {

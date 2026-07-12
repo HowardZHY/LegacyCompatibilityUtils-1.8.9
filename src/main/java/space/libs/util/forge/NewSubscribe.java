@@ -1,4 +1,4 @@
-package space.libs.util;
+package space.libs.util.forge;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
