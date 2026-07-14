@@ -10,11 +10,13 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(targets = "sushen.eieae", remap = false)
 public abstract class MixinCameraStudioRenderCameraFOV extends MixinCameraStudioRenderCamera {
 
+    @Override
     public void func_181560_a(float partialTicks, long nanoTime) {
         this.func_78480_b(partialTicks);
     }
 
     @Dynamic
+    @Override
     @Shadow(aliases = "b", remap = false)
     public void func_78480_b(float pt) {}
 

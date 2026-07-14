@@ -12,6 +12,7 @@ import space.libs.mixins.client.render.entity.MixinEntityRenderer;
 public abstract class MixinCameraStudioRenderCamera extends MixinEntityRenderer {
 
     @Dynamic
+    @Override
     @Shadow(aliases = "b", remap = false)
     public void func_78480_b(float pt) {}
 

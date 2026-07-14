@@ -10,13 +10,22 @@
 package space.libs.asm.remap;
 
 import com.google.common.base.*;
+import com.google.common.collect.Iterables;
+import com.google.common.io.CharSource;
+import com.google.common.io.Resources;
 import net.minecraft.launchwrapper.*;
+import space.libs.core.ICoreUtils;
 
 import java.io.IOException;
+import java.util.List;
 
 public class DefaultRemapper extends RemapperBase implements IClassNameTransformer {
 
     public static String DEFAULT_MAPPINGS = "compatlib.srg";
+
+    public static String FIELD_RENAMES = "compatlib_fields.csv";
+
+    public static String METHOD_RENAMES = "compatlib_methods.csv";
 
     public static String LEGACY_MAPPINGS = "legacydeobf.srg";
 
@@ -26,12 +35,42 @@ public class DefaultRemapper extends RemapperBase implements IClassNameTransform
 
     private DefaultRemapper() {
         this(DEFAULT_MAPPINGS, false);
+        this.setupDefault(FIELD_RENAMES, METHOD_RENAMES);
     }
 
     public DefaultRemapper(final String file, final boolean deobfuscating) {
         super(file, deobfuscating);
         this.classLoader = (LaunchClassLoader) this.getClass().getClassLoader();
     }
+
+    protected void setupDefault(final String fields, final String methods) {
+        ICoreUtils.EXECUTOR.execute(() -> this.setupRename(fields, true));
+        ICoreUtils.EXECUTOR.execute(() -> this.setupRename(methods, false));
+    }
+
+    @SuppressWarnings("UnstableApiUsage")
+    protected void setupRename(final String file, final boolean flag) {
+        try {
+            CharSource srgSource = Resources.asCharSource(Resources.getResource(file), Charsets.UTF_8);
+            List<String> csvList = srgSource.readLines();
+            Splitter splitter = Splitter.on(CharMatcher.anyOf(",")).omitEmptyStrings().trimResults();
+            for (String line : csvList) {
+                line = line.trim();
+                if (line.isEmpty() || line.startsWith("#")) continue;
+                String[] parts = Iterables.toArray(splitter.split(line), String.class);
+                String from = parts[0];
+                String to = parts[1];
+                if (flag) {
+                    this.fieldRenamesMap.put(from, to);
+                } else {
+                    this.methodRenamesMap.put(from, to);
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.error("An error occurred loading the custom csv data ", e);
+        }
+    }
+
 
     @Override
     public String remapClassName(String name) {

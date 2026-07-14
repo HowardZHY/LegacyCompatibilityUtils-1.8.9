@@ -26,7 +26,7 @@ public class CustomRemapper extends DefaultRemapper {
     }
 
     @Override
-    protected void setup() {
+    protected void setupClasses() {
         try {
             CharSource srgSource = Resources.asCharSource(this.mappings, Charsets.UTF_8);
             List<String> srgList = srgSource.readLines();
@@ -48,6 +48,9 @@ public class CustomRemapper extends DefaultRemapper {
             LOGGER.error("An error occurred loading the custom map data" + e);
         }
     }
+
+    @Override
+    protected void setupMembers() {}
 
     private void parseField(String[] parts) {
         String oldSrg = parts[1];

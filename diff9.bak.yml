@@ -1,11 +1,8 @@
-Incompatibilities found: 750 errors, 0 warnings
-net/minecraft/server/network/NetHandlerHandshakeTCP$SwitchEnumConnectionState:
-  - error: Class no longer exists
-
+Incompatibilities found: 611 errors, 0 warnings
 net/minecraftforge/client/model/IPerspectiveAwareModel$MapWrapper:
   - error: <init>(Lnet/minecraftforge/client/model/IFlexibleBakedModel;Lnet/minecraftforge/client/model/IPerspectiveState;Lnet/minecraftforge/client/model/IModelPart;)V - Method was removed
   - error: getTransforms(Lnet/minecraftforge/client/model/IPerspectiveState;Lnet/minecraftforge/client/model/IModelPart;)Lcom/google/common/collect/ImmutableMap; - Method was removed
-    #DONE
+
 net/minecraft/world/gen/structure/StructureStrongholdPieces$Stones:
   - error: <init>(Ljava/lang/Object;)V - Method was removed
 
@@ -20,15 +17,6 @@ net/minecraft/network/play/server/S32PacketConfirmTransaction:
 
 net/minecraft/client/renderer/tileentity/TileEntitySignRenderer:
   - error: func_180541_a(Lnet/minecraft/tileentity/TileEntitySign;DDDFI)V - Method was removed
-
-net/minecraft/entity/player/EntityPlayer$SwitchEnumFacing:
-  - error: Class no longer exists
-
-net/minecraftforge/fml/relauncher/CoreModManager:
-  - error: getLoadedCoremods()Ljava/util/List; - Method was removed
-  - error: sortCoreMods()V - Method was removed
-  - error: reparsedCoremods:Ljava/util/List; - Field was removed
-  - error: loadedCoremods:Ljava/util/List; - Field was removed
 
 net/minecraft/client/renderer/WorldVertexBufferUploader:
   - error: func_178177_a(Lnet/minecraft/client/renderer/WorldRenderer;I)I - Method was removed
@@ -45,15 +33,6 @@ net/minecraft/client/renderer/WorldRenderer$SwitchEnumUsage:
 net/minecraft/enchantment/EnchantmentHelper$ModifierDamage:
   - error: <init>(Ljava/lang/Object;)V - Method was removed
 
-net/minecraft/block/BlockBanner$SwitchEnumFacing:
-  - error: Class no longer exists
-
-net/minecraftforge/fml/common/BukkitPluginRef:
-  - error: Class no longer exists
-
-net/minecraft/block/BlockFurnace$SwitchEnumFacing:
-  - error: Class no longer exists
-
 net/minecraft/client/renderer/entity/layers/LayerWitherAura:
   - error: func_177214_a(Lnet/minecraft/entity/boss/EntityWither;FFFFFFF)V - Method was removed
 
@@ -62,14 +41,8 @@ net/minecraftforge/client/MinecraftForgeClient:
   - error: registerItemRenderer(Lnet/minecraft/item/Item;Lnet/minecraftforge/client/IItemRenderer;)V - Method was removed
   - error: customItemRenderers:Ljava/util/IdentityHashMap; - Field was removed
 
-net/minecraft/block/BlockSourceImpl:
-  - error: func_179316_e()Lnet/minecraft/block/Block; - Method was removed
-
 net/minecraft/entity/monster/EntitySlime$AISlimeHop:
   - error: this$0:Lnet/minecraft/entity/monster/EntitySlime; - Field was removed
-
-net/minecraftforge/fml/common/BukkitProxy:
-  - error: Class no longer exists
 
 net/minecraftforge/fml/common/Loader:
   - error: fireMissingMappingEvent(Ljava/util/LinkedHashMap;Ljava/util/LinkedHashMap;ZLnet/minecraftforge/fml/common/registry/GameData;Ljava/util/Map;Ljava/util/Map;)Ljava/util/List; - Method was removed
@@ -91,9 +64,6 @@ net/minecraft/enchantment/EnchantmentHelper$DamageIterator:
 net/minecraft/network/play/server/S11PacketSpawnExperienceOrb:
   - error: func_180719_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
-net/minecraftforge/client/model/MultiModel:
-  - error: Class missing interface net/minecraftforge/client/model/IModelPart
-
 net/minecraft/block/BlockPressurePlateWeighted:
   - error: <init>(Ljava/lang/String;Lnet/minecraft/block/material/Material;I)V - Method was removed
 
@@ -103,9 +73,6 @@ net/minecraft/world/biome/BiomeGenBase$SwitchEnumCreatureType:
 net/minecraft/client/renderer/vertex/VertexFormatElement$EnumUsage:
   - error: preDraw(Lnet/minecraft/client/renderer/vertex/VertexFormatElement;ILjava/nio/ByteBuffer;)V - Method was removed
   - error: postDraw(Lnet/minecraft/client/renderer/vertex/VertexFormatElement;ILjava/nio/ByteBuffer;)V - Method was removed
-
-net/minecraft/block/BlockVine$SwitchEnumFacing:
-  - error: Class no longer exists
 
 net/minecraft/network/play/server/S30PacketWindowItems:
   - error: func_180732_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
@@ -124,9 +91,6 @@ net/minecraft/tileentity/TileEntityChest:
 
 net/minecraft/client/renderer/RenderGlobal$ContainerLocalRenderInformation:
   - error: <init>(Lnet/minecraft/client/renderer/RenderGlobal;Lnet/minecraft/client/renderer/chunk/RenderChunk;Lnet/minecraft/util/EnumFacing;ILjava/lang/Object;)V - Method was removed
-
-net/minecraft/client/gui/GuiOptionsRowList:
-  - error: func_180792_c(I)Lnet/minecraft/client/gui/GuiOptionsRowList$Row; - Method was removed
 
 net/minecraft/client/renderer/entity/RenderChicken:
   - error: func_180568_a(Lnet/minecraft/entity/passive/EntityChicken;)Lnet/minecraft/util/ResourceLocation; - Method was removed
@@ -158,9 +122,6 @@ net/minecraft/client/renderer/entity/RenderFallingBlock:
 net/minecraft/client/particle/EntityFireworkStarterFX:
   - error: Class no longer exists
 
-net/minecraft/client/renderer/tileentity/TileEntitySkullRenderer$SwitchEnumFacing:
-  - error: Class no longer exists
-
 net/minecraft/server/management/PlayerProfileCache$Serializer:
   - error: serialize(Ljava/lang/Object;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement; - Method was removed
   - error: func_152676_a(Lnet/minecraft/server/management/PlayerProfileCache$ProfileEntry;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement; - Method was removed
@@ -172,8 +133,8 @@ net/minecraft/server/management/PlayerProfileCache$Serializer:
 net/minecraft/client/gui/FontRenderer:
   - error: func_78278_a(ICZ)F - Method was removed
 
-net/minecraft/client/audio/MovingSoundMinecartRiding:
-  - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
+net/minecraftforge/fml/client/GuiModOptionList:
+  - error: Class no longer exists
 
 net/minecraft/client/particle/EntityFireworkSparkFX:
   - error: Class no longer exists
@@ -191,42 +152,21 @@ net/minecraftforge/fml/common/registry/VillagerRegistry:
   - error: addExtraVillageComponents(Ljava/util/ArrayList;Ljava/util/Random;I)V - Method was removed
   - error: getVillageComponent(Lnet/minecraft/world/gen/structure/StructureVillagePieces$PieceWeight;Lnet/minecraft/world/gen/structure/StructureVillagePieces$Start;Ljava/util/List;Ljava/util/Random;IIILnet/minecraft/util/EnumFacing;I)Ljava/lang/Object; - Method was removed
 
-net/minecraft/client/audio/MovingSoundMinecart:
-  - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
-
 net/minecraft/network/play/server/S22PacketMultiBlockChange:
   - error: func_180729_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
-net/minecraft/block/BlockSapling$SwitchEnumType:
-  - error: Class no longer exists
-
 net/minecraft/block/BlockTrapDoor$SwitchEnumFacing:
-  - error: Class no longer exists
-
-net/minecraft/client/Minecraft$SwitchEnumMinecartType:
   - error: Class no longer exists
 
 net/minecraft/world/gen/ChunkProviderSettings$Serializer:
   - error: func_177861_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/world/gen/ChunkProviderSettings$Factory; - Method was removed
   - error: func_177862_a(Lnet/minecraft/world/gen/ChunkProviderSettings$Factory;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement; - Method was removed
 
-net/minecraft/block/BlockLog$SwitchAxis:
-  - error: Class no longer exists
-
 net/minecraft/network/NetHandlerPlayServer$SwitchAction:
-  - error: Class no longer exists
-
-net/minecraft/network/play/server/S42PacketCombatEvent$SwitchEvent:
-  - error: Class no longer exists
-
-net/minecraftforge/client/IItemRenderer$ItemRendererHelper:
   - error: Class no longer exists
 
 net/minecraft/client/renderer/tileentity/RenderItemFrame:
   - error: func_147914_a(Lnet/minecraft/entity/item/EntityItemFrame;DDD)V - Method was removed
-
-net/minecraft/world/gen/structure/StructureComponent$SwitchEnumFacing:
-  - error: Class no longer exists
 
 net/minecraft/world/chunk/storage/AnvilChunkLoader:
   - error: func_75821_a(Lnet/minecraft/world/chunk/storage/AnvilChunkLoader$PendingChunk;)V - Method was removed
@@ -238,11 +178,8 @@ net/minecraft/client/renderer/BlockModelShapes$SwitchEnumType:
 net/minecraft/block/BlockButton$SwitchEnumFacing:
   - error: Class no longer exists
 
-net/minecraft/client/renderer/entity/RenderItem$SwitchTransformType:
-  - error: Class no longer exists
-
 net/minecraft/tileentity/TileEntityMobSpawner:
-  - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
+  - error Class missing interface: net/minecraft/server/gui/IUpdatePlayerListBox
 
 net/minecraft/world/biome/BiomeDecorator:
   - error: nextInt(I)I - Method was removed
@@ -256,18 +193,11 @@ net/minecraft/client/renderer/block/model/BlockPart$Deserializer:
 net/minecraft/client/renderer/tileentity/TileEntityPistonRenderer:
   - error: func_178461_a(Lnet/minecraft/tileentity/TileEntityPiston;DDDFI)V - Method was removed
 
-net/minecraft/client/audio/GuardianSound:
-  - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
-
 net/minecraft/network/play/server/S2EPacketCloseWindow:
   - error: func_180731_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
 net/minecraft/client/renderer/entity/RenderTNTPrimed:
   - error: func_180563_a(Lnet/minecraft/entity/item/EntityTNTPrimed;)Lnet/minecraft/util/ResourceLocation; - Method was removed
-
-net/minecraftforge/fml/common/event/FMLMissingMappingsEvent$MissingMapping:
-  - error: <init>(Lnet/minecraftforge/fml/common/registry/GameRegistry$Type;Ljava/lang/String;I)V - Method was removed
-  - error: setAction(Lnet/minecraftforge/fml/common/event/FMLMissingMappingsEvent$Action;)V - Method was removed
 
 net/minecraft/network/play/server/S08PacketPlayerPosLook:
   - error: func_180718_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
@@ -324,9 +254,6 @@ net/minecraft/server/gui/IUpdatePlayerListBox:
   - error: Class no longer exists
 
 net/minecraft/server/MinecraftServer:
-  - error: func_71252_i(Ljava/lang/String;)Ljava/lang/String; - Method was removed
-  - error: func_71258_A()Ljava/lang/String; - Method was removed
-  - error: func_82010_a(Lnet/minecraft/server/gui/IUpdatePlayerListBox;)V - Method was removed
   - error: func_181035_ah()Z - Method was made abstract
   - error: func_183002_r()Z - Method was made abstract
   - error: func_181034_q()Z - Method was made abstract
@@ -345,16 +272,9 @@ net/minecraft/network/play/server/S49PacketUpdateEntityNBT:
 
 net/minecraft/client/gui/GuiScreenRealmsProxy:
   - error: func_154322_b(Ljava/lang/String;III)V - Method was removed
-
-net/minecraft/block/state/pattern/BlockPattern$CacheLoader:
-  - error: <init>(Lnet/minecraft/world/World;)V - Method was removed
-  - error: func_177679_a(Lnet/minecraft/util/BlockPos;)Lnet/minecraft/block/state/BlockWorldState; - Method was removed
-
+    #NOT PLANNED
 net/minecraft/network/play/server/S34PacketMaps:
   - error: func_180741_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
-
-net/minecraft/block/state/pattern/BlockPattern$PatternHelper:
-  - error: <init>(Lnet/minecraft/util/BlockPos;Lnet/minecraft/util/EnumFacing;Lnet/minecraft/util/EnumFacing;Lcom/google/common/cache/LoadingCache;)V - Method was removed
 
 net/minecraft/network/play/server/S39PacketPlayerAbilities:
   - error: func_180742_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
@@ -371,19 +291,15 @@ net/minecraft/network/play/server/S43PacketCamera:
 net/minecraft/client/renderer/tileentity/TileEntityBannerRenderer:
   - error: func_180545_a(Lnet/minecraft/tileentity/TileEntityBanner;DDDFI)V - Method was removed
 
-net/minecraftforge/client/IItemRenderer:
-  - error: Class no longer exists
-
 net/minecraft/client/renderer/tileentity/TileEntityChestRenderer:
   - error: func_180538_a(Lnet/minecraft/tileentity/TileEntityChest;DDDFI)V - Method was removed
-
 net/minecraftforge/fml/common/WrongMinecraftVersionException:
   - error: <init>(Lnet/minecraftforge/fml/common/ModContainer;)V - Method was removed
 
 net/minecraft/entity/Entity:
   - error: func_82148_at()I - Method was removed
   - error: func_70063_aa()V - Method was removed
-  - error: persistentID:Ljava/util/UUID; - Field was removed
+  - error: persistentID:Ljava/util/UUID; - Field was removed #INVALID
   - error: field_82152_aq:I - Field was removed
 
 net/minecraft/entity/ai/attributes/ServersideAttributeMap:
@@ -402,9 +318,6 @@ net/minecraft/block/BlockPlanks$EnumType:
 net/minecraft/server/management/UserList$Serializer:
   - error: func_152751_a(Lnet/minecraft/server/management/UserListEntry;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement; - Method was removed
   - error: func_152750_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/server/management/UserListEntry; - Method was removed
-
-net/minecraft/server/gui/PlayerListComponent:
-  - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
 
 net/minecraft/network/play/server/S3FPacketCustomPayload:
   - error: func_180734_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
@@ -431,9 +344,6 @@ net/minecraftforge/fml/common/registry/FMLControlledNamespacedRegistry:
   - error: persistentSubstitutions:Lcom/google/common/collect/BiMap; - Field was made final
   - error: activeSubstitutions:Lcom/google/common/collect/BiMap; - Field was made final
 
-net/minecraft/client/resources/ResourcePackListEntry:
-  - error: func_183019_a()I - Method was made abstract
-
 net/minecraft/tileentity/TileEntityFurnace:
   - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
 
@@ -449,24 +359,15 @@ net/minecraft/util/EnumFacing$SwitchPlane:
 net/minecraft/world/gen/feature/WorldGenBigMushroom:
   - error: <init>(I)V - Method was removed
 
-net/minecraft/client/renderer/entity/RendererLivingEntity$SwitchEnumVisible:
-  - error: Class no longer exists
-
 net/minecraftforge/fml/common/registry/IncompatibleSubstitutionException:
   - error: <init>(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V - Method was removed
 
-net/minecraftforge/fml/common/registry/VillagerRegistry$IVillageCreationHandler:
-  - error: buildComponent(Lnet/minecraft/world/gen/structure/StructureVillagePieces$PieceWeight;Lnet/minecraft/world/gen/structure/StructureVillagePieces$Start;Ljava/util/List;Ljava/util/Random;IIILnet/minecraft/util/EnumFacing;I)Ljava/lang/Object; - Method was removed
-  - error: buildComponent(Lnet/minecraft/world/gen/structure/StructureVillagePieces$PieceWeight;Lnet/minecraft/world/gen/structure/StructureVillagePieces$Start;Ljava/util/List;Ljava/util/Random;IIILnet/minecraft/util/EnumFacing;I)Lnet/minecraft/world/gen/structure/StructureVillagePieces$Village; - Method was made abstract
+net/minecraftforge/fml/client/GuiIngameModOptions:
+  - error: Class no longer exists
 
 net/minecraft/client/renderer/block/model/ItemTransformVec3f$Deserializer:
   - error: func_178359_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/ItemTransformVec3f; - Method was removed
   - error: func_178358_a(Lcom/google/gson/JsonObject;Ljava/lang/String;Ljavax/vecmath/Vector3f;)Ljavax/vecmath/Vector3f; - Method was removed
-
-net/minecraftforge/client/model/b3d/B3DLoader$B3DState:
-  - error: Class missing interface com/google/common/base/Function
-  - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
-  - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
 
 net/minecraft/client/audio/ITickableSound:
   - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
@@ -481,7 +382,7 @@ net/minecraft/network/play/server/S0APacketUseBed:
   - error: func_180744_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
 net/minecraftforge/fml/client/GuiModList$Info:
-  - error: splitLines(Ljava/lang/String;)Ljava/util/List; - Method was removed
+  - error: Class no longer exists
 
 net/minecraft/client/network/NetworkPlayerInfo$SwitchType:
   - error: Class no longer exists
@@ -494,19 +395,6 @@ net/minecraft/network/play/server/S1CPacketEntityMetadata:
 
 net/minecraft/entity/monster/EntityZombie$GroupData:
   - error: <init>(Lnet/minecraft/entity/monster/EntityZombie;ZZLjava/lang/Object;)V - Method was removed
-
-net/minecraft/client/renderer/BlockModelRenderer$SwitchEnumFacing:
-  - error: Class no longer exists
-
-net/minecraft/client/audio/MovingSound:
-  - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
-
-net/minecraft/world/gen/structure/ComponentScatteredFeaturePieces$SwitchEnumFacing:
-  - error: Class no longer exists
-
-net/minecraftforge/client/model/b3d/B3DLoader$ModelWrapper:
-  - error: Class missing interface net/minecraftforge/client/model/IModelPart
-net/minecraft/network/ServerStatusResponse$PlayerCountData:
 
 net/minecraft/util/BlockPos:
   - error: func_177983_c(Lnet/minecraft/util/Vec3i;)Lnet/minecraft/util/BlockPos; - Method was removed
@@ -532,10 +420,6 @@ net/minecraft/client/renderer/entity/RenderPainting:
 
 net/minecraft/network/play/client/C0BPacketEntityAction:
   - error: func_180765_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
-
-net/minecraftforge/fml/common/registry/GameRegistry$Type:
-  - error: Class was made final
-  - error: getRegistry()Lnet/minecraftforge/fml/common/registry/FMLControlledNamespacedRegistry; - Method was removed
 
 net/minecraft/client/renderer/block/model/BlockFaceUV$Deserializer:
   - error: func_178293_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/BlockFaceUV; - Method was removed
@@ -575,12 +459,6 @@ net/minecraft/client/renderer/tileentity/TileEntityEndPortalRenderer:
 net/minecraft/entity/passive/EntityVillager:
   - error: func_180488_b(Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/passive/EntityVillager; - Method was removed
 
-net/minecraft/util/ChatComponentSelector:
-  - error: func_179991_h()Lnet/minecraft/util/ChatComponentSelector; - Method was removed
-
-net/minecraft/block/BlockSkull$SwitchEnumFacing:
-  - error: Class no longer exists
-
 net/minecraftforge/client/model/ModelLoader$VanillaModelWrapper:
   - error: Class missing interface net/minecraftforge/client/model/IModelPart
   - error: <init>(Lnet/minecraftforge/client/model/ModelLoader;Lnet/minecraft/util/ResourceLocation;Lnet/minecraft/client/renderer/block/model/ModelBlock;)V - Method was removed
@@ -588,9 +466,6 @@ net/minecraftforge/client/model/ModelLoader$VanillaModelWrapper:
 
 net/minecraft/client/renderer/block/model/ItemCameraTransforms$Deserializer:
   - error: func_178352_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/ItemCameraTransforms; - Method was removed
-
-net/minecraft/block/state/BlockWorldState:
-  - error: <init>(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;)V - Method was removed
 
 net/minecraft/client/renderer/entity/RenderGhast:
   - error: func_180576_a(Lnet/minecraft/entity/monster/EntityGhast;)Lnet/minecraft/util/ResourceLocation; - Method was removed
@@ -604,9 +479,6 @@ net/minecraft/client/renderer/WorldRenderer$State:
 net/minecraft/client/audio/SoundManager$SoundSystemStarterThread:
   - error: <init>(Lnet/minecraft/client/audio/SoundManager;Ljava/lang/Object;)V - Method was removed
 
-net/minecraft/tileentity/TileEntityChest$SwitchEnumFacing:
-  - error: Class no longer exists
-
 net/minecraft/network/play/client/C13PacketPlayerAbilities:
   - error: func_180761_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
 
@@ -618,7 +490,6 @@ net/minecraft/network/play/client/C08PacketPlayerBlockPlacement:
 
 net/minecraftforge/fml/common/event/FMLModIdMappingEvent:
   - error: <init>(Ljava/util/Map;Ljava/util/Map;)V - Method was removed
-
 net/minecraft/client/renderer/entity/layers/LayerHeldItemWitch:
   - error: func_177143_a(Lnet/minecraft/entity/monster/EntityWitch;FFFFFFF)V - Method was removed
 
@@ -627,7 +498,6 @@ net/minecraft/client/renderer/entity/layers/LayerHeldBlock:
 
 net/minecraft/client/renderer/entity/layers/LayerEnderDragonEyes:
   - error: func_177210_a(Lnet/minecraft/entity/boss/EntityDragon;FFFFFFF)V - Method was removed
-
 net/minecraft/client/renderer/entity/RenderWither:
   - error: func_180591_a(Lnet/minecraft/entity/boss/EntityWither;DDDFF)V - Method was removed
   - error: func_180592_a(Lnet/minecraft/entity/boss/EntityWither;F)V - Method was removed
@@ -659,6 +529,7 @@ net/minecraft/client/renderer/WorldRenderer:
   - error: field_179008_i:I - Field was removed
   - error: field_179012_p:I - Field was removed
   - error: field_179003_o:I - Field was removed
+
   - error: field_179009_s:I - Field was removed
   - error: field_178995_f:D - Field was removed
   - error: field_178996_g:I - Field was removed
@@ -690,32 +561,11 @@ net/minecraft/block/state/pattern/BlockStateHelper:
 net/minecraft/client/util/QuadComparator:
   - error: Class no longer exists
 
-net/minecraft/realms/Tezzelator:
-  - error: color(FFF)V - Method was removed
-  - error: vertexUV(DDDDD)V - Method was removed
-  - error: begin(I)V - Method was removed
-  - error: vertex(DDD)V - Method was removed
-  - error: begin()V - Method was removed
-  - error: tex2(I)V - Method was removed
-  - error: color(IIII)V - Method was removed
-  - error: color(I)V - Method was removed
-  - error: tex(DD)V - Method was removed
-  - error: color(BBB)V - Method was removed
-  - error: color(III)V - Method was removed
-  - error: end()I - Method was removed
-  - error: color(II)V - Method was removed
-  - error: sortQuads(FFF)Lnet/minecraft/client/renderer/WorldRenderer$State; - Method was removed
-  - error: restoreState(Lnet/minecraft/client/renderer/WorldRenderer$State;)V - Method was removed
-  - error: noColor()V - Method was removed
-
 net/minecraft/network/play/server/S20PacketEntityProperties:
   - error: func_180754_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
 net/minecraft/block/state/BlockState$StateImplementation:
   - error: <init>(Lnet/minecraft/block/Block;Lcom/google/common/collect/ImmutableMap;Ljava/lang/Object;)V - Method was removed
-
-net/minecraft/client/renderer/entity/layers/LayerArmorBase$SwitchArmorMaterial:
-  - error: Class no longer exists
 
 net/minecraft/network/handshake/client/C00Handshake:
   - error: func_180770_a(Lnet/minecraft/network/handshake/INetHandlerHandshakeServer;)V - Method was removed
@@ -728,12 +578,6 @@ net/minecraft/client/renderer/block/model/ModelBlock:
 
 net/minecraft/network/play/server/S31PacketWindowProperty:
   - error: func_180733_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
-
-net/minecraft/block/BlockRailBase$SwitchEnumRailDirection:
-  - error: Class no longer exists
-
-net/minecraftforge/fml/common/IASMHook:
-  - error: Class no longer exists
 
 net/minecraft/client/renderer/tileentity/TileEntitySkullRenderer:
   - error: func_180542_a(Lnet/minecraft/tileentity/TileEntitySkull;DDDFI)V - Method was removed
@@ -750,12 +594,8 @@ net/minecraft/world/gen/feature/WorldGenHugeTrees:
 net/minecraft/item/crafting/ShapedRecipes:
   - error: func_92100_c()Lnet/minecraft/item/crafting/ShapedRecipes; - Method was removed
 
-net/minecraft/block/BlockTripWireHook$SwitchEnumFacing:
-  - error: Class no longer exists
-
 net/minecraft/world/gen/feature/WorldGenTrees:
   - error: <init>(ZIIIZ)V - Method was removed
-
   - error: func_175923_a(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;I)V - Method was removed
 
 net/minecraft/client/renderer/entity/RenderItem:
@@ -801,11 +641,8 @@ net/minecraftforge/client/model/ItemLayerModel$BakedModel:
   - error: <init>(Lcom/google/common/collect/ImmutableList;Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;Lnet/minecraft/client/renderer/vertex/VertexFormat;Lcom/google/common/collect/ImmutableMap;)V - Method was removed
   - error: handlePerspective(Lnet/minecraft/client/renderer/block/model/ItemCameraTransforms$TransformType;)Lorg/apache/commons/lang3/tuple/Pair; - Method was removed
   - error: transforms:Lcom/google/common/collect/ImmutableMap; - Field was removed
-
+    #DONE?
 net/minecraft/client/resources/FallbackResourceManager$ImputStreamLeakedResourceLogger:
-  - error: Class no longer exists
-
-net/minecraft/block/BlockSilverfish$SwitchEnumType:
   - error: Class no longer exists
 
 net/minecraft/client/renderer/entity/RenderTntMinecart:
@@ -813,7 +650,7 @@ net/minecraft/client/renderer/entity/RenderTntMinecart:
 
 net/minecraftforge/client/model/ModelLoader$WeightedPartWrapper:
   - error: Class no longer exists
-
+    #DONE
 net/minecraft/world/gen/feature/WorldGenBigTree:
   - error: func_180712_a(Lnet/minecraft/util/BlockPos;FLnet/minecraft/block/Block;)V - Method was removed
 
@@ -822,9 +659,6 @@ net/minecraft/client/renderer/block/model/ItemCameraTransforms:
 
 net/minecraft/client/renderer/chunk/RenderChunk:
   - error: func_178583_l()Z - Method was removed
-
-net/minecraft/block/BlockLadder$SwitchEnumFacing:
-  - error: Class no longer exists
 
 net/minecraft/client/gui/GuiPlayerTabOverlay$PlayerComparator:
   - error: func_178952_a(Lnet/minecraft/client/network/NetworkPlayerInfo;Lnet/minecraft/client/network/NetworkPlayerInfo;)I - Method was removed
@@ -853,18 +687,10 @@ net/minecraft/client/renderer/block/model/BlockPartFace$Deserializer:
 net/minecraft/client/renderer/entity/RenderEndermite:
   - error: func_177107_a(Lnet/minecraft/entity/monster/EntityEndermite;)F - Method was removed
   - error: func_177106_b(Lnet/minecraft/entity/monster/EntityEndermite;)Lnet/minecraft/util/ResourceLocation; - Method was removed
-
-net/minecraftforge/fml/relauncher/ReflectionHelper$UnableToFindFieldException:
-  - error: fieldNameList:[Ljava/lang/String; - Field was removed
-
-net/minecraft/client/renderer/WorldVertexBufferUploader$SwitchEnumUsage:
-  - error: Class no longer exists
-
   - error: $VALUES$:[Lnet/minecraft/util/EnumFacing$AxisDirection; - Field was removed
 
 net/minecraft/network/play/server/S0FPacketSpawnMob:
   - error: func_180721_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
-
 net/minecraft/network/play/server/S2CPacketSpawnGlobalEntity:
   - error: func_180720_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
@@ -883,6 +709,7 @@ net/minecraft/network/play/server/S2APacketParticles:
 net/minecraft/network/play/client/C01PacketChatMessage:
   - error: func_180757_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
 
+net/minecraft/block/BlockChest:
   - error: field_149955_b:Ljava/util/Random; - Field was removed
 
 net/minecraft/client/renderer/block/model/BlockPartRotation:
@@ -900,24 +727,12 @@ net/minecraft/network/play/client/C16PacketClientStatus:
 net/minecraft/client/renderer/Tessellator:
   - error: func_78381_a()I - Method was removed
 
-net/minecraft/client/renderer/ItemRenderer$SwitchEnumAction:
-  - error: Class no longer exists
-
 net/minecraft/entity/passive/EntityRabbit:
   - error: func_175526_b(Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/passive/EntityRabbit; - Method was removed
 
 net/minecraftforge/client/model/ModelLoader$FlexibleWeightedBakedModel:
   - error: parent:Lnet/minecraft/client/resources/model/WeightedBakedModel; - Field was removed
-
-net/minecraft/server/dedicated/DedicatedServer:
-  - error: func_180508_aN()Lnet/minecraft/server/dedicated/DedicatedPlayerList; - Method was removed
-
-net/minecraftforge/fluids/FluidStack:
-  - error: <init>(IILnet/minecraft/nbt/NBTTagCompound;)V - Method was removed
-  - error: <init>(II)V - Method was removed
-  - error: getFluidID()I - Method was removed
-  - error: fluid:Lnet/minecraftforge/fluids/Fluid; - Field was removed
-
+    #NOT PLANNED
 net/minecraft/client/renderer/entity/layers/LayerMooshroomMushroom:
   - error: func_177204_a(Lnet/minecraft/entity/passive/EntityMooshroom;FFFFFFF)V - Method was removed
 
@@ -936,7 +751,6 @@ net/minecraftforge/client/model/ItemLayerModel:
   - error: putVertex(Lnet/minecraftforge/client/model/pipeline/UnpackedBakedQuad$Builder;Lnet/minecraft/client/renderer/vertex/VertexFormat;Lnet/minecraftforge/client/model/TRSRTransformation;Lnet/minecraft/util/EnumFacing;FFFFF)V - Method was removed
   - error: buildSideQuad(Lnet/minecraft/client/renderer/vertex/VertexFormat;Lnet/minecraftforge/client/model/TRSRTransformation;Lnet/minecraft/util/EnumFacing;ILnet/minecraft/client/renderer/texture/TextureAtlasSprite;II)Lnet/minecraft/client/renderer/block/model/BakedQuad; - Method was removed
   - error: buildQuad(Lnet/minecraft/client/renderer/vertex/VertexFormat;Lnet/minecraftforge/client/model/TRSRTransformation;Lnet/minecraft/util/EnumFacing;IFFFFFFFFFFFFFFFFFFFF)Lnet/minecraft/client/renderer/block/model/BakedQuad; - Method was removed
-  - error: addSideQuad(Lcom/google/common/collect/ImmutableList$Builder;Ljava/util/BitSet;Lnet/minecraft/client/renderer/vertex/VertexFormat;Lnet/minecraftforge/client/model/TRSRTransformation;Lnet/minecraft/util/EnumFacing;ILnet/minecraft/client/renderer/texture/TextureAtlasSprite;IIII)V - Method was removed
   - error: getQuadsForSprite(ILnet/minecraft/client/renderer/texture/TextureAtlasSprite;Lnet/minecraft/client/renderer/vertex/VertexFormat;Lnet/minecraftforge/client/model/TRSRTransformation;)Lcom/google/common/collect/ImmutableList; - Method was removed
 
 net/minecraftforge/client/model/Attributes:
@@ -945,9 +759,6 @@ net/minecraftforge/client/model/Attributes:
 
 net/minecraft/client/renderer/block/model/BlockPart:
   - error: <init>(Ljavax/vecmath/Vector3f;Ljavax/vecmath/Vector3f;Ljava/util/Map;Lnet/minecraft/client/renderer/block/model/BlockPartRotation;Z)V - Method was removed
-
-net/minecraft/command/IEntitySelector$ArmoredMob:
-  - error: Class no longer exists
 
 net/minecraft/client/renderer/RenderGlobal$SwitchEnumUsage:
   - error: Class no longer exists
@@ -959,9 +770,6 @@ net/minecraft/client/renderer/entity/RenderBoat:
 net/minecraft/tileentity/TileEntityEnderChest:
   - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
 
-net/minecraft/block/BlockPressurePlate$SwitchSensitivity:
-  - error: Class no longer exists
-
 net/minecraft/network/play/client/C0APacketAnimation:
   - error: func_179721_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
 
@@ -969,20 +777,6 @@ net/minecraftforge/client/model/IModelState:
   - error: Class missing interface com/google/common/base/Function
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
   - error: apply(Lcom/google/common/base/Optional;)Lcom/google/common/base/Optional; - Method was made abstract
-
-net/minecraft/client/stream/BroadcastController$SwitchBroadcastState:
-  - error: Class no longer exists
-
-net/minecraft/client/renderer/block/model/BreakingFour$SwitchEnumFacing:
-  - error: Class no longer exists
-
-net/minecraftforge/fml/client/registry/RenderingRegistry$EntityRendererInfo:
-  - error: Class no longer exists
-
-net/minecraftforge/client/model/obj/OBJModel$OBJState:
-  - error: Class missing interface com/google/common/base/Function
-  - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
-  - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
 
 net/minecraft/client/renderer/entity/RenderHorse:
   - error: func_180580_a(Lnet/minecraft/entity/passive/EntityHorse;F)V - Method was removed
@@ -1001,6 +795,7 @@ net/minecraft/client/renderer/entity/RenderLeashKnot:
 net/minecraftforge/client/model/BlockStateLoader$ForgeVariant:
   - error: <init>(Lnet/minecraft/util/ResourceLocation;Lnet/minecraftforge/client/model/IModelState;ZILcom/google/common/collect/ImmutableMap;Lcom/google/common/collect/ImmutableMap;Lcom/google/common/collect/ImmutableMap;)V - Method was removed
   - error: runModelHooks(Lnet/minecraftforge/client/model/IModel;Lcom/google/common/collect/ImmutableMap;Lcom/google/common/collect/ImmutableMap;)Lnet/minecraftforge/client/model/IModel; - Method was removed
+    #TODO?
 
 net/minecraft/client/renderer/entity/RenderRabbit:
   - error: func_177125_a(Lnet/minecraft/entity/passive/EntityRabbit;)Lnet/minecraft/util/ResourceLocation; - Method was removed
@@ -1011,9 +806,6 @@ net/minecraft/block/properties/PropertyBool:
 net/minecraft/client/renderer/entity/layers/LayerSaddle:
   - error: func_177155_a(Lnet/minecraft/entity/passive/EntityPig;FFFFFFF)V - Method was removed
 
-net/minecraft/block/BlockCocoa$SwitchEnumFacing:
-  - error: Class no longer exists
-
 net/minecraft/network/play/server/S25PacketBlockBreakAnim:
   - error: func_180724_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
@@ -1023,30 +815,17 @@ net/minecraft/client/renderer/tileentity/RenderWitherSkull:
 net/minecraft/server/management/UserListOpsEntry:
   - error: <init>(Lcom/mojang/authlib/GameProfile;I)V - Method was removed
 
-net/minecraft/tileentity/TileEntityPiston$SwitchAxis:
-  - error: Class no longer exists
-
 net/minecraft/client/renderer/entity/RenderPigZombie:
   - error: func_177119_a(Lnet/minecraft/entity/monster/EntityPigZombie;)Lnet/minecraft/util/ResourceLocation; - Method was removed
 
-net/minecraft/world/gen/structure/StructureStrongholdPieces$SwitchEnumFacing:
-  - error: Class no longer exists
-
 net/minecraft/network/status/client/C00PacketServerQuery:
   - error: func_180775_a(Lnet/minecraft/network/status/INetHandlerStatusServer;)V - Method was removed
-
-net/minecraft/world/gen/structure/StructureBoundingBox$SwitchEnumFacing:
-  - error: Class no longer exists
-
-net/minecraft/world/gen/structure/StructureVillagePieces$SwitchEnumFacing:
-  - error: Class no longer exists
 
 net/minecraft/client/renderer/block/model/ModelBlockDefinition$Deserializer:
   - error: func_178336_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/ModelBlockDefinition; - Method was removed
 
 net/minecraft/network/play/client/C07PacketPlayerDigging:
   - error: func_180763_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
-
 net/minecraft/tileentity/TileEntityBrewingStand:
   - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
 
@@ -1063,9 +842,6 @@ net/minecraft/entity/passive/EntityRabbit$AIAvoidEntity:
 net/minecraftforge/client/model/IRetexturableModel:
   - error: Class missing interface net/minecraftforge/client/model/IModelPart
 
-net/minecraftforge/classloading/FluidIdTransformer:
-  - error: Class no longer exists
-
 net/minecraft/world/gen/layer/GenLayerEdge$SwitchMode:
   - error: Class no longer exists
 
@@ -1078,12 +854,6 @@ net/minecraft/enchantment/EnchantmentHelper$ModifierLiving:
 net/minecraft/client/gui/GuiIngame:
   - error: func_175182_a(Lnet/minecraft/client/gui/ScaledResolution;)V - Method was removed
 
-net/minecraftforge/client/IItemRenderer$ItemRenderType:
-  - error: Class no longer exists
-
-net/minecraftforge/client/model/IModelCustomData:
-  - error: Class missing interface net/minecraftforge/client/model/IModelPart
-
 net/minecraft/block/BlockStoneSlab$EnumType:
   - error: <init>(Ljava/lang/String;IILjava/lang/String;)V - Method was removed
   - error: <init>(Ljava/lang/String;IILjava/lang/String;Ljava/lang/String;)V - Method was removed
@@ -1093,9 +863,6 @@ net/minecraft/network/play/server/S35PacketUpdateTileEntity:
 
 net/minecraft/client/renderer/tileentity/RenderEnderCrystal:
   - error: func_180554_a(Lnet/minecraft/entity/item/EntityEnderCrystal;)Lnet/minecraft/util/ResourceLocation; - Method was removed
-
-net/minecraft/world/gen/structure/StructureOceanMonumentPieces$SwitchEnumFacing:
-  - error: Class no longer exists
 
 net/minecraft/enchantment/Enchantment:
   - error: func_180304_c()[Ljava/lang/String; - Method was removed
@@ -1155,27 +922,15 @@ net/minecraft/entity/ai/EntityAIAvoidEntity:
   - error: <init>(Lnet/minecraft/entity/EntityCreature;Lcom/google/common/base/Predicate;FDD)V - Method was removed
   - error: field_179509_a:Lcom/google/common/base/Predicate; - Field was lowered in visibility
 
-net/minecraftforge/server/ForgeTimeTracker:
-  - error: entityTimings:Ljava/util/Map; - Field was removed
-  - error: entity:Ljava/lang/ref/WeakReference; - Field was removed
-
 net/minecraft/network/play/server/S47PacketPlayerListHeaderFooter:
   - error: func_179699_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
-
-net/minecraftforge/client/model/b3d/B3DLoader$Wrapper:
-  - error: getDefaultState()Lnet/minecraftforge/client/model/b3d/B3DLoader$B3DState; - Method was removed
-
-net/minecraftforge/client/model/ModelFluid$BakedFluid:
-  - error: <init>(Lnet/minecraftforge/client/model/TRSRTransformation;Lnet/minecraft/client/renderer/vertex/VertexFormat;ILnet/minecraft/client/renderer/texture/TextureAtlasSprite;Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;Z)V - Method was removed
-  - error: <init>(Lnet/minecraftforge/client/model/TRSRTransformation;Lnet/minecraft/client/renderer/vertex/VertexFormat;ILnet/minecraft/client/renderer/texture/TextureAtlasSprite;Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;ZLcom/google/common/base/Optional;)V - Method was removed
-  - error: state:Lcom/google/common/base/Optional; - Field was removed
 
 net/minecraftforge/client/model/MapModelState:
   - error: Class missing interface com/google/common/base/Function
   - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
   - error: getState(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/IModelState; - Method was removed
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
-
+    #DONE
 net/minecraft/network/NetworkManager:
   - error: func_150726_a(Ljava/net/InetAddress;I)Lnet/minecraft/network/NetworkManager; - Method was removed
 
@@ -1194,17 +949,6 @@ net/minecraft/client/renderer/entity/RenderSilverfish:
 net/minecraft/network/play/server/S19PacketEntityHeadLook:
   - error: func_180745_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
-net/minecraftforge/client/model/obj/OBJModel:
-  - error: Class missing interface net/minecraftforge/client/model/IModelPart
-  - error: getDefaultState()Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
-  - error: GSON:Lcom/google/gson/Gson; - Field was removed
-
-net/minecraft/block/BlockQuartz$SwitchAxis:
-  - error: Class no longer exists
-
-net/minecraft/client/gui/GuiPageButtonList:
-  - error: func_178070_d(I)Lnet/minecraft/client/gui/GuiPageButtonList$GuiEntry; - Method was removed
-
 net/minecraft/client/shader/ShaderUniform:
   - error: func_148088_a(Ljavax/vecmath/Matrix4f;)V - Method was removed
 
@@ -1212,6 +956,7 @@ net/minecraft/block/BlockVine:
   - error: func_176270_b(Lnet/minecraft/util/EnumFacing;)I - Method was removed
   - error: field_176271_T:I - Field was removed
   - error: field_176272_Q:I - Field was removed
+
   - error: field_176275_S:I - Field was removed
   - error: field_176276_R:I - Field was removed
 
@@ -1231,9 +976,6 @@ net/minecraftforge/fluids/Fluid:
   - error: stillIcon:Lnet/minecraft/client/renderer/texture/TextureAtlasSprite; - Field was removed
   - error: flowingIcon:Lnet/minecraft/client/renderer/texture/TextureAtlasSprite; - Field was removed
 
-net/minecraft/item/ItemHoe$SwitchDirtType:
-  - error: Class no longer exists
-
 net/minecraft/client/renderer/RenderGlobal:
   - error: func_174962_a(Lnet/minecraft/entity/Entity;D)Ljavax/vecmath/Vector3f; - Method was removed
   - error: func_147590_a(Lnet/minecraft/util/AxisAlignedBB;I)V - Method was removed
@@ -1249,9 +991,6 @@ net/minecraft/item/ItemBlock:
   - error: setTileEntityNBT(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/player/EntityPlayer;)Z - Method was removed
   - error: func_179224_a(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;Lnet/minecraft/item/ItemStack;)Z - Method was removed
 
-net/minecraft/block/BlockLever$SwitchEnumFacing:
-  - error: Class no longer exists
-
 net/minecraft/world/gen/feature/WorldGenerator:
   - error: func_175906_a(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;Lnet/minecraft/block/Block;)V - Method was removed
   - error: func_175905_a(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;Lnet/minecraft/block/Block;I)V - Method was removed
@@ -1266,17 +1005,12 @@ net/minecraft/client/renderer/entity/RenderBat:
   - error: func_180566_a(Lnet/minecraft/entity/passive/EntityBat;)Lnet/minecraft/util/ResourceLocation; - Method was removed
   - error: func_180567_a(Lnet/minecraft/entity/passive/EntityBat;F)V - Method was removed
 
-net/minecraft/client/stream/ChatController$SwitchEnumEmoticonMode:
-  - error: Class no longer exists
-
-net/minecraftforge/client/model/ModelFluid:
-  - error: Class missing interface net/minecraftforge/client/model/IModelPart
-
 net/minecraft/network/play/server/S41PacketServerDifficulty:
   - error: func_179829_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
 net/minecraft/client/renderer/entity/RenderXPOrb:
   - error: func_180555_a(Lnet/minecraft/entity/item/EntityXPOrb;)Lnet/minecraft/util/ResourceLocation; - Method was removed
+
 net/minecraft/client/renderer/GlStateManager:
   - error: field_179169_u:Lnet/minecraft/client/renderer/GlStateManager$Viewport; - Field was removed
 
@@ -1286,19 +1020,14 @@ net/minecraft/client/renderer/entity/RenderWolf:
 
 net/minecraft/client/renderer/entity/RenderFish:
   - error: func_180558_a(Lnet/minecraft/entity/projectile/EntityFishHook;DDDFF)V - Method was removed
+
 net/minecraft/client/renderer/entity/layers/LayerIronGolemFlower:
   - error: func_177153_a(Lnet/minecraft/entity/monster/EntityIronGolem;FFFFFFF)V - Method was removed
 
 net/minecraft/client/renderer/tileentity/TileEntityEnchantmentTableRenderer:
   - error: func_180537_a(Lnet/minecraft/tileentity/TileEntityEnchantmentTable;DDDFI)V - Method was removed
 
-net/minecraft/client/particle/EntityFireworkOverlayFX:
-  - error: Class no longer exists
-
 net/minecraft/client/renderer/vertex/VertexFormat$SwitchEnumUsage:
-  - error: Class no longer exists
-
-net/minecraft/client/renderer/GlStateManager$SwitchTexGen:
   - error: Class no longer exists
 
 net/minecraft/network/play/server/S26PacketMapChunkBulk:
@@ -1313,10 +1042,6 @@ net/minecraft/client/shader/Shader:
 
 net/minecraft/network/play/server/S05PacketSpawnPosition:
   - error: func_180752_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
-
-net/minecraft/block/BlockPistonBase$SwitchEnumFacing:
-  - error: Class no longer exists
-
 net/minecraft/client/renderer/GlStateManager$Viewport:
   - error: Class no longer exists
 
@@ -1326,9 +1051,6 @@ net/minecraft/block/BlockStoneSlabNew$EnumType:
 net/minecraftforge/fml/common/Mod:
   - error: bukkitPlugin()Ljava/lang/String; - Method was removed
   - error: asmHookClass()Ljava/lang/String; - Method was removed
-
-net/minecraft/block/BlockFlowerPot$SwitchEnumType:
-  - error: Class no longer exists
 
 net/minecraft/network/login/client/C00PacketLoginStart:
   - error: func_180773_a(Lnet/minecraft/network/login/INetHandlerLoginServer;)V - Method was removed
@@ -1350,8 +1072,11 @@ net/minecraft/server/management/PlayerProfileCache$ProfileEntry:
   - error: <init>(Lnet/minecraft/server/management/PlayerProfileCache;Lcom/mojang/authlib/GameProfile;Ljava/util/Date;Ljava/lang/Object;)V - Method was removed
   - error: this$0:Lnet/minecraft/server/management/PlayerProfileCache; - Field was removed
 
-net/minecraftforge/fml/relauncher/ReflectionHelper$UnableToAccessFieldException:
-  - error: fieldNameList:[Ljava/lang/String; - Field was removed
+net/minecraft/entity/passive/EntityRabbit$RabbitTypeData:
+  - error: Class no longer exists
+
+net/minecraftforge/fml/client/GuiScrollingList:
+  - error: Class no longer exists
 
 net/minecraft/network/play/server/S24PacketBlockAction:
   - error: func_180726_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
@@ -1373,9 +1098,6 @@ net/minecraft/client/renderer/entity/RenderLiving:
 
 net/minecraft/block/BlockHugeMushroom:
   - error: <init>(Lnet/minecraft/block/material/Material;Lnet/minecraft/block/Block;)V - Method was removed
-
-net/minecraft/util/ChatComponentScore:
-  - error: func_179996_i()Lnet/minecraft/util/ChatComponentScore; - Method was removed
 
 net/minecraft/client/shader/ShaderDefault:
   - error: func_148088_a(Ljavax/vecmath/Matrix4f;)V - Method was removed
@@ -1401,12 +1123,6 @@ net/minecraft/client/renderer/entity/layers/LayerEndermanEyes:
 
 net/minecraft/tileentity/TileEntityDaylightDetector:
   - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
-
-net/minecraftforge/fml/relauncher/ReflectionHelper$UnableToFindClassException:
-  - error: classNames:[Ljava/lang/String; - Field was removed
-
-net/minecraft/entity/monster/EntityGuardian$GuardianTargetSelector:
-  - error: func_179915_a(Lnet/minecraft/entity/EntityLivingBase;)Z - Method was removed
 
 net/minecraft/client/renderer/entity/RenderCow:
   - error: func_180572_a(Lnet/minecraft/entity/passive/EntityCow;)Lnet/minecraft/util/ResourceLocation; - Method was removed
@@ -1443,14 +1159,8 @@ net/minecraft/client/renderer/entity/RenderPlayer:
 net/minecraftforge/common/BiomeManager:
   - error: isModded:Z - Field was removed
 
-net/minecraft/block/BlockPistonExtension$SwitchEnumFacing:
-  - error: Class no longer exists
-
 net/minecraft/server/management/ServerConfigurationManager:
   - error: func_180602_f()Ljava/lang/String; - Method was removed
-
-net/minecraft/client/settings/GameSettings$SwitchOptions:
-  - error: Class no longer exists
 
 net/minecraft/item/crafting/RecipesBanners$RecipeAddPattern:
   - error: <init>(Ljava/lang/Object;)V - Method was removed
@@ -1474,12 +1184,6 @@ net/minecraft/network/play/server/S45PacketTitle:
 net/minecraft/entity/passive/EntityTameable:
   - error: func_180492_cm()Lnet/minecraft/entity/EntityLivingBase; - Method was removed
 
-net/minecraftforge/fml/common/event/FMLModIdMappingEvent$ModRemapping:
-  - error: <init>(Lnet/minecraftforge/fml/common/event/FMLModIdMappingEvent;IILjava/lang/String;Lnet/minecraftforge/fml/common/event/FMLModIdMappingEvent$RemapTarget;)V - Method was removed
-
-net/minecraft/block/BlockWallSign$SwitchEnumFacing:
-  - error: Class no longer exists
-
 net/minecraft/client/renderer/chunk/VisGraph$SwitchEnumFacing:
   - error: Class no longer exists
 
@@ -1495,14 +1199,8 @@ net/minecraft/world/WorldServer$ServerBlockEventList:
 net/minecraft/client/renderer/entity/RenderSlime:
   - error: func_177124_a(Lnet/minecraft/entity/monster/EntitySlime;DDDFF)V - Method was removed
 
-net/minecraft/network/NettyCompressionEncoder:
-  - error: func_179298_a(Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V - Method was removed
-
 net/minecraft/client/renderer/entity/layers/LayerWolfCollar:
   - error: func_177145_a(Lnet/minecraft/entity/passive/EntityWolf;FFFFFFF)V - Method was removed
-
-net/minecraft/world/gen/structure/StructureMineshaftPieces$SwitchEnumFacing:
-  - error: Class no longer exists
 
 net/minecraft/command/common/CommandReplaceItem:
   - error: Class no longer exists
@@ -1518,9 +1216,6 @@ net/minecraftforge/common/MinecraftForge:
 
 net/minecraft/client/renderer/block/model/ModelBlockDefinition$Variant$Deserializer:
   - error: func_178425_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/ModelBlockDefinition$Variant; - Method was removed
-
-net/minecraft/client/stream/IngestServerTester$SwitchStatType:
-  - error: Class no longer exists
 
 net/minecraft/entity/monster/EntityEnderman$AIPlaceBlock:
   - error: this$0:Lnet/minecraft/entity/monster/EntityEnderman; - Field was removed
@@ -1538,9 +1233,6 @@ net/minecraftforge/client/GuiIngameForge:
 net/minecraft/network/play/client/C0DPacketCloseWindow:
   - error: func_180759_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
 
-net/minecraft/world/gen/structure/StructureNetherBridgePieces$SwitchEnumFacing:
-  - error: Class no longer exists
-
 net/minecraft/network/play/server/S42PacketCombatEvent:
   - error: func_179771_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
 
@@ -1549,9 +1241,6 @@ net/minecraft/util/Cartesian$GetList:
 
 net/minecraft/client/renderer/block/statemap/StateMap:
   - error: <init>(Lnet/minecraft/block/properties/IProperty;Ljava/lang/String;Ljava/util/List;Ljava/lang/Object;)V - Method was removed
-
-net/minecraft/entity/item/EntityMinecart$SwitchEnumMinecartType:
-  - error: Class no longer exists
 
 net/minecraft/util/BlockPos$MutableBlockPos:
   - error: field_177996_d:I - Field was lowered in visibility
@@ -1563,9 +1252,6 @@ net/minecraft/client/renderer/entity/RenderIronGolem:
 
 net/minecraft/client/renderer/entity/RenderMinecartMobSpawner:
   - error: func_177081_a(Lnet/minecraft/entity/ai/EntityMinecartMobSpawner;FLnet/minecraft/block/state/IBlockState;)V - Method was removed
-
-net/minecraftforge/client/model/obj/OBJModel$Group:
-  - error: applyTransform(Lnet/minecraftforge/client/model/TRSRTransformation;)Ljava/util/LinkedHashSet; - Method was removed
 
 net/minecraft/util/Cartesian$Product$ProductIterator:
   - error: func_179421_a()[Ljava/lang/Object; - Method was removed
@@ -1588,14 +1274,8 @@ net/minecraft/entity/monster/EntitySlime$AISlimeFaceRandom:
 net/minecraft/entity/monster/EntitySlime$AISlimeFloat:
   - error: this$0:Lnet/minecraft/entity/monster/EntitySlime; - Field was removed
 
-net/minecraft/client/gui/stream/GuiStreamUnavailable$SwitchReason:
-  - error: Class no longer exists
-
 net/minecraft/client/settings/GameSettings:
   - error: func_74309_c()Z - Method was removed
-
-net/minecraft/network/play/server/S38PacketPlayerListItem$SwitchAction:
-  - error: Class no longer exists
 
 net/minecraft/client/renderer/entity/RenderPotion:
   - error: func_177085_a(Lnet/minecraft/entity/projectile/EntityPotion;)Lnet/minecraft/item/ItemStack; - Method was removed
@@ -1606,24 +1286,13 @@ net/minecraft/network/play/server/S23PacketBlockChange:
 net/minecraft/client/renderer/entity/layers/LayerDeadmau5Head:
   - error: func_177207_a(Lnet/minecraft/client/entity/AbstractClientPlayer;FFFFFFF)V - Method was removed
 
-net/minecraft/util/MessageSerializer:
-  - error: encode(Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;Lio/netty/buffer/ByteBuf;)V - Method was removed
-
 net/minecraft/client/renderer/vertex/VertexFormatElement:
   - error: func_177371_a(I)V - Method was removed
   - error: func_177373_a()I - Method was removed
   - error: field_177376_f:I - Field was removed
 
-net/minecraftforge/client/model/ModelStateComposition:
-  - error: Class missing interface com/google/common/base/Function
-  - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
-  - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
-
 net/minecraft/client/audio/SoundHandler:
   - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
-
-net/minecraft/client/renderer/block/model/ItemModelGenerator$SwitchSpanFacing:
-  - error: Class no longer exists
 
 net/minecraft/client/renderer/entity/RendererLivingEntity:
   - error: func_77033_b(Lnet/minecraft/entity/EntityLivingBase;DDD)V - Method was removed
@@ -1647,9 +1316,6 @@ net/minecraft/block/BlockTorch$SwitchEnumFacing:
 net/minecraft/network/login/server/S00PacketDisconnect:
   - error: func_180772_a(Lnet/minecraft/network/login/INetHandlerLoginClient;)V - Method was removed
 
-net/minecraft/block/BlockRailPowered$SwitchEnumRailDirection:
-  - error: Class no longer exists
-
 net/minecraft/client/gui/GuiOverlayDebug$SwitchEnumFacing:
   - error: Class no longer exists
 
@@ -1658,9 +1324,6 @@ net/minecraft/network/play/server/S28PacketEffect:
 
 net/minecraft/block/properties/PropertyEnum:
   - error: func_177705_a(Ljava/lang/Enum;)Ljava/lang/String; - Method was removed
-
-net/minecraftforge/fml/relauncher/ReflectionHelper$UnableToFindMethodException:
-  - error: methodNames:[Ljava/lang/String; - Field was removed
 
 net/minecraft/client/renderer/entity/ArmorStandRenderer:
   - error: func_177100_a()Lnet/minecraft/client/model/ModelArmorStand; - Method was removed

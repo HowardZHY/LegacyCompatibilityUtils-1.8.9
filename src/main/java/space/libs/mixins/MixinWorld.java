@@ -7,10 +7,17 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import space.libs.core.CompatLibCoreConfig;
 
 @SuppressWarnings("all")
 @Mixin(World.class)
 public abstract class MixinWorld {
+
+    @Shadow
+    private int ambientTickCountdown;
 
     @Shadow
     public abstract Chunk getChunkFromBlockCoords(net.minecraft.util.BlockPos pos);
@@ -40,5 +47,12 @@ public abstract class MixinWorld {
 
     public IBlockState func_180495_p(net.minecraft.util.math.BlockPos pos) {
         return this.getBlockState(pos);
+    }
+
+    @Inject(method = "playMoodSoundAndCheckLight", at = @At("HEAD"), cancellable = true)
+    protected void playMoodSoundAndCheckLight(int x, int y, Chunk chunkIn, CallbackInfo ci) {
+        if (CompatLibCoreConfig.NSM) {
+            this.ambientTickCountdown = -1;
+        }
     }
 }
