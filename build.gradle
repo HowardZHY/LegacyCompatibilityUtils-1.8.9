@@ -73,15 +73,27 @@ repositories {
     mavenCentral()
 }
 
-def cclUrl = new URL('https://maven.covers1624.net/repository/maven-hosted/codechicken/CodeChickenLib/1.8-1.1.2.139/CodeChickenLib-1.8-1.1.2.139-dev.jar')
-def neiUrl = new URL('https://maven.covers1624.net/repository/maven-hosted/codechicken/NotEnoughItems/1.8-1.0.5.104/NotEnoughItems-1.8-1.0.5.104-dev.jar')
+task NEI {
+    def cclFile = new File('libs/CodeChickenLib-1.8-1.1.2.139-dev.jar')
+    def neiFile = new File('libs/NotEnoughItems-1.8-1.0.5.104-dev.jar')
+    if (cclFile.exists() && neiFile.exists()) return
+    def cclUrl = new URL('https://maven.covers1624.net/repository/maven-hosted/codechicken/CodeChickenLib/1.8-1.1.2.139/CodeChickenLib-1.8-1.1.2.139-dev.jar')
+    def neiUrl = new URL('https://maven.covers1624.net/repository/maven-hosted/codechicken/NotEnoughItems/1.8-1.0.5.104/NotEnoughItems-1.8-1.0.5.104-dev.jar')
+    download(cclUrl, cclFile)
+    download(neiUrl, neiFile)
+}
+
 task LiteLoader {
-    def jarUrl = new URL('https://jenkins.liteloader.com/view/1.8.9/job/LiteLoader%201.8.9/lastSuccessfulBuild/artifact/build/libs/liteloader-1.8.9-SNAPSHOT.jar')
     def jarFile = new File('libs/liteloader-1.8.9-SNAPSHOT.jar')
     if (jarFile.exists()) return
+    def jarUrl = new URL('https://jenkins.liteloader.com/view/1.8.9/job/LiteLoader%201.8.9/lastSuccessfulBuild/artifact/build/libs/liteloader-1.8.9-SNAPSHOT.jar')
+    download(jarUrl, jarFile)
+}
+
+static void download(URL url, File file) {
     try {
-        jarUrl.withInputStream { inputStream ->
-            jarFile.withOutputStream { outputStream ->
+        url.withInputStream { inputStream ->
+            file.withOutputStream { outputStream ->
                 inputStream.eachByte(1024) { buffer, bytesRead ->
                     outputStream.write(buffer, 0, bytesRead)
                 }

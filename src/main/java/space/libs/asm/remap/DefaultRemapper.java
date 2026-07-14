@@ -20,9 +20,11 @@ public class DefaultRemapper extends RemapperBase implements IClassNameTransform
 
     public static String LEGACY_MAPPINGS = "legacydeobf.srg";
 
+    public static final DefaultRemapper INSTANCE = new DefaultRemapper();
+
     public final LaunchClassLoader classLoader;
 
-    public DefaultRemapper() {
+    private DefaultRemapper() {
         this(DEFAULT_MAPPINGS, false);
     }
 
