@@ -12,7 +12,6 @@ package space.libs.asm.remap;
 import com.google.common.base.*;
 import com.google.common.collect.*;
 import com.google.common.io.*;
-import net.minecraftforge.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
 import net.minecraftforge.fml.common.patcher.ClassPatchManager;
 import org.objectweb.asm.ClassReader;
 
@@ -21,8 +20,8 @@ import java.util.*;
 @SuppressWarnings("UnstableApiUsage")
 public class CustomRemapper extends DefaultRemapper {
 
-    public CustomRemapper(String name) {
-        super(name, true);
+    public CustomRemapper(String name, int id) {
+        super(name, id);
     }
 
     @Override
@@ -85,21 +84,23 @@ public class CustomRemapper extends DefaultRemapper {
         rawMethodMaps.get(cl).put(oldName+sig, newName);
     }
 
+    @Override
     public String getRealName(String name) {
         if (Strings.isNullOrEmpty(name)) {
             return name;
         }
         if (name.contains("/")) {
-            return name; // Not mapped by Forge
+            return name; // Not mapped
         }
         String mappedName = this.map(name);
-        String realName = FMLDeobfuscatingRemapper.INSTANCE.unmap(mappedName);
-        if (DEBUG_REMAPPING && (!name.equals(realName))) {
+        String realName = this.FMLRemapper.unmap(mappedName);
+        if (DEBUG_CUSTOM_REMAPPING && (!name.equals(realName))) {
             LOGGER.info("Get " + name + "'s unmapped name " + realName + " from " + mappedName);
         }
         return realName;
     }
 
+    @Override
     public String getLegacyName(String name) {
         if (Strings.isNullOrEmpty(name)) {
             return name;
@@ -107,8 +108,8 @@ public class CustomRemapper extends DefaultRemapper {
         if (name.contains("/")) {
             return name; // Not mapped
         }
-        String mappedName = FMLDeobfuscatingRemapper.INSTANCE.map(name);
-        return this.unmap(mappedName);
+        String mapped = this.FMLRemapper.map(name);
+        return this.unmap(mapped);
     }
 
     @Override
@@ -133,10 +134,5 @@ public class CustomRemapper extends DefaultRemapper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @SuppressWarnings("unused")
-    public Set<String> getObfedClasses() {
-        return ImmutableSet.copyOf(this.classesBiMap.keySet());
     }
 }

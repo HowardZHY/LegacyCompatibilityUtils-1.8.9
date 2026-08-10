@@ -46,7 +46,7 @@ public class ReplaceTransformer implements IClassTransformer {
         if (name == null || bytes == null) {
             return bytes;
         }
-        if (ClassNameList.Contains(name) || ClassNameList.StartsWith(name)) {
+        if (ClassNameList.ShouldNotTransform(name)) {
             return bytes;
         }
         boolean found = containsAnyPattern(bytes, PACKAGE_PREFIXES_RAW);

@@ -24,9 +24,9 @@ public class CustomRemappingAdapter extends RemappingClassAdapter {
             DefaultRemapper instance = INSTANCES[id];
             if (instance == null) {
                 if (id > 9) {
-                    instance = new CustomRemapper(name);
+                    instance = new CustomRemapper(name, id);
                 } else {
-                    instance = new DefaultRemapper(name, false);
+                    instance = new DefaultRemapper(name, id);
                 }
                 INSTANCES[id] = instance;
             }
@@ -35,17 +35,17 @@ public class CustomRemappingAdapter extends RemappingClassAdapter {
     }
 
     public static CustomRemappingAdapter Default(ClassVisitor cv) {
-        return new CustomRemappingAdapter(cv, DefaultRemapper.INSTANCE, 1);
+        return new CustomRemappingAdapter(cv, DefaultRemapper.INSTANCE);
     }
 
     public static CustomRemappingAdapter Legacy(ClassVisitor cv) {
-        return new CustomRemappingAdapter(cv, Remapper(DefaultRemapper.LEGACY_MAPPINGS, 10), 10);
+        return new CustomRemappingAdapter(cv, Remapper(DefaultRemapper.LEGACY_MAPPINGS, 10));
     }
 
-    public CustomRemappingAdapter(ClassVisitor cv, DefaultRemapper instance, int id) {
+    public CustomRemappingAdapter(ClassVisitor cv, DefaultRemapper instance) {
         super(cv, instance);
+        this.id = instance.id;
         INSTANCES[id] = instance;
-        this.id = id;
         this.legacy = id > 9;
     }
 

@@ -13,43 +13,40 @@ import com.google.common.base.*;
 import com.google.common.collect.*;
 import com.google.common.io.*;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.*;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.commons.Remapper;
 import org.objectweb.asm.tree.*;
-import space.libs.core.CompatLibDebug;
 
 import java.io.*;
 import java.net.URL;
 import java.util.*;
 
 @SuppressWarnings({"UnstableApiUsage", "CommentedOutCode"})
-public abstract class RemapperBase extends Remapper {
+public abstract class RemapperBase extends Remapper implements IRemapperDebug {
 
-    public static final Logger LOGGER = LogManager.getLogger();
-
-    public static boolean DEBUG_REMAPPING = CompatLibDebug.DEBUG_REMAP;
-
-    public RemapperBase(final String file, final boolean deobfuscating) {
+    public RemapperBase(final String file, final int id) {
         this.mappings = Resources.getResource(file);
-        this.legacy = deobfuscating;
+        this.id = id;
+        this.legacy = (id > 9);
         this.fieldRenamesMap = Maps.newHashMap();
         this.methodRenamesMap = Maps.newHashMap();
         this.fieldDescriptions = Maps.newHashMap();
         this.rawFieldMaps = Maps.newHashMap();
         this.rawMethodMaps = Maps.newHashMap();
+        this.packagesIn = ImmutableBiMap.builder();
         this.classesIn = ImmutableBiMap.builder();
         this.fieldsIn = ImmutableTable.builder();
         this.methodsIn = ImmutableTable.builder();
         this.negativeFields = Sets.newHashSet();
         this.negativeMethods = Sets.newHashSet();
         this.setupClasses();
+        this.packagesBiMap = packagesIn.build();
         this.classesBiMap = classesIn.build();
         this.reverseClassMap = classesBiMap.inverse();
         this.setupMembers();
         this.rawFields = fieldsIn.build();
         this.rawMethods = methodsIn.build();
-        if (deobfuscating) {
+        if (this.legacy) {
             this.fieldsMap = Maps.newHashMapWithExpectedSize(this.rawFieldMaps.size());
             this.methodsMap = Maps.newHashMapWithExpectedSize(this.rawMethodMaps.size());
         } else {
@@ -59,11 +56,14 @@ public abstract class RemapperBase extends Remapper {
     }
 
     protected final URL mappings;
-    public final Boolean legacy;
+    public final int id;
+    public final boolean legacy;
 
+    public final ImmutableBiMap<String, String> packagesBiMap;
     public final ImmutableBiMap<String, String> classesBiMap;
     public final ImmutableBiMap<String, String> reverseClassMap;
 
+    protected final ImmutableBiMap.Builder<String, String> packagesIn;
     protected final ImmutableBiMap.Builder<String, String> classesIn;
     protected final ImmutableTable.Builder<String, String, String> fieldsIn;
     protected final ImmutableTable.Builder<String, String, String> methodsIn;
@@ -134,7 +134,7 @@ public abstract class RemapperBase extends Remapper {
             return result;
         }
         if (!this.negativeFields.contains(owner)) {
-            loadSuperMaps(owner);
+            this.loadSuperMaps(owner);
             if (!this.fieldsMap.containsKey(owner)) {
                 this.negativeFields.add(owner);
             }
@@ -151,7 +151,7 @@ public abstract class RemapperBase extends Remapper {
             return result;
         }
         if (!this.negativeMethods.contains(owner)) {
-            loadSuperMaps(owner);
+            this.loadSuperMaps(owner);
             if (!this.methodsMap.containsKey(owner)) {
                 this.negativeMethods.add(owner);
             }
@@ -160,6 +160,18 @@ public abstract class RemapperBase extends Remapper {
             }*/
         }
         return this.methodsMap.get(owner);
+    }
+
+    @SuppressWarnings("unused")
+    public String mapPackageName(String name) {
+        if (this.noPackages()) {
+            return name;
+        }
+        String mapped = this.packagesBiMap.get(name);
+        if (mapped != null) {
+            return mapped;
+        }
+        return name;
     }
 
     @Override
@@ -255,8 +267,19 @@ public abstract class RemapperBase extends Remapper {
         return fType;
     }
 
+    /**
+     * @implNote Legacy Deobf only
+     */
+    public String getRealName(String name) {
+        return name;
+    }
+
+    public String getLegacyName(String name) {
+        return name;
+    }
+
     public void loadSuperMaps(String name) {
-        byte[] bytes = this.getBytes(name);
+        byte[] bytes = this.getBytesForSuperMap(name);
         if (bytes != null) {
             ClassReader reader = new ClassReader(bytes);
             this.mergeSuperMaps(name, reader.getSuperName(), reader.getInterfaces());
@@ -295,11 +318,13 @@ public abstract class RemapperBase extends Remapper {
             }
         }
         if (this.legacy) {
-            if (rawFieldMaps.containsKey(name)) {
-                fields.putAll(rawFieldMaps.get(name));
+            value = this.rawFieldMaps.get(name);
+            if (value != null) {
+                fields.putAll(value);
             }
-            if (rawMethodMaps.containsKey(name)) {
-                methods.putAll(rawMethodMaps.get(name));
+            value = this.rawMethodMaps.get(name);
+            if (value != null) {
+                methods.putAll(value);
             }
         } else {
             fields.putAll(this.rawFields.row(name));
@@ -323,6 +348,14 @@ public abstract class RemapperBase extends Remapper {
         return bytes;
     }
 
+    protected byte[] getBytesForSuperMap(String name) {
+        return this.getBytes(name);
+    }
+
+    public boolean noPackages() {
+        return this.packagesBiMap == null || this.packagesBiMap.isEmpty();
+    }
+
     public boolean noClasses() {
         return this.classesBiMap == null || this.classesBiMap.isEmpty();
     }
@@ -338,6 +371,11 @@ public abstract class RemapperBase extends Remapper {
     @SuppressWarnings("unused")
     public boolean isRemappedClass(String className) {
         return !map(className).equals(className);
+    }
+
+    @SuppressWarnings("unused")
+    public Set<String> getObfedClasses() {
+        return ImmutableSet.copyOf(this.classesBiMap.keySet());
     }
 
     public static String[] getSignature(String in) {
@@ -399,7 +437,7 @@ public abstract class RemapperBase extends Remapper {
             if (classes) {
                 switch (type) {
                     case PACKAGE:
-                        //packagesIn.put(parts[1], parts[2]);
+                        packagesIn.put(parts[1], parts[2]);
                         break;
                     case CLASS:
                         classesIn.put(parts[1], parts[2]);

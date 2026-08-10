@@ -11,9 +11,9 @@ package space.libs.asm.remap;
 
 import com.google.common.base.*;
 import com.google.common.collect.Iterables;
-import com.google.common.io.CharSource;
-import com.google.common.io.Resources;
+import com.google.common.io.*;
 import net.minecraft.launchwrapper.*;
+import net.minecraftforge.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
 import space.libs.core.ICoreUtils;
 
 import java.io.IOException;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class DefaultRemapper extends RemapperBase implements IClassNameTransformer {
 
-    public static String DEFAULT_MAPPINGS = "compatlib.srg";
+    public static final String DEFAULT_MAPPINGS = "compatlib.srg";
 
     public static String FIELD_RENAMES = "compatlib_fields.csv";
 
@@ -33,14 +33,17 @@ public class DefaultRemapper extends RemapperBase implements IClassNameTransform
 
     public final LaunchClassLoader classLoader;
 
+    public final FMLDeobfuscatingRemapper FMLRemapper;
+
     private DefaultRemapper() {
-        this(DEFAULT_MAPPINGS, false);
+        this(DEFAULT_MAPPINGS, 1);
         this.setupDefault(FIELD_RENAMES, METHOD_RENAMES);
     }
 
-    public DefaultRemapper(final String file, final boolean deobfuscating) {
-        super(file, deobfuscating);
+    public DefaultRemapper(final String file, final int id) {
+        super(file, id);
         this.classLoader = (LaunchClassLoader) this.getClass().getClassLoader();
+        this.FMLRemapper = FMLDeobfuscatingRemapper.INSTANCE;
     }
 
     protected void setupDefault(final String fields, final String methods) {

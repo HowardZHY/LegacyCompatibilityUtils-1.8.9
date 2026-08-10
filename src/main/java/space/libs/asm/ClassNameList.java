@@ -5,6 +5,10 @@ import java.util.Arrays;
 @SuppressWarnings("SpellCheckingInspection")
 public class ClassNameList {
 
+    public static boolean ShouldNotTransform(String name) {
+        return (StartsWith(name) || Contains(name));
+    }
+
     public static boolean StartsWith(String name) {
         return Arrays.stream(ClassNameList.WHITELIST).anyMatch(name::startsWith);
     }

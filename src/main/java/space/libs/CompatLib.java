@@ -1,8 +1,9 @@
 package space.libs;
 
 import net.minecraftforge.fml.common.*;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 import org.apache.logging.log4j.Logger;
+import space.libs.core.ICoreUtils;
 import space.libs.event.GuiScreenEventHandler;
 import space.libs.util.ModDetector;
 import space.libs.util.mods.SkyboxEventHandler;
@@ -39,5 +40,10 @@ public class CompatLib {
                 FMLCommonHandler.instance().bus().register(new SkyboxEventHandler());
             }
         }
+    }
+
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+        ICoreUtils.EXECUTOR.shutdown();
     }
 }

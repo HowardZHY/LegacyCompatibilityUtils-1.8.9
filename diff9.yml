@@ -883,8 +883,9 @@ net/minecraft/network/play/server/S2APacketParticles:
 net/minecraft/network/play/client/C01PacketChatMessage:
   - error: func_180757_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
 
+net/minecraft/block/BlockChest:
   - error: field_149955_b:Ljava/util/Random; - Field was removed
-
+    #DONE
 net/minecraft/client/renderer/block/model/BlockPartRotation:
   - error: <init>(Ljavax/vecmath/Vector3f;Lnet/minecraft/util/EnumFacing$Axis;FZ)V - Method was removed
 
