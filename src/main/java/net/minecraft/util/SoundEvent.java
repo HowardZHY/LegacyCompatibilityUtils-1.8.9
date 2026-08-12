@@ -1,6 +1,7 @@
 package net.minecraft.util;
 
 import net.minecraft.client.audio.SoundPoolEntry;
+import space.libs.util.MappedName;
 
 @SuppressWarnings("unused")
 public class SoundEvent extends SoundPoolEntry {
@@ -16,7 +17,7 @@ public class SoundEvent extends SoundPoolEntry {
         super(p_i46834_1_, 1, 1 , false);
     }
 
-    /** getSoundName */
+    @MappedName("getSoundName")
     public ResourceLocation func_187503_a() {
         return super.getSoundPoolEntryLocation();
     }

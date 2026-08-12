@@ -5,13 +5,16 @@ import java.lang.reflect.Modifier;
 
 @SuppressWarnings("all")
 public abstract class ValueObject {
+
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("{");
         for (Field field : getClass().getFields()) {
-            if (!func_148766_a(field))
+            if (!func_148766_a(field)) {
                 try {
                     stringBuilder.append(field.getName()).append("=").append(field.get(this)).append(" ");
-                } catch (IllegalAccessException ignored) {}
+                } catch (IllegalAccessException ignored) {
+                }
+            }
         }
         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         stringBuilder.append('}');

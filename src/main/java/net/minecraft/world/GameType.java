@@ -1,4 +1,6 @@
 package net.minecraft.world;
 
-public class GameType {
-}
+/**
+ * @see WorldSettings.GameType
+ */
+public class GameType {}

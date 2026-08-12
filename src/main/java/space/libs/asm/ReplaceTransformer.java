@@ -9,32 +9,23 @@ import org.objectweb.asm.commons.RemappingClassAdapter;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unused")
 public class ReplaceTransformer implements IClassTransformer {
 
-    public static String FML_OLD = "cpw/mods/fml";
+    public static final String FML_OLD = "cpw/mods/fml";
 
-    public static String FML = "net/minecraftforge/fml";
+    public static final String FML = "net/minecraftforge/fml";
 
-    public static String BLOCKPOS_NEW = "net/minecraft/util/math/BlockPos";
+    public static final String UTIL_MATH = "net/minecraft/util/math";
 
-    public static String BLOCKPOS = "net/minecraft/util/BlockPos";
-
-    public static String AABB_NEW = "net/minecraft/util/math/AxisAlignedBB";
-
-    public static String AABB = "net/minecraft/util/AxisAlignedBB";
-
-    public static Map<String, String> PACKAGE = new HashMap<>();
+    public static final String UTIL = "net/minecraft/util";
 
     public static List<String> PACKAGE_PREFIXES = Arrays.asList(
         FML_OLD,
-        BLOCKPOS_NEW,
-        AABB_NEW
+        UTIL_MATH
     );
 
     public static List<byte[]> PACKAGE_PREFIXES_RAW = PACKAGE_PREFIXES.stream()
@@ -75,11 +66,6 @@ public class ReplaceTransformer implements IClassTransformer {
         return PACKAGE_PREFIXES.get(index);
     }
 
-    static  {
-        PACKAGE.put(BLOCKPOS_NEW, BLOCKPOS);
-        PACKAGE.put(AABB_NEW, AABB);
-    }
-
     public static class ReplaceRemappingAdapter extends RemappingClassAdapter {
         public ReplaceRemappingAdapter(ClassWriter classWriter) {
             super(classWriter, ReplaceRemapper.INSTANCE);
@@ -95,12 +81,8 @@ public class ReplaceTransformer implements IClassTransformer {
             if (typeName.startsWith(FML_OLD)) {
                 return FML + typeName.substring(FML_OLD.length());
             } else {
-                for (Map.Entry<String, String> entry : PACKAGE.entrySet()) {
-                    String oldPrefix = entry.getKey();
-                    String newPrefix = entry.getValue();
-                    if (typeName.startsWith(oldPrefix)) {
-                        return newPrefix + typeName.substring(oldPrefix.length());
-                    }
+                if (typeName.startsWith(UTIL_MATH)) {
+                    return UTIL + typeName.substring(UTIL_MATH.length());
                 }
             }
             return super.map(typeName);
