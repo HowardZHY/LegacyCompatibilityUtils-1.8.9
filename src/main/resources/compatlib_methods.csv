@@ -1,3 +1,14 @@
+# net/minecraft/client/renderer/tileentity/TileEntitySpecialRenderer
+func_178461_a,func_180535_a
+func_180536_a,func_180535_a
+func_180537_a,func_180535_a
+func_180538_a,func_180535_a
+func_180539_a,func_180535_a
+func_180540_a,func_180535_a
+func_180541_a,func_180535_a
+func_180542_a,func_180535_a
+func_180544_a,func_180535_a
+func_180545_a,func_180535_a
 # net/minecraft/network/Packet
 func_179699_a,func_148833_a
 func_179718_a,func_148833_a

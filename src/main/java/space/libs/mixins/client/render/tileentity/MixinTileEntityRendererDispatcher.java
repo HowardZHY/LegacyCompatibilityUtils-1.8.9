@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import space.libs.util.MappedName;
 
 @SuppressWarnings("unused")
 @Mixin(TileEntityRendererDispatcher.class)
@@ -13,7 +14,7 @@ public abstract class MixinTileEntityRendererDispatcher {
     @Shadow
     public abstract <T extends TileEntity> TileEntitySpecialRenderer<T> getSpecialRenderer(TileEntity tileEntityIn);
 
-    /** hasSpecialRenderer */
+    @MappedName("hasSpecialRenderer")
     public boolean func_147545_a(TileEntity te) {
         return (getSpecialRenderer(te) != null);
     }

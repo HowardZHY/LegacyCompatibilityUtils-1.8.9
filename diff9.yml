@@ -11,13 +11,13 @@ net/minecraft/world/gen/structure/StructureStrongholdPieces$Stones:
 
 net/minecraft/network/play/client/C19PacketResourcePackStatus:
   - error: func_179718_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
-
+    #DONE
 net/minecraft/enchantment/EnchantmentHelper$HurtIterator:
   - error: <init>(Ljava/lang/Object;)V - Method was removed
 
 net/minecraft/network/play/server/S32PacketConfirmTransaction:
   - error: func_180730_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
-
+    #DONE
 net/minecraft/client/renderer/tileentity/TileEntitySignRenderer:
   - error: func_180541_a(Lnet/minecraft/tileentity/TileEntitySign;DDDFI)V - Method was removed
 

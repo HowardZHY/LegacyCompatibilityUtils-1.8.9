@@ -170,17 +170,7 @@
     "client.render.entity.layers.MixinLayerSpiderEyes",
     "client.render.entity.layers.MixinLayerWitherAura",
     "client.render.entity.layers.MixinLayerWolfCollar",
-    "client.render.tileentity.MixinTileEntityBannerRenderer",
-    "client.render.tileentity.MixinTileEntityBeaconRenderer",
-    "client.render.tileentity.MixinTileEntityChestRenderer",
-    "client.render.tileentity.MixinTileEntityEnchantmentTableRenderer",
-    "client.render.tileentity.MixinTileEntityEnderChestRenderer",
-    "client.render.tileentity.MixinTileEntityEndPortalRenderer",
-    "client.render.tileentity.MixinTileEntityMobSpawnerRenderer",
-    "client.render.tileentity.MixinTileEntityPistonRenderer",
-    "client.render.tileentity.MixinTileEntityRendererDispatcher",
-    "client.render.tileentity.MixinTileEntitySignRenderer",
-    "client.render.tileentity.MixinTileEntitySkullRenderer"
+    "client.render.tileentity.MixinTileEntityRendererDispatcher"
   ],
   "mixins": [
     "MixinAchievement",
