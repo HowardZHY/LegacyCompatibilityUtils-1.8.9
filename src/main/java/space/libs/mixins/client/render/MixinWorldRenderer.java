@@ -67,8 +67,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
     @Shadow
     private VertexFormatElement vertexFormatElement;
 
-    @Shadow
-    public abstract void begin(int glMode, VertexFormat format);
+    @Shadow public abstract void begin(int glMode, VertexFormat format);
 
     @Shadow public abstract WorldRenderer lightmap(int u, int v);
 
@@ -92,7 +91,7 @@ public abstract class MixinWorldRenderer implements IWorldRenderer {
 
     @Shadow public abstract void endVertex();
 
-    /** Flags to mark legacy behavior */
+    /** @implNote Flags to mark legacy behavior */
     public boolean LegacyPOSITION, LegacyCOLORF, LegacyCOLORI, LegacyNORMAL, LegacyLITMAP;
 
     public int[] Colors;

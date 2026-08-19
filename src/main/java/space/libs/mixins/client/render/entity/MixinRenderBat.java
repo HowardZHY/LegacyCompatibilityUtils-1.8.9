@@ -14,10 +14,10 @@ public abstract class MixinRenderBat {
     protected abstract ResourceLocation getEntityTexture(EntityBat entity);
 
     @Shadow
-    protected void preRenderCallback(EntityBat entitylivingbaseIn, float partialTickTime) {}
+    protected void preRenderCallback(EntityBat entity, float partialTickTime) {}
 
-    public ResourceLocation func_180566_a(EntityBat e) {
-        return this.getEntityTexture(e);
+    public ResourceLocation func_180566_a(EntityBat bat) {
+        return this.getEntityTexture(bat);
     }
 
     public void func_180567_a(EntityBat bat, float f) {

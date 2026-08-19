@@ -15,7 +15,7 @@ public abstract class MixinEntityRenderer {
 
     private long NanoTimeCache;
 
-    /** 1.7.10 Unused */
+    /** @implNote 1.7.10 Unused */
     public float field_78495_O = 0.0F;
 
     public float camRoll = 0.0F;

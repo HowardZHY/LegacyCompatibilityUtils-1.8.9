@@ -20,28 +20,28 @@ net/minecraft/network/play/server/S32PacketConfirmTransaction:
     #DONE
 net/minecraft/client/renderer/tileentity/TileEntitySignRenderer:
   - error: func_180541_a(Lnet/minecraft/tileentity/TileEntitySign;DDDFI)V - Method was removed
-
+    #DONE
 net/minecraft/entity/player/EntityPlayer$SwitchEnumFacing:
   - error: Class no longer exists
-
+    #DONE
 net/minecraftforge/fml/relauncher/CoreModManager:
   - error: getLoadedCoremods()Ljava/util/List; - Method was removed
   - error: sortCoreMods()V - Method was removed
   - error: reparsedCoremods:Ljava/util/List; - Field was removed
   - error: loadedCoremods:Ljava/util/List; - Field was removed
-
+    #NOT PLANNED
 net/minecraft/client/renderer/WorldVertexBufferUploader:
   - error: func_178177_a(Lnet/minecraft/client/renderer/WorldRenderer;I)I - Method was removed
-
+    #DONE
 net/minecraft/tileentity/TileEntityBeacon:
   - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
-
+    #DONE
 net/minecraft/client/renderer/entity/RenderSkeleton:
   - error: func_180577_a(Lnet/minecraft/entity/monster/EntitySkeleton;)Lnet/minecraft/util/ResourceLocation; - Method was removed
 
 net/minecraft/client/renderer/WorldRenderer$SwitchEnumUsage:
   - error: Class no longer exists
-
+    #DONE
 net/minecraft/enchantment/EnchantmentHelper$ModifierDamage:
   - error: <init>(Ljava/lang/Object;)V - Method was removed
 
@@ -50,7 +50,7 @@ net/minecraft/block/BlockBanner$SwitchEnumFacing:
 
 net/minecraftforge/fml/common/BukkitPluginRef:
   - error: Class no longer exists
-
+    #NOT PLANNED
 net/minecraft/block/BlockFurnace$SwitchEnumFacing:
   - error: Class no longer exists
 

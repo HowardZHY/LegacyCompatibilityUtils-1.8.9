@@ -3,7 +3,8 @@ CL: net/minecraft/client/renderer/GlStateManager$DestFactor net/minecraft/client
 CL: net/minecraft/client/renderer/GlStateManager$SourceFactor net/minecraft/client/renderer/SourceFactor
 CL: net/minecraft/client/renderer/RenderItem net/minecraft/client/renderer/entity/RenderItem
 CL: net/minecraft/client/renderer/entity/RenderLivingBase net/minecraft/client/renderer/entity/RendererLivingEntity
-CL: net/minecraft/entity/passive/EntityRabbit$RabbitTypeData net/minecraft/entity/passive/EntityRabbitRabbitTypeData
+CL: net/minecraft/entity/passive/EntityRabbit$RabbitTypeData net/minecraft/entity/passive/RabbitTypeData
+CL: net/minecraft/entity/player/EntityPlayer$SwitchEnumFacing net/minecraft/entity/player/SwitchEnumFacing
 CL: net/minecraft/world/GameType net/minecraft/world/WorldSettings$GameType
 CL: net/minecraft/world/chunk/storage/AnvilChunkLoader$PendingChunk net/minecraft/world/chunk/storage/PendingChunk
 CL: net/minecraft/server/management/PlayerChunkMapEntry net/minecraft/server/management/PlayerManager$PlayerInstance

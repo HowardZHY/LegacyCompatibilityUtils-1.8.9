@@ -2,7 +2,7 @@ package net.minecraft.init;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import space.libs.util.cursedmixinextensions.annotations.Public;
+import space.libs.util.MappedName;
 
 @SuppressWarnings("all")
 public class SoundEvents {
@@ -13,10 +13,10 @@ public class SoundEvents {
         }
     }
 
-    /** UI_BUTTON_CLICK */
+    @MappedName("UI_BUTTON_CLICK")
     public static final SoundEvent field_187909_gi = func_187510_a("ui.button.click");
 
-    /** getRegisteredSoundEvent */
+    @MappedName("getRegisteredSoundEvent")
     public static SoundEvent func_187510_a(String soundname) {
         SoundEvent sound = new SoundEvent(new ResourceLocation(soundname));
         if (sound == null) {

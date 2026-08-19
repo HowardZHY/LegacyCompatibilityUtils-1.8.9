@@ -1,3 +1,23 @@
+# net/minecraft/client/renderer/entity/layers/LayerArmorBase
+func_177195_a,func_177179_a
+# net/minecraft/client/renderer/entity/layers/LayerRenderer
+func_177143_a,func_177141_a
+func_177145_a,func_177141_a
+func_177148_a,func_177141_a
+func_177151_a,func_177141_a
+func_177153_a,func_177141_a
+func_177155_a,func_177141_a
+func_177159_a,func_177141_a
+func_177162_a,func_177141_a
+func_177166_a,func_177141_a
+func_177169_a,func_177141_a
+func_177173_a,func_177141_a
+func_177201_a,func_177141_a
+func_177204_a,func_177141_a
+func_177207_a,func_177141_a
+func_177210_a,func_177141_a
+func_177213_a,func_177141_a
+func_177214_a,func_177141_a
 # net/minecraft/client/renderer/tileentity/TileEntitySpecialRenderer
 func_178461_a,func_180535_a
 func_180536_a,func_180535_a
