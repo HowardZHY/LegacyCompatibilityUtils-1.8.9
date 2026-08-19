@@ -12,16 +12,16 @@ import space.libs.util.cursedmixinextensions.annotations.Public;
 
 import java.util.List;
 
-@SuppressWarnings("all")
 @Mixin(TileEntityHopper.class)
 public abstract class MixinTileEntityHopper implements IUpdatePlayerListBox {
 
     @Shadow
     public abstract void update();
 
+    @SuppressWarnings("SizeReplaceableByIsEmpty")
     @Public
-    private static EntityItem func_145897_a(World worldIn, double p_145897_1_, double p_145897_3_, double p_145897_5_) {
-        List<EntityItem> list = worldIn.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(p_145897_1_, p_145897_3_, p_145897_5_, p_145897_1_ + 1.0D, p_145897_3_ + 1.0D, p_145897_5_ + 1.0D), IEntitySelector.selectAnything);
+    private static EntityItem func_145897_a(World worldIn, double x, double y, double z) {
+        List<EntityItem> list = worldIn.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D), IEntitySelector.selectAnything);
         return (list.size() > 0) ? list.get(0) : null;
     }
 }
