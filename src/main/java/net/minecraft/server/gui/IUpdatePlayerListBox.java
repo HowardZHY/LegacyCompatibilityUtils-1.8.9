@@ -6,6 +6,6 @@ import net.minecraft.util.ITickable;
 public interface IUpdatePlayerListBox extends ITickable {
 
     /** func_73660_a */
-    void update();
+    default void update() {}
 
 }

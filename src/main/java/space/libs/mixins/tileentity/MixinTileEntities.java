@@ -1,9 +1,9 @@
 package space.libs.mixins.tileentity;
 
 import net.minecraft.server.gui.IUpdatePlayerListBox;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 
+@Pseudo
 @Mixin(
     targets = {
         "net.minecraft.tileentity.TileEntityBeacon",

@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(WorldRenderer.class)
 public abstract class MixinWorldRendererVanilla {
 
+    @SuppressWarnings("MissingOrInvalidOpcode")
     @Dynamic
     @Redirect(method = "func_181662_b", at = @At(value = "FIELD", target = "*:[I", ordinal = 0), remap = false)
     public int[] pos() {

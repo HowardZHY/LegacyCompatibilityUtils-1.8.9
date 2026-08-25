@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import space.libs.util.MappedName;
 
 @SuppressWarnings("unused")
 @Mixin(BlockSourceImpl.class)
@@ -20,7 +21,7 @@ public abstract class MixinBlockSourceImpl {
     @Shadow
     private BlockPos pos;
 
-    /** getBlock */
+    @MappedName("getBlock")
     public Block func_179316_e() {
         return worldObj.getBlockState(pos).getBlock();
     }
