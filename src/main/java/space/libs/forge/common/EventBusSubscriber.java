@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: LGPL-2.1-only
  */
 
-package net.minecraftforge.fml.common;
+package space.libs.forge.common;
 
 import net.minecraftforge.fml.relauncher.Side;
 

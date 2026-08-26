@@ -3,11 +3,9 @@
  * SPDX-License-Identifier: LGPL-2.1-only
  */
 
-package space.libs.util.client;
+package space.libs.forge.client;
 
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.*;
 import net.minecraft.client.resources.I18n;
 
 public class GuiIngameModOptions extends GuiScreen {
