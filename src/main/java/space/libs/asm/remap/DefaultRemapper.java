@@ -87,10 +87,10 @@ public class DefaultRemapper extends RemapperBase implements IClassNameTransform
 
     @Override
     protected byte[] getBytes(String name) {
+        byte[] bytes = null;
         try {
-            return Launch.classLoader.getClassBytes(name.replace('/', '.'));
-        } catch (IOException e) {
-            throw Throwables.propagate(e);
-        }
+            bytes = Launch.classLoader.getClassBytes(name.replace('/', '.'));
+        } catch (IOException ignored) {}
+        return bytes;
     }
 }

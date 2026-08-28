@@ -21,7 +21,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.*;
 
-@SuppressWarnings({"UnstableApiUsage", "CommentedOutCode"})
+@SuppressWarnings({"unused", "UnstableApiUsage", "CommentedOutCode"})
 public abstract class RemapperBase extends Remapper implements IRemapperDebug {
 
     public RemapperBase(final String file, final int id) {
@@ -134,12 +134,12 @@ public abstract class RemapperBase extends Remapper implements IRemapperDebug {
             return result;
         }
         if (!this.negativeFields.contains(owner)) {
-            this.loadSuperMaps(owner);
+            this.loadSuperMaps(owner, false);
             if (!this.fieldsMap.containsKey(owner)) {
                 this.negativeFields.add(owner);
             }
             /*if (DEBUG_REMAPPING && !owner.startsWith("java")) {
-                LOGGER.info("Field map for " + owner + " : " + fieldsMap.get(owner));
+                DebugRemap("Field map for " + owner + " : " + fieldsMap.get(owner));
             }*/
         }
         return this.fieldsMap.get(owner);
@@ -151,18 +151,18 @@ public abstract class RemapperBase extends Remapper implements IRemapperDebug {
             return result;
         }
         if (!this.negativeMethods.contains(owner)) {
-            this.loadSuperMaps(owner);
+            this.loadSuperMaps(owner, false);
             if (!this.methodsMap.containsKey(owner)) {
                 this.negativeMethods.add(owner);
             }
             /*if (DEBUG_REMAPPING && !owner.startsWith("java")) {
-                LOGGER.info("Method map for " + owner + " : " + methodsMap.get(owner));
+                DebugRemap("Method map for " + owner + " : " + methodsMap.get(owner));
             }*/
         }
         return this.methodsMap.get(owner);
     }
 
-    @SuppressWarnings("unused")
+    /* @Override */
     public String mapPackageName(String name) {
         if (this.noPackages()) {
             return name;
@@ -217,7 +217,7 @@ public abstract class RemapperBase extends Remapper implements IRemapperDebug {
                 mapped = fields.get(name + ":null");
                 if (mapped != null) {
                     if (DEBUG_REMAPPING && (!owner.contains("/") || owner.startsWith("net"))) {
-                        LOGGER.info("Try map field without desc " + owner + "." + name + " to " + mapped);
+                        DebugRemap("Try map field without desc " + owner + "." + name + " to " + mapped);
                     }
                     return mapped;
                 }
@@ -253,7 +253,7 @@ public abstract class RemapperBase extends Remapper implements IRemapperDebug {
     public String getStaticFieldType(String oldType, String oldName, String newType, String newName) {
         String fType = getFieldType(oldType, oldName);
         if (DEBUG_REMAPPING) {
-            LOGGER.info("Static Field: " + oldType + "+" + oldName + " & " + newType + "+" + newName + " fT: " + fType);
+            DebugRemap("Static Field: " + oldType + "+" + oldName + " & " + newType + "+" + newName + " fT: " + fType);
         }
         if (oldType.equals(newType)) {
             return fType;
@@ -278,29 +278,43 @@ public abstract class RemapperBase extends Remapper implements IRemapperDebug {
         return name;
     }
 
-    public void loadSuperMaps(String name) {
+    public void loadSuperMaps(String name, boolean chain) {
         byte[] bytes = this.getBytesForSuperMap(name);
         if (bytes != null) {
             ClassReader reader = new ClassReader(bytes);
-            this.mergeSuperMaps(name, reader.getSuperName(), reader.getInterfaces());
+            this.mergeSuperMaps(name, reader.getSuperName(), reader.getInterfaces(), false, false);
         }
     }
 
-    public void mergeSuperMaps(String name, String superName, String[] interfaces) {
-        if (Strings.isNullOrEmpty(superName)) {
+    /**
+     * @param handleSuper Should parents to be proceed by getLegacyName
+     * @param visit Called by CustomRemappingAdapter#visit
+     */
+    public void mergeSuperMaps(String name, String superName, String[] interfaces, boolean handleSuper, boolean visit) {
+        if (name.startsWith("java/") || Strings.isNullOrEmpty(superName) || superName.startsWith("net/minecraftforge/e") ) {
             return;
         }
-        if (DEBUG_REMAPPING && (!superName.startsWith("java") || !name.startsWith("java"))) {
-            LOGGER.info("Computing super maps for " + name + " & " + superName);
-            LOGGER.info("Interfaces: " + Arrays.toString(interfaces));
+        int l = interfaces.length;
+        String[] parents;
+        if (handleSuper) {
+            String[] legacyInterfaces = new String[l];
+            for (int i = 0; i < l; i++) {
+                legacyInterfaces[i] = this.getLegacyName(interfaces[i]);
+            }
+            parents = mergeParents(this.getLegacyName(superName), legacyInterfaces, l);
+        } else {
+            parents = mergeParents(superName, interfaces, l);
         }
-        String[] parents = new String[interfaces.length + 1];
-        parents[0] = superName;
-        System.arraycopy(interfaces, 0, parents, 1, interfaces.length);
+        if (DEBUG_REMAPPING && (!parents[0].startsWith("java"))) {
+            LOGGER.info("Merging super maps for " + name + " & " + Arrays.toString(parents) + " handleSuper " + handleSuper + " visit " + visit);
+        }
+        this.mergeSuperMaps(name, parents);
+    }
+
+    public void mergeSuperMaps(String name, String[] parents) {
         for (String parent : parents) {
-            if ((this.legacy && !this.methodsMap.containsKey(parent)) ||
-                (!this.legacy && !this.fieldsMap.containsKey(parent))) {
-                loadSuperMaps(parent);
+            if (!this.fieldsMap.containsKey(parent) || !this.methodsMap.containsKey(parent)) {
+                this.loadSuperMaps(parent, true);
             }
         }
         Map<String, String> fields = Maps.newHashMap();
@@ -368,12 +382,10 @@ public abstract class RemapperBase extends Remapper implements IRemapperDebug {
         return this.methodRenamesMap == null || this.methodRenamesMap.isEmpty();
     }
 
-    @SuppressWarnings("unused")
     public boolean isRemappedClass(String className) {
         return !map(className).equals(className);
     }
 
-    @SuppressWarnings("unused")
     public Set<String> getObfedClasses() {
         return ImmutableSet.copyOf(this.classesBiMap.keySet());
     }
@@ -381,6 +393,17 @@ public abstract class RemapperBase extends Remapper implements IRemapperDebug {
     public static String[] getSignature(String in) {
         int pos = in.lastIndexOf('/');
         return new String[]{in.substring(0, pos), in.substring(pos + 1)};
+    }
+
+    public static String[] mergeParents(String superName, String[] interfaces, int l) {
+        String[] parents = new String[l + 1];
+        parents[0] = superName;
+        System.arraycopy(interfaces, 0, parents, 1, l);
+        return parents;
+    }
+
+    public static boolean isMCPackage(String name) {
+        return name.startsWith("net/minecraft/");
     }
 
     public enum MappingType {

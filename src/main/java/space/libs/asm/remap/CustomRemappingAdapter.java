@@ -12,12 +12,15 @@ package space.libs.asm.remap;
 import org.objectweb.asm.*;
 import org.objectweb.asm.commons.*;
 
+@SuppressWarnings("unused")
 public class CustomRemappingAdapter extends RemappingClassAdapter {
 
-    public static final DefaultRemapper[] INSTANCES = new DefaultRemapper[16];
+    public static final int MAX = 16;
+
+    public static final DefaultRemapper[] INSTANCES = new DefaultRemapper[MAX];
 
     public static DefaultRemapper Remapper(final String name, final int id) {
-        if (id < 0 || id > 15) {
+        if (id < 0 || id >= MAX) {
             throw new IllegalArgumentException();
         }
         synchronized (INSTANCES) {
@@ -70,9 +73,9 @@ public class CustomRemappingAdapter extends RemappingClassAdapter {
             interfaces = new String[0];
         }
         if (legacy) {
-            this.getCustomRemapper().mergeSuperMaps(name, superName, interfaces);
+            this.getCustomRemapper().mergeSuperMaps(name, superName, interfaces, false, true);
         } else {
-            this.getRemapper().mergeSuperMaps(name, superName, interfaces);
+            this.getRemapper().mergeSuperMaps(name, superName, interfaces, false, true);
         }
         super.visit(version, access, name, signature, superName, interfaces);
     }
