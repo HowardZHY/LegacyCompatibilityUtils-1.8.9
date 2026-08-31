@@ -1,6 +1,7 @@
 CL: net/minecraft/client/model/ModelBiped$ArmPose net/minecraft/client/model/EnumArmPose
 CL: net/minecraft/client/renderer/GlStateManager$DestFactor net/minecraft/client/renderer/DestFactor
 CL: net/minecraft/client/renderer/GlStateManager$SourceFactor net/minecraft/client/renderer/SourceFactor
+CL: net/minecraft/client/renderer/GlStateManager$Viewport net/minecraft/client/renderer/Viewport
 CL: net/minecraft/client/renderer/RenderItem net/minecraft/client/renderer/entity/RenderItem
 CL: net/minecraft/client/renderer/entity/RenderLivingBase net/minecraft/client/renderer/entity/RendererLivingEntity
 CL: net/minecraft/entity/passive/EntityRabbit$RabbitTypeData net/minecraft/entity/passive/RabbitTypeData
@@ -9,6 +10,8 @@ CL: net/minecraft/world/GameType net/minecraft/world/WorldSettings$GameType
 CL: net/minecraft/world/chunk/storage/AnvilChunkLoader$PendingChunk net/minecraft/world/chunk/storage/PendingChunk
 CL: net/minecraft/server/management/PlayerChunkMapEntry net/minecraft/server/management/PlayerManager$PlayerInstance
 CL: net/minecraftforge/client/IItemRenderer space/libs/forge/client/IItemRenderer
+CL: net/minecraftforge/client/IItemRenderer$ItemRendererHelper space/libs/forge/client/IItemRenderer$ItemRendererHelper
+CL: net/minecraftforge/client/IItemRenderer$ItemRenderType space/libs/forge/client/IItemRenderer$ItemRenderType
 CL: net/minecraftforge/client/model/IPerspectiveState space/libs/forge/client/IPerspectiveState
 CL: net/minecraftforge/client/model/ModelLoader$WeightedPartWrapper space/libs/forge/client/WeightedPartWrapper
 CL: net/minecraftforge/fml/client/GuiIngameModOptions space/libs/forge/client/GuiIngameModOptions

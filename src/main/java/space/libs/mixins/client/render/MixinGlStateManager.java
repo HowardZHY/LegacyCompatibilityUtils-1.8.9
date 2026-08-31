@@ -19,6 +19,10 @@ public abstract class MixinGlStateManager {
     @Shadow
     public static void tryBlendFuncSeparate(int srcFactor, int dstFactor, int srcFactorAlpha, int dstFactorAlpha) {}
 
+    @SuppressWarnings("FieldMayBeFinal")
+    @Public
+    private static Viewport field_179169_u = new Viewport();
+
     @Public
     private static int func_187397_v(int p_187397_0_) {
         return GL11.glGetInteger(p_187397_0_);

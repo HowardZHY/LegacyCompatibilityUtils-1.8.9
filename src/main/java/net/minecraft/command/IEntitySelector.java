@@ -9,98 +9,87 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EntitySelectors;
+import space.libs.util.MappedName;
 
 
 @SuppressWarnings("all")
 public class IEntitySelector extends EntitySelectors {
 
-    /** field_94557_a */
-    public static Predicate<Entity> selectAnything = new Predicate<Entity>() {
+    @MappedName("selectAnything")
+    public static Predicate<Entity> field_94557_a = new Predicate<Entity>() {
 
-        public boolean func_180131_a(Entity p_180131_1_)
-        {
-            return p_180131_1_.isEntityAlive();
+        public boolean func_180131_a(Entity entity) {
+            return entity.isEntityAlive();
         }
 
-        public boolean apply(Entity p_apply_1_)
-        {
-            return this.func_180131_a(p_apply_1_);
+        @Override
+        public boolean apply(Entity entity) {
+            return this.func_180131_a(entity);
         }
-
     };
 
-    /** field_152785_b */
-    public static Predicate<Entity> IS_STANDALONE = new Predicate<Entity>() {
+    @MappedName("IS_STANDALONE")
+    public static Predicate<Entity> field_152785_b  = new Predicate<Entity>() {
 
-        public boolean func_180130_a(Entity p_180130_1_)
-        {
-            return p_180130_1_.isEntityAlive() && p_180130_1_.riddenByEntity == null && p_180130_1_.ridingEntity == null;
+        public boolean func_180130_a(Entity entity) {
+            return entity.isEntityAlive() && entity.riddenByEntity == null && entity.ridingEntity == null;
         }
 
-        public boolean apply(Entity p_apply_1_)
-        {
-            return this.func_180130_a(p_apply_1_);
+        @Override
+        public boolean apply(Entity entity) {
+            return this.func_180130_a(entity);
         }
-
     };
 
-    /** field_96566_b */
-    public static Predicate<Entity> selectInventories = new Predicate<Entity>() {
+    @MappedName("selectInventories")
+    public static Predicate<Entity> field_96566_b = new Predicate<Entity>() {
 
-        public boolean func_180102_a(Entity p_180102_1_)
-        {
-            return p_180102_1_ instanceof IInventory && p_180102_1_.isEntityAlive();
+        public boolean func_180102_a(Entity entity) {
+            return entity instanceof IInventory && entity.isEntityAlive();
         }
 
-        public boolean apply(Entity p_apply_1_)
-        {
-            return this.func_180102_a(p_apply_1_);
+        @Override
+        public boolean apply(Entity entity) {
+            return this.func_180102_a(entity);
         }
-
     };
 
-    /** field_180132_d */
-    public static Predicate<Entity> NOT_SPECTATING = new Predicate<Entity>() {
+    @MappedName("NOT_SPECTATING")
+    public static Predicate<Entity> field_180132_d = new Predicate<Entity>() {
 
-        public boolean func_180103_a(Entity p_180103_1_)
-        {
-            return !(p_180103_1_ instanceof EntityPlayer) || !((EntityPlayer)p_180103_1_).isSpectator();
+        public boolean func_180103_a(Entity entity) {
+            return !(entity instanceof EntityPlayer) || !((EntityPlayer)entity).isSpectator();
         }
 
-        public boolean apply(Entity p_apply_1_)
-        {
-            return this.func_180103_a(p_apply_1_);
+        @Override
+        public boolean apply(Entity entity) {
+            return this.func_180103_a(entity);
         }
-
     };
-
 
     public static class ArmoredMob implements Predicate<Entity> {
 
         public ItemStack field_96567_c;
 
-
-        public ArmoredMob(ItemStack p_i1584_1_)
+        public ArmoredMob(ItemStack stack)
         {
-            this.field_96567_c = p_i1584_1_;
+            this.field_96567_c = stack;
         }
 
-        public boolean func_180100_a(Entity p_180100_1_)
-        {
-            if (!p_180100_1_.isEntityAlive()) {
+        public boolean func_180100_a(Entity entity) {
+            if (!entity.isEntityAlive()) {
                 return false;
-            } else if (!(p_180100_1_ instanceof EntityLivingBase)) {
+            } else if (!(entity instanceof EntityLivingBase)) {
                 return false;
             } else {
-                EntityLivingBase elb = (EntityLivingBase)p_180100_1_;
+                EntityLivingBase elb = (EntityLivingBase)entity;
                 return elb.getEquipmentInSlot(EntityLiving.getArmorPosition(this.field_96567_c)) == null && (elb instanceof EntityLiving ? ((EntityLiving) elb).canPickUpLoot() : (elb instanceof EntityArmorStand || elb instanceof EntityPlayer));
             }
         }
 
-        public boolean apply(Entity p_apply_1_)
-        {
-            return this.func_180100_a(p_apply_1_);
+        @Override
+        public boolean apply(Entity entity) {
+            return this.func_180100_a(entity);
         }
-
     }
 }

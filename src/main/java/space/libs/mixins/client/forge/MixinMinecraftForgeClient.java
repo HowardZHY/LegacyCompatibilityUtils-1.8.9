@@ -6,9 +6,9 @@ package space.libs.mixins.client.forge;
 
 import com.google.common.collect.Maps;
 import net.minecraft.item.*;
-import space.libs.forge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import org.spongepowered.asm.mixin.Mixin;
+import space.libs.forge.client.IItemRenderer;
 import space.libs.util.cursedmixinextensions.annotations.Public;
 
 import java.util.IdentityHashMap;

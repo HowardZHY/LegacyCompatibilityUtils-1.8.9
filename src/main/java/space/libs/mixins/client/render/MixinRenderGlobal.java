@@ -29,7 +29,7 @@ public abstract class MixinRenderGlobal {
     @Shadow
     protected abstract org.lwjgl.util.vector.Vector3f getViewVector(Entity entityIn, double partialTicks);
 
-    @MappedName("drawOutlinedBoundingBox ")
+    @MappedName("drawOutlinedBoundingBox")
     @Public
     private static void func_147590_a(AxisAlignedBB boundingBox, int i) {
         drawSelectionBoundingBox(boundingBox);

@@ -7,6 +7,7 @@ import net.minecraft.world.chunk.storage.RegionFileCache;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import space.libs.util.MappedName;
 
 import java.io.DataOutputStream;
 import java.io.File;
@@ -16,17 +17,16 @@ import java.io.IOException;
 @Mixin(AnvilChunkLoader.class)
 public class MixinAnvilChunkLoader {
 
-    @Final
     @Shadow
-    public File chunkSaveLocation;
+    public @Final File chunkSaveLocation;
 
-    /** syncLockObject */
+    @MappedName("syncLockObject")
     public Object field_75827_c = new Object();
 
-    /** writeChunkNBTTags */
-    public void func_75821_a(PendingChunk p_75821_1_) throws IOException {
-        DataOutputStream dataoutputstream = RegionFileCache.getChunkOutputStream(this.chunkSaveLocation, p_75821_1_.field_76548_a.chunkXPos, p_75821_1_.field_76548_a.chunkZPos);
-        CompressedStreamTools.write(p_75821_1_.field_76547_b, dataoutputstream);
+    @MappedName("writeChunkNBTTags ")
+    public void func_75821_a(PendingChunk chunk) throws IOException {
+        DataOutputStream dataoutputstream = RegionFileCache.getChunkOutputStream(this.chunkSaveLocation, chunk.field_76548_a.chunkXPos, chunk.field_76548_a.chunkZPos);
+        CompressedStreamTools.write(chunk.field_76547_b, dataoutputstream);
         dataoutputstream.close();
     }
 }

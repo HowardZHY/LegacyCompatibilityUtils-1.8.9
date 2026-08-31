@@ -21,7 +21,7 @@ public abstract class MixinTileEntityHopper implements IUpdatePlayerListBox {
     @SuppressWarnings("SizeReplaceableByIsEmpty")
     @Public
     private static EntityItem func_145897_a(World worldIn, double x, double y, double z) {
-        List<EntityItem> list = worldIn.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D), IEntitySelector.selectAnything);
+        List<EntityItem> list = worldIn.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D), IEntitySelector.field_94557_a);
         return (list.size() > 0) ? list.get(0) : null;
     }
 }

@@ -13,7 +13,7 @@ import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 public class MixinBlockHugeMushroom extends MixinBlock {
 
     @ShadowConstructor
-    public void BlockHugeMushroom(Material p_i46392_1_, MapColor p_i46392_2_, Block p_i46392_3_) {}
+    public void BlockHugeMushroom(Material m, MapColor color, Block block) {}
 
     @NewConstructor
     public void BlockHugeMushroom(Material m, Block block) {

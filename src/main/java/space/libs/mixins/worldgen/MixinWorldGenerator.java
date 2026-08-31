@@ -15,12 +15,12 @@ public abstract class MixinWorldGenerator {
     @Shadow
     protected void setBlockAndNotifyAdequately(World worldIn, BlockPos pos, IBlockState state) {}
 
-    public void func_175905_a(World worldIn, BlockPos p_175905_2_, Block p_175905_3_, int p_175905_4_) {
-        this.setBlockAndNotifyAdequately(worldIn, p_175905_2_, p_175905_3_.getStateFromMeta(p_175905_4_));
+    public void func_175905_a(World worldIn, BlockPos pos, Block block, int meta) {
+        this.setBlockAndNotifyAdequately(worldIn, pos, block.getStateFromMeta(meta));
     }
 
-    public void func_175906_a(World worldIn, BlockPos p_175906_2_, Block p_175906_3_) {
-        this.func_175905_a(worldIn, p_175906_2_, p_175906_3_, 0);
+    public void func_175906_a(World worldIn, BlockPos pos, Block block) {
+        this.func_175905_a(worldIn, pos, block, 0);
     }
 
 }

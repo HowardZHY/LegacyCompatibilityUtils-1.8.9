@@ -16,7 +16,6 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(value = ModelStateComposition.class, remap = false)
 public abstract class MixinModelStateComposition implements Function<IModelPart, TRSRTransformation> {
 
-
     @Shadow
     public abstract Optional<TRSRTransformation> apply(Optional<? extends IModelPart> part);
 

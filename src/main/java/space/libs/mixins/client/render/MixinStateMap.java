@@ -13,10 +13,10 @@ import java.util.List;
 public class MixinStateMap {
 
     @ShadowConstructor
-    private void StateMap(IProperty<?> name, String suffix, List< IProperty<? >> ignored) {}
+    private void StateMap(IProperty<?> name, String suffix, List<IProperty<?>> ignored) {}
 
     @NewConstructor
-    public void StateMap(IProperty name, String suffix, List ignored, Object o) {
+    public void StateMap(IProperty<?> name, String suffix, List<IProperty<?>> ignored, Object o) {
         this.StateMap(name, suffix, ignored);
     }
 }

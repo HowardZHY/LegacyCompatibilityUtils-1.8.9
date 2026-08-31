@@ -1,5 +1,7 @@
 # net/minecraft/client/gui/GuiOptionsRowList
 func_180792_c,func_148180_b
+# net/minecraft/client/gui/GuiPageButtonList
+func_178070_d,func_148180_b
 # net/minecraft/client/renderer/entity/layers/LayerArmorBase
 func_177195_a,func_177179_a
 # net/minecraft/client/renderer/entity/layers/LayerRenderer
@@ -31,6 +33,8 @@ func_180541_a,func_180535_a
 func_180542_a,func_180535_a
 func_180544_a,func_180535_a
 func_180545_a,func_180535_a
+# net/minecraft/network/NettyCompressionEncoder
+func_179298_a,encode
 # net/minecraft/network/Packet
 func_179699_a,func_148833_a
 func_179718_a,func_148833_a
