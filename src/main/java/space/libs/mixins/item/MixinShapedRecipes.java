@@ -1,4 +1,4 @@
-package space.libs.mixins;
+package space.libs.mixins.item;
 
 import net.minecraft.item.crafting.ShapedRecipes;
 import org.spongepowered.asm.mixin.Mixin;

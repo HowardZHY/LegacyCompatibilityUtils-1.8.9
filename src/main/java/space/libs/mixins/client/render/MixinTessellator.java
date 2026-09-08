@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import space.libs.interfaces.ITessellator;
+import space.libs.util.MappedName;
 
 @SuppressWarnings("unused")
 @Mixin(value = Tessellator.class, priority = 100)
@@ -26,17 +27,17 @@ public abstract class MixinTessellator implements ITessellator {
         this.worldRenderer = func_178180_c();
     }
 
-    /** buffer */
+    @MappedName("buffer")
     public BufferBuilder field_178183_a;
 
-    /** draw */
+    @MappedName("draw")
     public int func_78381_a() {
         this.draw();
         return 0;
         // return this.worldRenderer.getBufferSize() * 4; TODO?
     }
 
-    /** getBuffer */
+    @MappedName("getBuffer")
     public BufferBuilder func_178180_c() {
         return this.field_178183_a;
     }

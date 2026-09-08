@@ -12,10 +12,10 @@ import org.spongepowered.asm.mixin.Shadow;
 public abstract class MixinWorldGenBigTree extends MixinWorldGenAbstractTree {
 
     @Shadow
-    void func_181631_a(BlockPos p_181631_1_, float p_181631_2_, IBlockState p_181631_3_) {}
+    void func_181631_a(BlockPos pos, float p_181631_2_, IBlockState block) {}
 
-    public void func_180712_a(BlockPos p_180712_1_, float p_180712_2_, Block p_180712_3_) {
-        this.func_181631_a(p_180712_1_, p_180712_2_, p_180712_3_.getDefaultState());
+    public void func_180712_a(BlockPos pos, float p_180712_2_, Block block) {
+        this.func_181631_a(pos, p_180712_2_, block.getDefaultState());
     }
 
 }

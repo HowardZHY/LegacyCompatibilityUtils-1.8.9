@@ -6,6 +6,7 @@ package space.libs.mixins.client.forge;
 
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.model.ModelBlock;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
@@ -80,5 +81,9 @@ public abstract class MixinModelLoader extends MixinModelBakery {
             }
         }
         return location;
+    }
+
+    public boolean isBuiltinModel(ModelBlock model) {
+        return (model == MODEL_GENERATED|| model == MODEL_COMPASS || model == MODEL_CLOCK || model == MODEL_ENTITY);
     }
 }

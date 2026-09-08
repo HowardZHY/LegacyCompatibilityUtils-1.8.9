@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.chunk.RenderChunk;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import space.libs.util.MappedName;
 
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -19,7 +20,7 @@ public class MixinRenderChunk {
     @Shadow
     private ChunkCompileTaskGenerator compileTask;
 
-    /** isCompileTaskPending */
+    @MappedName("isCompileTaskPending")
     public boolean func_178583_l() {
         boolean flag;
         this.lockCompileTask.lock();

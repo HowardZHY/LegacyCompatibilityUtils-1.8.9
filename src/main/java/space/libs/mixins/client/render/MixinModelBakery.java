@@ -1,9 +1,11 @@
 package space.libs.mixins.client.render;
 
+import net.minecraft.client.renderer.block.model.ModelBlock;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import org.apache.commons.lang3.ArrayUtils;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,6 +17,9 @@ import java.util.List;
 
 @Mixin(ModelBakery.class)
 public abstract class MixinModelBakery {
+
+    @Shadow
+    protected static @Final ModelBlock MODEL_GENERATED, MODEL_COMPASS, MODEL_CLOCK, MODEL_ENTITY;
 
     @Shadow
     protected List<String> getVariantNames(Item item) {

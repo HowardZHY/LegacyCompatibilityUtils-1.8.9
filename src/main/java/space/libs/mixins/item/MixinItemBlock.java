@@ -1,4 +1,4 @@
-package space.libs.mixins;
+package space.libs.mixins.item;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
