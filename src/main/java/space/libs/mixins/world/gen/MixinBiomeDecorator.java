@@ -1,4 +1,4 @@
-package space.libs.mixins.worldgen;
+package space.libs.mixins.world.gen;
 
 import net.minecraft.world.biome.BiomeDecorator;
 import org.spongepowered.asm.mixin.Mixin;

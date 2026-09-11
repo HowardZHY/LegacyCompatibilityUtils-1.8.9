@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import space.libs.util.cursedmixinextensions.annotations.Public;
 
-@SuppressWarnings("all")
 @Mixin(value = MinecraftForge.class, remap = false)
 public class MixinMinecraftForge {
 
@@ -21,6 +20,6 @@ public class MixinMinecraftForge {
 
     @Public
     private static String getBrandingVersion() {
-        return "Minecraft Forge "+ ForgeVersion.getVersion();
+        return "Minecraft Forge " + ForgeVersion.getVersion();
     }
 }

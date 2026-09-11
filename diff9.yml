@@ -1420,7 +1420,7 @@ net/minecraft/network/play/server/S09PacketHeldItemChange:
     #DONE
 net/minecraft/world/chunk/storage/AnvilChunkLoader$PendingChunk:
   - error: Class no longer exists
-
+    #DONE WITH REMAP
 net/minecraft/block/BlockOldLog$SwitchEnumAxis:
   - error: Class no longer exists
 
@@ -1461,7 +1461,7 @@ net/minecraft/item/crafting/RecipesBanners$RecipeDuplicatePattern:
 
 net/minecraft/client/renderer/block/model/ModelBlock$Deserializer:
   - error: func_178327_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/ModelBlock; - Method was removed
-
+    #DONE
 net/minecraft/server/management/UserListOps:
   - error: func_152699_b(Lcom/mojang/authlib/GameProfile;)Ljava/lang/String; - Method was removed
 
@@ -1477,7 +1477,7 @@ net/minecraft/entity/passive/EntityTameable:
     #DONE
 net/minecraftforge/fml/common/event/FMLModIdMappingEvent$ModRemapping:
   - error: <init>(Lnet/minecraftforge/fml/common/event/FMLModIdMappingEvent;IILjava/lang/String;Lnet/minecraftforge/fml/common/event/FMLModIdMappingEvent$RemapTarget;)V - Method was removed
-
+    #DONE
 net/minecraft/block/BlockWallSign$SwitchEnumFacing:
   - error: Class no longer exists
 
@@ -1492,7 +1492,7 @@ net/minecraft/client/Minecraft:
     #DONE
 net/minecraft/world/WorldServer$ServerBlockEventList:
   - error: <init>(Ljava/lang/Object;)V - Method was removed
-
+    #DONE
 net/minecraft/client/renderer/entity/RenderSlime:
   - error: func_177124_a(Lnet/minecraft/entity/monster/EntitySlime;DDDFF)V - Method was removed
 
@@ -1510,16 +1510,16 @@ net/minecraft/command/common/CommandReplaceItem:
     #DONE
 net/minecraftforge/client/model/IPerspectiveState$Impl:
   - error: Class no longer exists
-
+    #DONE
 net/minecraft/command/server/CommandTestForBlock:
   - error: func_175775_a(Lnet/minecraft/nbt/NBTBase;Lnet/minecraft/nbt/NBTBase;Z)Z - Method was removed
     #DONE
 net/minecraftforge/common/MinecraftForge:
   - error: getBrandingVersion()Ljava/lang/String; - Method was removed
-
+    #DONE
 net/minecraft/client/renderer/block/model/ModelBlockDefinition$Variant$Deserializer:
   - error: func_178425_a(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/ModelBlockDefinition$Variant; - Method was removed
-
+    #DONE
 net/minecraft/client/stream/IngestServerTester$SwitchStatType:
   - error: Class no longer exists
 
@@ -1535,7 +1535,7 @@ net/minecraft/server/management/UserListWhitelist:
 net/minecraftforge/client/GuiIngameForge:
   - error: WIDGITS:Lnet/minecraft/util/ResourceLocation; - Field was removed
   - error: MC_VERSION:Ljava/lang/String; - Field was removed
-
+    #DONE
 net/minecraft/network/play/client/C0DPacketCloseWindow:
   - error: func_180759_a(Lnet/minecraft/network/play/INetHandlerPlayServer;)V - Method was removed
     #DONE
@@ -1547,7 +1547,7 @@ net/minecraft/network/play/server/S42PacketCombatEvent:
     #DONE
 net/minecraft/util/Cartesian$GetList:
   - error: func_179324_a([Ljava/lang/Object;)Ljava/util/List; - Method was removed
-
+    #DONE
 net/minecraft/client/renderer/block/statemap/StateMap:
   - error: <init>(Lnet/minecraft/block/properties/IProperty;Ljava/lang/String;Ljava/util/List;Ljava/lang/Object;)V - Method was removed
     #DONE
@@ -1567,7 +1567,7 @@ net/minecraft/client/renderer/entity/RenderMinecartMobSpawner:
 
 net/minecraftforge/client/model/obj/OBJModel$Group:
   - error: applyTransform(Lnet/minecraftforge/client/model/TRSRTransformation;)Ljava/util/LinkedHashSet; - Method was removed
-
+    #DONE
 net/minecraft/util/Cartesian$Product$ProductIterator:
   - error: func_179421_a()[Ljava/lang/Object; - Method was removed
 

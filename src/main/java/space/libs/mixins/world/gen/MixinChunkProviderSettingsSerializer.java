@@ -1,4 +1,4 @@
-package space.libs.mixins.worldgen;
+package space.libs.mixins.world.gen;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;

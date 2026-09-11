@@ -1,4 +1,4 @@
-package space.libs.mixins;
+package space.libs.mixins.world;
 
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.world.chunk.storage.AnvilChunkLoader;
@@ -23,7 +23,7 @@ public class MixinAnvilChunkLoader {
     @MappedName("syncLockObject")
     public Object field_75827_c = new Object();
 
-    @MappedName("writeChunkNBTTags ")
+    @MappedName("writeChunkNBTTags")
     public void func_75821_a(PendingChunk chunk) throws IOException {
         DataOutputStream dataoutputstream = RegionFileCache.getChunkOutputStream(this.chunkSaveLocation, chunk.field_76548_a.chunkXPos, chunk.field_76548_a.chunkZPos);
         CompressedStreamTools.write(chunk.field_76547_b, dataoutputstream);

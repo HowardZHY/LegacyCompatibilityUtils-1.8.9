@@ -1,4 +1,4 @@
-package space.libs.mixins.worldgen;
+package space.libs.mixins.world.gen;
 
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import org.spongepowered.asm.mixin.Mixin;

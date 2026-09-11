@@ -1,4 +1,4 @@
-package space.libs.mixins;
+package space.libs.mixins.world;
 
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.Teleporter;

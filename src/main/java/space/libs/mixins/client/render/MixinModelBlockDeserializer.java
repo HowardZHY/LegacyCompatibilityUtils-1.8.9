@@ -13,9 +13,9 @@ import java.lang.reflect.Type;
 public abstract class MixinModelBlockDeserializer {
 
     @Shadow
-    public abstract ModelBlock deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_) throws JsonParseException;
+    public abstract ModelBlock deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException;
 
-    public ModelBlock func_178327_a(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_) {
-        return this.deserialize(p_deserialize_1_, p_deserialize_2_, p_deserialize_3_);
+    public ModelBlock func_178327_a(JsonElement json, Type type, JsonDeserializationContext context) {
+        return this.deserialize(json, type, context);
     }
 }
