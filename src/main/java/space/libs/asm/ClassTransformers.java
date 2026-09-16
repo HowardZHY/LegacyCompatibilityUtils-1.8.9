@@ -54,17 +54,20 @@ public class ClassTransformers implements IClassTransformer, ICoreUtils {
             } else if (name.startsWith("net")) {
                 if (name.startsWith("net.minecraftfor")) {
                     switch (name) {
-                        case "net.minecraftforge.fml.common.Loader": {
-                            return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, LoaderVisitor.class, 0);
-                        }
-                        case "net.minecraftforge.fml.common.versioning.VersionRange": {
-                            return TransformerUtils.transform(bytes, 0, VersionRangeVisitor.class, 0);
-                        }
                         case "net.minecraftforge.fml.client.event.ConfigChangedEvent": {
                             return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, ConfigChangedEventVisitor.class, 0);
                         }
+                        case "net.minecraftforge.fml.common.Loader": {
+                            return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, LoaderVisitor.class, 0);
+                        }
                         case "net.minecraftforge.fml.common.event.FMLModIdMappingEvent": {
                             return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, FMLModIdMappingEventVisitor.class, 0);
+                        }
+                        case "net.minecraftforge.fml.common.registry.GameRegistry$Type": {
+                            return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, GameRegistryTypeVisitor.class, 0);
+                        }
+                        case "net.minecraftforge.fml.common.versioning.VersionRange": {
+                            return TransformerUtils.transform(bytes, ClassWriter.COMPUTE_MAXS, VersionRangeVisitor.class, 0);
                         }
                         default: {
                             return bytes;
@@ -75,5 +78,4 @@ public class ClassTransformers implements IClassTransformer, ICoreUtils {
         }
         return bytes;
     }
-
 }

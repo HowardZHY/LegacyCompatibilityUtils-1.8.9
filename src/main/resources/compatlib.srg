@@ -1,6 +1,7 @@
 CL: net/minecraft/client/model/ModelBiped$ArmPose net/minecraft/client/model/EnumArmPose
 CL: net/minecraft/client/renderer/GlStateManager$DestFactor net/minecraft/client/renderer/DestFactor
 CL: net/minecraft/client/renderer/GlStateManager$SourceFactor net/minecraft/client/renderer/SourceFactor
+CL: net/minecraft/client/renderer/GlStateManager$SwitchTexGen net/minecraft/client/renderer/SwitchTexGen
 CL: net/minecraft/client/renderer/GlStateManager$Viewport net/minecraft/client/renderer/Viewport
 CL: net/minecraft/client/renderer/RenderItem net/minecraft/client/renderer/entity/RenderItem
 CL: net/minecraft/client/renderer/entity/RenderLivingBase net/minecraft/client/renderer/entity/RendererLivingEntity

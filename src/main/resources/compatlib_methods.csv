@@ -2,6 +2,10 @@
 func_180792_c,func_148180_b
 # net/minecraft/client/gui/GuiPageButtonList
 func_178070_d,func_148180_b
+# net/minecraft/client/renderer/block/model/BlockFaceUV$Deserializer
+func_178293_a,deserialize
+# net/minecraft/client/renderer/block/model/ItemTransformVec3f$Deserializer
+func_178359_a,deserialize
 # net/minecraft/client/renderer/entity/layers/LayerArmorBase
 func_177195_a,func_177179_a
 # net/minecraft/client/renderer/entity/layers/LayerRenderer
@@ -101,5 +105,7 @@ func_180775_a,func_148833_a
 func_180787_a,func_150953_b
 func_180788_c,func_75971_g
 func_180789_a,func_75966_h
+# net/minecraft/util/ChatComponentScore
+func_179996_i,func_150259_f
 # net/minecraft/util/ChatComponentSelector
 func_179991_h,func_150259_f

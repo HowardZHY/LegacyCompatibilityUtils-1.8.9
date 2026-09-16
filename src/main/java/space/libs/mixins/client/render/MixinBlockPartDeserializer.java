@@ -7,13 +7,13 @@ import com.google.gson.JsonParseException;
 import net.minecraft.client.renderer.block.model.BlockPart;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import space.libs.util.cursedmixinextensions.annotations.Public;
+import space.libs.util.client.IMathUtils;
 
 import java.lang.reflect.Type;
 
 @SuppressWarnings("unused")
 @Mixin(targets = "net.minecraft.client.renderer.block.model.BlockPart$Deserializer")
-public abstract class MixinBlockPartDeserializer {
+public abstract class MixinBlockPartDeserializer implements IMathUtils {
 
     @Shadow
     public abstract BlockPart deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_) throws JsonParseException;
@@ -47,10 +47,5 @@ public abstract class MixinBlockPartDeserializer {
 
     public javax.vecmath.Vector3f func_178251_a(JsonObject jo, String s) {
         return TransformVec3f(this.parsePosition(jo, s));
-    }
-
-    @Public
-    private static javax.vecmath.Vector3f TransformVec3f(org.lwjgl.util.vector.Vector3f vec) {
-        return new javax.vecmath.Vector3f(vec.x, vec.y, vec.z);
     }
 }

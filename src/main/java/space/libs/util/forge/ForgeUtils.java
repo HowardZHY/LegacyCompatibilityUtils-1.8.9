@@ -2,6 +2,7 @@ package space.libs.util.forge;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.*;
+import net.minecraftforge.fml.common.registry.*;
 import net.minecraftforge.fml.common.versioning.ArtifactVersion;
 import net.minecraftforge.fml.common.versioning.Restriction;
 
@@ -42,5 +43,14 @@ public abstract class ForgeUtils {
         data.version = version;
         data.authorList.add(author);
         return data;
+    }
+
+    public static FMLControlledNamespacedRegistry<?> getRegistry(GameRegistry.Type type) {
+        if (type == GameRegistry.Type.BLOCK) {
+            return GameData.getBlockRegistry();
+        } else if (type == GameRegistry.Type.ITEM) {
+            return GameData.getItemRegistry();
+        }
+        return null;
     }
 }

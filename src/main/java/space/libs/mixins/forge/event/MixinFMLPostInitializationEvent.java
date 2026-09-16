@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import org.spongepowered.asm.mixin.Mixin;
 
 @SuppressWarnings("unused")
-@Mixin(FMLPostInitializationEvent.class)
+@Mixin(value = FMLPostInitializationEvent.class, remap = false)
 public class MixinFMLPostInitializationEvent {
 
     public Object buildSoftDependProxy(String modId, String className) {

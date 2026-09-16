@@ -7,7 +7,7 @@ import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
 @SuppressWarnings("unused")
-@Mixin(ModRemapping.class)
+@Mixin(value = ModRemapping.class, remap = false)
 public abstract class MixinFMLModIdMappingEventModRemapping {
 
     @ShadowConstructor

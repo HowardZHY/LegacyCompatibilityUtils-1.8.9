@@ -1,16 +1,14 @@
 package space.libs.mixins.client.render.entity;
 
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.ItemModelMesher;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.item.ItemStack;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import space.libs.util.MappedName;
 import space.libs.util.cursedmixinextensions.annotations.Public;
 
 @SuppressWarnings("all")
@@ -18,7 +16,7 @@ import space.libs.util.cursedmixinextensions.annotations.Public;
 public abstract class MixinRenderItem {
 
     @Shadow
-    private @Final ItemModelMesher itemModelMesher;
+    private ItemModelMesher itemModelMesher;
 
     @Shadow
     private void draw(WorldRenderer renderer, int x, int y, int width, int height, int red, int green, int blue, int alpha) {}
@@ -26,48 +24,48 @@ public abstract class MixinRenderItem {
     @Shadow
     protected void renderItemModelTransform(ItemStack stack, IBakedModel model, ItemCameraTransforms.TransformType cameraTransformType) {}
 
-    /** debugItemOffsetX */
+    @MappedName("debugItemOffsetX")
     @Public
     private static float field_175055_b = 0.0F;
 
-    /** debugItemOffsetY */
+    @MappedName("debugItemOffsetY")
     @Public
     private static float field_175056_c = 0.0F;
 
-    /** debugItemOffsetZ */
+    @MappedName("debugItemOffsetZ")
     @Public
     private static float field_175053_d = 0.0F;
 
-    /** debugItemRotationOffsetX */
+    @MappedName("debugItemRotationOffsetX")
     @Public
     private static float field_175054_e = 0.0F;
 
-    /** debugItemRotationOffsetY */
+    @MappedName("debugItemRotationOffsetY")
     @Public
     private static float field_175051_f = 0.0F;
 
-    /** debugItemRotationOffsetZ */
+    @MappedName("debugItemRotationOffsetZ")
     @Public
     private static float field_175052_g = 0.0F;
 
-    /** debugItemScaleX */
+    @MappedName("debugItemScaleX")
     @Public
     private static float field_175061_h = 0.0F;
 
-    /** debugItemScaleY */
+    @MappedName("debugItemScaleY")
     @Public
     private static float field_175062_i = 0.0F;
 
-    /** debugItemScaleZ */
+    @MappedName("debugItemScaleZ")
     @Public
     private static float field_175060_j = 0.0F;
 
-    /** applyTransform */
+    @MappedName("applyTransform")
     public void func_175034_a(ItemTransformVec3f vec3f) {
         this.applyVanillaTransform(vec3f);
     }
 
-    /** renderItemModel */
+    @MappedName("renderItemModel")
     public void func_175043_b(ItemStack stack) {
         if (stack != null) {
             IBakedModel ibakedmodel = this.itemModelMesher.getItemModel(stack);
@@ -75,7 +73,7 @@ public abstract class MixinRenderItem {
         }
     }
 
-    /** drawRect */
+    @MappedName("drawRect")
     public void func_175044_a(WorldRenderer renderer, int x, int y, int width, int height, int color) {
         int r = color >> 16 & 255;
         int g = color >> 8 & 255;
