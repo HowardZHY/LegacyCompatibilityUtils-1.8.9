@@ -1,4 +1,4 @@
-package space.libs.mixins.client;
+package space.libs.mixins.client.gui;
 
 import net.minecraft.client.network.NetworkPlayerInfo;
 import org.spongepowered.asm.mixin.Mixin;

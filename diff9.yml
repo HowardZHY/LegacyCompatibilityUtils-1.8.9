@@ -330,7 +330,7 @@ net/minecraft/server/MinecraftServer:
   - error: func_181035_ah()Z - Method was made abstract
   - error: func_183002_r()Z - Method was made abstract
   - error: func_181034_q()Z - Method was made abstract
-
+    #DONE
 net/minecraft/client/renderer/block/model/FaceBakery$SwitchEnumFacing:
   - error: Class no longer exists
 
@@ -345,7 +345,7 @@ net/minecraft/network/play/server/S49PacketUpdateEntityNBT:
     #DONE
 net/minecraft/client/gui/GuiScreenRealmsProxy:
   - error: func_154322_b(Ljava/lang/String;III)V - Method was removed
-
+    #DONE
 net/minecraft/block/state/pattern/BlockPattern$CacheLoader:
   - error: <init>(Lnet/minecraft/world/World;)V - Method was removed
   - error: func_177679_a(Lnet/minecraft/util/BlockPos;)Lnet/minecraft/block/state/BlockWorldState; - Method was removed

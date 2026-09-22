@@ -5,6 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import space.libs.util.MappedName;
 import space.libs.util.cursedmixinextensions.annotations.Public;
 
 @SuppressWarnings("all")
@@ -16,7 +17,7 @@ public abstract class MixinPositionedSoundRecord {
         throw new AbstractMethodError();
     }
 
-    /** getMasterRecord */
+    @MappedName("getMasterRecord")
     @Public
     private static PositionedSoundRecord func_184371_a(SoundEvent sound, float pitch) {
         return create(sound.func_187503_a(), pitch);

@@ -109,3 +109,5 @@ func_180789_a,func_75966_h
 func_179996_i,func_150259_f
 # net/minecraft/util/ChatComponentSelector
 func_179991_h,func_150259_f
+# net/minecraft/util/Vec3i
+func_177953_g,compareTo
