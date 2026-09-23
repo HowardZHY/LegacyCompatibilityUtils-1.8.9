@@ -15,21 +15,19 @@ import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 public class MixinWorldGenTrees extends MixinWorldGenAbstractTree {
 
     @ShadowConstructor
-    public void WorldGenTrees(boolean p_i46446_1_, int p_i46446_2_, IBlockState p_i46446_3_, IBlockState p_i46446_4_, boolean p_i46446_5_) {}
+    public void WorldGenTrees(boolean notify, int height, IBlockState wood, IBlockState leaves, boolean vines) {}
 
     @NewConstructor
-    public void WorldGenTrees(boolean p_i2028_1_, int p_i2028_2_, int p_i2028_3_, int p_i2028_4_, boolean p_i2028_5_) {
-        this.WorldGenTrees(p_i2028_1_, p_i2028_2_, Blocks.log.getStateFromMeta(p_i2028_3_), Blocks.leaves.getStateFromMeta(p_i2028_4_), p_i2028_5_);
+    public void WorldGenTrees(boolean notify, int height, int wood, int leaves, boolean vines) {
+        this.WorldGenTrees(notify, height, Blocks.log.getStateFromMeta(wood), Blocks.leaves.getStateFromMeta(leaves), vines);
     }
 
-    public void func_175923_a(World worldIn, BlockPos pos, int p_175923_3_) {
-        this.func_175905_a(worldIn, pos, Blocks.vine, p_175923_3_);
+    public void func_175923_a(World worldIn, BlockPos pos, int meta) {
+        this.func_175905_a(worldIn, pos, Blocks.vine, meta);
         int var4 = 4;
-
         for (pos = pos.down(); worldIn.getBlockState(pos).getBlock().getMaterial() == Material.air && var4 > 0; --var4) {
-            this.func_175905_a(worldIn, pos, Blocks.vine, p_175923_3_);
+            this.func_175905_a(worldIn, pos, Blocks.vine, meta);
             pos = pos.down();
         }
     }
-
 }

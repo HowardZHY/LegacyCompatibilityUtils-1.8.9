@@ -29,6 +29,16 @@ public abstract class ForgeUtils {
         return convertedMap;
     }
 
+    public static ResourceLocation convertRLNullable(Object thing) {
+        if (thing == null) {
+            return null;
+        } else if (thing instanceof ResourceLocation) {
+            return (ResourceLocation) thing;
+        } else {
+            return new ResourceLocation(thing.toString());
+        }
+    }
+
     public static boolean checkVersion(Restriction restriction, ArtifactVersion version) {
         if (version.getVersionString().contains("1.8")) {
             return true;

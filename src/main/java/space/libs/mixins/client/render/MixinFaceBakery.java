@@ -9,6 +9,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import space.libs.util.client.IMathUtils;
 
+import static space.libs.util.client.IMathUtils.*;
+
 @SuppressWarnings("unused")
 @Mixin(FaceBakery.class)
 public abstract class MixinFaceBakery implements IMathUtils {
@@ -41,11 +43,11 @@ public abstract class MixinFaceBakery implements IMathUtils {
     }
 
     public BakedQuad makeBakedQuad(javax.vecmath.Vector3f posFrom, javax.vecmath.Vector3f posTo, BlockPartFace face, TextureAtlasSprite sprite, EnumFacing facing, net.minecraftforge.client.model.ITransformation modelRotationIn, BlockPartRotation partRotation, boolean uvLocked, boolean shade) {
-        return this.makeBakedQuad(TransformVec3f(posFrom), TransformVec3f(posTo), face, sprite, facing, modelRotationIn, partRotation, uvLocked, shade);
+        return this.makeBakedQuad(TransformVector3f(posFrom), TransformVector3f(posTo), face, sprite, facing, modelRotationIn, partRotation, uvLocked, shade);
     }
 
     public float[] func_178403_a(javax.vecmath.Vector3f pos1, javax.vecmath.Vector3f pos2) {
-        return this.getPositionsDiv16(TransformVec3f(pos1), TransformVec3f(pos2));
+        return this.getPositionsDiv16(TransformVector3f(pos1), TransformVector3f(pos2));
     }
 
     public void func_178404_a(int[] faceData, int storeIndex, int vertexIndex, javax.vecmath.Vector3d pos, int shadeColor, TextureAtlasSprite sprite, BlockFaceUV faceUV) {
@@ -67,7 +69,7 @@ public abstract class MixinFaceBakery implements IMathUtils {
     }
 
     public BakedQuad func_178414_a(javax.vecmath.Vector3f posFrom, javax.vecmath.Vector3f posTo, BlockPartFace face, TextureAtlasSprite sprite, EnumFacing facing, ModelRotation modelRotationIn, BlockPartRotation partRotation, boolean uvLocked, boolean shade) {
-        return this.makeBakedQuad(TransformVec3f(posFrom), TransformVec3f(posTo), face, sprite, facing, modelRotationIn, partRotation, uvLocked, shade);
+        return this.makeBakedQuad(TransformVector3f(posFrom), TransformVector3f(posTo), face, sprite, facing, modelRotationIn, partRotation, uvLocked, shade);
     }
 
     public int func_178415_a(javax.vecmath.Vector3d position, EnumFacing facing, int vertexIndex, ModelRotation modelRotationIn, boolean uvLocked) {

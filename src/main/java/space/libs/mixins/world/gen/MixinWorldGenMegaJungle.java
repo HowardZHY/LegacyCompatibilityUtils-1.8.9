@@ -16,16 +16,16 @@ import java.util.Random;
 public class MixinWorldGenMegaJungle extends MixinWorldGenHugeTrees {
 
     @ShadowConstructor
-    public void WorldGenMegaJungle(boolean p_i46447_1_, int p_i46447_2_, int p_i46447_3_, IBlockState p_i46447_4_, IBlockState p_i46447_5_) {}
+    public void WorldGenMegaJungle(boolean notify, int height1, int height2, IBlockState wood, IBlockState leaves) {}
 
     @NewConstructor
-    public void WorldGenMegaJungle(boolean p_i45456_1_, int p_i45456_2_, int p_i45456_3_, int p_i45456_4_, int p_i45456_5_) {
-        WorldGenMegaJungle(p_i45456_1_, p_i45456_2_, p_i45456_3_, Blocks.log.getStateFromMeta(p_i45456_4_), Blocks.leaves.getStateFromMeta(p_i45456_5_));
+    public void WorldGenMegaJungle(boolean notify, int height1, int height2, int wood, int leaves) {
+        WorldGenMegaJungle(notify, height1, height2, Blocks.log.getStateFromMeta(wood), Blocks.leaves.getStateFromMeta(leaves));
     }
 
-    public void func_175932_b(World world, Random r, BlockPos pos, int p_175932_4_) {
+    public void func_175932_b(World world, Random r, BlockPos pos, int meta) {
         if (r.nextInt(3) > 0 && world.isAirBlock(pos)) {
-            this.func_175905_a(world, pos, Blocks.vine, p_175932_4_);
+            this.func_175905_a(world, pos, Blocks.vine, meta);
         }
     }
 }

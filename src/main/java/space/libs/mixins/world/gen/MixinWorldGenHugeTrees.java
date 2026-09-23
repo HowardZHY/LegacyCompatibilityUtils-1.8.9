@@ -12,10 +12,10 @@ import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 public class MixinWorldGenHugeTrees extends MixinWorldGenAbstractTree {
 
     @ShadowConstructor
-    public void WorldGenHugeTrees(boolean p_i46447_1_, int p_i46447_2_, int p_i46447_3_, IBlockState p_i46447_4_, IBlockState p_i46447_5_) {}
+    public void WorldGenHugeTrees(boolean notify, int height1, int height2, IBlockState wood, IBlockState leaves) {}
 
     @NewConstructor
-    public void WorldGenHugeTrees(boolean p_i45458_1_, int p_i45458_2_, int p_i45458_3_, int p_i45458_4_, int p_i45458_5_) {
-        this.WorldGenHugeTrees(p_i45458_1_, p_i45458_2_, p_i45458_3_, Blocks.log.getStateFromMeta(p_i45458_4_), Blocks.leaves.getStateFromMeta(p_i45458_5_));
+    public void WorldGenHugeTrees(boolean notify, int height1, int height2, int wood, int leaves) {
+        this.WorldGenHugeTrees(notify, height1, height2, Blocks.log.getStateFromMeta(wood), Blocks.leaves.getStateFromMeta(leaves));
     }
 }

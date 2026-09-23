@@ -11,6 +11,8 @@ import space.libs.util.MappedName;
 import space.libs.util.client.IMathUtils;
 import space.libs.util.cursedmixinextensions.annotations.Public;
 
+import static space.libs.util.client.IMathUtils.*;
+
 @SuppressWarnings("unused")
 @Mixin(value = RenderGlobal.class, priority = 100)
 public abstract class MixinRenderGlobal implements IMathUtils {
@@ -20,11 +22,6 @@ public abstract class MixinRenderGlobal implements IMathUtils {
 
     @Shadow
     private ViewFrustum viewFrustum;
-
-    @Shadow
-    private RenderChunk getRenderChunkOffset(BlockPos playerPos, RenderChunk renderChunkBase, EnumFacing facing) {
-        throw new AbstractMethodError();
-    }
 
     @Shadow
     protected abstract org.lwjgl.util.vector.Vector3f getViewVector(Entity entityIn, double partialTicks);
@@ -40,11 +37,20 @@ public abstract class MixinRenderGlobal implements IMathUtils {
 
     @MappedName("getViewVector")
     public javax.vecmath.Vector3f func_174962_a(Entity entityIn, double partialTicks) {
-        return TransformVec3f(this.getViewVector(entityIn, partialTicks));
+        return TransformVecMath3f(this.getViewVector(entityIn, partialTicks));
     }
 
+    /** @implNote Original getRenderChunkOffset was removed by OptiFine */
     @MappedName("getRenderChunkOffset")
     public RenderChunk func_174973_a(BlockPos playerPos, RenderChunk renderChunkBase, EnumFacing facing) {
-        return this.getRenderChunkOffset(playerPos, renderChunkBase, facing);
+        BlockPos blockpos = renderChunkBase.getBlockPosOffset16(facing);
+        return MathHelper.abs_int(playerPos.getX() - blockpos.getX()) >
+            this.renderDistanceChunks * 16 ? null : (
+            blockpos.getY() >= 0 && blockpos.getY() < 256 ? (
+                MathHelper.abs_int(
+                    playerPos.getZ() - blockpos.getZ()
+                ) > this.renderDistanceChunks * 16 ? null : this.viewFrustum.getRenderChunk(blockpos)
+            ) : null
+        );
     }
 }

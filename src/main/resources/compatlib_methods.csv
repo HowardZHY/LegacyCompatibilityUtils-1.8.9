@@ -1,3 +1,5 @@
+# net/minecraft/block/state/pattern/BlockPattern$CacheLoader
+func_177679_a,load
 # net/minecraft/client/gui/GuiOptionsRowList
 func_180792_c,func_148180_b
 # net/minecraft/client/gui/GuiPageButtonList
@@ -37,6 +39,16 @@ func_180541_a,func_180535_a
 func_180542_a,func_180535_a
 func_180544_a,func_180535_a
 func_180545_a,func_180535_a
+# net/minecraft/entity/EntityAgeable
+func_175526_b,func_90011_a
+func_180488_b,func_90011_a
+func_180491_b,func_90011_a
+func_180493_b,func_90011_a
+# net/minecraft/entity/ai/attributes/ServersideAttributeMap
+func_180795_e,func_111151_a
+func_180796_b,func_111152_a
+# net/minecraft/entity/passive/EntityTameable
+func_180492_cm,func_70902_q
 # net/minecraft/network/NettyCompressionEncoder
 func_179298_a,encode
 # net/minecraft/network/Packet
@@ -101,6 +113,10 @@ func_180772_a,func_148833_a
 func_180773_a,func_148833_a
 func_180774_a,func_148833_a
 func_180775_a,func_148833_a
+# net/minecraft/server/management/UserList
+func_152699_b,func_152681_b
+func_152701_b,func_152681_b
+func_152704_b,func_152681_b
 # net/minecraft/stats/Achievement
 func_180787_a,func_150953_b
 func_180788_c,func_75971_g

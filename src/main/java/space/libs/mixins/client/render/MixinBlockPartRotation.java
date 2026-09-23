@@ -7,6 +7,8 @@ import space.libs.util.client.IMathUtils;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
+import static space.libs.util.client.IMathUtils.*;
+
 @SuppressWarnings("unused")
 @Mixin(BlockPartRotation.class)
 public class MixinBlockPartRotation implements IMathUtils {
@@ -16,6 +18,6 @@ public class MixinBlockPartRotation implements IMathUtils {
 
     @NewConstructor
     public void BlockPartRotation(javax.vecmath.Vector3f originIn, EnumFacing.Axis axisIn, float angleIn, boolean rescaleIn) {
-        BlockPartRotation(TransformVec3f(originIn), axisIn, angleIn, rescaleIn);
+        BlockPartRotation(TransformVector3f(originIn), axisIn, angleIn, rescaleIn);
     }
 }

@@ -2,10 +2,7 @@ package space.libs.mixins.entity;
 
 import com.google.common.collect.Sets;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.*;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,19 +16,10 @@ import java.util.Set;
 public abstract class MixinEntity {
 
     @Shadow
-    public double prevPosX;
+    public double prevPosX, prevPosZ;
 
     @Shadow
-    public double prevPosZ;
-
-    @Shadow
-    public double posX;
-
-    @Shadow
-    public double posY;
-
-    @Shadow
-    public double posZ;
+    public double posX, posY, posZ;
 
     @Shadow
     public World worldObj;
@@ -49,14 +37,10 @@ public abstract class MixinEntity {
     public int timeUntilPortal;
 
     @Shadow
-    public int getPortalCooldown() {
-        return 300;
-    }
+    public abstract int getPortalCooldown();
 
     @Shadow
-    public boolean isRiding() {
-        return false;
-    }
+    public abstract boolean isRiding();
 
     @Shadow
     public void addChatMessage(IChatComponent component) {}
@@ -74,10 +58,8 @@ public abstract class MixinEntity {
         } else {
             double x = this.prevPosX - this.posX;
             double y = this.prevPosZ - this.posZ;
-
             if (!this.worldObj.isRemote && !this.inPortal) {
                 int facing;
-
                 if (MathHelper.abs((float) x) > MathHelper.abs((float) y)) {
                     facing = x > 0.0D ? EnumFacing.WEST.getHorizontalIndex() : EnumFacing.EAST.getHorizontalIndex();
                 } else {
@@ -86,7 +68,6 @@ public abstract class MixinEntity {
                 this.teleportDirection = EnumFacing.getHorizontal(facing);
                 this.field_82152_aq = this.teleportDirection.getHorizontalIndex();
             }
-
             this.inPortal = true;
         }
     }
@@ -114,15 +95,15 @@ public abstract class MixinEntity {
     }
 
     @MappedName(value = "removeTag", since = "1.9")
-    public boolean func_184197_b(String p_184197_1_) {
-        return this.field_184236_aF.remove(p_184197_1_);
+    public boolean func_184197_b(String tag) {
+        return this.field_184236_aF.remove(tag);
     }
 
     @MappedName(value = "addTag", since = "1.9")
-    public boolean func_184211_a(String p_184211_1_) {
+    public boolean func_184211_a(String tag) {
         if (this.field_184236_aF.size() >= 1024)
             return false;
-        this.field_184236_aF.add(p_184211_1_);
+        this.field_184236_aF.add(tag);
         return true;
     }
 

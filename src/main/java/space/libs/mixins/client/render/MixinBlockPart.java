@@ -9,6 +9,8 @@ import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
 import java.util.Map;
 
+import static space.libs.util.client.IMathUtils.*;
+
 @SuppressWarnings("unused")
 @Mixin(BlockPart.class)
 public class MixinBlockPart implements IMathUtils {
@@ -18,6 +20,6 @@ public class MixinBlockPart implements IMathUtils {
 
     @NewConstructor
     public void BlockPart(javax.vecmath.Vector3f positionFromIn, javax.vecmath.Vector3f positionToIn, Map<EnumFacing, BlockPartFace> mapFacesIn, BlockPartRotation partRotationIn, boolean shadeIn) {
-        BlockPart(TransformVec3f(positionFromIn), TransformVec3f(positionToIn), mapFacesIn, partRotationIn, shadeIn);
+        BlockPart(TransformVector3f(positionFromIn), TransformVector3f(positionToIn), mapFacesIn, partRotationIn, shadeIn);
     }
 }

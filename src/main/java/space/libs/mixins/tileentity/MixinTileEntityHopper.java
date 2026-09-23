@@ -16,7 +16,7 @@ import java.util.List;
 public abstract class MixinTileEntityHopper implements IUpdatePlayerListBox {
 
     @Shadow
-    public abstract void update();
+    public void update() {}
 
     @SuppressWarnings("SizeReplaceableByIsEmpty")
     @Public

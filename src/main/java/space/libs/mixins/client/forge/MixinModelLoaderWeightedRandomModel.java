@@ -4,14 +4,26 @@
  */
 package space.libs.mixins.client.forge;
 
+import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraftforge.client.model.IModelPart;
 import net.minecraftforge.client.model.IModelState;
 import net.minecraftforge.client.model.MapModelState;
 import org.spongepowered.asm.mixin.Mixin;
+import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
+import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
 @SuppressWarnings("unused")
-@Mixin(targets = "net.minecraftforge.client.model.ModelLoader$WeightedRandomModel")
+@Mixin(targets = "net.minecraftforge.client.model.ModelLoader$WeightedRandomModel", remap = false)
 public class MixinModelLoaderWeightedRandomModel implements IModelPart {
+
+    @ShadowConstructor
+    public void WeightedRandomModel(ModelResourceLocation parent, ModelBlockDefinition.Variants variants) {}
+
+    @NewConstructor
+    public void WeightedRandomModel(ModelBlockDefinition.Variants variants) {
+        WeightedRandomModel(null, variants);
+    }
 
     public IModelState getState(IModelState state, IModelPart part) {
         if (state instanceof MapModelState) {

@@ -15,6 +15,7 @@ import space.libs.CompatLib;
 import space.libs.interfaces.IFMLControlledNamespacedRegistry;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
+import space.libs.util.forge.ForgeUtils;
 
 import java.util.BitSet;
 import java.util.Map;
@@ -91,7 +92,7 @@ public class MixinFMLControlledNamespacedRegistry<K, I> extends RegistryNamespac
 
     @NewConstructor
     public void FMLControlledNamespacedRegistry(Object defaultKey, int maxIdValue, int minIdValue, Class<I> type) {
-        FMLControlledNamespacedRegistry(new ResourceLocation((String) defaultKey), maxIdValue, minIdValue, type, false);
+        FMLControlledNamespacedRegistry(ForgeUtils.convertRLNullable(defaultKey), maxIdValue, minIdValue, type, false);
     }
 
     public void validateContent(int maxId, String type, BitSet availabilityMap, Set<Integer> blockedIds, FMLControlledNamespacedRegistry<Block> iBlockRegistry) {
@@ -178,10 +179,11 @@ public class MixinFMLControlledNamespacedRegistry<K, I> extends RegistryNamespac
 
     public void serializeInto(Map<String, Integer> idMapping) {
         for (I thing : this.typeSafeIterable()) {
-            idMapping.put(getNameForObject(thing).toString(), getId(thing.toString()));
+            idMapping.put(getNameForObject(thing).toString(), getIDForObject(thing));
         }
     }
 
+    @Deprecated
     public BitSet internalAvailabilityMap = new BitSet();
 
     public int add(int id, String name, Object thing) {

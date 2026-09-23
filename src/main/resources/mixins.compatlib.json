@@ -20,8 +20,10 @@
     "client.MixinNetworkManager",
     "client.MixinPlayerControllerMP",
     "client.MixinPositionedSoundRecord",
+    "client.MixinResourcePackListEntry",
     "client.MixinServerData",
     "client.MixinSoundHandler",
+    "client.forge.MixinAnimation",
     "client.forge.MixinAttributes",
     "client.forge.MixinB3DLoaderB3DState",
     "client.forge.MixinB3DLoaderModelWrapper",
@@ -185,11 +187,14 @@
     "block.MixinBlockHelper",
     "block.MixinBlockHugeMushroom",
     "block.MixinBlockLever",
+    "block.MixinBlockPatternCacheLoader",
+    "block.MixinBlockPatternHelper",
     "block.MixinBlockPressurePlateWeighted",
     "block.MixinBlockSourceImpl",
     "block.MixinBlockState1",
     "block.MixinBlockState2",
     "block.MixinBlockStateHelper",
+    "block.MixinBlockStateImplementatio",
     "block.MixinBlockVine",
     "block.MixinBlockWorldState",
     "entity.MixinDataWatcher",
@@ -211,7 +216,6 @@
     "entity.MixinEntityTameable",
     "entity.MixinEntityVillager",
     "entity.MixinEntityZombie",
-    "entity.MixinServersideAttributeMap",
     "forge.MixinBiomeManager",
     "forge.MixinExistingSubstitutionException",
     "forge.MixinFluid",
@@ -284,5 +288,8 @@
     "world.gen.MixinWorldGenShrub",
     "world.gen.MixinWorldGenSwamp",
     "world.gen.MixinWorldGenTrees"
+  ],
+  "server": [
+    "server.MixinPlayerListComponent"
   ]
 }

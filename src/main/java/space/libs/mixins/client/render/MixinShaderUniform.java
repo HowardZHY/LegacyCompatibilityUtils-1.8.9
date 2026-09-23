@@ -5,6 +5,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import space.libs.util.client.IMathUtils;
 
+import static space.libs.util.client.IMathUtils.*;
+
 @SuppressWarnings("unused")
 @Mixin(ShaderUniform.class)
 public abstract class MixinShaderUniform implements IMathUtils {

@@ -6,19 +6,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public interface IMathUtils {
 
-    default javax.vecmath.Vector3f TransformVec3f(org.lwjgl.util.vector.Vector3f vec) {
+    static javax.vecmath.Vector3f TransformVecMath3f(org.lwjgl.util.vector.Vector3f vec) {
         return new javax.vecmath.Vector3f(vec.x, vec.y, vec.z);
     }
 
-    default org.lwjgl.util.vector.Vector3f TransformVec3f(javax.vecmath.Vector3f vec) {
+    static org.lwjgl.util.vector.Vector3f TransformVector3f(javax.vecmath.Vector3f vec) {
         return new org.lwjgl.util.vector.Vector3f(vec.x, vec.y, vec.z);
     }
 
-    default org.lwjgl.util.vector.Vector3f TransformVec3dTo3f(javax.vecmath.Vector3d vec) {
+    static org.lwjgl.util.vector.Vector3f TransformVec3dTo3f(javax.vecmath.Vector3d vec) {
         return new org.lwjgl.util.vector.Vector3f((float) vec.x, (float) vec.y, (float) vec.z);
     }
 
-    default javax.vecmath.Matrix4d TransformMat4fTo4d(org.lwjgl.util.vector.Matrix4f mat) {
+    static javax.vecmath.Matrix4d TransformMat4fTo4d(org.lwjgl.util.vector.Matrix4f mat) {
         javax.vecmath.Matrix4d vecM4d = new javax.vecmath.Matrix4d();
         vecM4d.m00 = mat.m00;
         vecM4d.m01 = mat.m01;
@@ -39,7 +39,7 @@ public interface IMathUtils {
         return vecM4d;
     }
 
-    default org.lwjgl.util.vector.Matrix4f TransformMat4f(javax.vecmath.Matrix4f mat) {
+    static org.lwjgl.util.vector.Matrix4f TransformMat4f(javax.vecmath.Matrix4f mat) {
         org.lwjgl.util.vector.Matrix4f lwjglM4f = new org.lwjgl.util.vector.Matrix4f();
         lwjglM4f.m00 = mat.m00;
         lwjglM4f.m01 = mat.m01;
@@ -60,7 +60,7 @@ public interface IMathUtils {
         return lwjglM4f;
     }
 
-    default org.lwjgl.util.vector.Matrix4f TransformMat4dTo4f(javax.vecmath.Matrix4d mat) {
+    static org.lwjgl.util.vector.Matrix4f TransformMat4dTo4f(javax.vecmath.Matrix4d mat) {
         return TransformMat4f(new javax.vecmath.Matrix4f(mat));
     }
 }

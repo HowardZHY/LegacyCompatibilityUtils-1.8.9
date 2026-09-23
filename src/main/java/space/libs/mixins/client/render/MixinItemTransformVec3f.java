@@ -12,6 +12,8 @@ import space.libs.util.client.IMathUtils;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
+import static space.libs.util.client.IMathUtils.*;
+
 @SuppressWarnings("all")
 @Mixin(value = ItemTransformVec3f.class, priority = 100)
 public abstract class MixinItemTransformVec3f implements Function<IModelPart, TRSRTransformation>, IMathUtils {
@@ -42,14 +44,14 @@ public abstract class MixinItemTransformVec3f implements Function<IModelPart, TR
 
     @NewConstructor
     public void ItemTransformVec3f(javax.vecmath.Vector3f rotation, javax.vecmath.Vector3f translation, javax.vecmath.Vector3f scale) {
-        this.ItemTransformVec3f(TransformVec3f(rotation), TransformVec3f(translation), TransformVec3f(scale));
+        this.ItemTransformVec3f(TransformVector3f(rotation), TransformVector3f(translation), TransformVector3f(scale));
     }
 
     @Inject(method = "<init>(Lorg/lwjgl/util/vector/Vector3f;Lorg/lwjgl/util/vector/Vector3f;Lorg/lwjgl/util/vector/Vector3f;)V", at = @At("RETURN"))
     public void init(org.lwjgl.util.vector.Vector3f rotation, org.lwjgl.util.vector.Vector3f translation, org.lwjgl.util.vector.Vector3f scale, CallbackInfo ci) {
-        this.field_178364_b = TransformVec3f(rotation);
-        this.field_178365_c = TransformVec3f(translation);
-        this.field_178363_d = TransformVec3f(scale);
+        this.field_178364_b = TransformVecMath3f(rotation);
+        this.field_178365_c = TransformVecMath3f(translation);
+        this.field_178363_d = TransformVecMath3f(scale);
     }
 
     @Override

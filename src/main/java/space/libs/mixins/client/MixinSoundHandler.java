@@ -9,6 +9,6 @@ import org.spongepowered.asm.mixin.Shadow;
 public abstract class MixinSoundHandler implements IUpdatePlayerListBox {
 
     @Shadow
-    public abstract void update();
+    public void update() {}
 
 }

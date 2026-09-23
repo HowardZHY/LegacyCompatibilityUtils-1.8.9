@@ -6,13 +6,14 @@ import net.minecraft.util.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import space.libs.util.MappedName;
 import space.libs.util.cursedmixinextensions.annotations.Public;
 
 import static net.minecraft.entity.EntityList.classToStringMapping;
 
 @SuppressWarnings("unused")
 @Mixin(EntityList.class)
-public class MixinEntityList {
+public abstract class MixinEntityList {
 
     /**
      * @reason Restore old behavior that forge didn't restrict
@@ -22,7 +23,7 @@ public class MixinEntityList {
         return 4095;
     }
 
-    /** getKey */
+    @MappedName("getKey")
     @Public
     private static ResourceLocation func_191301_a(Entity entity) {
         return func_191306_a(entity.getClass());
