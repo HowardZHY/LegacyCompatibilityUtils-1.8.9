@@ -14,28 +14,21 @@ public abstract class MixinWorldRendererState implements IWorldRendererState {
     @Shadow
     public abstract int getVertexCount();
 
-    @ShadowSuperConstructor
-    public void Object() {}
-
     @ShadowConstructor
-    public void State(int[] buffer, VertexFormat format) {}
+    public void State(WorldRenderer outer, int[] buffer, VertexFormat format) {}
 
-    /**
-     * @param dummy
-     * @reason unknown cause first int[] disappear
-     */
     @NewConstructor
-    public void State(int[] dummy, int[] buffer, int p_i46274_3_, VertexFormat format) {
-        State(buffer, format);
-        this.field_179020_c = p_i46274_3_;
+    public void State(WorldRenderer outer, int[] buffer, int index, VertexFormat format) {
+        State(outer, buffer, format);
+        this.field_179020_c = index;
         this.field_179017_d = this.getVertexCount();
     }
 
     @NewConstructor
-    public void State(int[] dummy, int[] buffer, int p_i46274_3_, int p_i46274_4_, VertexFormat format) {
-        State(buffer, format);
-        this.field_179020_c = p_i46274_3_;
-        this.field_179017_d = p_i46274_4_;
+    public void State(WorldRenderer outer, int[] buffer, int index, int count, VertexFormat format) {
+        State(outer, buffer, format);
+        this.field_179020_c = index;
+        this.field_179017_d = count;
     }
 
     @MappedName("stateRawBufferIndex")
@@ -45,10 +38,12 @@ public abstract class MixinWorldRendererState implements IWorldRendererState {
     public int field_179017_d;
 
     @MappedName("getRawBufferIndex")
+    @Override
     public int func_179015_b() {
         return this.field_179020_c;
     }
 
+    @Override
     public void setRawBufferIndex(int index) {
         this.field_179020_c = index;
         this.field_179017_d = this.getVertexCount();

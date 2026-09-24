@@ -21,21 +21,48 @@ import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
 @SuppressWarnings({"unused", "deprecation"})
 @Mixin(value = ModelFluid.BakedFluid.class, remap = false)
-public class MixinModelFluidBakedFluid {
+public abstract class MixinModelFluidBakedFluid {
 
     public Optional<IExtendedBlockState> state;
 
     @ShadowConstructor
-    public void BakedFluid(Optional<TRSRTransformation> transformation, VertexFormat format, int color, TextureAtlasSprite still, TextureAtlasSprite flowing, boolean gas, Optional<IExtendedBlockState> stateOption) {}
+    public void BakedFluid(
+        Optional<TRSRTransformation> transformation, VertexFormat format,
+        int color, TextureAtlasSprite still, TextureAtlasSprite flowing,
+        boolean gas, Optional<IExtendedBlockState> stateOption) {}
+
+    @ShadowConstructor
+    public void BakedFluid(
+        Optional<TRSRTransformation> transformation,
+        ImmutableMap<ItemCameraTransforms.TransformType, TRSRTransformation> transforms,
+        VertexFormat format, int color,
+        TextureAtlasSprite still, TextureAtlasSprite flowing, boolean gas,
+        boolean statePresent, int[] cornerRound, int flowRound) {}
 
     @NewConstructor
-    public void BakedFluid(TRSRTransformation transformation, VertexFormat format, int color, TextureAtlasSprite still, TextureAtlasSprite flowing, boolean gas) {
+    public void BakedFluid(
+        TRSRTransformation transformation, VertexFormat format, int color,
+        TextureAtlasSprite still, TextureAtlasSprite flowing, boolean gas)
+    {
         BakedFluid(transformation, format, color, still, flowing, gas, Optional.absent());
     }
 
     @NewConstructor
-    public void BakedFluid(TRSRTransformation transformation, VertexFormat format, int color, TextureAtlasSprite still, TextureAtlasSprite flowing, boolean gas, Optional<IExtendedBlockState> stateOption) {
+    public void BakedFluid(
+        TRSRTransformation transformation, VertexFormat format, int color,
+        TextureAtlasSprite still, TextureAtlasSprite flowing,
+        boolean gas, Optional<IExtendedBlockState> stateOption)
+    {
         BakedFluid(Optional.fromNullable(transformation), format, color, still, flowing, gas, stateOption);
+    }
+
+    @NewConstructor
+    public void BakedFluid(
+        Optional<TRSRTransformation> transformation, VertexFormat format, int color,
+        TextureAtlasSprite still, TextureAtlasSprite flowing, boolean gas,
+        boolean statePresent, int[] cornerRound, int flowRound)
+    {
+        BakedFluid(transformation, ImmutableMap.of(), format, color, still, flowing, gas, statePresent, cornerRound, flowRound);
     }
 
     @Inject(

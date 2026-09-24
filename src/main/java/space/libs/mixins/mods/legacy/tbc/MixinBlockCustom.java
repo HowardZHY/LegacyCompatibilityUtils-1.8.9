@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
+@SuppressWarnings("all")
 @Mixin(value = BlockCustom.class, remap = false)
 public class MixinBlockCustom extends Block {
 

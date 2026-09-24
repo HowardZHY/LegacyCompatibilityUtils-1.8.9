@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
+@SuppressWarnings("all")
 @Mixin(BlockCustomOre.class)
 public abstract class MixinBlockCustomOre extends BlockOre {
 

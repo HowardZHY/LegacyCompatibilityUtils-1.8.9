@@ -11,10 +11,10 @@ import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 public abstract class MixinModRemapping {
 
     @ShadowConstructor
-    public void ModRemapping(int oldId, int newId, ResourceLocation tag, FMLModIdMappingEvent.RemapTarget type) {}
+    public void ModRemapping(FMLModIdMappingEvent outer, int oldId, int newId, ResourceLocation tag, FMLModIdMappingEvent.RemapTarget type) {}
 
     @NewConstructor
-    public void ModRemapping(int oldId, int newId, String tag, FMLModIdMappingEvent.RemapTarget type) {
-        ModRemapping(oldId, newId, new ResourceLocation(tag), type);
+    public void ModRemapping(FMLModIdMappingEvent outer, int oldId, int newId, String tag, FMLModIdMappingEvent.RemapTarget type) {
+        ModRemapping(outer, oldId, newId, new ResourceLocation(tag), type);
     }
 }

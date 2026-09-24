@@ -11,7 +11,7 @@ import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 public class MixinBlockPressurePlateWeighted {
 
     @ShadowConstructor
-    protected void BlockPressurePlateWeighted(Material p_i46379_1_, int p_i46379_2_) {}
+    protected void BlockPressurePlateWeighted(Material m, int i) {}
 
     @NewConstructor
     public void BlockPressurePlateWeighted(String s, Material m, int i) {

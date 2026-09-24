@@ -20,11 +20,11 @@ public class MixinFMLMissingMappingsEvent {
     private FMLMissingMappingsEvent.Action action;
 
     @ShadowConstructor
-    public void MissingMapping(GameRegistry.Type type, ResourceLocation name, int id) {}
+    public void MissingMapping(FMLMissingMappingsEvent outer, GameRegistry.Type type, ResourceLocation name, int id) {}
 
     @NewConstructor
-    public void MissingMapping(GameRegistry.Type type, String name, int id) {
-        MissingMapping(type, new ResourceLocation(name), id);
+    public void MissingMapping(FMLMissingMappingsEvent outer, GameRegistry.Type type, String name, int id) {
+        MissingMapping(outer, type, new ResourceLocation(name), id);
     }
 
     public void setAction(FMLMissingMappingsEvent.Action action) {

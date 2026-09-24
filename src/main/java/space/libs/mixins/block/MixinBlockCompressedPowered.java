@@ -13,7 +13,6 @@ import space.libs.util.cursedmixinextensions.annotations.ShadowSuperConstructor;
 @ChangeSuperClass(BlockCompressed.class)
 public class MixinBlockCompressedPowered extends MixinBlock {
 
-
     @ShadowSuperConstructor
     public void BlockCompressed(MapColor color) {}
 

@@ -26,11 +26,11 @@ import java.util.List;
 public abstract class MixinModelLoaderVanillaModelWrapper implements IModelPart {
 
     @ShadowConstructor
-    public void VanillaModelWrapper(ResourceLocation location, ModelBlock model, ModelBlockAnimation animation) {}
+    public void VanillaModelWrapper(ModelLoader outer, ResourceLocation location, ModelBlock model, ModelBlockAnimation animation) {}
 
     @NewConstructor
-    public void VanillaModelWrapper(ResourceLocation location, ModelBlock model) {
-        VanillaModelWrapper(location, model, Animation.INSTANCE.loadVanillaAnimation(null));
+    public void VanillaModelWrapper(ModelLoader outer, ResourceLocation location, ModelBlock model) {
+        VanillaModelWrapper(outer, location, model, Animation.INSTANCE.loadVanillaAnimation(null));
     }
 
     @Shadow

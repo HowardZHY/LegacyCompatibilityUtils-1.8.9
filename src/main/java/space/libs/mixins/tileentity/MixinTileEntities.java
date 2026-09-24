@@ -15,11 +15,11 @@ import org.spongepowered.asm.mixin.*;
         "net.minecraft.tileentity.TileEntityFurnace",
         "net.minecraft.tileentity.TileEntityMobSpawner",
         "net.minecraft.tileentity.TileEntityPiston"
-    }
+    }, remap = false
 )
 public abstract class MixinTileEntities implements IUpdatePlayerListBox {
 
-    @Shadow
+    @Shadow(aliases = "func_73660_a")
     @Override
     public abstract void update();
 

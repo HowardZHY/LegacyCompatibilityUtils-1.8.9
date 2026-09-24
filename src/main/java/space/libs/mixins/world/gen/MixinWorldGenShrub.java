@@ -12,10 +12,10 @@ import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 public class MixinWorldGenShrub extends MixinWorldGenTrees {
 
     @ShadowConstructor
-    public void WorldGenShrub(IBlockState p_i46450_1_, IBlockState p_i46450_2_) {}
+    public void WorldGenShrub(IBlockState wood, IBlockState leaves) {}
 
     @NewConstructor
-    public void WorldGenShrub(int p_i2015_1_, int p_i2015_2_) {
-        this.WorldGenShrub(Blocks.log.getStateFromMeta(p_i2015_1_), Blocks.leaves.getStateFromMeta(p_i2015_2_));
+    public void WorldGenShrub(int wood, int leaves) {
+        this.WorldGenShrub(Blocks.log.getStateFromMeta(wood), Blocks.leaves.getStateFromMeta(leaves));
     }
 }

@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Pseudo;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
+@SuppressWarnings("all")
 @Pseudo
 @Mixin(
     targets = {

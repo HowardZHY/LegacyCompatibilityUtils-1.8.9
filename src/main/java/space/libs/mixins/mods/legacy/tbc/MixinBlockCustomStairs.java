@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowSuperConstructor;
 
+@SuppressWarnings("all")
 @Mixin(BlockCustomStairs.class)
 public class MixinBlockCustomStairs extends BlockStairs {
 

@@ -8,6 +8,7 @@ import net.minecraft.block.state.IBlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import space.libs.util.cursedmixinextensions.annotations.*;
 
+@SuppressWarnings("all")
 @Mixin(BlockCustomSlab.class)
 public abstract class MixinBlockCustomSlab extends BlockSlab {
 

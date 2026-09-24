@@ -9,6 +9,7 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraftforge.client.model.IModelPart;
 import net.minecraftforge.client.model.IModelState;
 import net.minecraftforge.client.model.MapModelState;
+import net.minecraftforge.client.model.ModelLoader;
 import org.spongepowered.asm.mixin.Mixin;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
@@ -18,11 +19,11 @@ import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 public class MixinModelLoaderWeightedRandomModel implements IModelPart {
 
     @ShadowConstructor
-    public void WeightedRandomModel(ModelResourceLocation parent, ModelBlockDefinition.Variants variants) {}
+    public void WeightedRandomModel(ModelLoader outer, ModelResourceLocation parent, ModelBlockDefinition.Variants variants) {}
 
     @NewConstructor
-    public void WeightedRandomModel(ModelBlockDefinition.Variants variants) {
-        WeightedRandomModel(null, variants);
+    public void WeightedRandomModel(ModelLoader outer, ModelBlockDefinition.Variants variants) {
+        WeightedRandomModel(outer, null, variants);
     }
 
     public IModelState getState(IModelState state, IModelPart part) {
