@@ -258,7 +258,7 @@ net/minecraft/client/renderer/tileentity/TileEntityPistonRenderer:
     #DONE
 net/minecraft/client/audio/GuardianSound:
   - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
-
+    #DONE
 net/minecraft/network/play/server/S2EPacketCloseWindow:
   - error: func_180731_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
     #DONE
@@ -385,7 +385,7 @@ net/minecraft/entity/Entity:
   - error: func_70063_aa()V - Method was removed
   - error: persistentID:Ljava/util/UUID; - Field was removed
   - error: field_82152_aq:I - Field was removed
-
+    #DONE
 net/minecraft/entity/ai/attributes/ServersideAttributeMap:
   - error: func_180795_e(Lnet/minecraft/entity/ai/attributes/IAttribute;)Lnet/minecraft/entity/ai/attributes/ModifiableAttributeInstance; - Method was removed
   - error: func_180796_b(Ljava/lang/String;)Lnet/minecraft/entity/ai/attributes/ModifiableAttributeInstance; - Method was removed
@@ -993,7 +993,7 @@ net/minecraft/client/renderer/entity/RenderZombie:
 
 net/minecraftforge/fml/common/registry/GameData$GameDataSnapshot$Entry:
   - error: Class no longer exists
-
+    #DONE
 net/minecraft/client/renderer/entity/RenderLeashKnot:
   - error: func_180559_a(Lnet/minecraft/entity/EntityLeashKnot;DDDFF)V - Method was removed
 
@@ -1243,7 +1243,7 @@ net/minecraft/client/renderer/tileentity/TileEntityEnderChestRenderer:
     #DONE
 net/minecraftforge/fml/common/registry/GameData$GameDataSnapshot:
   - error: Class no longer exists
-
+    #DONE
 net/minecraft/item/ItemBlock:
   - error: setTileEntityNBT(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/player/EntityPlayer;)Z - Method was removed
   - error: func_179224_a(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;Lnet/minecraft/item/ItemStack;)Z - Method was removed

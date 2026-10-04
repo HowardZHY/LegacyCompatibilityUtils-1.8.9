@@ -34,17 +34,11 @@ public class MixinDrawScreenEvent extends GuiScreenEvent {
         return mouseX;
     }
 
-    /**
-     * The y coordinate of the mouse pointer on the screen.
-     */
     public int getMouseY()
     {
         return mouseY;
     }
 
-    /**
-     * Partial render ticks elapsed.
-     */
     public float getRenderPartialTicks()
     {
         return renderPartialTicks;

@@ -1,6 +1,5 @@
 package space.libs.util.forge;
 
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.registry.*;
 import net.minecraftforge.fml.common.versioning.ArtifactVersion;
@@ -10,34 +9,6 @@ import java.util.*;
 
 @SuppressWarnings("unused")
 public abstract class ForgeUtils {
-
-    public static <T> Map<ResourceLocation, T> convertMapKeys(Map<?, T> originalMap) {
-        if (originalMap == null) {
-            return new HashMap<>();
-        }
-        Map<ResourceLocation, T> convertedMap = new HashMap<>();
-        for (Map.Entry<?, T> entry : originalMap.entrySet()) {
-            if (entry.getKey() instanceof java.lang.String) {
-                ResourceLocation key = new ResourceLocation((String) entry.getKey());
-                convertedMap.put(key, entry.getValue());
-            } else if (entry.getKey() instanceof ResourceLocation) {
-                convertedMap.put((ResourceLocation) entry.getKey(), entry.getValue());
-            } else {
-                throw new IllegalArgumentException();
-            }
-        }
-        return convertedMap;
-    }
-
-    public static ResourceLocation convertRLNullable(Object thing) {
-        if (thing == null) {
-            return null;
-        } else if (thing instanceof ResourceLocation) {
-            return (ResourceLocation) thing;
-        } else {
-            return new ResourceLocation(thing.toString());
-        }
-    }
 
     public static boolean checkVersion(Restriction restriction, ArtifactVersion version) {
         if (version.getVersionString().contains("1.8")) {

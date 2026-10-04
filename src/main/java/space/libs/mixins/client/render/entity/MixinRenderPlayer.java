@@ -2,11 +2,8 @@ package space.libs.mixins.client.render.entity;
 
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.entity.RendererLivingEntity;
+import net.minecraft.client.renderer.entity.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
@@ -54,7 +51,7 @@ public abstract class MixinRenderPlayer extends RendererLivingEntity<AbstractCli
     }
 
     public void func_76986_a(Entity entity, double x, double y, double z, float p_76986_8_, float partialTicks) {
-        this.doRender((AbstractClientPlayer) entity, x, y, z, p_76986_8_, partialTicks);
+        this.doRender((AbstractClientPlayer)entity, x, y, z, p_76986_8_, partialTicks);
     }
 
     /** getEntityTexture */

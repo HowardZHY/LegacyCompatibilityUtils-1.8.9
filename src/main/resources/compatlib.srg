@@ -18,6 +18,8 @@ CL: net/minecraftforge/client/model/ModelLoader$WeightedPartWrapper space/libs/f
 CL: net/minecraftforge/fml/client/GuiIngameModOptions space/libs/forge/client/GuiIngameModOptions
 CL: net/minecraftforge/fml/client/GuiModOptionList space/libs/forge/client/GuiModOptionList
 CL: net/minecraftforge/fml/common/Mod$EventBusSubscriber space/libs/forge/common/EventBusSubscriber
+CL: net/minecraftforge/fml/common/registry/GameData$GameDataSnapshot space/libs/forge/common/GameDataSnapshot
+CL: net/minecraftforge/fml/common/registry/GameData$GameDataSnapshot$Entry space/libs/forge/common/GameDataSnapshot$Entry
 FD: net/minecraft/client/renderer/block/model/ItemCameraTransforms$TransformType/FIRST_PERSON_RIGHT_HAND net/minecraft/client/renderer/block/model/ItemCameraTransforms$TransformType/FIRST_PERSON
 FD: net/minecraft/client/renderer/block/model/ItemCameraTransforms$TransformType/THIRD_PERSON_RIGHT_HAND net/minecraft/client/renderer/block/model/ItemCameraTransforms$TransformType/THIRD_PERSON
 FD: net/minecraft/world/chunk/storage/AnvilChunkLoader$PendingChunk/field_76548_a net/minecraft/world/chunk/storage/PendingChunk/field_76548_a

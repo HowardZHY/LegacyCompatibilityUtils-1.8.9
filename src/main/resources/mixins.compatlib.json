@@ -11,6 +11,7 @@
     "client.MixinClientWorldProvider",
     "client.MixinEntityPlayerSP",
     "client.MixinGameSettings",
+    "client.MixinGuardianSound",
     "client.MixinIntegratedPlayerList",
     "client.MixinKeyBinding",
     "client.MixinMinecraft",

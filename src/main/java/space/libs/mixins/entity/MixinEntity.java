@@ -7,11 +7,15 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import space.libs.util.MappedName;
 
 import java.util.Set;
+import java.util.UUID;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unused")
 @Mixin(Entity.class)
 public abstract class MixinEntity {
 
@@ -44,6 +48,9 @@ public abstract class MixinEntity {
 
     @Shadow
     public void addChatMessage(IChatComponent component) {}
+
+    /** @implNote Unused in 1.8 ? */
+    private UUID persistentID;
 
     @MappedName("teleportDirection")
     public int field_82152_aq;
@@ -114,5 +121,22 @@ public abstract class MixinEntity {
 
     public boolean func_184218_aH() {
         return this.isRiding();
+    }
+
+    @SuppressWarnings("MissingOrInvalidOpcode")
+    @Inject(method = "setPortal",
+        at = @At(
+            value = "FIELD",
+            target = "Lnet/minecraft/entity/Entity;teleportDirection:Lnet/minecraft/util/EnumFacing;",
+            shift = At.Shift.AFTER
+        )
+    )
+    public void setPortal(BlockPos pos, CallbackInfo ci) {
+        this.field_82152_aq = this.teleportDirection.getHorizontalIndex();
+    }
+
+    @Inject(method = "copyDataFromOld", at = @At("RETURN"))
+    public void copyDataFromOld(Entity entityIn, CallbackInfo ci) {
+        this.field_82152_aq = this.teleportDirection.getHorizontalIndex();
     }
 }

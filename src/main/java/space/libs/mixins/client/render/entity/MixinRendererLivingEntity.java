@@ -9,11 +9,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import space.libs.interfaces.IRenderLiving;
 import space.libs.util.mods.MoBendsUtils;
 
 @SuppressWarnings("unused")
 @Mixin(value = RendererLivingEntity.class, priority = 2500)
-public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> extends Render<T> {
+public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> extends Render<T> implements IRenderLiving<T> {
 
     public MixinRendererLivingEntity(RenderManager renderManager) {
         super(renderManager);
@@ -35,7 +36,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
 
     @Inject(method = "doRender(Lnet/minecraft/entity/EntityLivingBase;DDDFF)V", at = @At("HEAD"), cancellable = true)
     private void RenderLivingEvent(T entity, double x, double y, double z, float entityYaw, float partialTicks, CallbackInfo callbackInfo) {
-        if (MoBendsUtils.RenderLivingEvent((RendererLivingEntity<?>) (Object) this, entity, x, y, z, entityYaw, partialTicks)) {
+        if (MoBendsUtils.RenderLivingEvent(this, entity, x, y, z, entityYaw, partialTicks)) {
             callbackInfo.cancel();
         }
     }

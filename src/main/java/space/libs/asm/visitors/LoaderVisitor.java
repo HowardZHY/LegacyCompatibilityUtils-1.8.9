@@ -11,6 +11,12 @@ import static org.objectweb.asm.Opcodes.*;
  */
 public class LoaderVisitor extends ClassVisitor {
 
+    private static final String UTIL = "space/libs/util/forge/ResourcesLocationUtils";
+
+    private static final String CONVERT = "convertMapKeys";
+
+    private static final String DESC = "(Ljava/util/Map;)Ljava/util/Map;";
+
     public LoaderVisitor(ClassVisitor cv) {
         super(ASM5, cv);
     }
@@ -28,8 +34,8 @@ public class LoaderVisitor extends ClassVisitor {
             "()Ljava/lang/ClassLoader;", null, null);
         mv.visitCode();
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, "net/minecraftforge/fml/common/Loader", "modClassLoader",
-            "Lnet/minecraftforge/fml/common/ModClassLoader;");
+        mv.visitFieldInsn(GETFIELD, "net/minecraftforge/fml/common/Loader",
+            "modClassLoader", "Lnet/minecraftforge/fml/common/ModClassLoader;");
         mv.visitInsn(ARETURN);
         mv.visitMaxs(1, 1);
         mv.visitEnd();
@@ -41,9 +47,9 @@ public class LoaderVisitor extends ClassVisitor {
         mv.visitCode();
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "space/libs/util/forge/ForgeUtils", "convertMapKeys", "(Ljava/util/Map;)Ljava/util/Map;", false);
+        mv.visitMethodInsn(INVOKESTATIC, UTIL, CONVERT, DESC, false);
         mv.visitVarInsn(ALOAD, 2);
-        mv.visitMethodInsn(INVOKESTATIC, "space/libs/util/forge/ForgeUtils", "convertMapKeys", "(Ljava/util/Map;)Ljava/util/Map;", false);
+        mv.visitMethodInsn(INVOKESTATIC, UTIL, CONVERT, DESC, false);
         mv.visitInsn(ICONST_0);
         mv.visitMethodInsn(INVOKEVIRTUAL, "net/minecraftforge/fml/common/Loader", "fireRemapEvent", "(Ljava/util/Map;Ljava/util/Map;Z)V", false);
         mv.visitInsn(RETURN);
@@ -58,14 +64,14 @@ public class LoaderVisitor extends ClassVisitor {
         mv.visitCode();
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "space/libs/util/forge/ForgeUtils", "convertMapKeys", "(Ljava/util/Map;)Ljava/util/Map;", false);
+        mv.visitMethodInsn(INVOKESTATIC, UTIL, CONVERT, DESC, false);
         mv.visitVarInsn(ALOAD, 2);
-        mv.visitMethodInsn(INVOKESTATIC, "space/libs/util/forge/ForgeUtils", "convertMapKeys", "(Ljava/util/Map;)Ljava/util/Map;", false);
+        mv.visitMethodInsn(INVOKESTATIC, UTIL, CONVERT, DESC, false);
         mv.visitVarInsn(ILOAD, 3);
         mv.visitVarInsn(ALOAD, 5);
-        mv.visitMethodInsn(INVOKESTATIC, "space/libs/util/forge/ForgeUtils", "convertMapKeys", "(Ljava/util/Map;)Ljava/util/Map;", false);
+        mv.visitMethodInsn(INVOKESTATIC, UTIL, CONVERT, DESC, false);
         mv.visitVarInsn(ALOAD, 6);
-        mv.visitMethodInsn(INVOKESTATIC, "space/libs/util/forge/ForgeUtils", "convertMapKeys", "(Ljava/util/Map;)Ljava/util/Map;", false);
+        mv.visitMethodInsn(INVOKESTATIC, UTIL, CONVERT, DESC, false);
         mv.visitMethodInsn(INVOKEVIRTUAL, "net/minecraftforge/fml/common/Loader", "fireMissingMappingEvent", "(Ljava/util/Map;Ljava/util/Map;ZLjava/util/Map;Ljava/util/Map;)Ljava/util/List;", false);
         mv.visitInsn(ARETURN);
         mv.visitMaxs(6, 7);

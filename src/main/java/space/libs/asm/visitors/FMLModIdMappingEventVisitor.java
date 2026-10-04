@@ -28,7 +28,7 @@ public class FMLModIdMappingEventVisitor extends ClassVisitor {
         mv.visitVarInsn(ALOAD, 1);
         mv.visitMethodInsn(
             INVOKESTATIC,
-            "space/libs/util/forge/ForgeUtils",
+            "space/libs/util/forge/ResourcesLocationUtils",
             "convertMapKeys",
             "(Ljava/util/Map;)Ljava/util/Map;",
             false
@@ -36,7 +36,7 @@ public class FMLModIdMappingEventVisitor extends ClassVisitor {
         mv.visitVarInsn(ALOAD, 2);
         mv.visitMethodInsn(
             INVOKESTATIC,
-            "space/libs/util/forge/ForgeUtils",
+            "space/libs/util/forge/ResourcesLocationUtils",
             "convertMapKeys",
             "(Ljava/util/Map;)Ljava/util/Map;",
             false

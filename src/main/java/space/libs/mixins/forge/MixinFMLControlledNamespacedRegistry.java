@@ -15,11 +15,9 @@ import space.libs.CompatLib;
 import space.libs.interfaces.IFMLControlledNamespacedRegistry;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
-import space.libs.util.forge.ForgeUtils;
+import space.libs.util.forge.ResourcesLocationUtils;
 
-import java.util.BitSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @SuppressWarnings("unused")
 @Mixin(value = FMLControlledNamespacedRegistry.class, remap = false)
@@ -92,7 +90,7 @@ public class MixinFMLControlledNamespacedRegistry<K, I> extends RegistryNamespac
 
     @NewConstructor
     public void FMLControlledNamespacedRegistry(Object defaultKey, int maxIdValue, int minIdValue, Class<I> type) {
-        FMLControlledNamespacedRegistry(ForgeUtils.convertRLNullable(defaultKey), maxIdValue, minIdValue, type, false);
+        FMLControlledNamespacedRegistry(ResourcesLocationUtils.convertNullable(defaultKey), maxIdValue, minIdValue, type, false);
     }
 
     public void validateContent(int maxId, String type, BitSet availabilityMap, Set<Integer> blockedIds, FMLControlledNamespacedRegistry<Block> iBlockRegistry) {
@@ -177,6 +175,7 @@ public class MixinFMLControlledNamespacedRegistry<K, I> extends RegistryNamespac
         return containsKey(new ResourceLocation(itemName));
     }
 
+    @Override
     public void serializeInto(Map<String, Integer> idMapping) {
         for (I thing : this.typeSafeIterable()) {
             idMapping.put(getNameForObject(thing).toString(), getIDForObject(thing));

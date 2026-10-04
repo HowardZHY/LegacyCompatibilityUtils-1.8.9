@@ -12,9 +12,8 @@ import org.spongepowered.asm.mixin.*;
 @Mixin(value = EntityEvent.class, remap = false)
 public abstract class MixinEntityEvent {
 
-    @Final
     @Shadow
-    public Entity entity;
+    public @Final Entity entity;
 
     public Entity getEntity() {
         return entity;
