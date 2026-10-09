@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.RegistryDelegate;
 import org.spongepowered.asm.mixin.*;
 
-@Mixin(RegistryDelegate.class)
+@Mixin(value = RegistryDelegate.class, remap = false)
 public interface MixinIRegistryDelegate {
 
     @Shadow

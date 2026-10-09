@@ -467,7 +467,7 @@ net/minecraftforge/client/model/b3d/B3DLoader$B3DState:
   - error: Class missing interface com/google/common/base/Function
   - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
-
+    #DONE
 net/minecraft/client/audio/ITickableSound:
   - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
     #DONE
@@ -525,7 +525,7 @@ net/minecraftforge/client/model/ModelLoader$UVLock:
   - error: Class missing interface com/google/common/base/Function
   - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
-
+    #DONE
 net/minecraft/client/renderer/entity/RenderPainting:
   - error: func_180562_a(Lnet/minecraft/entity/item/EntityPainting;)Lnet/minecraft/util/ResourceLocation; - Method was removed
 
@@ -870,7 +870,7 @@ net/minecraftforge/client/model/TRSRTransformation:
   - error: Class missing interface com/google/common/base/Function
   - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
-
+    #DONE
 net/minecraft/util/EnumFacing$Axis:
   - error: func_176718_a(Lnet/minecraft/util/EnumFacing;)Z - Method was removed
   - error: $VALUES$:[Lnet/minecraft/util/EnumFacing$Axis; - Field was removed
@@ -929,7 +929,7 @@ net/minecraft/client/resources/model/ModelRotation:
   - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
   - error: func_177525_a()Ljavax/vecmath/Matrix4d; - Method was removed
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
-
+    #DONE
 net/minecraftforge/client/model/ItemLayerModel:
   - error: Class missing interface net/minecraftforge/client/model/IModelPart
   - error: putVertex(Lnet/minecraftforge/client/model/pipeline/UnpackedBakedQuad$Builder;Lnet/minecraft/client/renderer/vertex/VertexFormat;Lnet/minecraftforge/client/model/TRSRTransformation;Lnet/minecraft/util/EnumFacing;FFFFF)V - Method was removed
@@ -982,7 +982,7 @@ net/minecraftforge/client/model/obj/OBJModel$OBJState:
   - error: Class missing interface com/google/common/base/Function
   - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
-
+    #DONE
 net/minecraft/client/renderer/entity/RenderHorse:
   - error: func_180580_a(Lnet/minecraft/entity/passive/EntityHorse;F)V - Method was removed
   - error: func_180581_a(Lnet/minecraft/entity/passive/EntityHorse;)Lnet/minecraft/util/ResourceLocation; - Method was removed
@@ -1174,7 +1174,7 @@ net/minecraftforge/client/model/MapModelState:
   - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
   - error: getState(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/IModelState; - Method was removed
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
-
+    #DONE
 net/minecraft/network/NetworkManager:
   - error: func_150726_a(Ljava/net/InetAddress;I)Lnet/minecraft/network/NetworkManager; - Method was removed
     #DONE
@@ -1619,7 +1619,7 @@ net/minecraftforge/client/model/ModelStateComposition:
   - error: Class missing interface com/google/common/base/Function
   - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
   - error: apply(Lnet/minecraftforge/client/model/IModelPart;)Lnet/minecraftforge/client/model/TRSRTransformation; - Method was removed
-
+    #DONE
 net/minecraft/client/audio/SoundHandler:
   - error: Class missing interface net/minecraft/server/gui/IUpdatePlayerListBox
     #DONE

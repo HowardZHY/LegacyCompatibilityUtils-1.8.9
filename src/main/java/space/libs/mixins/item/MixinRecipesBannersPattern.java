@@ -4,11 +4,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import space.libs.util.cursedmixinextensions.annotations.NewConstructor;
 import space.libs.util.cursedmixinextensions.annotations.ShadowConstructor;
 
+import static net.minecraft.item.crafting.RecipesBanners.*;
+
 @SuppressWarnings("all")
 @Mixin(
-    targets = {
-        "net.minecraft.item.crafting.RecipesBanners$RecipeAddPattern",
-        "net.minecraft.item.crafting.RecipesBanners$RecipeDuplicatePattern"
+    value = {
+        RecipeAddPattern.class,
+        RecipeDuplicatePattern.class
     },
     remap = false
 )
