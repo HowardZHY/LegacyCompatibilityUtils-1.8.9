@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Shadow;
 @SuppressWarnings("all")
 @Mixin(value = EnumFacing.Axis.class, remap = false)
 public abstract class MixinEnumFacingAxis {
+
     @Shadow
     public abstract boolean apply(EnumFacing p_apply_1_);
 

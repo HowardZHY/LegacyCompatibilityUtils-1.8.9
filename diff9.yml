@@ -560,7 +560,7 @@ net/minecraft/block/state/pattern/BlockHelper:
     #DONE
 net/minecraftforge/fml/common/registry/VillagerRegistry$VillagerProfession:
   - error: delegate:Lnet/minecraftforge/fml/common/registry/RegistryDelegate; - Field was made final
-
+    #NOT PLANNED
 net/minecraft/client/multiplayer/ServerData:
   - error: <init>(Ljava/lang/String;Ljava/lang/String;)V - Method was removed
     #DONE
@@ -874,7 +874,7 @@ net/minecraftforge/client/model/TRSRTransformation:
 net/minecraft/util/EnumFacing$Axis:
   - error: func_176718_a(Lnet/minecraft/util/EnumFacing;)Z - Method was removed
   - error: $VALUES$:[Lnet/minecraft/util/EnumFacing$Axis; - Field was removed
-
+    #DONE AND INVALID
 net/minecraft/network/play/server/S2APacketParticles:
   - error: func_180740_a(Lnet/minecraft/network/play/INetHandlerPlayClient;)V - Method was removed
     #DONE
@@ -947,7 +947,7 @@ net/minecraft/client/renderer/block/model/BlockPart:
     #DONE
 net/minecraft/command/IEntitySelector$ArmoredMob:
   - error: Class no longer exists
-
+    #DONE
 net/minecraft/client/renderer/RenderGlobal$SwitchEnumUsage:
   - error: Class no longer exists
 
@@ -977,7 +977,7 @@ net/minecraft/client/renderer/block/model/BreakingFour$SwitchEnumFacing:
 
 net/minecraftforge/fml/client/registry/RenderingRegistry$EntityRendererInfo:
   - error: Class no longer exists
-
+    #DONE WITH REMAP
 net/minecraftforge/client/model/obj/OBJModel$OBJState:
   - error: Class missing interface com/google/common/base/Function
   - error: apply(Ljava/lang/Object;)Ljava/lang/Object; - Method was removed
@@ -1021,7 +1021,7 @@ net/minecraft/client/renderer/tileentity/RenderWitherSkull:
 
 net/minecraft/server/management/UserListOpsEntry:
   - error: <init>(Lcom/mojang/authlib/GameProfile;I)V - Method was removed
-
+    #DONE
 net/minecraft/tileentity/TileEntityPiston$SwitchAxis:
   - error: Class no longer exists
 
@@ -1359,7 +1359,7 @@ net/minecraft/network/play/server/S24PacketBlockAction:
     #DONE
 net/minecraft/client/resources/model/WeightedBakedModel$MyWeighedRandomItem:
   - error: func_177634_a(Lnet/minecraft/client/resources/model/WeightedBakedModel$MyWeighedRandomItem;)I - Method was removed
-
+    #DONE
 net/minecraft/client/renderer/tileentity/TileEntityMobSpawnerRenderer:
   - error: func_180539_a(Lnet/minecraft/tileentity/TileEntityMobSpawner;DDDFI)V - Method was removed
     #DONE

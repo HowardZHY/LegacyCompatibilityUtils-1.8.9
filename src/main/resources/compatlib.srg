@@ -18,6 +18,7 @@ CL: net/minecraftforge/client/model/IPerspectiveState space/libs/forge/client/IP
 CL: net/minecraftforge/client/model/ModelLoader$WeightedPartWrapper space/libs/forge/client/WeightedPartWrapper
 CL: net/minecraftforge/fml/client/GuiIngameModOptions space/libs/forge/client/GuiIngameModOptions
 CL: net/minecraftforge/fml/client/GuiModOptionList space/libs/forge/client/GuiModOptionList
+CL: net/minecraftforge/fml/client/registry/RenderingRegistry$EntityRendererInfo space/libs/forge/client/EntityRendererInfo
 CL: net/minecraftforge/fml/common/Mod$EventBusSubscriber space/libs/forge/common/EventBusSubscriber
 CL: net/minecraftforge/fml/common/registry/GameData$GameDataSnapshot space/libs/forge/common/GameDataSnapshot
 CL: net/minecraftforge/fml/common/registry/GameData$GameDataSnapshot$Entry space/libs/forge/common/GameDataSnapshot$Entry

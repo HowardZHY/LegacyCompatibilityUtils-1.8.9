@@ -43,6 +43,8 @@ func_180541_a,func_180535_a
 func_180542_a,func_180535_a
 func_180544_a,func_180535_a
 func_180545_a,func_180535_a
+# net/minecraft/client/resources/model/WeightedBakedModel$MyWeighedRandomItem
+func_177634_a,compareTo
 # net/minecraft/entity/EntityAgeable
 func_175526_b,func_90011_a
 func_180488_b,func_90011_a

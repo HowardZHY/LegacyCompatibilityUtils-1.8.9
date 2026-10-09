@@ -295,6 +295,7 @@
   ],
   "server": [
     "server.MixinDedicatedServer",
-    "server.MixinPlayerListComponent"
+    "server.MixinPlayerListComponent",
+    "server.MixinUserListOpsEntry"
   ]
 }
