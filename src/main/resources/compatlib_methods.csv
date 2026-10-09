@@ -6,6 +6,10 @@ func_180792_c,func_148180_b
 func_178070_d,func_148180_b
 # net/minecraft/client/renderer/block/model/BlockFaceUV$Deserializer
 func_178293_a,deserialize
+# net/minecraft/client/renderer/block/model/BlockPartFace$Deserializer
+func_178338_a,deserialize
+# net/minecraft/client/renderer/block/model/ItemCameraTransforms$Deserializer
+func_178352_a,deserialize
 # net/minecraft/client/renderer/block/model/ItemTransformVec3f$Deserializer
 func_178359_a,deserialize
 # net/minecraft/client/renderer/entity/layers/LayerArmorBase

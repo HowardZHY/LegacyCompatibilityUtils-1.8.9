@@ -9,10 +9,7 @@ import net.gobbob.mobends.data.EntityData;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
-import org.spongepowered.asm.mixin.Dynamic;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Pseudo;
+import org.spongepowered.asm.mixin.*;
 
 @SuppressWarnings("all")
 @Pseudo

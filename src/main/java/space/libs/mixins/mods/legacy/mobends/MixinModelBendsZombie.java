@@ -23,19 +23,7 @@ public abstract class MixinModelBendsZombie extends ModelBiped {
 
     @Dynamic
     @Shadow(remap = false)
-    public ModelRenderer bipedRightForeArm;
-
-    @Dynamic
-    @Shadow(remap = false)
-    public ModelRenderer bipedLeftForeArm;
-
-    @Dynamic
-    @Shadow(remap = false)
-    public ModelRenderer bipedRightForeLeg;
-
-    @Dynamic
-    @Shadow(remap = false)
-    public ModelRenderer bipedLeftForeLeg;
+    public ModelRenderer bipedRightForeArm, bipedLeftForeArm, bipedRightForeLeg, bipedLeftForeLeg;
 
     /**
      * @author HowardZHY

@@ -53,11 +53,13 @@ public abstract class MixinEventHandlerDataUpdate {
                     Data_Player.add(new Data_Player(entity.getEntityId()));
                     BendsLogger.log("Reset EntityPlayer:" + data.entityID, BendsLogger.DEBUG);
                 } else {
-                    data.motion_prev.set(data.motion);
-                    data.motion.x = (float) entity.posX - data.position.x;
-                    data.motion.y = (float) entity.posY - data.position.y;
-                    data.motion.z = (float) entity.posZ - data.position.z;
-                    data.position = new Vector3f((float) entity.posX, (float) entity.posY, (float) entity.posZ);
+                    Vector3f motion = data.motion;
+                    Vector3f position = data.position;
+                    data.motion_prev.set(motion);
+                    motion.x = (float) entity.posX - position.x;
+                    motion.y = (float) entity.posY - position.y;
+                    motion.z = (float) entity.posZ - position.z;
+                    position = new Vector3f((float) entity.posX, (float) entity.posY, (float) entity.posZ);
                 }
             } else {
                 Data_Player.dataList.remove(data);
@@ -73,11 +75,13 @@ public abstract class MixinEventHandlerDataUpdate {
                     Data_Zombie.add(new Data_Zombie(entity.getEntityId()));
                     BendsLogger.log("Reset EntityZombie:" + data.entityID, BendsLogger.DEBUG);
                 } else {
-                    data.motion_prev.set(data.motion);
-                    data.motion.x = (float) entity.posX - data.position.x;
-                    data.motion.y = (float) entity.posY - data.position.y;
-                    data.motion.z = (float) entity.posZ - data.position.z;
-                    data.position = new Vector3f((float) entity.posX, (float) entity.posY, (float) entity.posZ);
+                    Vector3f motion = data.motion;
+                    Vector3f position = data.position;
+                    data.motion_prev.set(motion);
+                    motion.x = (float) entity.posX - position.x;
+                    motion.y = (float) entity.posY - position.y;
+                    motion.z = (float) entity.posZ - position.z;
+                    position = new Vector3f((float) entity.posX, (float) entity.posY, (float) entity.posZ);
                 }
             } else {
                 Data_Zombie.dataList.remove(data);
@@ -92,11 +96,13 @@ public abstract class MixinEventHandlerDataUpdate {
                     Data_Spider.dataList.remove(data);
                     Data_Spider.add(new Data_Spider(entity.getEntityId()));
                 } else {
-                    data.motion_prev.set(data.motion);
-                    data.motion.x = (float) entity.posX - data.position.x;
-                    data.motion.y = (float) entity.posY - data.position.y;
-                    data.motion.z = (float) entity.posZ - data.position.z;
-                    data.position = new Vector3f((float) entity.posX, (float) entity.posY, (float) entity.posZ);
+                    Vector3f motion = data.motion;
+                    Vector3f position = data.position;
+                    data.motion_prev.set(motion);
+                    motion.x = (float) entity.posX - position.x;
+                    motion.y = (float) entity.posY - position.y;
+                    motion.z = (float) entity.posZ - position.z;
+                    position = new Vector3f((float) entity.posX, (float) entity.posY, (float) entity.posZ);
                 }
             } else {
                 Data_Spider.dataList.remove(data);

@@ -1,11 +1,10 @@
 package space.libs.mixins.mods.legacy.mochickens;
 
 import net.minecraft.world.biome.BiomeGenBase;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Pseudo;
+import org.spongepowered.asm.mixin.*;
 import space.libs.CompatLib;
 
+@SuppressWarnings("all")
 @Pseudo
 @Mixin(targets = "com.saxon564.mochickens.configs.FileManager", remap = false)
 public class MixinFileManager {

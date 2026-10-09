@@ -175,6 +175,7 @@
     "MixinCommandTestForBlock",
     "MixinContainerPlayer",
     "MixinEnchantment",
+    "MixinEnchantmentHelper",
     "MixinMinecraftServer",
     "MixinPotion",
     "MixinServerConfigurationManager",
@@ -227,6 +228,7 @@
     "forge.MixinIncompatibleSubstitutionException",
     "forge.MixinMinecraftForge",
     "forge.MixinModRemapping",
+    "forge.MixinObjectHolderRef",
     "forge.MixinPersistentRegistryManager",
     "forge.MixinRegistryDelegate",
     "forge.MixinVillagerRegistry",
@@ -239,9 +241,11 @@
     "forge.event.MixinFMLPostInitializationEvent",
     "interfaces.MixinIBlockSource",
     "interfaces.MixinIChatComponent",
+    "interfaces.MixinIRegistryDelegate",
     "item.MixinItemArmor",
     "item.MixinItemBlock",
     "item.MixinItemEditableBook",
+    "item.MixinRecipesBannersPattern",
     "item.MixinShapedRecipes",
     "nbt.MixinCompressedStreamTools",
     "nbt.MixinNBTBase",
@@ -290,6 +294,7 @@
     "world.gen.MixinWorldGenTrees"
   ],
   "server": [
+    "server.MixinDedicatedServer",
     "server.MixinPlayerListComponent"
   ]
 }

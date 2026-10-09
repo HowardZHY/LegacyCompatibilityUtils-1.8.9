@@ -3,6 +3,7 @@ package space.libs.mixins.world;
 import net.minecraft.world.WorldProvider;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import space.libs.util.MappedName;
 
 @SuppressWarnings("unused")
 @Mixin(WorldProvider.class)
@@ -16,12 +17,12 @@ public abstract class MixinWorldProvider {
         throw new AbstractMethodError();
     }
 
-    /** hasSkyLight */
+    @MappedName("hasSkyLight")
     public boolean func_191066_m() {
         return !this.getHasNoSky();
     }
 
-    /** Forge 1.9+ */
+    /** @implNote Forge 1.9+ */
     public int getDimension() {
         return this.dimensionId;
     }

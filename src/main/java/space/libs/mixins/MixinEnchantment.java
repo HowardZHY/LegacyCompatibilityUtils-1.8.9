@@ -2,9 +2,7 @@ package space.libs.mixins;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.ResourceLocation;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 import space.libs.util.cursedmixinextensions.annotations.Public;
 
 import java.util.Iterator;
@@ -14,9 +12,8 @@ import java.util.Map;
 @Mixin(Enchantment.class)
 public abstract class MixinEnchantment {
 
-    @Final
     @Shadow
-    private static Map<ResourceLocation, Enchantment> locationEnchantments;
+    private static @Final Map<ResourceLocation, Enchantment> locationEnchantments;
 
     @Public
     private static String[] func_180304_c() {

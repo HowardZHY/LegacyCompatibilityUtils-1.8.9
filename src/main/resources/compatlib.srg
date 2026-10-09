@@ -5,6 +5,7 @@ CL: net/minecraft/client/renderer/GlStateManager$SwitchTexGen net/minecraft/clie
 CL: net/minecraft/client/renderer/GlStateManager$Viewport net/minecraft/client/renderer/Viewport
 CL: net/minecraft/client/renderer/RenderItem net/minecraft/client/renderer/entity/RenderItem
 CL: net/minecraft/client/renderer/entity/RenderLivingBase net/minecraft/client/renderer/entity/RendererLivingEntity
+CL: net/minecraft/client/resources/FallbackResourceManager$ImputStreamLeakedResourceLogger net/minecraft/client/resources/FallbackResourceManager$InputStreamLeakedResourceLogger
 CL: net/minecraft/entity/passive/EntityRabbit$RabbitTypeData net/minecraft/entity/passive/RabbitTypeData
 CL: net/minecraft/entity/player/EntityPlayer$SwitchEnumFacing net/minecraft/entity/player/SwitchEnumFacing
 CL: net/minecraft/world/GameType net/minecraft/world/WorldSettings$GameType

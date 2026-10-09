@@ -17,9 +17,9 @@ public abstract class MixinAchievement {
     public abstract Achievement registerStat();
 
     @Shadow
-    public abstract Achievement func_150953_b(Class <? extends IJsonSerializable> c);
+    public abstract Achievement func_150953_b(Class<? extends IJsonSerializable> c);
 
-    public Achievement func_180787_a(Class <? extends IJsonSerializable> c) {
+    public Achievement func_180787_a(Class<? extends IJsonSerializable> c) {
         return this.func_150953_b(c);
     }
 

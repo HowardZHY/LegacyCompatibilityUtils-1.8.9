@@ -5,16 +5,16 @@
 package space.libs.forge.common;
 
 import com.google.common.collect.*;
-import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
+import net.minecraftforge.fml.common.registry.*;
 import space.libs.interfaces.IFMLControlledNamespacedRegistry;
 import space.libs.util.forge.ResourcesLocationUtils;
 
 import java.util.*;
 
 @SuppressWarnings("unused")
-public class GameDataSnapshot {
+public class GameDataSnapshot extends PersistentRegistryManager.GameDataSnapshot {
 
-    public static class Entry {
+    public static class Entry extends PersistentRegistryManager.GameDataSnapshot.Entry {
 
         public final Map<String, Integer> ids;
         public final Set<String> substitutions;
@@ -26,6 +26,7 @@ public class GameDataSnapshot {
         }
 
         public Entry(Map<String, Integer> ids, Set<String> substitions, Map<String, String> aliases, Set<Integer> blocked) {
+            super();
             this.ids = ids;
             this.substitutions = substitions;
             this.aliases = aliases;
@@ -33,6 +34,7 @@ public class GameDataSnapshot {
         }
 
         public Entry(FMLControlledNamespacedRegistry<?> registry) {
+            super();
             this.ids = Maps.newHashMap();
             this.substitutions = Sets.newHashSet();
             this.aliases = Maps.newHashMap();
